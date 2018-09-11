@@ -16,7 +16,7 @@ https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[G
 - [ ] Figure out how to display different events and switch to different events for the event planner (i.e. the user)
 - [ ] Break down the AB4 GUI features, particularly the list panel and in-build Browser (which could be utilised for Contacts Class)
 - [ ] Implement logging infrastructure
-- [ ] If time permits, check out the *Build Automation* (Gradle) and *Continuous Integration* (Travis CI)
+- [x] If time permits, check out the *Build Automation* (Gradle) and *Continuous Integration* (Travis CI)
 
 
 ## Acknowledgements for AddressBook Level 4 files
