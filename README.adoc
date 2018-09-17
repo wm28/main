@@ -8,7 +8,7 @@ https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&utm_m
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ### TO-DO List
-- [ ] Look through AB4 and understand how the GUi is created at runtime and figure out how to manipulate it
+- [x] Look through AB4 and understand how the GUi is created at runtime and figure out how to manipulate it
 - [x] Research on the Text API to use for mass messaging all guests in the list
 - [ ] Implement JavaMail API for mass sending of emails
 - [ ] Create base class for Storing all of the Guests from the Event (Add, Delete, Edit Guest)
