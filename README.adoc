@@ -41,8 +41,8 @@ __For each event __
 
     e. Ticket number/QR code of guest
 
-
-## Acknowledgements for AddressBook Level 4 files
+## Acknowledgements
+Some parts of this application were adapted from the sample application: Address Book Level 4 at SE-EDU.
 
 #### Libraries used: TextFX, ControlsFX, Jackson, Guava, JUnit5
 ### Licence : MIT
