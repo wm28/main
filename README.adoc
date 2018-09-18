@@ -10,12 +10,16 @@ https://cs2113-ay1819s1-f09-3.github.io/main/[image:https://img.shields.io/badge
 Invitees is a Windows application that caters to organisers of different events(such as weddings, orientation camps, networking sessions, product launches, etc).
 It helps event planners reduce their workload while planning events by providing them
 a convenient platform to do all the planning.
+
 *Features*:
+
 _General_
+
 
 1. Side tab, where event planners will be able to see what events they are planning.
 
 __For each event __
+
 
 1. Overarching detail fields
 
@@ -28,6 +32,7 @@ __For each event __
     d. Dress code for event
 
     e. Number of guests so far
+    
 
 2. Table of details of guests
 
