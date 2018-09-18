@@ -3,7 +3,7 @@
 
 https://travis-ci.org/CS2113-AY1819S1-F09-3/main[image:https://travis-ci.org/CS2113-AY1819S1-F09-3/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/aaryamNUS/main/branch/master[image:https://ci.appveyor.com/api/projects/status/1d4mupmconi0843a/branch/master?svg=true[Build status]]
-https://coveralls.io/github/CS2113-AY1819S1-F09-3/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-F09-3/addressbook-level4/badge.svg?branch=master[Coverage Status]]
+https://coveralls.io/github/CS2113-AY1819S1-F09-3/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-F09-3/main/badge.svg?branch=master[Coverage Status]]
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 https://cs2113-ay1819s1-f09-3.github.io/main/[image:https://badges.gitter.im/se-edu/Lobby.svg[Documentation Link]]
 
