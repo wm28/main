@@ -7,20 +7,41 @@ https://coveralls.io/github/CS2113-AY1819S1-F09-3/main?branch=master[image:https
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 https://cs2113-ay1819s1-f09-3.github.io/main/[image:https://img.shields.io/badge/Documentation-Online-green.svg[Documentation Link]]
 
-### TO-DO List
-- [x] Look through AB4 and understand how the GUi is created at runtime and figure out how to manipulate it
-- [x] Research on the Text API to use for mass messaging all guests in the list
-- [ ] Implement JavaMail API for mass sending of emails
-- [ ] Create base class for Storing all of the Guests from the Event (Add, Delete, Edit Guest)
-- [ ] Research on how to import a CSV file that will auto generate an entire list
-- [ ] Figure out how to display different events and switch to different events for the event planner (i.e. the user)
-- [ ] Break down the AB4 GUI features, particularly the list panel and in-build Browser (which could be utilised for Contacts Class)
-- [ ] Implement logging infrastructure
-- [x] If time permits, check out the *Build Automation* (Gradle) and *Continuous Integration* (Travis CI)
+Invitees helps event planners reduce their workload while planning events by providing them
+a convenient platform to do all the planning.
+*Features*:
+_General_
+
+1. Side tab, where event planners will be able to see what events they are planning.
+
+__For each event __
+
+1. Overarching detail fields
+
+    a. Name of event
+
+    b. Date and Time of event
+
+    c. Venue of event
+
+    d. Dress code for event
+
+    e. Number of guests so far
+
+2. Table of details of guests
+
+    a. Name of guest
+
+    b. Mobile number of guest
+
+    c. Email address of guest
+
+    d. Dietary Requirement of guest
+
+    e. Ticket number/QR code of guest
 
 
 ## Acknowledgements for AddressBook Level 4 files
-Some parts of this sample application were inspired by the excellent Java FX tutorial by Marco Jakob.
 
 #### Libraries used: TextFX, ControlsFX, Jackson, Guava, JUnit5
 ### Licence : MIT
