@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Invités - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,33 +12,43 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/nusCS2113-AY1819S1/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-F09-3/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
+Invités is an application that allows its users to better *organise, cater, and manage* the reception for large events such
+as weddings, school gatherings, orientation camps, etc. Some of the main features include mass email notification, tracking of payments, as well as tab
+keeping the attendance of the guests. This will give the hosts of the event an easier time to manage the reception as they will be equipped with tools that will minimise errors in catering,
+organisation, and orders. Moreover, this application aims to reduce the frustrations of event managers and address their needs in a platform that is more user friendly, personalised, and
+efficient.
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+To add to this, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event. This reduces the hassle of
+having to input all the information manually, as well as subsequently, if the event manager decides to organise another event using the same guest list.
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Download the latest jar file from the GIT repository link:https://github.com/CS2113-AY1819S1-F09-3/main[here].
+.  Place the jar file where the home directory resides
+.  Double click on the jar file and wait a couple of seconds as the application loads.
 +
-image::Ui.png[width="790"]
+image::UI_mockup.png[width="790"]
 +
+.  Using the Command Line Input as its primary method of manipulation, here are some
+   example commands that can be used:
+
+* *'help'*: Displays a summary of the list of commands that the application offers.
+* *'add'*: Adds a guest to the guest list.
+* *'Delete'*: Deletes an entry from the guest list.
+* *'Mark'*: Denotes that the attendee is present at the event.
+* *'Exit'*: exits the application.
+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Features>> subsection to see more detailed documentation of the functions that
+   are included in this application
 
 [[Features]]
 == Features
