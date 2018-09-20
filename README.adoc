@@ -7,6 +7,8 @@ https://coveralls.io/github/CS2113-AY1819S1-F09-3/main?branch=master[image:https
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 https://cs2113-ay1819s1-f09-3.github.io/main/[image:https://img.shields.io/badge/Documentation-Online-green.svg[Documentation Link]]
 
+image::docs/images/Ui.png[width="600"]
+
 Invités is a Windows application that caters to organisers of different events (such as weddings, orientation camps, networking sessions, product launches, etc). It helps event planners reduce their workload while planning events by providing them
 a convenient platform to do all the planning.
 
@@ -43,7 +45,10 @@ __For each event __
 
     d. Dietary Requirement of guest
 
-    e. Ticket number/QR code of guest
+    e. Ticket number of guest for mass attendance-marking
+
+    f. Status of guest (e.g. VIP)
+
 
 ## Acknowledgements
 Some parts of this application were adapted from the sample application: Address Book Level 4 at SE-EDU.
