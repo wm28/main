@@ -52,6 +52,8 @@ __For each event __
 
     f. Status of guest (e.g. VIP)
 
+    g. Status of Payment of guest (e.g. PAID)
+
 ## Acknowledgements
 Some parts of this application were adapted from the sample application: https://github.com/se-edu/[Address Book Level 4] by *_SE-EDU_*.
 
