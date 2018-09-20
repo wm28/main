@@ -33,7 +33,7 @@ having to input all the information manually, as well as subsequently, if the ev
 .  Place the jar file where the home directory resides
 .  Double click on the jar file and wait a couple of seconds as the application loads.
 +
-image::UI_mockup.png[width="790"]
+image::Ui.png[width="790"]
 +
 .  Using the Command Line Input as its primary method of manipulation, here are some
    example commands that can be used:
