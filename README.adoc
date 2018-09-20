@@ -1,5 +1,5 @@
 # Invités - Team F09-3
-### This repo contains the source code for Group F09-3's CS2113T Project
+=== This repo contains the source code for Group F09-3's CS2113T Project
 
 https://travis-ci.org/CS2113-AY1819S1-F09-3/main[image:https://travis-ci.org/CS2113-AY1819S1-F09-3/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/aaryamNUS/main/branch/master[image:https://ci.appveyor.com/api/projects/status/1d4mupmconi0843a/branch/master?svg=true[Build status]]
