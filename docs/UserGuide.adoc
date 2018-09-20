@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Invités - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,33 +12,43 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/nusCS2113-AY1819S1/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-F09-3/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
+Invités is an application that allows its users to better *organise, cater, and manage* the reception for large events such
+as weddings, school gatherings, orientation camps, etc. Some of the main features include mass email notification, tracking of payments, as well as tab
+keeping the attendance of the guests. This will give the hosts of the event an easier time to manage the reception as they will be equipped with tools that will minimise errors in catering,
+organisation, and orders. Moreover, this application aims to reduce the frustrations of event managers and address their needs in a platform that is more user friendly, personalised, and
+efficient.
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+To add to this, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event. This reduces the hassle of
+having to input all the information manually, as well as subsequently, if the event manager decides to organise another event using the same guest list.
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Download the latest jar file from the GIT repository link:https://github.com/CS2113-AY1819S1-F09-3/main[here].
+.  Place the jar file where the home directory resides
+.  Double click on the jar file and wait a couple of seconds as the application loads.
 +
 image::Ui.png[width="790"]
 +
+.  Using the Command Line Input as its primary method of manipulation, here are some
+   example commands that can be used:
+
+* *'help'*: Displays a summary of the list of commands that the application offers.
+* *'add'*: Adds a guest to the guest list.
+* *'Delete'*: Deletes an entry from the guest list.
+* *'Mark'*: Denotes that the attendee is present at the event.
+* *'Exit'*: exits the application.
+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Features>> subsection to see more detailed documentation of the functions that
+   are included in this application
 
 [[Features]]
 == Features
@@ -46,28 +56,29 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Bob Lee`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Bob Lee t/VIP` or as `n/Bob Lee`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/VIP`, `t/VIP t/Vegetarian` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
+Displays a summary of the list of commands that the application offers +
 Format: `help`
 
 === Adding a person: `add`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent t/VIP t/Vegetarian t/Not Paid'
+* `add n/John Doe p/91028392 e/johndoe@gmail.com a/Present t/Groom t/Non-Vegetarian t/Paid'
 
 === Listing all persons : `list`
 
@@ -77,7 +88,8 @@ Format: `list`
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
+         [t/PERSON_TYPE] [t/DIET] [t/PAID]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
@@ -89,10 +101,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 n/Bob Chan` +
+Edits the name of the 2nd person to be `Bob Chan` respectively.
 
 === Locating persons by name: `find`
 
@@ -134,45 +144,125 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Import users from CSV file : `import`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+Imports users with data from a CSV formatted file. The structure for the values in the CSV file is predefined. +
+Format: `import FILE_PATH`
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `import directory/subdirectory/guestlist.csv` +
+Imports the CSV file from the specified path.
 
-=== Listing entered commands : `history`
+=== Mark a person as present : `mark`
 
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Marks a person as present using their unique phone number. This will also change the
+'a/PRESENT'​ tag associated with the person to Present. +
+Format: `mark [p/PHONE_NUMBER]`
 
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
+Examples:
+
+* `mark 81927291` +
+Marks the person with phone number '81927291' as present.
+
+=== Mark a person as absent : `unmark`
+
+Marks a person as absent using their unique phone number. This will also change the
+'a/PRESENT'​ tag associated with the person to Absent. +
+Format: `unmark [p/PHONE_NUMBER]`
+
+Examples:
+
+* `unmark 81927291` +
+Marks the person with phone number '81927291' as absent.
+
+===  Start mass attendance marking: 'start_marking'
+
+Start the mass attendance marking mode. Allows you to mark attendance without using
+the mark prefix. +
+Format: `start_marking [TICKET_ID]...`
+
+Examples:
+
+* `start_marking` + '87654321' + '87654322' + '87654323' + '87654324...' +
+Marks the guests with phone numbers 87654321, 87654322, 87654323, 87654324 as present
+
+===  Stop mass attendance marking: 'stop_marking'
+
+Stop the mass attendance marking mode. +
+Format: `stop_marking`
+
+===  Filter list based on specified parameters: 'filter'
+
+Filter guest list based on filter guest attributes. Use the filter with no arguments to view
+the entire guest list. +
+Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
+         [t/PERSON_TYPE] [t/DIET] [t/PAID]`
+
+Examples:
+
+* `filter a/Present t/Vegetarian' +
+Filters the list with guests who are present and have a vegetarian dietary requirement.
+
+===   Sending emails to filtered list: 'email'
+
+Send emails to guests in the guest list +
+Format: `email MESSAGE`
+
+Examples:
+
+* `email Please be reminded to bring enough cash to pay for the event entry fee.' +
+Sends an email requesting all guests to bring enough cash to pay
+
+===   Creating a new event: 'add_event'
+
+Creates a new event +
+Format: `event n/EVENT_NAME [t/DATE_TIME]`
+
+Examples:
+
+* `event n/CFG career talk t/18 Sep 2018 10AM' +
+Create an event called 'CFG career talk' on the 18th of September at 10AM.
+
+===   Select an event: 'select_event'
+
+Switch between events by selecting its associated index (index starts from 1) +
+Format: `select_event [INDEX]`
+
+Examples:
+
+* `select_event 1' +
+Selects the event at the 1st position in the events list.
+
+===   Editing an event: 'edit_event'
+
+Edit the currently selected event +
+Format: `edit_event [n/EVENT_NAME] [t/...]`
+
+Examples:
+
+* `event n/CFG career talk t/18 Sep 2018 11AM' +
+Change the data and time of the event 'CFG career talk' to 18th of September at 11AM.
+
+===   Deleting event: 'event_delete'
+
+Deletes an event by specifying its associated index +
+Format: `event_delete [INDEX]`
+
+Examples:
+
+* `event_delete 1' +
+Deleting the event at index position 1.
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the guest list to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the guest list's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -214,11 +304,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
-
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -226,35 +311,35 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Guest list data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
+*Q*: ​ How do I import my existing data on a CSV into the application?
+*A*: Firstly, create a new event within the application. After this, use the import function and specify the path to the file. This will add the current entries that are on the CSV file into the event.
+
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+* *help*: ​Displays a help sheet containing useful commands.
+* *add*: ​Creates an entry for a person to attend the event.
+* *edit*:​ Modifies the entry of a specified person based on name.
+* *delete*: ​Removes an entry of a specified person based on name.
+* *find* : Finds persons whose names contain any of the given keywords.
+* *list* : Lists the current guest list
+* *import*: ​Automatically generates guest list from a given CSV file.
+* *mark*: ​Tags a person to note that they are currently at the event.
+* *unmark*: ​Removes the tag of a person attending the event based on name.
+* *start_marking*: ​Begins continuous marking of the people entering the event.
+* *stop_marking*: ​Stops the continuous marking of people.
+* *filter*: ​Filters the guest list based on tag(s) given.
+* *email*: ​Sends mass emails to all guests on the guest list.
+* *add_event*:​ Adds an event to the application.
+* *select_event*: ​Redirects the user to the guest list of the event given
+* *event_delete*: ​Removes the specified event
+* *undo*': Restores the address book to the state before the previous undoable command was executed.
+* *redo*: Reverses the most recent undo command
+* *exit*: ​Exits the application
