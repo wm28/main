@@ -831,17 +831,35 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |event planner |be able to mark attendance of guests easily |minimise holdup as much as possible
 
-|`* * *` |user |add a new person |
+|`* * *` |event planner |be able to plan a few events at a time |manage the workload of events that I have to plan
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |event planner |choose the theme for each event and get the necessary fields already done up and ready-to-use | reduce time spent on creating the fields for the details I need for each guest
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |event planner |be able to customise the themes and various fields |create events with new themes, and get any extra details of each guest if necessary
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |event planner |be able to track the guest list for each event |know how many guests there are in each event in order to know which event I should focus more on
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |event planner |be able to filter my guests to see who have not paid for the event |easily see who I need to remind
+
+|`* * *` |event planner |be able to view all the important details of guests |get all the necessary details at one go for easier planning
+
+|`* * *` |event planner |be able to send the guests their tickets via email |ensure that all guests will have their tickets with them and there will be no complications
+
+|`* * *` |event planner |have the tickets sent to each guest to have their phone number |have an easier time marking attendance
+
+|`* *` |event planner |be able to send mass messages and mass emails to guests |remind them about the event
+
+|`* *` |event planner |filter my guests based on dietary requirements |so that I can plan my event accordingly
+
+|`* *` |event planner |be able to specify the dress code of the event |ensure that the guests will be appropriately attired
+
+|`*` |event planner |be able to know who the VIP guests are and how many of them there are |make appropriate accommodation for them
+
+|`*` |event planner |be able to tag guests |take note of any extra details if necessary
+
+|`*` |event planner |have the tickets to contain a QR code instead of using the guest’s phone number |scan them using a smart phone or any other phone with scanning capability
 |=======================================================================
 
 _{More to be added}_
