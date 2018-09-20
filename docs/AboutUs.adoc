@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-Invités was developed by the CS2113TAY18/19 F09-3 team. +
+Invités was developed by the CS2113T AY18/19 F09-3 team. +
 _ +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
