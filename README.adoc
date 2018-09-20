@@ -45,7 +45,8 @@ __For each event __
 
     d. Dietary Requirement of guest
 
-    e. Ticket number/QR code of guest
+    e. Ticket number of guest for mass attendance-marking
+
 
 ## Acknowledgements
 Some parts of this application were adapted from the sample application: Address Book Level 4 at SE-EDU.
