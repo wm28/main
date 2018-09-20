@@ -47,8 +47,7 @@ __For each event __
 
     e. Ticket number of guest for mass attendance-marking
 
-    f. Status of guest 
-
+    f. Status of guest (e.g. VIP)
 
 ## Acknowledgements
 Some parts of this application were adapted from the sample application: Address Book Level 4 at SE-EDU.
