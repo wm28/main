@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-3/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F09-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 Invités is an application that allows its users to better *organise, cater, and manage* the reception for large events such
@@ -38,11 +38,11 @@ image::Ui.png[width="790"]
 .  Using the Command Line Input as its primary method of manipulation, here are some
    example commands that can be used:
 
-* *'help'*: Displays a summary of the list of commands that the application offers.
-* *'add'*: Adds a guest to the guest list.
-* *'Delete'*: Deletes an entry from the guest list.
-* *'Mark'*: Denotes that the attendee is present at the event.
-* *'Exit'*: exits the application.
+* `help` : Displays a summary of the list of commands that the application offers.
+* `add` : Adds a guest to the guest list.
+* `Delete` : Deletes an entry from the guest list.
+* `Mark` : Denotes that the attendee is present at the event.
+* `Exit` : exits the application.
 
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -77,8 +77,8 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent t/VIP t/Vegetarian t/Not Paid'
-* `add n/John Doe p/91028392 e/johndoe@gmail.com a/Present t/Groom t/Non-Vegetarian t/Paid'
+* `add n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent t/VIP t/Vegetarian t/Not Paid`
+* `add n/John Doe p/91028392 e/johndoe@gmail.com a/Present t/Groom t/Non-Vegetarian t/Paid`
 
 === Listing all persons : `list`
 
@@ -176,7 +176,7 @@ Examples:
 * `unmark 81927291` +
 Marks the person with phone number '81927291' as absent.
 
-===  Start mass attendance marking: 'start_marking'
+===  Start mass attendance marking : 'start_marking'
 
 Start the mass attendance marking mode. Allows you to mark attendance without using
 the mark prefix. +
@@ -187,12 +187,12 @@ Examples:
 * `start_marking` + '87654321' + '87654322' + '87654323' + '87654324...' +
 Marks the guests with phone numbers 87654321, 87654322, 87654323, 87654324 as present
 
-===  Stop mass attendance marking: 'stop_marking'
+===  Stop mass attendance marking : 'stop_marking'
 
 Stop the mass attendance marking mode. +
 Format: `stop_marking`
 
-===  Filter list based on specified parameters: 'filter'
+===  Filter list based on specified parameters : 'filter'
 
 Filter guest list based on filter guest attributes. Use the filter with no arguments to view
 the entire guest list. +
@@ -201,57 +201,57 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
 
 Examples:
 
-* `filter a/Present t/Vegetarian' +
+* `filter a/Present t/Vegetarian` +
 Filters the list with guests who are present and have a vegetarian dietary requirement.
 
-===   Sending emails to filtered list: 'email'
+===   Sending emails to filtered list : 'email'
 
 Send emails to guests in the guest list +
 Format: `email MESSAGE`
 
 Examples:
 
-* `email Please be reminded to bring enough cash to pay for the event entry fee.' +
+* `email Please be reminded to bring enough cash to pay for the event entry fee.` +
 Sends an email requesting all guests to bring enough cash to pay
 
-===   Creating a new event: 'add_event'
+===   Creating a new event : 'add_event'
 
 Creates a new event +
 Format: `event n/EVENT_NAME [t/DATE_TIME]`
 
 Examples:
 
-* `event n/CFG career talk t/18 Sep 2018 10AM' +
+* `event n/CFG career talk t/18 Sep 2018 10AM` +
 Create an event called 'CFG career talk' on the 18th of September at 10AM.
 
-===   Select an event: 'select_event'
+===   Select an event : 'select_event'
 
 Switch between events by selecting its associated index (index starts from 1) +
 Format: `select_event [INDEX]`
 
 Examples:
 
-* `select_event 1' +
+* `select_event 1` +
 Selects the event at the 1st position in the events list.
 
-===   Editing an event: 'edit_event'
+===   Editing an event : 'edit_event'
 
 Edit the currently selected event +
 Format: `edit_event [n/EVENT_NAME] [t/...]`
 
 Examples:
 
-* `event n/CFG career talk t/18 Sep 2018 11AM' +
+* `event n/CFG career talk t/18 Sep 2018 11AM` +
 Change the data and time of the event 'CFG career talk' to 18th of September at 11AM.
 
-===   Deleting event: 'event_delete'
+===   Deleting event : 'event_delete'
 
 Deletes an event by specifying its associated index +
 Format: `event_delete [INDEX]`
 
 Examples:
 
-* `event_delete 1' +
+* `event_delete 1` +
 Deleting the event at index position 1.
 
 // tag::undoredo[]
@@ -324,22 +324,22 @@ There is no need to save manually.
 
 == Command Summary
 
-* *help*: ​Displays a help sheet containing useful commands.
-* *add*: ​Creates an entry for a person to attend the event.
-* *edit*:​ Modifies the entry of a specified person based on name.
-* *delete*: ​Removes an entry of a specified person based on name.
-* *find* : Finds persons whose names contain any of the given keywords.
-* *list* : Lists the current guest list
-* *import*: ​Automatically generates guest list from a given CSV file.
-* *mark*: ​Tags a person to note that they are currently at the event.
-* *unmark*: ​Removes the tag of a person attending the event based on name.
-* *start_marking*: ​Begins continuous marking of the people entering the event.
-* *stop_marking*: ​Stops the continuous marking of people.
-* *filter*: ​Filters the guest list based on tag(s) given.
-* *email*: ​Sends mass emails to all guests on the guest list.
-* *add_event*:​ Adds an event to the application.
-* *select_event*: ​Redirects the user to the guest list of the event given
-* *event_delete*: ​Removes the specified event
-* *undo*': Restores the address book to the state before the previous undoable command was executed.
-* *redo*: Reverses the most recent undo command
-* *exit*: ​Exits the application
+* `help` : ​Displays a help sheet containing useful commands.
+* `add` : ​Creates an entry for a person to attend the event.
+* `edit` :​ Modifies the entry of a specified person based on name.
+* `delete` : ​Removes an entry of a specified person based on name.
+* `find` : Finds persons whose names contain any of the given keywords.
+* `list` : Lists the current guest list
+* `import` : ​Automatically generates guest list from a given CSV file.
+* `mark` : ​Tags a person to note that they are currently at the event.
+* `unmark` : ​Removes the tag of a person attending the event based on name.
+* `start_marking` : ​Begins continuous marking of the people entering the event.
+* `stop_marking` : ​Stops the continuous marking of people.
+* `filter` : ​Filters the guest list based on tag(s) given.
+* `email` : ​Sends mass emails to all guests on the guest list.
+* `add_event` :​ Adds an event to the application.
+* `select_event` : ​Redirects the user to the guest list of the event given
+* `event_delete` : ​Removes the specified event
+* `undo` : Restores the address book to the state before the previous undoable command was executed.
+* `redo` : Reverses the most recent undo command
+* `exit` : ​Exits the application
