@@ -49,6 +49,13 @@ __For each event __
 
     f. Status of guest (e.g. VIP)
 
+
+== Site Map
+
+* <<UserGuide#, User Guide>>
+* <<DeveloperGuide#, Developer Guide>>
+* <<AboutUs#, About Us>>
+
 ## Acknowledgements
 Some parts of this application were adapted from the sample application: https://github.com/se-edu/[Address Book Level 4] by *_SE-EDU_*.
 
