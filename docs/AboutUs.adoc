@@ -11,46 +11,47 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Srivastava Aaryam
+image::aaryamnus.jpeg[width="150", align="left"]
+{empty}[http://github.com/aaryamNUS[github]] [<<johndoe#, portfolio>>]
 
-Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
-
-Role: Team Lead +
-Responsibilities: UI
+Role: Team lead +
+Responsibilities: Mass email sending functionality
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Sandhya Gopakumar
+image::sandhyagopakumar.jpg[width="150", align="left"]
+{empty}[http://github.com/SandhyaGopakumar[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Events functionality
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Sarah Taaher Bonna
+image::sarahtaaherbonna.jpg[width="150", align="left"]
+{empty}[http://github.com/SarahTaaherBonna[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Data filtering
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Tan Tze Guang
+image::kronicler.jpeg[width="150", align="left"]
+{empty}[http://github.com/kronicler[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Attendance taking functionality
+
+'''
+
+=== Tan Wei Ming
+image::wm28.jpg[width="150", align="left"]
+{empty}[http://github.com/wm28[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Data importation
 
 '''
