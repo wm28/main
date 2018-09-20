@@ -903,8 +903,12 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  Command line interface has to be the primary source of input. GUI is to be used only to give visual feedback to the user.
+.  Data should be stored locally in a text file that can be edited by user. DBMS must not be used to store data.
+.  OOP has to be followed.
+.  The software has to be independent of platforms of any kind.
+.  The software should work without needing an installer.
+.  Only free, open-source, permissive license software that do not require any installation and do not violate any other constraints can be used.
 
 [appendix]
 == Glossary
