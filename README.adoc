@@ -15,13 +15,16 @@ events. The application also caters to nearly every type of event specialising b
 ## Our Purpose
 To streamline, digitise, and revamp the process of managing events, and benefit both the guests and the planners by doing so.
 
-###Features:
+### Features:
 The following list highlights the main features our application provides, ranging from mass messaging to all guests to payment and dietary tracking.
 
 _General_
+
 1. Side tab, where event planners will be able to see what events they are planning.
 
+
 __For each event __
+
 1. *Overarching detail fields*
 
     a. Name of event
