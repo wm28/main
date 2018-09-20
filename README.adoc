@@ -1,4 +1,5 @@
 # Invités
+ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-F09-3/main[image:https://travis-ci.org/CS2113-AY1819S1-F09-3/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/aaryamNUS/main[image:https://ci.appveyor.com/api/projects/status/bdt6xr7o98ea332r?svg=true[Build status]]
@@ -6,7 +7,14 @@ https://coveralls.io/github/CS2113-AY1819S1-F09-3/main?branch=master[image:https
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 https://cs2113-ay1819s1-f09-3.github.io/main/[image:https://img.shields.io/badge/Documentation-Online-green.svg[Documentation Link]]
 
-image::docs/images/Ui.png[width="80%"]
+ifdef::env-github[]
+image::docs/images/Ui.png[width="600"]
+endif::[]
+
+ifndef::env-github[]
+image::images/Ui.png[width="600"]
+endif::[]
+
 
 Invités is a web application that caters to organisers of different events (such as weddings, orientation camps, networking sessions, product launches, etc). It helps event planners reduce their workload during the planning phase by providing them
 a convenient platform to manage guest lists, organise catering services, as well as keep track of payments. Our main target audience are event managers and planners, who wish to utilise a streamlined and efficient approach towards organising their
