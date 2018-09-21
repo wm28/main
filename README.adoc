@@ -31,7 +31,7 @@ The following list highlights the main features our application provides, rangin
 1. Side tab, where event planners will be able to see what events they are planning.
 
 
-###### __For each event __
+##### __For each event __
 
 1. *Overarching detail fields*
 
