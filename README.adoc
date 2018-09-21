@@ -26,12 +26,12 @@ To streamline, digitise, and revamp the process of managing events, and benefit 
 ### Features:
 The following list highlights the main features our application provides, ranging from mass messaging to all guests to payment and dietary tracking.
 
-# _General_
+###### _General_
 
 1. Side tab, where event planners will be able to see what events they are planning.
 
 
-# __For each event __
+###### __For each event __
 
 1. *Overarching detail fields*
 
