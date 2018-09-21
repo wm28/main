@@ -349,3 +349,44 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Light";
+
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab:selected .focus-indicator {
+    -fx-border-radius: 10 10 0 0, 10 10 0 0;
+    -fx-border-insets: -6 -9 -8 -8, -5 -8 -7 -7;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-padding:0 30 0 0;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: derive(#1d1d1d, 40%);
+}
+
+.tab-header-area .tab{
+    -fx-padding:5 10 5 10;
+    -fx-background-radius: 10 10 0 0;
+    -fx-background-color: derive(#1d1d1d, 25%);
+
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-padding: 0 0 0 20;
+}
