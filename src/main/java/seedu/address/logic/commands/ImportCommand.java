@@ -9,11 +9,14 @@ import java.nio.file.Paths;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Imports multiple guests into the guest list of the current event via a CSV file
+ */
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Export current event guest list to a CSV file. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports guests into current event through a CSV file. "
             + "Parameters: FILE_PATH\n"
             + "Example: " + COMMAND_WORD + " guestlist.csv";
 
