@@ -32,6 +32,19 @@ public class FileUtil {
     }
 
     /**
+     * Returns true if {@code path} has the file extension, {@code extension}
+     * @param path A string representing the file path. Cannot be null.
+     * @param extension A string representing the file extension type. Cannot be null.
+     */
+    public static boolean isCorrectFileExtension(String path, String extension){
+        assert extension != null : "file extension is null";
+        if(!path.endsWith("." + extension)){
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Creates a file if it does not exist along with its missing parent directories.
      * @throws IOException if the file or directory cannot be created.
      */
