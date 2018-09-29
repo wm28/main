@@ -341,11 +341,53 @@
     -fx-vgap: 3;
 }
 
+/*@@author aaryamNUS
+* Adding the definitions for the tag labels
+*/
 #tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#tags .orange {
+    -fx-text-fill: black;
+    -fx-background-color: #ff9900;
+}
+
+#tags .yellow {
+    -fx-text-fill: white;
+    -fx-background-color: #cb9d1d;
+}
+
+#tags .green {
+    -fx-text-fill: white;
+    -fx-background-color: #71bc78;
+}
+
+#tags .lightblue {
+    -fx-text-fill: black;
+    -fx-background-color: #96e1f0;
+}
+
+#tags .red {
+    -fx-text-fill: white;
+    -fx-background-color: #cd3333;
+}
+
+#tags .white {
+    -fx-text-fill: black;
+    -fx-background-color: #ffffff;
+}
+
+#tags .black {
+    -fx-text-fill: white;
+    -fx-background-color: #000000;
+}
+
+#tags .purple {
+    -fx-text-fill: white;
+    -fx-background-color: #572d57;
+}
+/* @@author */

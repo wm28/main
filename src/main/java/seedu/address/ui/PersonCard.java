@@ -14,6 +14,18 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
+    //@@author aaryamNUS
+    /**
+     * The following string array represents different tag colours associated with each guest in the list.
+     * Each colour represents a charecteristic of the guest, as summarised below:
+     * Orange - Absent, Yellow - Present, Green - Vegetarian, Light Blue - VIP, Red - Bride or Groom,
+     * White - Guest Speaker, Black - Not Paid, Purple - Paid
+     *
+     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
+     */
+    private static final String[] TAG_COLORS = {"orange", "yellow", "green", "lightblue", "red", "white", "black", "purple"};
+    //@@author
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -47,8 +59,35 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        createTags(person);
     }
+
+    //@@author aaryamNUS
+    /**
+        Method getTagColor returns the specific color style for {@code tagName}'s label.
+        Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
+     */
+    private String getTagColor(String tagName) {
+        /**
+         * Using the hashcode of the tag name ensures the color of the tag remains consistent
+         * during different iterations of the code by generating a random color
+         */
+
+        return TAG_COLORS[Math.abs(tagName.hashCode()) % TAG_COLORS.length];
+    }
+
+    /**
+        Method createTags initialises the tag labels for {@code person}
+        Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
+     */
+    private void createTags(Person person) {
+        person.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add(getTagColor(tag.tagName));
+            tags.getChildren().add(tagLabel);
+        });
+    }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
