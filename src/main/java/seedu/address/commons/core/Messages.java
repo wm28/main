@@ -11,5 +11,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_FILE_EXTENSION = "Invalid file extension! \n%1$s";
     public static final String MESSAGE_INVALID_FILE_PATH = "Invalid file path! \n%1$s";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_FILE_NOT_FOUND = "%1$s does not exists!";
 
 }
