@@ -55,26 +55,25 @@ public class GuiTestAssert {
 
     private static String getTagColor(String tagName) {
         switch (tagName) {
-            case "vegetarian":
-                return "green";
-            case "absent":
-                return "orange";
-            case "present":
-                return "yellow";
-            case "vip":
-                return "lightblue";
-            case "bride":
-            case "groom":
-                return "red";
-            case "Guest Speaker":
-                return "white";
-            case "not paid":
-                return "black";
-            case "paid":
-                return "purple";
-            default:
-                throw new AssertionError(tagName + "does not have a color assigned.");
-
+        case "vegetarian":
+            return "green";
+        case "absent":
+            return "orange";
+        case "present":
+            return "yellow";
+        case "vip":
+            return "lightblue";
+        case "bride":
+        case "groom":
+            return "red";
+        case "Guest Speaker":
+            return "white";
+        case "not paid":
+            return "black";
+        case "paid":
+            return "purple";
+        default:
+            throw new AssertionError(tagName + "does not have a color assigned.");
         }
     }
 
@@ -86,7 +85,8 @@ public class GuiTestAssert {
      */
 
     private static void assertTagsEqual(Person expectedPerson, PersonCardHandle actualCard) {
-        List<String> expectedTags = expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList());
+        List<String> expectedTags = expectedPerson.getTags().stream().map(tag ->
+                tag.tagName).collect(Collectors.toList());
         assertEquals(expectedTags, actualCard.getTags());
         expectedTags.forEach(tag ->
                 assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColor(tag)), actualCard.getTagStyleClasses(tag)));
