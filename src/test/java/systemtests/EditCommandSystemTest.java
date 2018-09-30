@@ -294,6 +294,6 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         asserCommandBoxAndResultDisplayShowsErrorStyle();
-        assertStatusBarUnchanged();
+        assertStatusBarChangedExceptSaveLocation();
     }
 }

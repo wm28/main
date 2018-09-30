@@ -190,6 +190,6 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         asserCommandBoxAndResultDisplayShowsErrorStyle();
-        assertStatusBarUnchanged();
+        assertStatusBarChangedExceptSaveLocation();
     }
 }

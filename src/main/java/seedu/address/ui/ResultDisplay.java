@@ -42,8 +42,7 @@ public class ResultDisplay extends UiPart<Region> {
 
             if (event.isCorrectCommand) {
                 setStyleforSuccessfulCommand();
-            }
-            else {
+            } else {
                 setStyleforIncorrectCommand();
             }
         });

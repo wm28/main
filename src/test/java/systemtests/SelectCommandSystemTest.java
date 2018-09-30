@@ -149,6 +149,6 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         asserCommandBoxAndResultDisplayShowsErrorStyle();
-        assertStatusBarUnchanged();
+        assertStatusBarChangedExceptSaveLocation();
     }
 }
