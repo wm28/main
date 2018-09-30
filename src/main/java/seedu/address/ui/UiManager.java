@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -30,7 +31,7 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE = "Could not save data to file";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/docs/images/InvitésLogoSmall.png";
 
     private Logic logic;
     private Config config;
