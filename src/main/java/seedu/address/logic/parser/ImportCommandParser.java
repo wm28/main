@@ -22,7 +22,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         } else if (!FileUtil.isValidPath(trimmedArg)) {
             throw new ParseException(String.format(MESSAGE_INVALID_FILE_PATH, ImportCommand.MESSAGE_USAGE));
-        } else if (!FileUtil.isCorrectFileExtension(trimmedArg, "csv")) {
+        } else if (!FileUtil.isValidFileExtension(trimmedArg, "csv")) {
             throw new ParseException(String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
         }
         return new ImportCommand(trimmedArg);

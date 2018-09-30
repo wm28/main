@@ -36,8 +36,9 @@ public class FileUtil {
      * @param path A string representing the file path. Cannot be null.
      * @param extension A string representing the file extension type. Cannot be null.
      */
-    public static boolean isCorrectFileExtension(String path, String extension){
-        assert extension != null : "file extension is null";
+    public static boolean isValidFileExtension(String path, String extension){
+        extension = extension.toLowerCase();
+        path = path.toLowerCase();
         if(!path.endsWith("." + extension)){
             return false;
         }
