@@ -24,15 +24,17 @@ public class FileUtilTest {
     @Test
     public void isCorrectFileExtension() {
         // correct file extension
-        assertTrue(FileUtil.isValidFileExtension("valid/file/path.csv","csv"));
+        assertTrue(FileUtil.isValidFileExtension("valid/file/path.csv", "csv"));
 
         // incorrect file extension
-        assertFalse(FileUtil.isValidFileExtension("valid/file/path.csv","vsc"));
+        assertFalse(FileUtil.isValidFileExtension("valid/file/path.csv", "vsc"));
 
         // null path -> throws NullPointerException
-        Assert.assertThrows(NullPointerException.class, () -> FileUtil.isValidFileExtension(null,"csv"));
+        Assert.assertThrows(NullPointerException.class,
+                () -> FileUtil.isValidFileExtension(null, "csv"));
 
         // null extension -> throws AssertionException
-        Assert.assertThrows(NullPointerException.class, () -> FileUtil.isValidFileExtension("valid/file/path.csv",null));
+        Assert.assertThrows(NullPointerException.class,
+                () -> FileUtil.isValidFileExtension("valid/file/path.csv", null));
     }
 }
