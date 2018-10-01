@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -10,9 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -61,16 +58,16 @@ public class MarkCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         int x = 0;
-        boolean not_found = true;
-        for (Person p : lastShownList){
+        boolean isNotFound = true;
+        for (Person p : lastShownList) {
             Phone temp = p.getPhone();
-            if (phone.equals(temp)){
-                not_found = false;
+            if (phone.equals(temp)) {
+                isNotFound = false;
                 break;
             }
             x++;
         }
-        if (not_found){
+        if (isNotFound) {
             throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
