@@ -22,35 +22,35 @@ public interface Model {
     /**
      * Returns true if an event with the same identity as {@code event} exists in the application.
      */
-    boolean hasEvent(Event event);
+    //boolean hasEvent(Event event);
 
     /**
      * Deletes the given event.
      * The event must exist in the application.
      */
-    void deleteEvent(Event target);
+    //void deleteEvent(Event target);
 
     /**
      * Adds the given event.
      * {@code event} must not already exist in the application.
      */
-    void addEvent(Event event);
+    //void addEvent(Event event);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
      * {@code target} must exist in the application.
      * The person identity of {@code editedEvent} must not be the same as another existing event in the application.
      */
-    void updateEvent(Event target, Event editedEvent);
+    //void updateEvent(Event target, Event editedEvent);
 
     /** Returns an unmodifiable view of the filtered event list */
-    ObservableList<Event> getFilteredEventList();
+   // ObservableList<Event> getFilteredEventList();
 
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredEventList(Predicate<Event> predicate);
+   // void updateFilteredEventList(Predicate<Event> predicate);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
