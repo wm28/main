@@ -1,9 +1,10 @@
 package seedu.address.model.person;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code Tags} matches all of the keywords given.
@@ -17,8 +18,15 @@ public class ContainsKeywordsPredicate {
 
 
     public boolean test(Person person) {
+        HashSet<seedu.address.model.tag.Tag> set;
+        Tag[] tagsArray = new Tag[0];
+        for (Tag tag : set = new HashSet<>(person.getTags())) {
+            tagsArray = set.toArray(new Tag[]{tag});
+        }
+
+        Tag[] finalTagsArray = tagsArray;
         return keywords.stream()
-                .allMatch(keyword -> java.util.Set(person.getTags(), keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(finalTagsArray, keyword));
     }
 
     @Override
