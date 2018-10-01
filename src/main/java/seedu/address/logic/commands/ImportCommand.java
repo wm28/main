@@ -1,5 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,13 +14,6 @@ import seedu.address.logic.parser.CsvParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Imports multiple guests into the guest list of the current event via a CSV file
@@ -31,45 +31,46 @@ public class ImportCommand extends Command {
 
     private Path csvFile;
     private List<String> guestData;
-    private int numberGuest;
-    private int numberSucess;
+    private int totalGuests;
+    private int sucessfulImports;
 
-    public ImportCommand(String fileName){
+    public ImportCommand(String fileName) {
         csvFile = Paths.get(fileName);
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException{
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        try{
+        try {
             guestData = CsvUtil.getDataLinesFromFile(csvFile);
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new CommandException(e.getMessage());
         }
 
-        numberGuest = guestData.size();
-        numberSucess = numberGuest;
+        totalGuests = guestData.size();
+        sucessfulImports = totalGuests;
 
-        for(String guest: guestData){
+        for (String guest : guestData) {
             try {
-                Person toAdd = new CsvParser(guest).parse();
-                addPerson(toAdd,model);
-            } catch (ParseException pe){
-                numberSucess--;
-            } catch (CommandException e){
-                numberSucess--;
+                Person toAdd = new CsvParser().parse(guest);
+                addPerson(toAdd, model);
+            } catch (ParseException pe) {
+                sucessfulImports--;
+            } catch (CommandException e) {
+                sucessfulImports--;
             }
         }
 
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_IMPORT_CSV_RESULT, numberSucess, numberGuest, csvFile.getFileName()));
+        return new CommandResult(
+                String.format(MESSAGE_IMPORT_CSV_RESULT, sucessfulImports, totalGuests, csvFile.getFileName()));
     }
 
     /**
      * Adds a person to the addressbook
      */
-    private void addPerson(Person toAdd, Model model) throws CommandException{
+    private void addPerson(Person toAdd, Model model) throws CommandException {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
