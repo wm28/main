@@ -1,19 +1,27 @@
 package seedu.address.model.event;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Person;
 
-public class UniqueEventList implements Iterable<Event>{
+/**
+ * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
+ * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
+ * as to ensure that the person with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ */
+
+public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalEventList = FXCollections.observableArrayList();
 
@@ -57,16 +65,6 @@ public class UniqueEventList implements Iterable<Event>{
         internalEventList.set(index, editedEvent);
     }
 
-    /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
-     */
-    public void remove(Event toRemove) {
-        requireNonNull(toRemove);
-        if (!internalEventList.remove(toRemove)) {
-            throw new EventNotFoundException();
-        }
-    }
 
     public void setEvent(UniqueEventList replacement) {
         requireNonNull(replacement);
@@ -77,13 +75,24 @@ public class UniqueEventList implements Iterable<Event>{
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Event> events) {
+    public void setEvent(List<Event> events) {
         requireAllNonNull(events);
         if (!eventsAreUnique(events)) {
             throw new DuplicateEventException();
         }
 
         internalEventList.setAll(events);
+    }
+
+    /**
+     * Removes the equivalent person from the list.
+     * The person must exist in the list.
+     */
+    public void remove(Event toRemove) {
+        requireNonNull(toRemove);
+        if (!internalEventList.remove(toRemove)) {
+            throw new EventNotFoundException();
+        }
     }
 
     /**

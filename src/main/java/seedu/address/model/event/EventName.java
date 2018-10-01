@@ -1,11 +1,11 @@
 package seedu.address.model.event;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class EventName {
 
+    //Identity fields
     public static final String MESSAGE_EVENTNAME_CONSTRAINTS =
             "Event names should only contain alphanumeric characters and spaces, and it should not be blank";
 
@@ -48,6 +48,5 @@ public class EventName {
     public int hashCode() {
         return fullEventName.hashCode();
     }
-
 
 }

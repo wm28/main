@@ -1,9 +1,5 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 import java.util.Collections;
@@ -13,14 +9,12 @@ import java.util.Set;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.tag.Tag;
 
 public class Event {
 
     //Identity fields
     private final EventName eventName;
     private final Set<Tag> eventTags = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */

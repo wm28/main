@@ -49,7 +49,7 @@ public interface Model {
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-   // void updateFilteredEventList(Predicate<Event> predicate);
+    //void updateFilteredEventList(Predicate<Event> predicate);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
