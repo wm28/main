@@ -30,11 +30,11 @@ public class FileUtilTest {
         assertFalse(FileUtil.isValidFileExtension("valid/file/path.csv", "vsc"));
 
         // null path -> throws NullPointerException
-        Assert.assertThrows(NullPointerException.class,
-                () -> FileUtil.isValidFileExtension(null, "csv"));
+        Assert.assertThrows(NullPointerException.class, () ->
+                FileUtil.isValidFileExtension(null, "csv"));
 
         // null extension -> throws AssertionException
-        Assert.assertThrows(NullPointerException.class,
-                () -> FileUtil.isValidFileExtension("valid/file/path.csv", null));
+        Assert.assertThrows(NullPointerException.class, () ->
+                FileUtil.isValidFileExtension("valid/file/path.csv", null));
     }
 }
