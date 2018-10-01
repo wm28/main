@@ -43,7 +43,7 @@ public interface Model {
     //void updateEvent(Event target, Event editedEvent);
 
     /** Returns an unmodifiable view of the filtered event list */
-   // ObservableList<Event> getFilteredEventList();
+    // ObservableList<Event> getFilteredEventList();
 
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
