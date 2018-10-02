@@ -73,6 +73,22 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     /**
+     * Tests the setting of different tags to the guests in the list
+     *
+     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
+     * @param tag
+     * @return
+     */
+    public List<String> getTagStyleClasses(String tag) {
+        return tagLabels
+                .stream()
+                .filter(label -> label.getText().equals(tag))
+                .map(Label::getStyleClass)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No such tag exists"));
+    }
+
+    /**
      * Returns true if this handle contains {@code person}.
      */
     public boolean equals(Person person) {
