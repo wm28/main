@@ -27,6 +27,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
         String strTags = null;
 
         for (Tag tag : set) {
+            strTags += " ";
             strTags += tag.tagName;
         }
 
