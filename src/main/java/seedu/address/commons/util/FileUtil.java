@@ -20,6 +20,7 @@ public class FileUtil {
     /**
      * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
      * otherwise returns false.
+     *
      * @param path A string representing the file path. Cannot be null.
      */
     public static boolean isValidPath(String path) {
@@ -32,7 +33,23 @@ public class FileUtil {
     }
 
     /**
+     * Returns true if {@code path} has the file extension, {@code extension}
+     *
+     * @param path      A string representing the file path. Cannot be null.
+     * @param extension A string representing the file extension type. Cannot be null.
+     */
+    public static boolean isValidFileExtension(String path, String extension) {
+        extension = extension.toLowerCase();
+        path = path.toLowerCase();
+        if (!path.endsWith("." + extension)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Creates a file if it does not exist along with its missing parent directories.
+     *
      * @throws IOException if the file or directory cannot be created.
      */
     public static void createIfMissing(Path file) throws IOException {

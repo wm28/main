@@ -154,6 +154,16 @@ Examples:
 * `import directory/subdirectory/guestlist.csv` +
 Imports the CSV file from the specified path.
 
+=== Export users to CSV file : `export`
+
+Exports users to a CSV formatted file. The structure for the values in the CSV file is predefined. +
+Format: `export FILE_PATH`
+
+Examples:
+
+* `export directory/subdirectory/guestlist.csv` +
+Exports users to the CSV file in the specified path.
+
 === Mark a person as present : `mark`
 
 Marks a person as present using their unique phone number. This will also change the
@@ -331,6 +341,7 @@ There is no need to save manually.
 * `find` : Finds persons whose names contain any of the given keywords.
 * `list` : Lists the current guest list
 * `import` : ​Automatically generates guest list from a given CSV file.
+* `export` : Exports guest list to a CSV file.
 * `mark` : ​Tags a person to note that they are currently at the event.
 * `unmark` : ​Removes the tag of a person attending the event based on name.
 * `start_marking` : ​Begins continuous marking of the people entering the event.
