@@ -16,7 +16,11 @@ public class ContainsKeywordsPredicate {
         this.keywords = keywords;
     }
 
-
+    /**
+     *
+     * @param person
+     * @return the tags that match keywords in the person's tags
+     */
     public boolean test(Person person) {
         HashSet<seedu.address.model.tag.Tag> set = new HashSet<>(person.getTags());
         String strTags = null;
