@@ -1,29 +1,34 @@
 package seedu.address.ui;
 
-import com.google.common.eventbus.Subscribe;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
+import com.google.common.eventbus.Subscribe;
+
+//@@author wm28
 
 /**
  * Panel containing the event tabs.
  */
 public class EventsPanel extends UiPart<Region> {
+    private static final String FXML = "EventsPanel.fxml";
+
     private final Logger logger = LogsCenter.getLogger(EventsPanel.class);
     private final Logic logic;
 
     @FXML
     private TabPane eventTabs;
 
-    private static final String FXML = "EventsPanel.fxml";
 
     public EventsPanel(Logic logic) {
         super(FXML);
@@ -34,7 +39,7 @@ public class EventsPanel extends UiPart<Region> {
     /**
      * creates all existing events on start up
      */
-    private void initializeTabs(){
+    private void initializeTabs() {
         /**
          * To be Implemented:
          *  1. Use logic to get the different events
@@ -48,7 +53,7 @@ public class EventsPanel extends UiPart<Region> {
     /**
      * Create an event tab in the tab pane
      */
-    private void createTab(ObservableList<Person> personList, String eventTitle){
+    private void createTab(ObservableList<Person> personList, String eventTitle) {
         Tab tab = new Tab();
         EventTab eventTab = new EventTab(personList);
         tab.setText(eventTitle);
@@ -61,7 +66,8 @@ public class EventsPanel extends UiPart<Region> {
      * NOTE: Tentative
      */
     @Subscribe
-    private void handleAddressBookChangedEvent(AddressBookChangedEvent event){
+    private void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
         //Update event tabs here
     }
 }
+//@@author

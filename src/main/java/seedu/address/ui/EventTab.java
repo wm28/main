@@ -1,26 +1,25 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
-
+//@@author wm28
 /**
  * Ui for each event tab in the EventsPanel
  */
-public class EventTab extends UiPart<Region>{
+public class EventTab extends UiPart<Region> {
+    private static final String FXML = "EventTab.fxml";
     private final Logger logger = LogsCenter.getLogger(EventTab.class);
-
     @FXML
     private ListView<Person> personListView;
-
-    private static final String FXML = "EventTab.fxml";
-
     public EventTab(ObservableList<Person> personList) {
         super(FXML);
         setConnections(personList);
@@ -48,3 +47,4 @@ public class EventTab extends UiPart<Region>{
         }
     }
 }
+//@@author
