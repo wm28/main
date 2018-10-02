@@ -19,13 +19,14 @@ public class ContainsKeywordsPredicate {
 
     public boolean test(Person person) {
         HashSet<seedu.address.model.tag.Tag> set = new HashSet<>(person.getTags());
-        String str_tags = null;
+        String strTags = null;
 
-        for (Tag tag : set) str_tags += tag.tagName;
-        
-        final String tag_str = str_tags;
+        for (Tag tag : set) {
+            strTags += tag.tagName;
+        }
+        final String tagStr = strTags;
         return keywords.stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(tag_str, keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(tagStr, keyword));
     }
 
     @Override

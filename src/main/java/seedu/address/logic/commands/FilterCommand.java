@@ -14,7 +14,7 @@ import java.util.function.Predicate;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FilterCommand extends Command{
+public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags contain all of "

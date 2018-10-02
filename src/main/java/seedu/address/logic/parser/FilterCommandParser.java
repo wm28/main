@@ -11,7 +11,7 @@ import seedu.address.model.person.ContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FilterCommand object
  */
-public class FilterCommandParser implements Parser<FilterCommand>{
+public class FilterCommandParser implements Parser<FilterCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns an FilterCommand object for execution.
@@ -24,8 +24,8 @@ public class FilterCommandParser implements Parser<FilterCommand>{
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        String[] Keywords = trimmedArgs.split("\\s+");
+        String[] keywords = trimmedArgs.split("\\s+");
 
-        return new FilterCommand(new ContainsKeywordsPredicate(Arrays.asList(Keywords)));
+        return new FilterCommand(new ContainsKeywordsPredicate(Arrays.asList(keywords)));
     }
 }
