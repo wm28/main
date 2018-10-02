@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import java.util.HashSet;
 import java.util.List;
-
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
