@@ -53,7 +53,7 @@ public class ImportCommand extends Command {
 
         for (String guest : guestData) {
             try {
-                Person toAdd = new CsvParser().parse(guest);
+                Person toAdd = new CsvParser().parsePerson(guest);
                 addPerson(toAdd, model);
             } catch (ParseException pe) {
                 sucessfulImports--;

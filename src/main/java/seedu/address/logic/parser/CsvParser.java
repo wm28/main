@@ -35,7 +35,7 @@ public class CsvParser {
      * @return Person based on the csv-formatted input string of the guest
      * @throws ParseException if the csv input does not conform to the expected format
      */
-    public Person parse(String csvInput) throws ParseException {
+    public Person parsePerson(String csvInput) throws ParseException {
         Matcher matcher = GUEST_DATA_FORMAT.matcher(csvInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
