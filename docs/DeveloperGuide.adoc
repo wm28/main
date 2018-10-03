@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Invités - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,9 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/nusCS2113-AY1819S1/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-F09-3/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F09-03`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -832,8 +832,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |event planner |be able to mark attendance of guests easily |minimise holdup as much as possible
-
-|`* * *` |event planner |be able to plan a few events at a time |manage the workload of events that I have to plan
 
 |`* * *` |event planner |choose the theme for each event and get the necessary fields already done up and ready-to-use | reduce time spent on creating the fields for the details I need for each guest
 
