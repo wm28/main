@@ -227,22 +227,12 @@ Sends an email requesting all guests to bring enough cash to pay
 ===   Creating a new event : `add_event`
 
 Creates a new event +
-Format: `event n/EVENT_NAME [t/DATE_TIME]`
+Format: `add_event n/EVENT_NAME [t/DATE_TIME]`
 
 Examples:
 
-* `event n/CFG career talk t/18 Sep 2018 10AM` +
+* `add_event n/CFG career talk t/18 Sep 2018 10AM` +
 Create an event called `CFG career talk` on the 18th of September at 10AM.
-
-===   Select an event : `select_event`
-
-Switch between events by selecting its associated index (index starts from 1) +
-Format: `select_event [INDEX]`
-
-Examples:
-
-* `select_event 1` +
-Selects the event at the 1st position in the events list.
 
 ===   Editing an event : `edit_event`
 
@@ -251,18 +241,18 @@ Format: `edit_event [n/EVENT_NAME] [t/...]`
 
 Examples:
 
-* `event n/CFG career talk t/18 Sep 2018 11AM` +
+* `edit_event n/CFG career talk t/18 Sep 2018 11AM` +
 Change the data and time of the event `CFG career talk` to 18th of September at 11AM.
 
-===   Deleting event : `event_delete`
+===   Deleting event : `delete_event`
 
-Deletes an event by specifying its associated index +
-Format: `event_delete [INDEX]`
+Deletes an event by specifying its name
+Format: `delete_event [NAME]`
 
 Examples:
 
-* `event_delete 1` +
-Deleting the event at index position 1.
+* `delete_event wedding` +
+Deleting the event named wedding.
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
