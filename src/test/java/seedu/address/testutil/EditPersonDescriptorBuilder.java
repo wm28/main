@@ -64,10 +64,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Attendance} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAttendance(new Attendance(address));
+    public EditPersonDescriptorBuilder withAttendance(String attendance) {
+        descriptor.setAttendance(new Attendance(attendance));
         return this;
     }
 
@@ -84,4 +84,5 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptor build() {
         return descriptor;
     }
+
 }
