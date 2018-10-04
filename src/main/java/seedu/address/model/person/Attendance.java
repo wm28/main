@@ -3,11 +3,12 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's attendance in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
+ */
 public class Attendance {
-    /**
-     * Represents a Person's address in the address book.
-     * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
-     */
+
     public static final String MESSAGE_ATTENDANCE_CONSTRAINTS =
             "Attendance should only contain alphanumeric characters and spaces, and it should not be blank";
 
@@ -43,12 +44,12 @@ public class Attendance {
         return attendanceValue;
     }
 
-//    @Override
-//    public boolean equals(Object other) {
-//        return other == this // short circuit if same object
-//                || (other instanceof Attendance // instanceof handles nulls
-//                && attendanceValue.equals(((Attendance) other).attendanceValue)); // state check
-//    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Attendance // instanceof handles nulls
+                && attendanceValue.equals(((Attendance) other).attendanceValue)); // state check
+    }
 
     @Override
     public int hashCode() {

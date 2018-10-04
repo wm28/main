@@ -29,9 +29,9 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EMAIL + "johnd@gmail.com "
             + PREFIX_ATTENDANCE + "PRESENT "
-            + PREFIX_TAG + "NOT PAID "
+            + PREFIX_TAG + "NOTPAID "
             + PREFIX_TAG + "NORMAL";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
