@@ -26,12 +26,8 @@ To streamline, digitise, and revamp the process of managing events, and benefit 
 ### Features:
 The following list highlights the main features our application provides, ranging from mass messaging to all guests to payment and dietary tracking.
 
-###### _General_
 
-1. Side tab, where event planners will be able to see what events they are planning.
-
-
-###### __For each event __
+###### __For an event __
 
 1. *Overarching detail fields*
 
@@ -44,6 +40,8 @@ The following list highlights the main features our application provides, rangin
     d. Dress code for event
 
     e. Number of guests so far
+
+    f. Number of days to event
 
 
 2. *Table of details of guests*
