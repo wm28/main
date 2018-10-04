@@ -90,4 +90,8 @@ public class PersonBuilder {
         return new Person(name, phone, email, attendance, tags);
     }
 
+    public PersonBuilder withAttendance(String attendance) {
+        this.attendance = new Attendance(attendance);
+        return this;
+    }
 }
