@@ -22,7 +22,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
