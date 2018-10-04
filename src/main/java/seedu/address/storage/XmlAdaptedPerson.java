@@ -106,8 +106,8 @@ public class XmlAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (attendance == null) {
-            throw new IllegalValueException(String.
-                    format(MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName()));
+            throw new IllegalValueException(String
+                    .format(MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName()));
         }
         if (!Attendance.isValidAttendance(attendance)) {
             throw new IllegalValueException(Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
