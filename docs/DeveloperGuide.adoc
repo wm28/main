@@ -868,7 +868,7 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Filter guest list based on status of payment
+=== Use case: Import guest data and update payment details
 Actor: Application User - Event Planner
 
 *MSS*
@@ -877,10 +877,19 @@ Actor: Application User - Event Planner
 2. System asks user to enter a command.
 3. User enters a command to mark those who have paid.
 4. System updates the file accordingly.
-5. User enters a command to filter out those who have yet to pay.
-6. System shows an indexed list of these guests with their names, phone numbers, email address and tags specified, if there are people in that category.
-7. User enters a command to remind all in the currently displayed list.
-8. System sends all guests in the not paid list an email/text to remind them.
+
+Use case ends.
+
+=== Use case: Filter guest list based on status of payment and mass message those who have not payed
+Actor: Application User - Event Planner
+
+*MSS*
+
+1. User opens application.
+2. User enters a command to filter out those who have yet to pay.
+3. System shows an indexed list of these guests with their names, phone numbers, email address and tags specified, if there are people in that category.
+4. User enters a command to remind all in the currently displayed list.
+5. System sends all guests in the not paid list an email/text to remind them.
 
 Use case ends.
 
