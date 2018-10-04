@@ -103,7 +103,9 @@ public class EditCommandParserTest {
 
         // multiple invalid values,
         // but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ATTENDANCE_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, "1"
+                        + INVALID_NAME_DESC + INVALID_EMAIL_DESC
+                        + VALID_ATTENDANCE_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_NAME_CONSTRAINTS);
     }
 
@@ -170,14 +172,18 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ATTENDANCE_DESC_AMY + EMAIL_DESC_AMY
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY
+                + ATTENDANCE_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ATTENDANCE_DESC_AMY
                 + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + ATTENDANCE_DESC_BOB
                 + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ATTENDANCE_BOB)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
