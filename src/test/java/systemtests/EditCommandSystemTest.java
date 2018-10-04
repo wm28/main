@@ -176,7 +176,9 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ATTENDANCE_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD +
+                        " " + INDEX_FIRST_PERSON.getOneBased()
+                        + INVALID_ATTENDANCE_DESC,
                 Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
