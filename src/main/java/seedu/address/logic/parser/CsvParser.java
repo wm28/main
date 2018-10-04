@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -26,7 +26,7 @@ public class CsvParser {
     private static final Pattern GUEST_DATA_FORMAT = Pattern.compile("(?<name>\"[^\"]*\"|[^\",]*),"
             + "(?<phone>\"[^\"]*\"|[^\",]*),"
             + "(?<email>\"[^\"]*\"|[^\",]*),"
-            + "(?<address>\"[^\"]*\"|[^\",]*),"
+            + "(?<attendance>\"[^\"]*\"|[^\",]*),"
             + "(?<tags>.*)");
     /**
      * Parses csv-formatted input into a Person object.
@@ -43,10 +43,10 @@ public class CsvParser {
         Name name = ParserUtil.parseName(matcher.group("name"));
         Phone phone = ParserUtil.parsePhone(matcher.group("phone"));
         Email email = ParserUtil.parseEmail(matcher.group("email"));
-        Address address = ParserUtil.parseAddress(matcher.group("address"));
+        Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
         Set<Tag> tagList = splitTags(matcher.group("tags"));
 
-        return new Person(name, phone, email, address, tagList);
+        return new Person(name, phone, email, attendance, tagList);
     }
 
     private Set<Tag> splitTags(String tags) throws ParseException {
