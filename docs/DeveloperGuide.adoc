@@ -888,9 +888,9 @@ Actor: Application User - Event Planner
 1. User opens application.
 2. System asks user to enter a command.
 3. User enters a command to filter out those who have yet to pay.
-4. System shows an indexed list of these guests with their names, phone numbers, email address and tags specified, if there are people in that category.
+4. System shows an indexed list of these guests with their names, phone numbers, email address, attendance status and tags specified, if there are people in that category.
 5. User enters a command to remind all in the currently displayed list.
-6. System sends all guests in the not paid list an email/text to remind them.
+6. System sends all guests in the not paid list an email to remind them.
 
 Use case ends.
 
@@ -902,9 +902,9 @@ Actor: Application User - Event Planner
 1. User opens application and imports csv file/adds each guest in the application.
 2. System asks user to enter a command.
 3. User enters a command to filter guests based on a requirement specified (e.g. dietary requirement).
-4. System displays list of all such guests, displaying their name, phone number, email address and tags, if there are people in that category.
+4. System displays list of all such guests, displaying their name, phone number, email address, attendance status and tags, if there are people in that category.
 5. User then enters command to list all guests.
-6. System displays everyone on the guest list along with their name, phone number, email address and tags.
+6. System displays everyone on the guest list along with their name, phone number, email address, attendance status and tags.
 7. User enters command to remind all guests about the event.
 8. System sends all guests an email/text reminding them about the event.
 
