@@ -156,7 +156,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
+        // attendance
         userInput = targetIndex.getOneBased() + ATTENDANCE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ATTENDANCE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
