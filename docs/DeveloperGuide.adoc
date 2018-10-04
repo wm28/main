@@ -886,10 +886,11 @@ Actor: Application User - Event Planner
 *MSS*
 
 1. User opens application.
-2. User enters a command to filter out those who have yet to pay.
-3. System shows an indexed list of these guests with their names, phone numbers, email address and tags specified, if there are people in that category.
-4. User enters a command to remind all in the currently displayed list.
-5. System sends all guests in the not paid list an email/text to remind them.
+2. System asks user to enter a command.
+3. User enters a command to filter out those who have yet to pay.
+4. System shows an indexed list of these guests with their names, phone numbers, email address and tags specified, if there are people in that category.
+5. User enters a command to remind all in the currently displayed list.
+6. System sends all guests in the not paid list an email/text to remind them.
 
 Use case ends.
 
@@ -915,11 +916,9 @@ Actor: Application User - Event Planner
 *MSS*
 
 1. User opens application and imports csv file/adds each guest in the application.
-2. System will display the list of guests with details of each guest, such as name, phone number, email address and tags, such as, dietary requirements, VIP, paid or not paid, etc in a row for ease of access.
-3. System will display the general information of the event at the top of the list of guests, such as name, date, time and venue of event, dress code, number of people attending the event so far, etc.
-4. System asks user to enter a command.
-5. User enters command to filter by some specific requirement, so that user is able to make arrangements accordingly.
-6. System lists all guests with the specified requirement, if available.
+2. System will display the list of guests with details of each guest, such as name, phone number, email address and tags, such as, dietary requirements, VIP, paid or not paid, etc in a row for ease of access. System will display the general information of the event at the top of the list of guests, such as name, date, time and venue of event, dress code, number of people attending the event so far, etc. System asks user to enter a command.
+3. User enters command to filter by some specific requirement, so that user is able to make arrangements accordingly.
+4. System lists all guests with the specified requirement, if available.
 
 Use case ends.
 
