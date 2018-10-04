@@ -29,7 +29,7 @@ public class EventName {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid event name.
      */
     public static boolean isValidEventName(String test) {
         return test.matches(EVENTNAME_VALIDATION_REGEX);
