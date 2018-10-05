@@ -16,8 +16,8 @@ import seedu.address.model.tag.Tag;
 public class Event {
 
     //Identity fields
-    private final EventName eventName;
-    private final Set<Tag> eventTags = new HashSet<>();
+    private EventName eventName;
+    private Set<Tag> eventTags = new HashSet<>();
     /**
      * Every field must be present and not null.
      */
@@ -26,9 +26,25 @@ public class Event {
         this.eventName = eventName;
         this.eventTags.addAll(eventTags);
     }
+    public Event()
+    {
+        EventName eventName = new EventName("none");
+        Set<Tag>eventTags = null;
+        this.eventName = eventName;
+        this.eventTags.addAll(eventTags);
+    }
 
     public EventName getEventName() {
         return eventName;
+    }
+
+    public void setEvent(Event event){
+        if(!this.equals(event))
+        {
+            this.eventName.fullEventName = event.eventName.fullEventName;
+            this.eventTags = event.eventTags;
+        }
+
     }
 
     /**
