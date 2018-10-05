@@ -116,7 +116,7 @@ public class PersonDisplay extends UiPart<Region> {
     }
 
     /**
-     * PersonDisplay Ui component when selection is cleared in the PersonListPanel
+     * Clears {@code Person} details in PersonDisplay Ui component when selection is cleared in the PersonListPanel
      */
     @Subscribe
     public void handlePersonPanelSelectionClearedEvent(PersonPanelSelectionClearedEvent event) {
