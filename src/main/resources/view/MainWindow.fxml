@@ -46,6 +46,13 @@
           </padding>
         </StackPane>
 
+        <StackPane VBox.vgrow="NEVER" fx:id="personDisplayPlaceholder" styleClass="pane-with-border"
+                   minHeight="100">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+        </StackPane>
+
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
           <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
