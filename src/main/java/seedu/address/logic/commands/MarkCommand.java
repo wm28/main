@@ -13,7 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -90,10 +90,10 @@ public class MarkCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
         Set<Tag> updatedTags = personToEdit.getTags();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAttendance, updatedTags);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class MarkCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Attendance attendance;
         private Set<Tag> tags;
 
         /**
@@ -133,7 +133,7 @@ public class MarkCommand extends Command {
             setName(null);
             setPhone(null);
             setEmail(null);
-            setAddress(new Address("PRESENT"));
+            setAttendance(new Attendance("PRESENT"));
             setTags(null);
         }
 
@@ -161,12 +161,12 @@ public class MarkCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setAttendance(Attendance attendance) {
+            this.attendance = attendance;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Attendance> getAttendance() {
+            return Optional.ofNullable(attendance);
         }
 
         /**
@@ -204,7 +204,7 @@ public class MarkCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getAttendance().equals(e.getAttendance())
                     && getTags().equals(e.getTags());
         }
     }
