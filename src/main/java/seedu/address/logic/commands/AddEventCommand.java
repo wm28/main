@@ -18,7 +18,7 @@ public class AddEventCommand extends Command{
             + PREFIX_NAME + "Wedding "
             + PREFIX_TAG + "18 Sep 2018 10AM ";
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the application";
+    public static final String MESSAGE_DUPLICATE_EVENT = "An event already exists in the application";
     private final Event toAdd;
     /**
      * Creates an AddCommand to add the specified {@code Person}

@@ -49,7 +49,7 @@ public class Event {
     }
 
     public boolean isNotUserInitialised(){
-        return isNotInitialisedByUser;
+        return !isNotInitialisedByUser;
     }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
