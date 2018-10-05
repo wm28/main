@@ -11,6 +11,7 @@ import javafx.scene.layout.Region;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionClearedEvent;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,7 +52,6 @@ public class PersonDisplay extends UiPart<Region> {
     }
 
     //@@author aaryamNUS
-
     /**
      * Method getTagColor returns the specific color style for {@code tagName}'s label.
      * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
@@ -78,6 +78,7 @@ public class PersonDisplay extends UiPart<Region> {
     }
     //@@author
 
+    //@@author wm28
     /**
      * Removes all tags from the PersonDisplay Ui component
      */
@@ -88,7 +89,7 @@ public class PersonDisplay extends UiPart<Region> {
     /**
      * Fills in details of the selected {@code person} to the PersonDisplay Ui component
      */
-    private void fillInDetails(Person person) {
+    private void fillInPersonDetails(Person person) {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         attendance.setText(person.getAttendance().attendanceValue);
@@ -97,8 +98,31 @@ public class PersonDisplay extends UiPart<Region> {
         createTags(person);
     }
 
-    @Subscribe
-    private void handlPersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        fillInDetails(event.getNewSelection());
+    /**
+     * Removes details of the previously selected {@code Person} displayed in the PersonDisplay Ui component
+     */
+    private void removePersonDetails() {
+        name.setText("");
+        phone.setText("");
+        attendance.setText("");
+        email.setText("");
+        removeTags();
     }
+
+    @Subscribe
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        fillInPersonDetails(event.getNewSelection());
+    }
+
+    /**
+     * PersonDisplay Ui component when selection is cleared in the PersonListPanel
+     */
+    @Subscribe
+    public void handlePersonPanelSelectionClearedEvent(PersonPanelSelectionClearedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Local data changed, clearing selected guest details "));
+        removePersonDetails();
+    }
+    //@@author
 }
