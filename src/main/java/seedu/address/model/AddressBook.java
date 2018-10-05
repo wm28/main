@@ -61,6 +61,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         setEvent(newData.getEventDetails());
     }
 
+    ///event-level operations
+    public void addEvent(Event e) {
+        eventDetails.setEvent(e);
+    }
+
+    public boolean hasEvent() {
+        return eventDetails.isNotUserInitialised();
+    }
+
     //// person-level operations
 
     /**
