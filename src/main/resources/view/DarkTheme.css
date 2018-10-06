@@ -390,4 +390,9 @@
     -fx-text-fill: white;
     -fx-background-color: #572d57;
 }
+
+#tags .default {
+    -fx-text-fill: red;
+    -fx-background-color: #ffffff;
+}
 /* @@author */
