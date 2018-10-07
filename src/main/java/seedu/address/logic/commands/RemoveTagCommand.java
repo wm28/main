@@ -28,18 +28,18 @@ public class RemoveTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
 
-    public static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully removed tag %1$s from %2$s persons";
-    public static final String MESSAGE_NO_PERSON_WITH_TAG = "No persons in the list have the tag %1$s";
+    public static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully removed all tags from %1$d persons";
+    public static final String MESSAGE_NO_PERSON_WITH_TAG = "No persons in the list have the specified tags";
 
     private int numberOfPeopleToChange = 0;
-    private final Tag tag;
+    private final Set<Tag> tagsToRemove;
 
     /**
-     * @param tag of the person in the filtered person list to edit
+     * @param tagsToRemove of the person in the filtered person list to edit
      */
-    public RemoveTagCommand(Tag tag) {
-        requireNonNull(tag);
-        this.tag = tag;
+    public RemoveTagCommand(Set<Tag> tagsToRemove) {
+        requireNonNull(tagsToRemove);
+        this.tagsToRemove = tagsToRemove;
     }
 
     @Override
@@ -52,13 +52,13 @@ public class RemoveTagCommand extends Command {
 
         for (Person personToBeEdited : currentList) {
             currentTags = personToBeEdited.getTags();
+            needToChange = false;
 
-            if (currentTags.contains(tag)) {
-                currentTags.remove(tag);
-                needToChange = true;
-            }
-            else {
-                needToChange = false;
+            for (Tag tagsToBeRemoved: tagsToRemove) {
+                if (currentTags.contains(tagsToBeRemoved)) {
+                    currentTags.remove(tagsToBeRemoved);
+                    needToChange = true;
+                }
             }
 
             if (needToChange) {
@@ -68,7 +68,6 @@ public class RemoveTagCommand extends Command {
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 model.commitAddressBook();
             }
-            else {}
         }
 
         /*
@@ -77,10 +76,11 @@ public class RemoveTagCommand extends Command {
          * key in another tag that they would like to remove
          */
         if (numberOfPeopleToChange == 0) {
-            throw new CommandException(String.format(MESSAGE_NO_PERSON_WITH_TAG, tag));
+            throw new CommandException(MESSAGE_NO_PERSON_WITH_TAG);
         }
-
-        return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, tag, numberOfPeopleToChange));
+        else {
+            return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, numberOfPeopleToChange));
+        }
     }
 
     /**
@@ -110,6 +110,6 @@ public class RemoveTagCommand extends Command {
         }
         // state check
         RemoveTagCommand e = (RemoveTagCommand) other;
-        return tag.equals(e.tag);
+        return tagsToRemove.equals(e.tagsToRemove);
     }
 }
