@@ -54,9 +54,9 @@ public class RemoveTagCommand extends Command {
             currentTags = personToBeEdited.getTags();
             needToChange = false;
 
-            for (Tag tagsToBeRemoved: tagsToRemove) {
-                if (currentTags.contains(tagsToBeRemoved)) {
-                    currentTags.remove(tagsToBeRemoved);
+            for (Tag tagToBeRemoved: tagsToRemove) {
+                if (currentTags.contains(tagToBeRemoved)) {
+                    //currentTags.remove(tagToBeRemoved);
                     needToChange = true;
                 }
             }

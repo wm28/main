@@ -25,7 +25,8 @@ public class PersonCard extends UiPart<Region> {
      * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
      */
     private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
-                                                "white", "black", "purple", "default"};
+                                                 "white", "bronze", "silver",
+                                                 "gold", "platinum", "default"};
     //@@author
 
     /**
@@ -74,7 +75,7 @@ public class PersonCard extends UiPart<Region> {
          * Using the hashcode of the tag name ensures the color of the tag remains consistent
          * during different iterations of the code by generating a random color
          */
-        switch (tagName.trim().toLowerCase().replaceAll("\\s+","")) {
+        switch (tagName.replaceAll("\\s+", "").toLowerCase()) {
         case "absent":
             return TAG_COLORS[0];
         case "present":
@@ -83,12 +84,16 @@ public class PersonCard extends UiPart<Region> {
             return TAG_COLORS[2];
         case "guestspeaker":
             return TAG_COLORS[3];
-        case "notpaid":
+        case "bronze":
             return TAG_COLORS[4];
-        case "paid":
-                return TAG_COLORS[5];
+        case "silver":
+            return TAG_COLORS[5];
+        case "gold":
+            return TAG_COLORS[6];
+        case "platinum":
+            return TAG_COLORS[7];
         default:
-            return "default";
+            return TAG_COLORS[8];
         }
     }
 
