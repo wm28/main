@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -10,15 +9,14 @@ import java.util.Set;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Attendance;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.AddressBook;
 
+//@@author aaryamNUS
 /**
- * Removes a particular tag to all of the people in the current GuestList
+ * Removes a set of tags from all the people in the current GuestList
  */
 public class RemoveTagCommand extends Command {
     public static final String COMMAND_WORD = "removeTag";
@@ -45,32 +43,61 @@ public class RemoveTagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         boolean needToChange;
+        //This set will contain the current tags of each Person in the AddressBook
         Set<Tag> currentTags;
 
         requireNonNull(model);
+
+        //This list represents the current filtered list in the Application
         List<Person> currentList = model.getFilteredPersonList();
 
+        /**
+         * currentAddressBookReadOnly is instantiated from the Model Interface, to give
+         * an unmodifiable AddressBook. However, currentAddressBook uses the AddressBook API
+         * to make give an editable AddressBook for the removeTag() function to properly execute
+         */
+        ReadOnlyAddressBook currentAddressBookReadOnly = model.getAddressBook();
+        AddressBook currentAddressBook = new AddressBook(currentAddressBookReadOnly);
+
+        /**
+         * Nested loop below determines which of the guests in the current list will have
+         * one or more of their tags removed, and which will not have any change at all.
+         */
         for (Person personToBeEdited : currentList) {
             currentTags = personToBeEdited.getTags();
             needToChange = false;
 
             for (Tag tagToBeRemoved: tagsToRemove) {
                 if (currentTags.contains(tagToBeRemoved)) {
-                    //currentTags.remove(tagToBeRemoved);
                     needToChange = true;
+                    break;
                 }
             }
 
             if (needToChange) {
                 numberOfPeopleToChange++;
-                Person editedPerson = createEditedPerson(personToBeEdited, currentTags);
-                model.updatePerson(personToBeEdited, editedPerson);
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-                model.commitAddressBook();
             }
         }
 
-        /*
+        /**
+         * The following code snippet uses the removeTag(Tag) method in the
+         * modified AddressBook API to modify the currentAddressBook and remove
+         * the specified tags from each person
+         */
+        for (Tag tagToBeRemoved: tagsToRemove) {
+            currentAddressBook.removeTag(tagToBeRemoved);
+        }
+
+        /**
+         * Resets the data of the application with the most updated AddressBook
+         * in order to highlight the removal of tags once all steps are complete.
+         * More importantly, the AddressBook is committed to allow undo/redo commands
+         * to properly work
+         */
+        model.resetData(currentAddressBook);
+        model.commitAddressBook();
+
+        /**
          * If the number of guests whose tags have changed is zero, a
          * command exception should be specified to notify the user to
          * key in another tag that they would like to remove
@@ -81,21 +108,6 @@ public class RemoveTagCommand extends Command {
         else {
             return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, numberOfPeopleToChange));
         }
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, Set<Tag> currentTags) {
-        assert personToEdit != null;
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Attendance updatedAttendance = personToEdit.getAttendance();
-        Set<Tag> updatedTags = currentTags;
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAttendance, updatedTags);
     }
 
     @Override
