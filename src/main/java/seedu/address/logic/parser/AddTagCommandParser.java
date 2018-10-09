@@ -7,32 +7,32 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.RemoveTagCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 //@@author aaryamNUS
 /**
- * Parses input arguments and creates a new RemoveTagCommand object
+ * Parses input arguments and creates a new AddTagCommand object
  */
-public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
+public class AddTagCommandParser implements Parser<AddTagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the RemoveTagCommand
-     * and returns an RemoveTagCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddTagCommand
+     * and returns an AddTagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public RemoveTagCommand parse(String args) throws ParseException {
+    public AddTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveTagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         }
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        return new RemoveTagCommand(tagList);
+        return new AddTagCommand(tagList);
     }
 
     /**

@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.DANNY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -37,6 +38,7 @@ public class AddressBookTest {
     private final AddressBook addressBook = new AddressBook();
     private final AddressBook addressBookWithBobAndAmy = new AddressBookBuilder().withPerson(BOB)
             .withPerson(AMY).build();
+    private final AddressBook addressBookWithDanny = new AddressBookBuilder().withPerson(DANNY).build();
 
     @Test
     public void constructor() {
@@ -122,6 +124,25 @@ public class AddressBookTest {
                 .withPerson(amyWithoutFriendTag).build();
 
         assertEquals(expectedAddressBook, addressBookWithBobAndAmy);
+    }
+
+    @Test
+    public void addTag_sameTagUsed_addressBookUnchanged() throws Exception {
+        addressBookWithDanny.addTag(new Tag(VALID_TAG_FRIEND));
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(DANNY).build();
+
+        assertEquals(expectedAddressBook, addressBookWithDanny);
+    }
+
+    @Test
+    public void addTag_tagUsedByMultiplePersons_tagAdded() throws Exception {
+        addressBookWithDanny.addTag(new Tag(VALID_TAG_HUSBAND));
+
+        Person dannyWithHusbandTag = new PersonBuilder(DANNY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(dannyWithHusbandTag).build();
+
+        assertEquals(expectedAddressBook, addressBookWithDanny);
     }
     //@@author
 
