@@ -2,7 +2,31 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.Label?>
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50"/>
+      </columnConstraints>
+      <Label styleClass="cell_big_label" text="Name"  GridPane.columnIndex="0"/>
+      <Label styleClass="cell_big_label" text="Phone" GridPane.columnIndex="1"/>
+      <Label styleClass="cell_big_label" text="Email" GridPane.columnIndex="2"/>
+      <Label styleClass="cell_big_label" text="Attendance" GridPane.columnIndex="3"/>
+      <Label styleClass="cell_big_label" text="Tags" GridPane.columnIndex="4"/>
+    </GridPane>
+  </HBox>
   <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
 </VBox>
