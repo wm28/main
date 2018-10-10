@@ -29,6 +29,18 @@ public class EventName {
     }
 
     /**
+     * Accessor method for eventName
+     */
+    public String getEventName() {
+        return this.fullEventName;
+    }
+    /**
+     * Setter method for eventName
+     */
+    public void setEventName(String eventName) {
+        this.fullEventName = eventName;
+    }
+    /**
      * Returns true if a given string is a valid event name.
      */
     public static boolean isValidEventName(String test) {

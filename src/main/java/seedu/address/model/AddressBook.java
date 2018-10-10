@@ -48,7 +48,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
-    public void setEvent(Event event){
+    public void setEvent(Event event) {
         this.eventDetails.setEvent(event);
     }
     /**
@@ -121,7 +121,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public Event getEventDetails(){ return eventDetails;}
+    public Event getEventDetails(){ return eventDetails; }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
