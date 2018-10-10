@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,7 +22,7 @@ public interface Model {
     /**
      * Returns true if an event with the same identity as {@code event} exists in the application.
      */
-    //boolean hasEvent(Event event);
+    boolean hasEvent();
 
     /**
      * Deletes the given event.
@@ -33,7 +34,7 @@ public interface Model {
      * Adds the given event.
      * {@code event} must not already exist in the application.
      */
-    //void addEvent(Event event);
+    void addEvent(Event event);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
