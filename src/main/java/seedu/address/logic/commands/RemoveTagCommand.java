@@ -8,11 +8,11 @@ import java.util.Set;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.AddressBook;
 
 //@@author aaryamNUS
 /**
@@ -20,7 +20,8 @@ import seedu.address.model.AddressBook;
  */
 public class RemoveTagCommand extends Command {
     public static final String COMMAND_WORD = "removeTag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the specified tag from all persons in the list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the specified tag " +
+            "from all persons in the list.\n"
             + "Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -104,8 +105,7 @@ public class RemoveTagCommand extends Command {
          */
         if (numberOfPeopleToChange == 0) {
             throw new CommandException(MESSAGE_NO_PERSON_WITH_TAG);
-        }
-        else {
+        } else {
             return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, numberOfPeopleToChange));
         }
     }

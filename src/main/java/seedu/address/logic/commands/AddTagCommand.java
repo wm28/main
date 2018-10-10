@@ -7,10 +7,10 @@ import java.util.Set;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.AddressBook;
 
 //@@author aaryamNUS
 /**
@@ -18,7 +18,8 @@ import seedu.address.model.AddressBook;
  */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addTag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the specified tags from all persons in the list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the specified tags from all " +
+            "persons in the list.\n"
             + "Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -66,7 +67,7 @@ public class AddTagCommand extends Command {
         model.resetData(currentAddressBook);
         model.commitAddressBook();
 
-       return new CommandResult(MESSAGE_REMOVED_TAG_SUCCESS);
+        return new CommandResult(MESSAGE_REMOVED_TAG_SUCCESS);
     }
 
     @Override

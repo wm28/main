@@ -25,8 +25,8 @@ public class PersonCard extends UiPart<Region> {
      * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
      */
     private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
-                                                 "white", "bronze", "silver",
-                                                 "gold", "platinum", "default"};
+                                                "white", "bronze", "silver",
+                                                "gold", "platinum", "default"};
     //@@author
 
     /**
