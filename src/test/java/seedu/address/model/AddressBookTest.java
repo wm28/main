@@ -113,7 +113,9 @@ public class AddressBookTest {
         }
 
         @Override
-        public Event getEventDetails() { return eventDetails;}
+        public Event getEventDetails() {
+            return eventDetails;
+        }
     }
 
 }
