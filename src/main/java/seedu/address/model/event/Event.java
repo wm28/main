@@ -46,7 +46,7 @@ public class Event {
         this.isNotInitialisedByUser = false;
     }
 
-    public boolean isNotUserInitialised(){
+    public boolean isNotUserInitialised() {
         return !isNotInitialisedByUser;
     }
     /**
