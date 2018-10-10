@@ -39,7 +39,8 @@ public class AddCommandParserTest {
 
         // multiple attendance - last attendance accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ATTENDANCE_DESC_AMY
-                + ATTENDANCE_DESC_BOB + PAYMENT_DESC_BOB  + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
+                + ATTENDANCE_DESC_BOB + PAYMENT_DESC_BOB
+                + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_DIET_BOB)
@@ -52,8 +53,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY + ATTENDANCE_DESC_AMY,
-                new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + PAYMENT_DESC_AMY + ATTENDANCE_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test

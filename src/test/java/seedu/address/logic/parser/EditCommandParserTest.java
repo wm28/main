@@ -78,8 +78,10 @@ public class EditCommandParserTest {
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "1" + TAG_DESC_DIET_BOB + TAG_EMPTY, Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_DIET_BOB + TAG_EMPTY + TAG_DESC_DIET_BOB, Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_DIET_BOB + TAG_DESC_DIET_BOB, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_DIET_BOB + TAG_EMPTY +
+                TAG_DESC_DIET_BOB, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_DIET_BOB +
+                TAG_DESC_DIET_BOB, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // multiple invalid values,
         // but only the first invalid value is captured
@@ -96,7 +98,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + NAME_DESC_BOB
                 + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
-                + ATTENDANCE_DESC_BOB +  TAG_DESC_DIET_BOB;
+                + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withPayment(VALID_PAYMENT_BOB)

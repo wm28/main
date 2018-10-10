@@ -57,28 +57,28 @@ public class GuiTestAssert {
 
     private static String getTagColor(String tagName) {
         switch (tagName) {
-            case "VEGETARIAN":
-                return "green";
-            case "HALAL":
-                return "orange";
-            case "VEGAN":
-                return "yellow";
-            case "VIP":
-                return "lightblue";
-            case "bride":
-            case "groom":
-                return "red";
-            case "Guest Speaker":
-            case "GUEST":
-                return "white";
-            case "NoNuts":
-            case "NoBeef":
-            case "NoSeafood":
-            case "NoGluten":
-            case "NoShrimp":
-                return "purple";
-            default:
-                return "grey";
+        case "vegetarian":
+            return "green";
+        case "halal":
+            return "orange";
+        case "vegan":
+            return "yellow";
+        case "vip":
+            return "lightblue";
+        case "bride":
+        case "groom":
+            return "red";
+        case "Guest Speaker":
+        case "guest":
+            return "white";
+        case "NoNuts":
+        case "NoBeef":
+        case "NoSeafood":
+        case "NoGluten":
+        case "NoShrimp":
+            return "purple";
+        default:
+            return "grey";
             //throw new AssertionError(tagName + "does not have a color assigned.");
         }
     }
