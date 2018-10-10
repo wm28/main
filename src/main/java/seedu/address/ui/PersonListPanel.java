@@ -11,8 +11,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionClearedEvent;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,4 +82,11 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    @Subscribe
+    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Local data changed, clearing guest list selection"));
+        personListView.getSelectionModel().clearSelection();
+        raise(new PersonPanelSelectionClearedEvent());
+    }
 }
