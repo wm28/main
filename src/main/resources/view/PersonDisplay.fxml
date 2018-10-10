@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1">
+    <HBox>
+        <GridPane HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+            </columnConstraints>
+            <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+                <padding>
+                    <Insets top="10" right="5" bottom="10" left="15" />
+                </padding>
+                <Label styleClass="cell_small_label" text="Name: "/>
+                <Label styleClass="cell_small_label" text="Tags: "/>
+                <Label styleClass="cell_small_label" text="Phone: "/>
+                <Label styleClass="cell_small_label" text="Email: "/>
+                <Label styleClass="cell_small_label" text="Attendance: " />
+            </VBox>
+            <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="1">
+                <padding>
+                    <Insets top="10" right="5" bottom="10" left="15" />
+                </padding>
+                <Label fx:id="name" styleClass="cell_big_label" />
+                <FlowPane fx:id="tags" />
+                <Label fx:id="phone" styleClass="cell_small_label" />
+                <Label fx:id="email" styleClass="cell_small_label" />
+                <Label fx:id="attendance" styleClass="cell_small_label" />
+            </VBox>
+        </GridPane>
+    </HBox>
+</StackPane>
