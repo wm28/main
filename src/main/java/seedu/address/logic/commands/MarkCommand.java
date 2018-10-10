@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -90,10 +91,14 @@ public class MarkCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
+        // @@author Sarah
+        Payment updatedPayment = personToEdit.getPayment();
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
+        // @@author Tze Guang
         Set<Tag> updatedTags = personToEdit.getTags();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAttendance, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
+                updatedAttendance, updatedTags);
     }
 
     @Override
@@ -122,6 +127,7 @@ public class MarkCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Payment payment;
         private Attendance attendance;
         private Set<Tag> tags;
 
@@ -133,6 +139,7 @@ public class MarkCommand extends Command {
             setName(null);
             setPhone(null);
             setEmail(null);
+            setPayment(null);
             setAttendance(new Attendance("PRESENT"));
             setTags(null);
         }
@@ -160,6 +167,14 @@ public class MarkCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
+        // @@author Sarah
+        public void setPayment(Payment payment) {
+            this.payment = payment;
+        }
+
+        public Optional<Payment> getPayment() {
+            return Optional.ofNullable(payment);
+        }
 
         public void setAttendance(Attendance attendance) {
             this.attendance = attendance;
@@ -169,6 +184,7 @@ public class MarkCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
+        // @@author Tze Guang
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -204,6 +220,7 @@ public class MarkCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getPayment().equals(e.getPayment())
                     && getAttendance().equals(e.getAttendance())
                     && getTags().equals(e.getTags());
         }

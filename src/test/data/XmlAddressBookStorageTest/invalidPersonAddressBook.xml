@@ -5,6 +5,7 @@
         <name>Ha!ns Mu@ster</name>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
+        <payment isPrivate="false">NOT PAID</payment>
         <attendance isPrivate="false">ABSENT</attendance>
     </persons>
 </addressbook>

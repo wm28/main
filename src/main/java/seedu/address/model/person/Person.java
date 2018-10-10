@@ -21,17 +21,19 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Payment payment;
     private final Attendance attendance;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Attendance attendance, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, attendance, tags);
+    public Person(Name name, Phone phone, Email email, Payment payment, Attendance attendance, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, payment, attendance, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.payment = payment;
         this.attendance = attendance;
         this.tags.addAll(tags);
     }
@@ -46,6 +48,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Payment getPayment() {
+        return payment;
     }
 
     public Attendance getAttendance() {
@@ -92,6 +98,7 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getPayment().equals(getPayment())
                 && otherPerson.getAttendance().equals(getAttendance())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -99,7 +106,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, attendance, tags);
+        return Objects.hash(name, phone, email, payment, attendance, tags);
     }
 
     @Override
@@ -110,6 +117,8 @@ public class Person {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
+                .append(" Payment: ")
+                .append(getPayment())
                 .append(" Attendance: ")
                 .append(getAttendance())
                 .append(" Tags: ");

@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
+//@@author Sarah
 /**
  * Tests that a {@code Person}'s {@code Tags} matches all of the keywords given.
  */
