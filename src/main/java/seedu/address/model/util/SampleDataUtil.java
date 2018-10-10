@@ -22,22 +22,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
                 new Payment("PAID"), new Attendance("PRESENT"),
-                getTagSet("NORMAL","NoShrimp","GUEST")),
+                    getTagSet("NORMAL", "NoShrimp", "GUEST")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
                 new Payment("NOT PAID"), new Attendance("ABSENT"),
-                getTagSet("VEGETARIAN","NoNuts","VIP")),
+                getTagSet("VEGETARIAN", "NoNuts", "VIP")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@gmail.com"),
                 new Payment("NOT PAID"), new Attendance("PRESENT"),
-                getTagSet("VEGAN","GUEST")),
+                getTagSet("VEGAN", "GUEST")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@gmail.com"),
                 new Payment("PENDING"), new Attendance("ABSENT"),
-                getTagSet("NORMAL","NoBeef","NoSeafood","VIP")),
+                getTagSet("NORMAL", "NoBeef", "NoSeafood", "VIP")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@gmail.com"),
                 new Payment("PAID"), new Attendance("PRESENT"),
-                getTagSet("HALAL","NoGluten","GUEST")),
+                getTagSet("HALAL", "NoGluten", "GUEST")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@gmail.com"),
                 new Payment("PENDING"), new Attendance("ABSENT"),
-                getTagSet("NoBeef","VIP"))
+                getTagSet("NoBeef", "VIP"))
         };
     }
 

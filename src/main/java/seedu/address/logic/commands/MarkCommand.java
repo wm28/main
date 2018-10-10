@@ -167,7 +167,7 @@ public class MarkCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
-// @@author Sarah
+        // @@author Sarah
         public void setPayment(Payment payment) {
             this.payment = payment;
         }
