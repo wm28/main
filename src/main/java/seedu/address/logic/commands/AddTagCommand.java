@@ -18,8 +18,8 @@ import seedu.address.model.tag.Tag;
  */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addTag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the specified tags from all " +
-            "persons in the list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the specified tags from all "
+            + "persons in the list.\n"
             + "Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "

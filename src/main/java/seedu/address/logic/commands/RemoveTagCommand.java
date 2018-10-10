@@ -20,8 +20,8 @@ import seedu.address.model.tag.Tag;
  */
 public class RemoveTagCommand extends Command {
     public static final String COMMAND_WORD = "removeTag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the specified tag " +
-            "from all persons in the list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the specified tag "
+            + "from all persons in the list.\n"
             + "Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
