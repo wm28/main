@@ -1,25 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDANCE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -40,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -59,7 +42,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
          */
         Person toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ATTENDANCE_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + EMAIL_DESC_AMY + "   " + PAYMENT_DESC_AMY + "   " + ATTENDANCE_DESC_AMY + "   " + TAG_DESC_DIET_AMY + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -75,8 +58,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a person with all fields same as another person in the address book except name -> added */
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ATTENDANCE_DESC_AMY
-                + TAG_DESC_FRIEND;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY + TAG_DESC_DIET_AMY;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person with all fields same as another person in the address book except phone and email
@@ -92,8 +75,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a person with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ATTENDANCE_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+        command = AddCommand.COMMAND_WORD + TAG_DESC_DIET_AMY + PHONE_DESC_BOB + ATTENDANCE_DESC_BOB + NAME_DESC_BOB
+                 + EMAIL_DESC_BOB + PAYMENT_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person, missing tags -> added */
@@ -127,8 +110,13 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate person except with different address -> rejected */
-        toAdd = new PersonBuilder(HOON).withAddress(VALID_ATTENDANCE_BOB).build();
+        /* Case: add a duplicate person except with different payment -> rejected */
+        toAdd = new PersonBuilder(HOON).withPayment(VALID_PAYMENT_BOB).build();
+        command = PersonUtil.getAddCommand(toAdd);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+
+        /* Case: add a duplicate person except with different attendance -> rejected */
+        toAdd = new PersonBuilder(HOON).withAttendance(VALID_ATTENDANCE_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
@@ -137,19 +125,26 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         /* Case: missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ATTENDANCE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ATTENDANCE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        /* Case: missing payment -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ATTENDANCE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        /* Case: missing attendance -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
@@ -157,24 +152,33 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + ATTENDANCE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY + TAG_DESC_DIET_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY + ATTENDANCE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY + TAG_DESC_DIET_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC + ATTENDANCE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY + TAG_DESC_DIET_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ATTENDANCE_DESC;
+        /* Case: invalid payment -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_PAYMENT_DESC
+                + ATTENDANCE_DESC_AMY + TAG_DESC_DIET_AMY;
+        assertCommandFailure(command, Payment.MESSAGE_PAYMENT_CONSTRAINTS);
+
+        /* Case: invalid attendance -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY
+        + INVALID_ATTENDANCE_DESC + TAG_DESC_DIET_AMY;
         assertCommandFailure(command, Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ATTENDANCE_DESC_AMY
-                + INVALID_TAG_DESC;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + PAYMENT_DESC_AMY
+        + ATTENDANCE_DESC_AMY + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 

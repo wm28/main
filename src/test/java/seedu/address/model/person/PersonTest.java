@@ -2,11 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -43,18 +39,25 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
+        // different payment -> returns true
+        editedAlice = new PersonBuilder(ALICE).withPayment(VALID_PAYMENT_BOB).build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
+
         // same name, same phone, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAttendance(VALID_ATTENDANCE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withPayment(VALID_PAYMENT_BOB)
+                .withAttendance(VALID_ATTENDANCE_BOB)
+                .withTags(VALID_TAG_DIET_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same name, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAttendance(VALID_ATTENDANCE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+                .withPayment(VALID_PAYMENT_BOB).withAttendance(VALID_ATTENDANCE_BOB)
+                .withTags(VALID_TAG_DIET_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withAttendance(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withPayment(VALID_PAYMENT_BOB)
+                .withAttendance(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_DIET_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
@@ -88,12 +91,16 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different payment -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPayment(VALID_PAYMENT_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different attendance -> returns false
         editedAlice = new PersonBuilder(ALICE).withAttendance(VALID_ATTENDANCE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_DIET_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

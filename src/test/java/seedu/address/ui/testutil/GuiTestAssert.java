@@ -25,6 +25,7 @@ public class GuiTestAssert {
         assertEquals(expectedCard.getAttendance(), actualCard.getAttendance());
         assertEquals(expectedCard.getEmail(), actualCard.getEmail());
         assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getPayment(), actualCard.getPayment());
         assertEquals(expectedCard.getPhone(), actualCard.getPhone());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
 
@@ -39,6 +40,7 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getName().fullName, actualCard.getName());
         assertEquals(expectedPerson.getPhone().value, actualCard.getPhone());
         assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
+        assertEquals(expectedPerson.getPayment().paymentValue, actualCard.getPayment());
         assertEquals(expectedPerson.getAttendance().attendanceValue, actualCard.getAttendance());
         assertTagsEqual(expectedPerson, actualCard);
     }
@@ -55,25 +57,29 @@ public class GuiTestAssert {
 
     private static String getTagColor(String tagName) {
         switch (tagName) {
-        case "vegetarian":
-            return "green";
-        case "absent":
-            return "orange";
-        case "present":
-            return "yellow";
-        case "vip":
-            return "lightblue";
-        case "bride":
-        case "groom":
-            return "red";
-        case "Guest Speaker":
-            return "white";
-        case "not paid":
-            return "black";
-        case "paid":
-            return "purple";
-        default:
-            throw new AssertionError(tagName + "does not have a color assigned.");
+            case "VEGETARIAN":
+                return "green";
+            case "HALAL":
+                return "orange";
+            case "VEGAN":
+                return "yellow";
+            case "VIP":
+                return "lightblue";
+            case "bride":
+            case "groom":
+                return "red";
+            case "Guest Speaker":
+            case "GUEST":
+                return "white";
+            case "NoNuts":
+            case "NoBeef":
+            case "NoSeafood":
+            case "NoGluten":
+            case "NoShrimp":
+                return "purple";
+            default:
+                return "grey";
+            //throw new AssertionError(tagName + "does not have a color assigned.");
         }
     }
 
@@ -88,8 +94,8 @@ public class GuiTestAssert {
         List<String> expectedTags = expectedPerson.getTags().stream().map(tag ->
                 tag.tagName).collect(Collectors.toList());
         assertEquals(expectedTags, actualCard.getTags());
-        expectedTags.forEach(tag ->
-                assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColor(tag)), actualCard.getTagStyleClasses(tag)));
+        expectedTags.forEach(tag -> assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE,
+                getTagColor(tag)), actualCard.getTagStyleClasses(tag)));
     }
     //@@author
 

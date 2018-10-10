@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -65,8 +66,9 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    //@@author Sarah
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String attendance} into an {@code attendance}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
@@ -80,6 +82,7 @@ public class ParserUtil {
         return new Attendance(trimmedAttendance);
     }
 
+    //@@author SE-EDU
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -95,6 +98,23 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    //@@author Sarah
+    /**
+     * Parses a {@code String Payment} into an {@code Payment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code payment} is invalid.
+     */
+    public static Payment parsePayment(String payment) throws ParseException {
+        requireNonNull(payment);
+        String trimmedPayment = payment.trim();
+        if (!Payment.isValidPayment(trimmedPayment)) {
+            throw new ParseException(Payment.MESSAGE_PAYMENT_CONSTRAINTS);
+        }
+        return new Payment(trimmedPayment);
+    }
+
+    //@@author SE-EDU
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

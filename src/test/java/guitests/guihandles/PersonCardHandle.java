@@ -17,6 +17,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ATTENDANCE_FIELD_ID = "#attendance";
+    private static final String PAYMENT_FIELD_ID = "#payment";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
@@ -26,6 +27,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label attendanceLabel;
     private final Label phoneLabel;
     private final Label emailLabel;
+    private final Label paymentLabel;
     private final List<Label> tagLabels;
 
     public PersonCardHandle(Node cardNode) {
@@ -36,6 +38,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         attendanceLabel = getChildNode(ATTENDANCE_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
+        paymentLabel = getChildNode(PAYMENT_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -63,6 +66,10 @@ public class PersonCardHandle extends NodeHandle<Node> {
 
     public String getEmail() {
         return emailLabel.getText();
+    }
+
+    public String getPayment() {
+        return paymentLabel.getText();
     }
 
     public List<String> getTags() {
@@ -96,6 +103,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && getAttendance().equals(person.getAttendance().attendanceValue)
                 && getPhone().equals(person.getPhone().value)
                 && getEmail().equals(person.getEmail().value)
+                && getPayment().equals(person.getPayment().paymentValue)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

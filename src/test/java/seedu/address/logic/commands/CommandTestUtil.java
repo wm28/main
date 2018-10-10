@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,12 +26,14 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_AMY = "amy@gmail.com";
+    public static final String VALID_EMAIL_BOB = "bob@gmail.com";
     public static final String VALID_ATTENDANCE_AMY = "PRESENT";
     public static final String VALID_ATTENDANCE_BOB = "ABSENT";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_PAYMENT_AMY = "PAID";
+    public static final String VALID_PAYMENT_BOB = "NOT PAID";
+    public static final String VALID_TAG_DIET_AMY = "NORMAL";
+    public static final String VALID_TAG_DIET_BOB = "NORMAL";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +45,18 @@ public class CommandTestUtil {
             + PREFIX_ATTENDANCE + VALID_ATTENDANCE_AMY;
     public static final String ATTENDANCE_DESC_BOB = " "
             + PREFIX_ATTENDANCE + VALID_ATTENDANCE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String PAYMENT_DESC_AMY = " "
+            + PREFIX_PAYMENT + VALID_PAYMENT_AMY;
+    public static final String PAYMENT_DESC_BOB = " "
+            + PREFIX_PAYMENT + VALID_PAYMENT_BOB;
+    public static final String TAG_DESC_DIET_AMY = " " + PREFIX_TAG + VALID_TAG_DIET_AMY;
+    public static final String TAG_DESC_DIET_BOB = " " + PREFIX_TAG + VALID_TAG_DIET_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    // and not gmail account
+    public static final String INVALID_PAYMENT_DESC = " " + PREFIX_PAYMENT + "$PAID"; // '$' not allowed in payment
     public static final String INVALID_ATTENDANCE_DESC = " "
             + PREFIX_ATTENDANCE; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
@@ -66,10 +70,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAttendance(VALID_ATTENDANCE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_DIET_AMY).withPayment(VALID_PAYMENT_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAttendance(VALID_ATTENDANCE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_DIET_BOB).withPayment(VALID_PAYMENT_BOB).build();
     }
 
     /**
