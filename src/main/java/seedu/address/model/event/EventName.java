@@ -15,7 +15,7 @@ public class EventName {
 
     public static final String EVENTNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public String fullEventName;
+    private String fullEventName;
 
     /**
      * Constructs a {@code eventName}.

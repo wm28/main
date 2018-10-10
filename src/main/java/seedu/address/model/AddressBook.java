@@ -121,7 +121,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public Event getEventDetails(){ return eventDetails; }
+    public Event getEventDetails() {
+        return eventDetails; 
+    }
 
     @Override
     public boolean equals(Object other) {
