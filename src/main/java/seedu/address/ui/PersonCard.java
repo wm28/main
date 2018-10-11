@@ -17,14 +17,14 @@ public class PersonCard extends UiPart<Region> {
     //@@author aaryamNUS
     /**
      * The following string array represents different tag colours associated with each guest in the list.
-     * Each colour represents a charecteristic of the guest, as summarised below:
-     * Orange - Absent, Yellow - Present, Green - Vegetarian, Light Blue - VIP, Red - Bride or Groom,
-     * White - Guest Speaker, Black - Not Paid, Purple - Paid
+     * Each colour represents a characteristic of the guest, as summarised below:
+     * Orange - Halal, Yellow - Vegan, Green - Vegetarian, Light Blue - VIP, Red - Bride or Groom,
+     * Black - Guest, White - Guest Speaker, Anything else - Pink
      *
      * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
      */
     private static final String[] TAG_COLORS = {"orange", "yellow", "green", "lightblue",
-                                                "red", "white", "black", "purple"};
+                                                "red", "white", "black", "purple", "grey"};
     //@@author
 
     /**
@@ -50,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label payment;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
@@ -60,6 +62,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         attendance.setText(person.getAttendance().attendanceValue);
         email.setText(person.getEmail().value);
+        payment.setText(person.getPayment().paymentValue);
         createTags(person);
     }
 
@@ -73,8 +76,8 @@ public class PersonCard extends UiPart<Region> {
          * Using the hashcode of the tag name ensures the color of the tag remains consistent
          * during different iterations of the code by generating a random color
          */
-
-        return TAG_COLORS[Math.abs(tagName.hashCode()) % TAG_COLORS.length];
+        int number = Math.abs(tagName.hashCode()) % TAG_COLORS.length;
+        return TAG_COLORS[number];
     }
 
     /**

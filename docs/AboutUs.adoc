@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Srivastava Aaryam
-image::aaryamnus.jpeg[width="150", align="left"]
+image::aaryamnus.png[width="150", align="left"]
 {empty}[http://github.com/aaryamNUS[github]] [<<johndoe#, portfolio>>]
 
 Role: Team lead +
@@ -20,7 +20,7 @@ Responsibilities: Mass email sending functionality
 '''
 
 === Sandhya Gopakumar
-image::sandhyagopakumar.jpg[width="150", align="left"]
+image::sandhyagopakumar.png[width="150", align="left"]
 {empty}[http://github.com/SandhyaGopakumar[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -29,7 +29,7 @@ Responsibilities: Events functionality
 '''
 
 === Sarah Taaher Bonna
-image::sarahtaaherbonna.jpg[width="150", align="left"]
+image::sarahtaaherbonna.png[width="150", align="left"]
 {empty}[http://github.com/SarahTaaherBonna[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Data filtering
 '''
 
 === Tan Tze Guang
-image::kronicler.jpeg[width="150", align="left"]
+image::kronicler.png[width="150", align="left"]
 {empty}[http://github.com/kronicler[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -47,7 +47,7 @@ Responsibilities: Attendance taking functionality
 '''
 
 === Tan Wei Ming
-image::wm28.jpg[width="150", align="left"]
+image::wm28.png[width="150", align="left"]
 {empty}[http://github.com/wm28[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +

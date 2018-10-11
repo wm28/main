@@ -15,7 +15,7 @@ public class EventName {
 
     public static final String EVENTNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullEventName;
+    private String fullEventName;
 
     /**
      * Constructs a {@code eventName}.
@@ -28,6 +28,18 @@ public class EventName {
         fullEventName = eventName;
     }
 
+    /**
+     * Accessor method for eventName
+     */
+    public String getEventName() {
+        return this.fullEventName;
+    }
+    /**
+     * Setter method for eventName
+     */
+    public void setEventName(String eventName) {
+        this.fullEventName = eventName;
+    }
     /**
      * Returns true if a given string is a valid event name.
      */
