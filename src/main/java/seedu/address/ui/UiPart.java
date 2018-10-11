@@ -19,6 +19,19 @@ public abstract class UiPart<T> {
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
 
+    /**
+     * The following string array represents different tag colours associated with each guest in the list.
+     * Each colour represents a charecteristic of the guest, as summarised below:
+     * Orange - Absent, Yellow - Present, Light Blue - VIP,
+     * White - Guest Speaker, Black - Not Paid, Purple - Paid,
+     * Default - a tag that is not supported by the application specifications
+     *
+     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
+     */
+    private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
+            "white", "bronze", "silver",
+            "gold", "platinum", "default"};
+
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
     /**
@@ -134,18 +147,4 @@ public abstract class UiPart<T> {
             return TAG_COLORS[8];
         }
     }
-
-    /**
-     * The following string array represents different tag colours associated with each guest in the list.
-     * Each colour represents a charecteristic of the guest, as summarised below:
-     * Orange - Absent, Yellow - Present, Light Blue - VIP,
-     * White - Guest Speaker, Black - Not Paid, Purple - Paid,
-     * Default - a tag that is not supported by the application specifications
-     *
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
-     */
-    private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
-            "white", "bronze", "silver",
-            "gold", "platinum", "default"};
-
 }
