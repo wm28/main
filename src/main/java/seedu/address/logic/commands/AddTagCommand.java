@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+import java.util.logging.*;
 import java.util.Set;
 
 import seedu.address.logic.CommandHistory;
@@ -10,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 //@@author aaryamNUS
@@ -25,7 +28,9 @@ public class AddTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
 
-    public static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully added all tags to all persons";
+    private static Logger logger = Logger.getLogger("execute");
+    private static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
+    private static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
 
     private final Set<Tag> tagsToAdd;
 
@@ -41,33 +46,24 @@ public class AddTagCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        /**
-         * currentAddressBookReadOnly is instantiated from the Model Interface, to give
-         * an unmodifiable AddressBook. However, currentAddressBook uses the AddressBook API
-         * to make give an editable AddressBook for the addTag() function to properly execute
-         */
         ReadOnlyAddressBook currentAddressBookReadOnly = model.getAddressBook();
+        // Uses edited AddressBook API to make an editable AddressBook for removeTag() to work
         AddressBook currentAddressBook = new AddressBook(currentAddressBookReadOnly);
+        List<Person> currentList = model.getFilteredPersonList();
 
-        /**
-         * The following code snippet uses the addTag(Tag) method in the
-         * modified AddressBook API to modify the currentAddressBook and add
-         * the specified tags to each person
-         */
-        for (Tag tagToBeAdded: tagsToAdd) {
-            currentAddressBook.addTag(tagToBeAdded);
+        if (currentList.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_PERSON_IN_LIST);
         }
+        else {
+            for (Tag tagToBeAdded: tagsToAdd) {
+                currentAddressBook.addTag(tagToBeAdded);
+            }
+            logger.log(Level.INFO, "All tags added successfully");
+            model.resetData(currentAddressBook);
+            model.commitAddressBook();
 
-        /**
-         * Resets the data of the application with the most updated AddressBook
-         * in order to highlight the removal of tags once all steps are complete.
-         * More importantly, the AddressBook is committed to allow undo/redo commands
-         * to properly work
-         */
-        model.resetData(currentAddressBook);
-        model.commitAddressBook();
-
-        return new CommandResult(MESSAGE_REMOVED_TAG_SUCCESS);
+            return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, currentList.size()));
+        }
     }
 
     @Override

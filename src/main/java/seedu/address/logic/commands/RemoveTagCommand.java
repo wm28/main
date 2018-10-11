@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.logging.*;
 import java.util.Set;
 
 import seedu.address.logic.CommandHistory;
@@ -27,9 +28,10 @@ public class RemoveTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
 
-    public static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully removed all tags from %1$d persons";
-    public static final String MESSAGE_NO_PERSON_WITH_TAG = "No persons in the list have the specified tags";
+    private static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully removed all tags from %1$d persons";
+    private static final String MESSAGE_NO_PERSON_WITH_TAG = "No persons in the list have the specified tags";
 
+    private static Logger logger = Logger.getLogger("calculateNumberOfPeopleToChange");
     private int numberOfPeopleToChange = 0;
     private final Set<Tag> tagsToRemove;
 
@@ -43,69 +45,26 @@ public class RemoveTagCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        boolean needToChange;
-        //This set will contain the current tags of each Person in the AddressBook
-        Set<Tag> currentTags;
-
         requireNonNull(model);
 
-        //This list represents the current filtered list in the Application
         List<Person> currentList = model.getFilteredPersonList();
-
-        /**
-         * currentAddressBookReadOnly is instantiated from the Model Interface, to give
-         * an unmodifiable AddressBook. However, currentAddressBook uses the AddressBook API
-         * to make give an editable AddressBook for the removeTag() function to properly execute
-         */
         ReadOnlyAddressBook currentAddressBookReadOnly = model.getAddressBook();
+        // Uses edited AddressBook API to make an editable AddressBook for removeTag() to work
         AddressBook currentAddressBook = new AddressBook(currentAddressBookReadOnly);
 
-        /**
-         * Nested loop below determines which of the guests in the current list will have
-         * one or more of their tags removed, and which will not have any change at all.
-         */
-        for (Person personToBeEdited : currentList) {
-            currentTags = personToBeEdited.getTags();
-            needToChange = false;
+        calculateNumberOfPeopleToChange(currentList);
 
-            for (Tag tagToBeRemoved: tagsToRemove) {
-                if (currentTags.contains(tagToBeRemoved)) {
-                    needToChange = true;
-                    break;
-                }
-            }
-
-            if (needToChange) {
-                numberOfPeopleToChange++;
-            }
-        }
-
-        /**
-         * The following code snippet uses the removeTag(Tag) method in the
-         * modified AddressBook API to modify the currentAddressBook and remove
-         * the specified tags from each person
-         */
-        for (Tag tagToBeRemoved: tagsToRemove) {
-            currentAddressBook.removeTag(tagToBeRemoved);
-        }
-
-        /**
-         * Resets the data of the application with the most updated AddressBook
-         * in order to highlight the removal of tags once all steps are complete.
-         * More importantly, the AddressBook is committed to allow undo/redo commands
-         * to properly work
-         */
-        model.resetData(currentAddressBook);
-        model.commitAddressBook();
-
-        /**
-         * If the number of guests whose tags have changed is zero, a
-         * command exception should be specified to notify the user to
-         * key in another tag that they would like to remove
-         */
         if (numberOfPeopleToChange == 0) {
             throw new CommandException(MESSAGE_NO_PERSON_WITH_TAG);
         } else {
+            for (Tag tagToBeRemoved: tagsToRemove) {
+                currentAddressBook.removeTag(tagToBeRemoved);
+            }
+            logger.log(Level.INFO, "All tags removed successfully");
+
+            model.resetData(currentAddressBook);
+            model.commitAddressBook();
+
             return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, numberOfPeopleToChange));
         }
     }
@@ -123,5 +82,32 @@ public class RemoveTagCommand extends Command {
         // state check
         RemoveTagCommand e = (RemoveTagCommand) other;
         return tagsToRemove.equals(e.tagsToRemove);
+    }
+
+    /**
+     * Calculates how many people in the list have at least one tag matching with the set of
+     * tags to be removed.
+     * @param currentList the current list of guests
+     */
+    private void calculateNumberOfPeopleToChange(List<Person> currentList) {
+        assert numberOfPeopleToChange == 0 : "numberOfPeopleToChange should start at 0";
+
+        Set<Tag> currentTags;
+
+        for (Person personToBeEdited : currentList) {
+            currentTags = personToBeEdited.getTags();
+
+            for (Tag tagToBeRemoved: tagsToRemove) {
+                try {
+                    if (currentTags.contains(tagToBeRemoved)) {
+                        numberOfPeopleToChange++;
+                        break;
+                    }
+                }
+                catch (IllegalArgumentException ex) {
+                    logger.log(Level.WARNING, "Incorrect format for tags", ex);
+                }
+            }
+        }
     }
 }

@@ -100,6 +100,7 @@ public class AddressBookParser {
 
         case RemoveTagCommand.COMMAND_WORD:
             return new RemoveTagCommandParser().parse(arguments);
+
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
 
