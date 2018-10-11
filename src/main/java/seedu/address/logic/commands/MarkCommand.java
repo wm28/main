@@ -1,3 +1,4 @@
+//@@author kronicler
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -40,7 +41,7 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
 
     private final Phone phone;
-    private final Index index = null;
+    private Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
@@ -53,11 +54,13 @@ public class MarkCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor();
     }
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
+    /**
+     * Scans through the list and compares the phone numbers to the one that is being searched
+     * Assigns the index of the found person to the index of the command.
+     * @param lastShownList {@code CommandHistory} which the command should operate on.
+     * @throws CommandException if there are no matching persons in the list
+     */
+    public void retrieveIndex(List<Person> lastShownList) throws CommandException{
         int x = 0;
         boolean isNotFound = true;
         for (Person p : lastShownList) {
@@ -72,7 +75,17 @@ public class MarkCommand extends Command {
             throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
-        Person personToEdit = lastShownList.get(x);
+        index = Index.fromZeroBased(x);
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        retrieveIndex(lastShownList);
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         model.updatePerson(personToEdit, editedPerson);
@@ -91,10 +104,12 @@ public class MarkCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
-        // @@author Sarah
+        //@@author
+        //@@author Sarah
         Payment updatedPayment = personToEdit.getPayment();
+        //@@author
+        //@@author kronicler
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
-        // @@author Tze Guang
         Set<Tag> updatedTags = personToEdit.getTags();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
@@ -167,10 +182,13 @@ public class MarkCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
-        // @@author Sarah
+        //@@author
+        //@@author Sarah
         public void setPayment(Payment payment) {
             this.payment = payment;
         }
+        //@@author
+        //@@author kronicler
 
         public Optional<Payment> getPayment() {
             return Optional.ofNullable(payment);
@@ -184,7 +202,6 @@ public class MarkCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
-        // @@author Tze Guang
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -226,3 +243,4 @@ public class MarkCommand extends Command {
         }
     }
 }
+//@@author
