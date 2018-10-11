@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 

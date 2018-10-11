@@ -20,22 +20,6 @@ import seedu.address.model.person.Person;
 public class PersonDisplay extends UiPart<Region> {
     private static final String FXML = "PersonDisplay.fxml";
 
-    //@@author aaryamNUS
-    /**
-     * The following string array represents different tag colours associated with each guest in the list.
-     * Each colour represents a charecteristic of the guest, as summarised below:
-     * Orange - Absent, Yellow - Present, Light Blue - VIP,
-     * White - Guest Speaker,
-     * Bronze, Silver, Gold, and Platinum refer to seat hierarchy at a concert event
-     * Default specifies the tag style to be assigned when
-     *
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
-     */
-    private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
-                                                "white", "bronze", "silver",
-                                                "gold", "platinum", "default"};
-    //@@author
-
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
@@ -55,38 +39,6 @@ public class PersonDisplay extends UiPart<Region> {
     }
 
     //@@author aaryamNUS
-    /**
-     * Method getTagColor returns the specific color style for {@code tagName}'s label.
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
-     */
-    private String getTagColor(String tagName) {
-        /**
-         * Using the hashcode of the tag name ensures the color of the tag remains consistent
-         * during different iterations of the code by generating a random color
-         */
-
-        switch (tagName.replaceAll("\\s+", "").toLowerCase()) {
-        case "absent":
-            return TAG_COLORS[0];
-        case "present":
-            return TAG_COLORS[1];
-        case "vip":
-            return TAG_COLORS[2];
-        case "guestspeaker":
-            return TAG_COLORS[3];
-        case "bronze":
-            return TAG_COLORS[4];
-        case "silver":
-            return TAG_COLORS[5];
-        case "gold":
-            return TAG_COLORS[6];
-        case "platinum":
-            return TAG_COLORS[7];
-        default:
-            return TAG_COLORS[8];
-        }
-    }
-
     /**
      * Method createTags initialises the tag labels for {@code person}
      * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
