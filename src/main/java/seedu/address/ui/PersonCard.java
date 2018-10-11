@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-
+    
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -37,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label payment;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
@@ -47,6 +49,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         attendance.setText(person.getAttendance().attendanceValue);
         email.setText(person.getEmail().value);
+        payment.setText(person.getPayment().paymentValue);
         createTags(person);
     }
 

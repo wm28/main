@@ -1,3 +1,4 @@
+//@@author kronicler
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -16,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -39,7 +41,7 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
 
     private final Phone phone;
-    private final Index index = null;
+    private Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
@@ -52,11 +54,13 @@ public class MarkCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor();
     }
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
+    /**
+     * Scans through the list and compares the phone numbers to the one that is being searched
+     * Assigns the index of the found person to the index of the command.
+     * @param lastShownList {@code CommandHistory} which the command should operate on.
+     * @throws CommandException if there are no matching persons in the list
+     */
+    public void retrieveIndex(List<Person> lastShownList) throws CommandException {
         int x = 0;
         boolean isNotFound = true;
         for (Person p : lastShownList) {
@@ -71,7 +75,17 @@ public class MarkCommand extends Command {
             throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
-        Person personToEdit = lastShownList.get(x);
+        index = Index.fromZeroBased(x);
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        retrieveIndex(lastShownList);
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         model.updatePerson(personToEdit, editedPerson);
@@ -90,10 +104,16 @@ public class MarkCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
+        //@@author
+        //@@author Sarah
+        Payment updatedPayment = personToEdit.getPayment();
+        //@@author
+        //@@author kronicler
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
         Set<Tag> updatedTags = personToEdit.getTags();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAttendance, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
+                updatedAttendance, updatedTags);
     }
 
     @Override
@@ -122,6 +142,7 @@ public class MarkCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Payment payment;
         private Attendance attendance;
         private Set<Tag> tags;
 
@@ -133,6 +154,7 @@ public class MarkCommand extends Command {
             setName(null);
             setPhone(null);
             setEmail(null);
+            setPayment(null);
             setAttendance(new Attendance("PRESENT"));
             setTags(null);
         }
@@ -159,6 +181,17 @@ public class MarkCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+        //@@author
+        //@@author Sarah
+        public void setPayment(Payment payment) {
+            this.payment = payment;
+        }
+        //@@author
+        //@@author kronicler
+
+        public Optional<Payment> getPayment() {
+            return Optional.ofNullable(payment);
         }
 
         public void setAttendance(Attendance attendance) {
@@ -204,6 +237,7 @@ public class MarkCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getPayment().equals(e.getPayment())
                     && getAttendance().equals(e.getAttendance())
                     && getTags().equals(e.getTags());
         }

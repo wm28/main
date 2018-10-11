@@ -31,6 +31,8 @@ public class PersonDisplay extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label payment;
+    @FXML
     private FlowPane tags;
 
     public PersonDisplay() {
@@ -68,6 +70,7 @@ public class PersonDisplay extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         attendance.setText(person.getAttendance().attendanceValue);
         email.setText(person.getEmail().value);
+        payment.setText(person.getPayment().paymentValue);
         removeTags();
         createTags(person);
     }
@@ -80,6 +83,7 @@ public class PersonDisplay extends UiPart<Region> {
         phone.setText("");
         attendance.setText("");
         email.setText("");
+        payment.setText("");
         removeTags();
     }
 

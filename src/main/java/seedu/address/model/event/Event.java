@@ -16,8 +16,9 @@ import seedu.address.model.tag.Tag;
 public class Event {
 
     //Identity fields
-    private final EventName eventName;
-    private final Set<Tag> eventTags = new HashSet<>();
+    private EventName eventName;
+    private Set<Tag> eventTags = new HashSet<>();
+    private boolean isNotInitialisedByUser;
     /**
      * Every field must be present and not null.
      */
@@ -25,12 +26,29 @@ public class Event {
         requireAllNonNull(eventName, eventTags);
         this.eventName = eventName;
         this.eventTags.addAll(eventTags);
+        this.isNotInitialisedByUser = false;
+    }
+    public Event() {
+        EventName eventName = new EventName("event not created yet");
+        this.eventName = eventName;
+        this.isNotInitialisedByUser = true;
     }
 
     public EventName getEventName() {
         return eventName;
     }
 
+    public void setEvent(Event event) {
+        if (!this.equals(event)) {
+            this.eventName.setEventName(event.eventName.getEventName());
+            this.eventTags = event.eventTags;
+        }
+        this.isNotInitialisedByUser = false;
+    }
+
+    public boolean isNotUserInitialised() {
+        return !isNotInitialisedByUser;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

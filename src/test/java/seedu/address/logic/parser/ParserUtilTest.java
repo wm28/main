@@ -33,7 +33,7 @@ public class ParserUtilTest {
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ATTENDANCE = "PRESENT";
-    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_EMAIL = "rachel@gmail.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -111,23 +111,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
+    public void parseAttendance_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAttendance((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
+    public void parseAttendance_invalidValue_throwsParseException() {
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAttendance(INVALID_ATTENDANCE));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+    public void parseAttendance_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Attendance expectedAttendance = new Attendance(VALID_ATTENDANCE);
         assertEquals(expectedAttendance, ParserUtil.parseAttendance(VALID_ATTENDANCE));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+    public void parseAttendance_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String attendanceWithWhitespace = WHITESPACE + VALID_ATTENDANCE + WHITESPACE;
         Attendance expectedAttendance = new Attendance(VALID_ATTENDANCE);
         assertEquals(expectedAttendance, ParserUtil.parseAttendance(attendanceWithWhitespace));

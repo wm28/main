@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -24,6 +25,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -61,7 +63,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAttendance(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_DIET_BOB)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
@@ -90,7 +92,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withAttendance(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_DIET_BOB)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -151,6 +153,11 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final Event eventDetails = new Event();
+        AddressBookStub(Collection<Person> persons, Event event) {
+            this.persons.setAll(persons);
+            this.eventDetails.setEvent(event);
+        }
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -159,6 +166,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public Event getEventDetails() {
+            return eventDetails;
         }
     }
 
