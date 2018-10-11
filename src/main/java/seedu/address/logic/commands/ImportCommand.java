@@ -65,7 +65,7 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Adds a person to the addressbook
+     * Adds a person to the guest list
      */
     private void addPerson(Person toAdd, Model model) throws CommandException {
         if (model.hasPerson(toAdd)) {
