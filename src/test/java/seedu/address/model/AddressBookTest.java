@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
@@ -117,11 +118,12 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removeTag_tagUsedByMultiplePersons_tagRemoved() throws Exception {
-        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_FRIEND));
+    public void removeTag_tagOfDifferentPersons_tagRemoved() throws Exception {
+        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_DIET_BOB));
+        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_DIET_AMY));
 
         Person amyWithoutFriendTag = new PersonBuilder(AMY).withTags().build();
-        Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags().build();
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(bobWithoutFriendTag)
                 .withPerson(amyWithoutFriendTag).build();
 

@@ -42,7 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_UNUSED = "unused"; //do not use this tag when creating a person
     public static final String VALID_EMAIL_AMY = "amy@gmail.com";
     public static final String VALID_EMAIL_BOB = "bob@gmail.com";
-    public static final String VALID_EMAIL_DANNY = "danny@gmail.com"
+    public static final String VALID_EMAIL_DANNY = "danny@gmail.com";
     public static final String VALID_PAYMENT_AMY = "PAID";
     public static final String VALID_PAYMENT_BOB = "NOT PAID";
     public static final String VALID_PAYMENT_DANNY = "PAID";
