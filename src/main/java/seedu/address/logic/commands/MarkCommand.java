@@ -60,7 +60,7 @@ public class MarkCommand extends Command {
      * @param lastShownList {@code CommandHistory} which the command should operate on.
      * @throws CommandException if there are no matching persons in the list
      */
-    public void retrieveIndex(List<Person> lastShownList) throws CommandException{
+    public void retrieveIndex(List<Person> lastShownList) throws CommandException {
         int x = 0;
         boolean isNotFound = true;
         for (Person p : lastShownList) {
