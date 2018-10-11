@@ -17,19 +17,18 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-
-
-
 /**
  * Parses a person in CSV format and creates a new Person object
  */
+//@@author wm28
 public class CsvParser {
-    private static final Pattern GUEST_DATA_FORMAT = Pattern.compile("(?<name>\"[^\"]*\"|[^\",]*),"
-            + "(?<phone>\"[^\"]*\"|[^\",]*),"
-            + "(?<email>\"[^\"]*\"|[^\",]*),"
-            + "(?<payment>\"[^\"]*\"|[^\",]*),"
-            + "(?<attendance>\"[^\"]*\"|[^\",]*),"
+    private static final Pattern GUEST_DATA_FORMAT = Pattern.compile("[\"|']?(?<name>[^\"',]*)[\"|']?,"
+            + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
+            + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
+            + "[\"|']?(?<payment>[^\"',]*)[\"|']?,"
+            + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,"
             + "(?<tags>.*)");
+
     /**
      * Parses csv-formatted input into a Person object.
      *
@@ -45,10 +44,8 @@ public class CsvParser {
         Name name = ParserUtil.parseName(matcher.group("name"));
         Phone phone = ParserUtil.parsePhone(matcher.group("phone"));
         Email email = ParserUtil.parseEmail(matcher.group("email"));
-        //@@author Sarah
         Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
         Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
-        //@@author SE-EDU
         Set<Tag> tagList = splitTags(matcher.group("tags"));
 
         return new Person(name, phone, email, payment, attendance, tagList);
@@ -57,5 +54,5 @@ public class CsvParser {
     private Set<Tag> splitTags(String tags) throws ParseException {
         return ParserUtil.parseTags(Arrays.asList(tags.split(",")));
     }
-
 }
+//@@author
