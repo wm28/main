@@ -48,7 +48,7 @@ public class CsvParser {
         //@@author Sarah
         Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
         Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
-        //@@author SE-EDU
+        //@@author
         Set<Tag> tagList = splitTags(matcher.group("tags"));
 
         return new Person(name, phone, email, payment, attendance, tagList);
