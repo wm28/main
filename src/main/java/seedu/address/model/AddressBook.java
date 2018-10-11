@@ -125,7 +125,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         Person newPerson =
-                new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(), person.getAttendance(), newTags);
+                new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(),
+                            person.getAttendance(), newTags);
 
         updatePerson(person, newPerson);
     }
@@ -149,7 +150,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         Person newPerson =
-                new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(), person.getAttendance(), newTags);
+                new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(),
+                            person.getAttendance(), newTags);
 
         updatePerson(person, newPerson);
     }
