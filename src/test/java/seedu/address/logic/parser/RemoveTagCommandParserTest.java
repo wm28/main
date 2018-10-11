@@ -18,16 +18,19 @@ public class RemoveTagCommandParserTest {
 
     @Test
     public void parse_invalidArgs_noPrefixSpecifiedForAllTags() {
-        assertParseFailure(parser, "Silver GuestSpeaker", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "Silver GuestSpeaker", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RemoveTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_onlyPrefixSpecified() {
-        assertParseFailure(parser, "t", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "t", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RemoveTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RemoveTagCommand.MESSAGE_USAGE));
     }
 }
