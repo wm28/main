@@ -4,8 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.DANNY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -22,6 +29,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -30,6 +39,9 @@ public class AddressBookTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final AddressBook addressBook = new AddressBook();
+    private final AddressBook addressBookWithBobAndAmy = new AddressBookBuilder().withPerson(BOB)
+            .withPerson(AMY).build();
+    private final AddressBook addressBookWithDanny = new AddressBookBuilder().withPerson(DANNY).build();
 
     @Test
     public void constructor() {
@@ -91,6 +103,52 @@ public class AddressBookTest {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getPersonList().remove(0);
     }
+
+    //@@author aaryamNUS
+    /**
+     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent
+     */
+    @Test
+    public void removeTag_nonExistentTag_addressBookUnchanged() throws Exception {
+        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_UNUSED));
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(BOB).withPerson(AMY).build();
+
+        assertEquals(expectedAddressBook, addressBookWithBobAndAmy);
+    }
+
+    @Test
+    public void removeTag_tagOfDifferentPersons_tagRemoved() throws Exception {
+        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_DIET_BOB));
+        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_DIET_AMY));
+
+        Person amyWithoutFriendTag = new PersonBuilder(AMY).withTags().build();
+        Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags().build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(bobWithoutFriendTag)
+                .withPerson(amyWithoutFriendTag).build();
+
+        assertEquals(expectedAddressBook, addressBookWithBobAndAmy);
+    }
+
+    @Test
+    public void addTag_sameTagUsed_addressBookUnchanged() throws Exception {
+        addressBookWithDanny.addTag(new Tag(VALID_TAG_FRIEND));
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(DANNY).build();
+
+        assertEquals(expectedAddressBook, addressBookWithDanny);
+    }
+
+    @Test
+    public void addTag_tagUsedByMultiplePersons_tagAdded() throws Exception {
+        addressBookWithDanny.addTag(new Tag(VALID_TAG_HUSBAND));
+
+        Person dannyWithHusbandTag = new PersonBuilder(DANNY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(dannyWithHusbandTag).build();
+
+        assertEquals(expectedAddressBook, addressBookWithDanny);
+    }
+    //@@author
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.

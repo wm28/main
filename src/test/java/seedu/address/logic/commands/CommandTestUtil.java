@@ -29,31 +29,50 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_DANNY = "Danny Timbo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@gmail.com";
-    public static final String VALID_EMAIL_BOB = "bob@gmail.com";
+    public static final String VALID_PHONE_DANNY = "33333333";
     public static final String VALID_ATTENDANCE_AMY = "PRESENT";
     public static final String VALID_ATTENDANCE_BOB = "ABSENT";
+    public static final String VALID_ATTENDANCE_DANNY = "PRESENT";
+    public static final String VALID_TAG_HUSBAND = "husband";
+    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_ADDED = "added"; //used to test whether a tag has been added to a person
+    public static final String VALID_TAG_UNUSED = "unused"; //do not use this tag when creating a person
+    public static final String VALID_EMAIL_AMY = "amy@gmail.com";
+    public static final String VALID_EMAIL_BOB = "bob@gmail.com";
+    public static final String VALID_EMAIL_DANNY = "danny@gmail.com";
     public static final String VALID_PAYMENT_AMY = "PAID";
     public static final String VALID_PAYMENT_BOB = "NOT PAID";
+    public static final String VALID_PAYMENT_DANNY = "PAID";
     public static final String VALID_TAG_DIET_AMY = "NORMAL";
     public static final String VALID_TAG_DIET_BOB = "NORMAL";
-
+    public static final String VALID_TAG_DIET_DANNY = "NORMAL";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_DANNY = " " + PREFIX_NAME + VALID_NAME_DANNY;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String PHONE_DESC_DANNY = " " + PREFIX_PHONE + VALID_PHONE_DANNY;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String EMAIL_DESC_DANNY = " " + PREFIX_EMAIL + VALID_EMAIL_DANNY;
     public static final String ATTENDANCE_DESC_AMY = " "
             + PREFIX_ATTENDANCE + VALID_ATTENDANCE_AMY;
     public static final String ATTENDANCE_DESC_BOB = " "
             + PREFIX_ATTENDANCE + VALID_ATTENDANCE_BOB;
+    public static final String ATTENDANCE_DESC_DANNY = " "
+            + PREFIX_ATTENDANCE + VALID_ATTENDANCE_DANNY;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_ADDED = " " + PREFIX_TAG + VALID_TAG_ADDED;
     public static final String PAYMENT_DESC_AMY = " "
             + PREFIX_PAYMENT + VALID_PAYMENT_AMY;
     public static final String PAYMENT_DESC_BOB = " "
             + PREFIX_PAYMENT + VALID_PAYMENT_BOB;
+    public static final String PAYMENT_DESC_DANNY = " "
+            + PREFIX_PAYMENT + VALID_PAYMENT_DANNY;
     public static final String TAG_DESC_DIET_AMY = " " + PREFIX_TAG + VALID_TAG_DIET_AMY;
     public static final String TAG_DESC_DIET_BOB = " " + PREFIX_TAG + VALID_TAG_DIET_BOB;
 
@@ -71,6 +90,7 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditPersonDescriptor DESC_DANNY;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -79,6 +99,9 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAttendance(VALID_ATTENDANCE_BOB)
                 .withTags(VALID_TAG_DIET_BOB).withPayment(VALID_PAYMENT_BOB).build();
+        DESC_DANNY = new EditPersonDescriptorBuilder().withName(VALID_NAME_DANNY)
+                .withPhone(VALID_PHONE_DANNY).withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY)
+                .withTags(VALID_TAG_FRIEND).withPayment(VALID_PAYMENT_DANNY).build();
     }
 
     /**

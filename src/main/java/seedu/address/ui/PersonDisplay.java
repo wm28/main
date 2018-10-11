@@ -20,19 +20,6 @@ import seedu.address.model.person.Person;
 public class PersonDisplay extends UiPart<Region> {
     private static final String FXML = "PersonDisplay.fxml";
 
-    //@@author aaryamNUS
-    /**
-     * The following string array represents different tag colours associated with each guest in the list.
-     * Each colour represents a charecteristic of the guest, as summarised below:
-     * Orange - Absent, Yellow - Present, Green - Vegetarian, Light Blue - VIP, Red - Bride or Groom,
-     * White - Guest Speaker, Black - Not Paid, Purple - Paid
-     *
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
-     */
-    private static final String[] TAG_COLORS = {"orange", "yellow", "green", "lightblue",
-                                                "red", "white", "black", "purple"};
-    //@@author
-
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
@@ -54,19 +41,6 @@ public class PersonDisplay extends UiPart<Region> {
     }
 
     //@@author aaryamNUS
-    /**
-     * Method getTagColor returns the specific color style for {@code tagName}'s label.
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
-     */
-    private String getTagColor(String tagName) {
-        /**
-         * Using the hashcode of the tag name ensures the color of the tag remains consistent
-         * during different iterations of the code by generating a random color
-         */
-
-        return TAG_COLORS[Math.abs(tagName.hashCode()) % TAG_COLORS.length];
-    }
-
     /**
      * Method createTags initialises the tag labels for {@code person}
      * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU

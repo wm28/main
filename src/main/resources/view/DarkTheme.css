@@ -361,19 +361,9 @@
     -fx-background-color: #cb9d1d;
 }
 
-#tags .green {
-    -fx-text-fill: white;
-    -fx-background-color: #71bc78;
-}
-
 #tags .lightblue {
     -fx-text-fill: black;
     -fx-background-color: #96e1f0;
-}
-
-#tags .red {
-    -fx-text-fill: white;
-    -fx-background-color: #cd3333;
 }
 
 #tags .white {
@@ -381,13 +371,28 @@
     -fx-background-color: #ffffff;
 }
 
-#tags .black {
-    -fx-text-fill: white;
-    -fx-background-color: #000000;
+#tags .bronze {
+    -fx-text-fill: black;
+    -fx-background-color: #cd7f32;
 }
 
-#tags .purple {
-    -fx-text-fill: white;
-    -fx-background-color: #572d57;
+#tags .silver {
+    -fx-text-fill: black;
+    -fx-background-color: #C0C0C0;
+}
+
+#tags .gold {
+    -fx-text-fill: black;
+    -fx-background-color: #DAA520;
+}
+
+#tags .platinum {
+    -fx-text-fill: black;
+    -fx-background-color: #E5E4E2;
+}
+
+#tags .default {
+    -fx-text-fill: red;
+    -fx-background-color: #ffffff;
 }
 /* @@author */
