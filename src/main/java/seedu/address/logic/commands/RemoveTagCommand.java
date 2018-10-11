@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
-import java.util.logging.*;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -103,8 +104,7 @@ public class RemoveTagCommand extends Command {
                         numberOfPeopleToChange++;
                         break;
                     }
-                }
-                catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException ex) {
                     logger.log(Level.WARNING, "Incorrect format for tags", ex);
                 }
             }

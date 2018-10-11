@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
-import java.util.logging.*;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -53,8 +54,7 @@ public class AddTagCommand extends Command {
 
         if (currentList.isEmpty()) {
             throw new CommandException(MESSAGE_NO_PERSON_IN_LIST);
-        }
-        else {
+        } else {
             for (Tag tagToBeAdded: tagsToAdd) {
                 currentAddressBook.addTag(tagToBeAdded);
             }
