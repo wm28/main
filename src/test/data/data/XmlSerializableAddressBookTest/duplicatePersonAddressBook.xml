@@ -4,16 +4,19 @@
     <persons>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
-        <email>alice@example.com</email>
+        <email>alice@gmail.com</email>
+        <payment>PENDING</payment>
         <attendance>PRESENT</attendance>
-        <tagged>friends</tagged>
+        <tagged>VEGETARIAN</tagged>
+        <tagged>NoNuts</tagged>
     </persons>
 
     <!-- Person with same identity as Alice Pauline -->
     <persons>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
-        <email>pauline@example.com</email>
+        <email>pauline@gmail.com</email>
+        <payment>PENDING</payment>
         <attendance>PRESENT</attendance>
     </persons>
 

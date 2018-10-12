@@ -13,20 +13,6 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-
-    //@@author aaryamNUS
-    /**
-     * The following string array represents different tag colours associated with each guest in the list.
-     * Each colour represents a charecteristic of the guest, as summarised below:
-     * Orange - Absent, Yellow - Present, Green - Vegetarian, Light Blue - VIP, Red - Bride or Groom,
-     * White - Guest Speaker, Black - Not Paid, Purple - Paid, Transparent - Default for other tags
-     *
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
-     */
-    private static final String[] TAG_COLORS = {"orange", "yellow", "green", "lightblue",
-                                                "red", "white", "black", "purple", "transparent"};
-    //@@author
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -50,6 +36,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label payment;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
@@ -60,46 +48,14 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         attendance.setText(person.getAttendance().attendanceValue);
         email.setText(person.getEmail().value);
+        payment.setText(person.getPayment().paymentValue);
         createTags(person);
     }
 
     //@@author aaryamNUS
     /**
-        Method getTagColor returns the specific color style for {@code tagName}'s label.
-        Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
-     */
-    private String getTagColor(String tagName) {
-        /**
-         * Using the hashcode of the tag name ensures the color of the tag remains consistent
-         * during different iterations of the code by generating a random color
-         */
-        switch(tagName.toLowerCase()) {
-        case "absent":
-            return TAG_COLORS[0];
-        case "present":
-            return TAG_COLORS[1];
-        case "veg":
-        case "vegetarian":
-            return TAG_COLORS[2];
-        case "vip":
-            return TAG_COLORS[3];
-        case "bride":
-        case "groom":
-            return TAG_COLORS[4];
-        case "guestspeaker":
-            return TAG_COLORS[5];
-        case "notpaid":
-            return TAG_COLORS[6];
-        case "paid":
-            return TAG_COLORS[7];
-        default:
-            return TAG_COLORS[8];
-        }
-    }
-
-    /**
-        Method createTags initialises the tag labels for {@code person}
-        Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
+     * Method createTags initialises the tag labels for {@code person}
+     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
      */
     private void createTags(Person person) {
         person.getTags().forEach(tag -> {

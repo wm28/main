@@ -5,32 +5,32 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.RemoveTagCommand;
+import seedu.address.logic.commands.AddTagCommand;
 
 //@@author aaryamNUS
 /**
- * RemoveTagCommandParserTest checks for various user input situations, such as tags without
+ * AddTagCommandParserTest checks for various user input situations, such as tags without
  * any prefix, tags with only the prefix, and if no input is presented
  */
-public class RemoveTagCommandParserTest {
+public class AddTagCommandParserTest {
 
-    private RemoveTagCommandParser parser = new RemoveTagCommandParser();
+    private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test
     public void parse_invalidArgs_noPrefixSpecifiedForAllTags() {
-        assertParseFailure(parser, "Silver GuestSpeaker", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RemoveTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "Veg Gold VIP", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_onlyPrefixSpecified() {
         assertParseFailure(parser, "t", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RemoveTagCommand.MESSAGE_USAGE));
+                AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RemoveTagCommand.MESSAGE_USAGE));
+                AddTagCommand.MESSAGE_USAGE));
     }
 }

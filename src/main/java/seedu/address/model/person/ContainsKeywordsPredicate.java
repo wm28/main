@@ -1,3 +1,4 @@
+//@@author Sarah
 package seedu.address.model.person;
 
 import java.util.HashSet;
