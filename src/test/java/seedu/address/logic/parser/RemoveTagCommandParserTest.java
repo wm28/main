@@ -17,13 +17,13 @@ public class RemoveTagCommandParserTest {
     private RemoveTagCommandParser parser = new RemoveTagCommandParser();
 
     @Test
-    public void parse_invalidArgs_noPrefixSpecifiedForAllTags() {
+    public void parse_noPrefixSpecifiedForAllTags_throwsParseException() {
         assertParseFailure(parser, "Silver GuestSpeaker", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemoveTagCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidArgs_onlyPrefixSpecified() {
+    public void parse_onlyPrefixSpecified_throwsParseException() {
         assertParseFailure(parser, "t", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemoveTagCommand.MESSAGE_USAGE));
     }
