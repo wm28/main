@@ -4,47 +4,57 @@
     <persons>
         <name>Alice Pauline</name>
         <phone>94351253</phone>
-        <email>alice@example.com</email>
+        <email>alice@gmail.com</email>
+        <payment>PENDING</payment>
         <attendance>PRESENT</attendance>
-        <tagged>friends</tagged>
+        <tagged>VEGETARIAN</tagged>
+        <tagged>NoNuts</tagged>
     </persons>
     <persons>
         <name>Benson Meier</name>
         <phone>98765432</phone>
-        <email>johnd@example.com</email>
+        <email>johnd@gmail.com</email>
+        <payment>PAID</payment>
         <attendance>ABSENT</attendance>
-        <tagged>owesMoney</tagged>
-        <tagged>friends</tagged>
+        <tagged>NORMAL</tagged>
+        <tagged>NoSeafood</tagged>
+        <tagged>GUEST</tagged>
     </persons>
     <persons>
         <name>Carl Kurz</name>
         <phone>95352563</phone>
-        <email>heinz@example.com</email>
+        <email>heinz@gmail.com</email>
+        <payment>NOT PAID</payment>
         <attendance>PRESENT</attendance>
     </persons>
     <persons>
         <name>Daniel Meier</name>
         <phone>87652533</phone>
-        <email>cornelia@example.com</email>
+        <email>cornelia@gmail.com</email>
+        <payment>PAID</payment>
         <attendance>ABSENT</attendance>
-        <tagged>friends</tagged>
+        <tagged>NORMAL</tagged>
+        <tagged>VIP</tagged>
     </persons>
     <persons>
         <name>Elle Meyer</name>
         <phone>9482224</phone>
-        <email>werner@example.com</email>
+        <email>werner@gmail.com</email>
+        <payment>NOT PAID</payment>
         <attendance>PRESENT</attendance>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
         <phone>9482427</phone>
-        <email>lydia@example.com</email>
+        <email>lydia@gmail.com</email>
+        <payment>PAID</payment>
         <attendance>ABSENT</attendance>
     </persons>
     <persons>
         <name>George Best</name>
         <phone>9482442</phone>
-        <email>anna@example.com</email>
+        <email>anna@gmail.com</email>
+        <payment>PENDING</payment>
         <attendance>PRESENT</attendance>
     </persons>
 </addressbook>

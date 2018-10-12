@@ -4,5 +4,6 @@
     <phone>9482424</phone>
     <email>hans@example</email>
     <attendance>PRESENT</attendance>
-    <tagged>friends</tagged>
+    <payment>NOT PAID</payment>
+    <tagged>NORMAL</tagged>
 </person>

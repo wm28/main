@@ -2,12 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -108,6 +111,58 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// util methods
+
+    //@@author aaryamNUS
+    /**
+     * Removes {@code tag} from {@code person} in this {@code AddressBook}.
+     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent
+     */
+    private void removeTagFromPerson(Tag tag, Person person) {
+        Set<Tag> newTags = new HashSet<>(person.getTags());
+
+        if (!newTags.remove(tag)) {
+            return;
+        }
+
+        Person newPerson =
+                new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(),
+                            person.getAttendance(), newTags);
+
+        updatePerson(person, newPerson);
+    }
+
+    /**
+     * Removes {@code tag} from all persons in this {@code AddressBook}
+     */
+    public void removeTag(Tag tag) {
+        persons.forEach(person -> removeTagFromPerson(tag, person));
+    }
+
+    /**
+     * Adds {@code tag} from {@code person} in this {@code AddressBook}.
+     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent
+     */
+    private void addTagFromPerson(Tag tag, Person person) {
+        Set<Tag> newTags = new HashSet<>(person.getTags());
+
+        if (!newTags.add(tag)) {
+            return;
+        }
+
+        Person newPerson =
+                new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(),
+                            person.getAttendance(), newTags);
+
+        updatePerson(person, newPerson);
+    }
+
+    /**
+     * Adds {@code tag} to all persons in this {@code AddressBook}
+     */
+    public void addTag(Tag tag) {
+        persons.forEach(person -> addTagFromPerson(tag, person));
+    }
+    //@@author
 
     @Override
     public String toString() {

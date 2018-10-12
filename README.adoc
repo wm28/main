@@ -61,7 +61,7 @@ The following list highlights the main features our application provides, rangin
     g. Status of Payment of guest (e.g. PAID)
 
 ## Acknowledgements
-Some parts of this application were adapted from the sample application: https://github.com/se-edu/[Address Book Level 4] by *_SE-EDU_*.
+Some parts of this application were adapted from the sample application: https://github.com/se-edu/addressbook-level4[Address Book Level 4] by *_SE-EDU_*.
 
 #### Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 ### Licence : link:LICENSE[MIT]

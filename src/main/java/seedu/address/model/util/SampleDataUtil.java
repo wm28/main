@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -19,24 +20,24 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Attendance("PRESENT"),
-                getTagSet("PAID", "NORMAL")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Attendance("ABSENT"),
-                getTagSet("PAID", "VEGETARIAN")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Attendance("PRESENT"),
-                getTagSet("NOTPAID", "VEGAN")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Attendance("ABSENT"),
-                getTagSet("PENDING", "NORMAL")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Attendance("PRESENT"),
-                getTagSet("PAID", "HALAL")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Attendance("ABSENT"),
-                getTagSet("PAID", "NoBEEF"))
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@gmail.com"),
+                new Payment("PAID"), new Attendance("PRESENT"),
+                    getTagSet("NORMAL", "NoShrimp", "GUEST")),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
+                new Payment("NOT PAID"), new Attendance("ABSENT"),
+                getTagSet("VEGETARIAN", "NoNuts", "VIP")),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@gmail.com"),
+                new Payment("NOT PAID"), new Attendance("PRESENT"),
+                getTagSet("VEGAN", "GUEST")),
+            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@gmail.com"),
+                new Payment("PENDING"), new Attendance("ABSENT"),
+                getTagSet("NORMAL", "NoBeef", "NoSeafood", "VIP")),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@gmail.com"),
+                new Payment("PAID"), new Attendance("PRESENT"),
+                getTagSet("HALAL", "NoGluten", "GUEST")),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@gmail.com"),
+                new Payment("PENDING"), new Attendance("ABSENT"),
+                getTagSet("NoBeef", "VIP"))
         };
     }
 

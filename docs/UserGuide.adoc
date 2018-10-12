@@ -104,26 +104,6 @@ Examples:
 * `edit 2 n/Bob Chan` +
 Edits the name of the 2nd person to be `Bob Chan` respectively.
 
-=== Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
 === Deleting a person : `delete`
 
 Deletes the specified person from the address book. +
@@ -143,6 +123,64 @@ Deletes the 2nd person in the address book.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
+
+=== Removing a set of tags from all persons : `removeTag`
+
+This command allows you to remove a set of tags from all persons in the address book. +
+Format: `removeTag [t/TAG]...`
+
+****
+* The removeTag command will remove any number of tags provided by you from all persons
+* If the tags you provide are not shared by any of the persons in the current list, the message bar will inform you of this
+* You must provide the tags to be removed, an input of `removeTag t/` will not do anything
+* You must provide tags that are alphanumeric, otherwise the system will inform you of the error in your input format
+****
+
+Examples:
+
+* `removeTag t/Veg t/VIP` +
+You will remove the tags `Veg` and `VIP` from all persons in the current list
+* `removeTag t/` +
+This will present you with an error in specifying the command, as you have not provided any tags to delete
+* `removeTag t/@!*` +
+This will present you with an error in specifying the command, as all your tags must be alphanumeric
+
+=== Adds a set of tags to all persons : `addTag`
+
+This command allows you to add a set of tags to all persons in the address book. +
+Format: `addTag [t/TAG]...`
+
+****
+* The addTag command will add any number of tags provided by you to all persons
+* You must provide tags that are alphanumeric, otherwise the system will inform you of the error in your input format
+****
+
+Examples:
+
+* `addTag t/Veg t/VIP` +
+You will add the tags `Veg` and `VIP` to all persons in the current list
+* `addTag t/@` +
+This will present you with an error in specifying the command, as all your tags must be alphanumeric
+
+=== Locating persons by name: `find`
+
+Finds persons whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
 
 === Import users from CSV file : `import`
 
@@ -328,6 +366,8 @@ There is no need to save manually.
 * `add` : ​Creates an entry for a person to attend the event.
 * `edit` :​ Modifies the entry of a specified person based on name.
 * `delete` : ​Removes an entry of a specified person based on name.
+* `removeTag` : Removes a set of tags from all the persons in the current list.
+* `addtag` : Adds a set of tags to all the persons in the current list.
 * `find` : Finds persons whose names contain any of the given keywords.
 * `list` : Lists the current guest list
 * `import` : ​Automatically generates guest list from a given CSV file.
