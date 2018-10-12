@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Tests that a {@code Person}'s {@code Tags} matches all of the keywords given.
  */
 public class ContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    public final List<String> keywords;
 
     public ContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
