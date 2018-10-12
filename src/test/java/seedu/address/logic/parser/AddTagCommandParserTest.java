@@ -17,13 +17,13 @@ public class AddTagCommandParserTest {
     private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test
-    public void parse_invalidArgs_noPrefixSpecifiedForAllTags() {
+    public void parse_noPrefixSpecifiedForAllTags_throwsParseException() {
         assertParseFailure(parser, "Veg Gold VIP", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTagCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidArgs_onlyPrefixSpecified() {
+    public void parse_onlyPrefixSpecified_throwsParseException() {
         assertParseFailure(parser, "t", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTagCommand.MESSAGE_USAGE));
     }
