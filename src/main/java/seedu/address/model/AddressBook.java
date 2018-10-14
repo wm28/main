@@ -110,54 +110,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    /**
-     * Removes {@code tag} from {@code person} in this {@code Java Application}
-     */
-    private void removeTagFromPerson(Tag tag, Person person) {
-        Set<Tag> newTags = new HashSet<>(person.getTags());
-
-        if (!newTags.remove(tag)) {
-            return;
-        }
-
-        Person newPerson =
-                new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAttendance(), newTags);
-
-        updatePerson(person, newPerson);
-
-    }
-
-    /**
-     * Removes {@code tag} from all persons in this {@code Java Application}
-     */
-    public void removeTag(Tag tag) {
-        persons.forEach(person -> removeTagFromPerson(tag, person));
-    }
-
-    /**
-     * Removes {@code tag} from {@code person} in this {@code Java Application}
-     */
-    private void addTagToPerson(Tag tag, Person person) {
-        Set<Tag> newTags = new HashSet<>(person.getTags());
-
-        if (!newTags.add(tag)) {
-            return;
-        }
-
-        Person newPerson =
-                new Person(person.getName(), person.getPhone(), person.getEmail(), person.getAttendance(), newTags);
-
-        updatePerson(person, newPerson);
-
-    }
-
-    /**
-     * Removes {@code tag} from all persons in this {@code Java Application}
-     */
-    public void addTag(Tag tag) {
-        persons.forEach(person -> addTagToPerson(tag, person));
-    }
-
     //// util methods
 
     //@@author aaryamNUS
@@ -210,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addTag(Tag tag) {
         persons.forEach(person -> addTagFromPerson(tag, person));
     }
-    //@@author
+    //@@author aaryamNUS
 
     @Override
     public String toString() {
