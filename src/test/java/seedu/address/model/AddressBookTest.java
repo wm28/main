@@ -118,12 +118,12 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removeTag_tagOfDifferentPersons_tagRemoved() throws Exception {
-        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_DIET_BOB));
-        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_DIET_AMY));
+    public void removeTag_sharedTagOfDifferentPersons_tagRemoved() {
+        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_FRIEND));
+        addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_FRIEND));
 
-        Person amyWithoutFriendTag = new PersonBuilder(AMY).withTags().build();
-        Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags().build();
+        Person amyWithoutFriendTag = new PersonBuilder(AMY).withTags(VALID_TAG_DIET_AMY).build();
+        Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags(VALID_TAG_DIET_BOB).build();
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(bobWithoutFriendTag)
                 .withPerson(amyWithoutFriendTag).build();
 
@@ -131,7 +131,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void addTag_sameTagUsed_addressBookUnchanged() throws Exception {
+    public void addTag_noNewTagsToAdd_addressBookUnchanged() {
         addressBookWithDanny.addTag(new Tag(VALID_TAG_FRIEND));
 
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(DANNY).build();
@@ -140,15 +140,17 @@ public class AddressBookTest {
     }
 
     @Test
-    public void addTag_tagUsedByMultiplePersons_tagAdded() throws Exception {
-        addressBookWithDanny.addTag(new Tag(VALID_TAG_HUSBAND));
+    public void addTag_tagAddedToMultiplePersons_tagAdded() {
+        addressBookWithBobAndAmy.addTag(new Tag(VALID_TAG_HUSBAND));
 
-        Person dannyWithHusbandTag = new PersonBuilder(DANNY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(dannyWithHusbandTag).build();
+        Person amyWithHusbandTag = new PersonBuilder(AMY).withTags(VALID_TAG_DIET_AMY, VALID_TAG_HUSBAND).build();
+        Person bobWithHusbandTag = new PersonBuilder(BOB).withTags(VALID_TAG_DIET_BOB, VALID_TAG_HUSBAND).build();
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(bobWithHusbandTag)
+                .withPerson(amyWithHusbandTag).build();
 
-        assertEquals(expectedAddressBook, addressBookWithDanny);
+        assertEquals(expectedAddressBook, addressBookWithBobAndAmy);
     }
-    //@@author
+    //@@author aaryamNUS
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
