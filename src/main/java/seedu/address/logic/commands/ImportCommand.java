@@ -15,10 +15,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+//@@author wm28
+
 /**
  * Imports multiple guests into the guest list of the current event via a CSV file
  */
-//@@author wm28
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
@@ -47,21 +48,31 @@ public class ImportCommand extends Command {
             guestData = CsvUtil.getDataLinesFromFile(csvFile);
             totalGuests = guestData.size();
             successfulImports = totalGuests;
-            for (String guest : guestData) {
-                Person toAdd = new CsvParser().parsePerson(guest);
-                addPerson(toAdd, model);
-            }
+            importPersons(guestData, model);
         } catch (IOException e) {
             throw new CommandException(e.getMessage());
-        } catch (ParseException pe) {
-            successfulImports--;
-        } catch (CommandException ce) {
-            successfulImports--;
         }
 
         model.commitAddressBook();
         return new CommandResult(
                 String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalGuests, csvFile.getFileName()));
+    }
+
+    /**
+     * Imports persons to the guest list
+     */
+    private void importPersons(List<String> guestData, Model model) {
+        for (String guest : guestData) {
+            try {
+                Person toAdd = new CsvParser().parsePerson(guest);
+                addPerson(toAdd, model);
+            } catch (ParseException pe) {
+                successfulImports--;
+            } catch (CommandException ce) {
+                successfulImports--;
+            }
+        }
+
     }
 
     /**
