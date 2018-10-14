@@ -10,7 +10,7 @@ import java.util.List;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CsvParser;
+import seedu.address.logic.parser.CsvConverter;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -64,7 +64,7 @@ public class ImportCommand extends Command {
     private void importPersons(List<String> guestData, Model model) {
         for (String guest : guestData) {
             try {
-                Person toAdd = new CsvParser().parsePerson(guest);
+                Person toAdd = new CsvConverter().convertToPerson(guest);
                 addPerson(toAdd, model);
             } catch (ParseException pe) {
                 successfulImports--;

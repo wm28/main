@@ -17,11 +17,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-/**
- * Parses a person in CSV format and creates a new Person object
- */
 //@@author wm28
-public class CsvParser {
+/**
+ * Converts a person between the CSV format and the Person Class object
+ */
+public class CsvConverter {
     private static final Pattern GUEST_DATA_FORMAT = Pattern.compile("[\"|']?(?<name>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
@@ -32,11 +32,11 @@ public class CsvParser {
     /**
      * Parses csv-formatted input into a Person object.
      *
-     * @param csvInput Csv-formatted guest input string
+     * @param csvInput Csv-formatted person input string
      * @return Person based on the csv-formatted input string of the guest
      * @throws ParseException if the csv input does not conform to the expected format
      */
-    public Person parsePerson(String csvInput) throws ParseException {
+    public Person convertToPerson(String csvInput) throws ParseException {
         Matcher matcher = GUEST_DATA_FORMAT.matcher(csvInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
