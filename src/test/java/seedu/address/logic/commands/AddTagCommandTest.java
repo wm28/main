@@ -35,7 +35,9 @@ public class AddTagCommandTest {
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADDED_TAG_SUCCESS, 7);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToAdd: tagsToAdd) expectedModel.addTag(eachTagsToAdd);
+        for (Tag eachTagsToAdd: tagsToAdd) {
+            expectedModel.addTag(eachTagsToAdd);
+        }
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(addTagCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -53,7 +55,9 @@ public class AddTagCommandTest {
         AddTagCommand addTagCommand = new AddTagCommand(allNewTags);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToAdd: allNewTags) expectedModel.addTag(eachTagsToAdd);
+        for (Tag eachTagsToAdd: allNewTags) {
+            expectedModel.addTag(eachTagsToAdd);
+        }
         expectedModel.commitAddressBook();
 
         // removeTag -> set of tags deleted

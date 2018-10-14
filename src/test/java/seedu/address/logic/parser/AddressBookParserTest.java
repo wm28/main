@@ -1,17 +1,17 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.Set;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,6 +64,24 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_removeTag() throws Exception {
+        RemoveTagCommand command = (RemoveTagCommand) parser.parseCommand(
+                RemoveTagCommand.COMMAND_WORD + " " + PREFIX_TAG + "Veg " + PREFIX_TAG + "Silver");
+        assertNotEquals(new RemoveTagCommand(new HashSet<>(Arrays.asList(new Tag("Veg"),
+                new Tag("Silver")
+        ))), command);
+    }
+
+    @Test
+    public void parseCommand_addTag() throws Exception {
+        AddTagCommand command = (AddTagCommand) parser.parseCommand(
+                AddTagCommand.COMMAND_WORD + " " + PREFIX_TAG + "Veg " + PREFIX_TAG + "Silver");
+        assertNotEquals(new AddTagCommand(new HashSet<>(Arrays.asList(new Tag("Veg"),
+                new Tag("Silver")
+        ))), command);
     }
 
     @Test

@@ -36,7 +36,9 @@ public class RemoveTagCommandTest {
         String expectedMessage = String.format(RemoveTagCommand.MESSAGE_REMOVED_TAG_SUCCESS, 2);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToDelete: tagsToRemove) expectedModel.deleteTag(eachTagsToDelete);
+        for (Tag eachTagsToDelete: tagsToRemove) {
+            expectedModel.deleteTag(eachTagsToDelete);
+        }
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(removeTagCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -63,7 +65,9 @@ public class RemoveTagCommandTest {
         String expectedMessage = String.format(RemoveTagCommand.MESSAGE_REMOVED_TAG_SUCCESS, 2);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToDelete: tagsToRemove) expectedModel.deleteTag(eachTagsToDelete);
+        for (Tag eachTagsToDelete: tagsToRemove) {
+            expectedModel.deleteTag(eachTagsToDelete);
+        }
         expectedModel.commitAddressBook();
 
         // removeTag -> set of tags deleted
