@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,8 +27,9 @@ public class CsvConverter {
             + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<payment>[^\"',]*)[\"|']?,"
-            + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,"
+            + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,?"
             + "(?<tags>.*)");
+
 
     /**
      * Parses csv-formatted input into a Person object.
@@ -51,7 +53,17 @@ public class CsvConverter {
         return new Person(name, phone, email, payment, attendance, tagList);
     }
 
+    /**
+     * Splits and parses the tags into a set of Tags
+     *
+     * @param tags String input tags
+     * @return set of parsed Tags
+     * @throws ParseException if the csv input does not conform to the expected format
+     */
     private Set<Tag> splitTags(String tags) throws ParseException {
+        if (tags.trim().isEmpty()){
+            return new HashSet<>();
+        }
         return ParserUtil.parseTags(Arrays.asList(tags.split(",")));
     }
 }

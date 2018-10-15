@@ -37,6 +37,7 @@ public class ImportCommand extends Command {
     private int successfulImports;
 
     public ImportCommand(String fileName) {
+        assert !fileName.isEmpty();
         csvFile = Paths.get(fileName);
     }
 
