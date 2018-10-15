@@ -204,10 +204,9 @@ Format: `stop_marking`
 
 ===  Filter list based on specified parameters : `filter`
 
-Filter guest list based on filter guest attributes. Use the filter with no arguments to view
-the entire guest list. +
-Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
-         [t/PERSON_TYPE] [t/DIET] [t/PAID]`
+Filter guest list based on filter guest attributes. +
+Format: `filter [p/PHONE_NUMBER] [e/EMAIL] [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
+         [t/DIET] [t/PERSON_TYPE]`
 
 Examples:
 
@@ -336,7 +335,7 @@ There is no need to save manually.
 * `unmark` : ​Removes the tag of a person attending the event based on name.
 * `start_marking` : ​Begins continuous marking of the people entering the event.
 * `stop_marking` : ​Stops the continuous marking of people.
-* `filter` : ​Filters the guest list based on tag(s) given.
+* `filter` : ​Filters the guest list based on keywords given.
 * `email` : ​Sends mass emails to all guests on the guest list.
 * `add_event` :​ Adds an event to the application.
 * `select_event` : ​Redirects the user to the guest list of the event given
