@@ -33,11 +33,11 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
         checkKeywords.clear();
 
-        for(int i = 0; i < keywords.size(); i++) {
+        for (int i = 0; i < keywords.size(); i++) {
             String str = keywords.get(i);
             String[] arrStr = str.split("/");
 
-            if(arrStr[j].equals("t")) {
+            if (arrStr[j].equals("t")) {
                 checkKeywords.add(i, arrStr[j + 1]);
                 strTags = "";
 
