@@ -61,7 +61,7 @@ public class CsvConverter {
      * @throws ParseException if the csv input does not conform to the expected format
      */
     private Set<Tag> splitTags(String tags) throws ParseException {
-        if (tags.trim().isEmpty()){
+        if (tags.trim().isEmpty()) {
             return new HashSet<>();
         }
         return ParserUtil.parseTags(Arrays.asList(tags.split(",")));
