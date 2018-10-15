@@ -17,37 +17,40 @@ endif::[]
 By: `Team F09-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-Invités is an application that allows its users to better *organise, cater, and manage* the reception for large events such
-as weddings, school gatherings, orientation camps, etc. Some of the main features include mass email notification, tracking of payments, as well as tab
-keeping the attendance of the guests. This will give the hosts of the event an easier time to manage the reception as they will be equipped with tools that will minimise errors in catering,
-organisation, and orders. Moreover, this application aims to reduce the frustrations of event managers and address their needs in a platform that is more user friendly, personalised, and
+Invités is an application targeted at event managers and planners, that allows you to better *organise, cater, and manage* the reception for large events such
+as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments, as well as the tab
+keeping of attendance of the guests. To add to this, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
+This removes your need having to input all the information manually, as well as subsequently, gives you an alternative if you decide to organise another event using the same guest list.
+
+This will give all you an easier time to manage the reception as you will be equipped with tools that will minimise errors in catering,
+organisation, and orders. Moreover, this application aims to reduce the frustrations for you when planning events and address your needs in a platform that is more user friendly, personalised, and
 efficient.
 
-To add to this, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event. This reduces the hassle of
-having to input all the information manually, as well as subsequently, if the event manager decides to organise another event using the same guest list.
+The main purpose of this User Guide is to give you a detailed overview of all the features in our application and how to use them.
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest jar file from the GIT repository link:https://github.com/CS2113-AY1819S1-F09-3/main[here].
-.  Place the jar file where the home directory resides
-.  Double click on the jar file and wait a couple of seconds as the application loads.
+.  Place the jar file where your home directory resides
+.  Double click on the jar file and wait a couple of seconds as the application loads. If you're successful, a main screen will load
+   similar to the one shown below:
 +
 image::Ui.png[width="790"]
 +
-.  Using the Command Line Input as its primary method of manipulation, here are some
-   example commands that can be used:
+.  As the Command Line Input is your primary method of manipulation, here are some
+   example commands that you can use:
 
 * `help` : Displays a summary of the list of commands that the application offers.
 * `add` : Adds a guest to the guest list.
 * `Delete` : Deletes an entry from the guest list.
-* `Mark` : Denotes that the attendee is present at the event.
+* `Mark` : Marks the attendance of a guest from `ABSENT` to `PRESENT`.
 * `Exit` : exits the application.
 
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+.  You should type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
-.  Refer to <<Features>> subsection to see more detailed documentation of the functions that
+.  Please refer to <<Features>> subsection to see more detailed documentation of the functions that
    are included in this application
 
 [[Features]]
@@ -56,10 +59,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Bob Lee`.
+* Words in `UPPER_CASE` are the parameters to be supplied by you e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Bob Lee`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Bob Lee t/VIP` or as `n/Bob Lee`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/VIP`, `t/VIP t/Vegetarian` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* You can specify parameters in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -67,36 +70,36 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Displays a summary of the list of commands that the application offers +
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a guest: `add`
 
-Adds a person to the address book +
+Adds a guest to the guest list +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT [t/TAG]...`
 
 [TIP]
-A person can have any number of tags (including 0)
+A guest can have any number of tags (including 0)
 
 Examples:
 
 * `add n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent t/VIP t/Vegetarian t/Not Paid`
 * `add n/John Doe p/91028392 e/johndoe@gmail.com a/Present t/Groom t/Non-Vegetarian t/Paid`
 
-=== Listing all persons : `list`
+=== Listing all guests : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all guests in the guest list. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Editing a guest : `edit`
 
-Edits an existing person in the address book. +
+Edits an existing guest entry in the guest list. +
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
          [t/PERSON_TYPE] [t/DIET] [t/PAID]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the guest will be removed i.e adding of tags is not cumulative.
+* You can remove all the guest's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
@@ -104,34 +107,14 @@ Examples:
 * `edit 2 n/Bob Chan` +
 Edits the name of the 2nd person to be `Bob Chan` respectively.
 
-=== Locating persons by name: `find`
+=== Deleting a guest : `delete`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
+Deletes the specified guest from the guest list. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the guest at the specified `INDEX`.
+* The index refers to the index number shown in the displayed guest list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -139,52 +122,110 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd person in the guest list.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Import users from CSV file : `import`
+=== Removing a set of tags from all guests : `removeTag`
 
-Imports users with data from a CSV formatted file. The structure for the values in the CSV file is predefined. +
+This command allows you to remove a set of tags from all guests in the guest list. +
+Format: `removeTag [t/TAG]...`
+
+****
+* The removeTag command will remove any number of tags provided by you from all guests
+* If the tags you provide are not shared by any of the guests in the current list, you will be informed of this
+* You must provide the tags to be removed, an input of `removeTag t/` will not do anything
+* You must provide tags that are alphanumeric, otherwise the system will inform you of the error
+****
+
+Examples:
+
+* `removeTag t/Veg t/VIP` +
+You will remove the tags `Veg` and `VIP` from all guests in the current list
+* `removeTag t/` +
+This will present you with an error in specifying the command, as you have not provided any tags to delete
+* `removeTag t/@!*` +
+This will present you with an error in specifying the command, as all your tags must be alphanumeric
+
+=== Adds a set of tags to all guests : `addTag`
+
+This command allows you to add a set of tags to all guests in the guest list. +
+Format: `addTag [t/TAG]...`
+
+****
+* The addTag command will add any number of tags provided by you to all guests
+* You must provide tags that are alphanumeric, otherwise the system will inform you of the error in your input format
+****
+
+Examples:
+
+* `addTag t/Veg t/VIP` +
+You will add the tags `Veg` and `VIP` to all guests in the current list
+* `addTag t/@` +
+This will present you with an error in specifying the command, as all your tags must be alphanumeric
+
+=== Locating guests by name: `find`
+
+Finds guests whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `find John` +
+You will be shown a list that contains the entries of `john` and `John Doe`
+* `find Betsy Tim John` +
+You will be show a list containing entries of any guest having names `Betsy`, `Tim`, or `John`
+
+=== Import guests from CSV file : `import`
+
+Imports guests with data from a CSV formatted file. The structure for the values in the CSV file is predefined. +
 Format: `import FILE_PATH`
 
 Examples:
 
 * `import directory/subdirectory/guestlist.csv` +
-Imports the CSV file from the specified path.
+You will populate the guest list with the data imported from the CSV file in the specified path.
 
-=== Export users to CSV file : `export`
+=== Export guests to CSV file : `export`
 
-Exports users to a CSV formatted file. The structure for the values in the CSV file is predefined. +
+Exports guests' data to a CSV formatted file. The structure for the values in the CSV file is predefined. +
 Format: `export FILE_PATH`
 
 Examples:
 
 * `export directory/subdirectory/guestlist.csv` +
-Exports users to the CSV file in the specified path.
+You will export the current guest list entries into a CSV file in the specified path.
 
-=== Mark a person as present : `mark`
+=== Mark a guest as present : `mark`
 
-Marks a person as present using their unique phone number. This will also change the
-`a/PRESENT`​ tag associated with the person to Present. +
+Marks a guest as present using a unique number assigned to them. This will also change the
+`a/PRESENT`​ tag associated with the guest to Present. +
 Format: `mark [p/PHONE_NUMBER]`
 
 Examples:
 
 * `mark 81927291` +
-Marks the person with phone number `81927291` as present.
+You will mark the guest with phone number `81927291` as present.
 
-=== Mark a person as absent : `unmark`
+=== Mark a guest as absent : `unmark`
 
-Marks a person as absent using their unique phone number. This will also change the
-`a/PRESENT`​ tag associated with the person to Absent. +
+Marks a guest as absent using their unique number. This will also change the
+`a/PRESENT`​ tag associated with the guest to Absent. +
 Format: `unmark [p/PHONE_NUMBER]`
 
 Examples:
 
 * `unmark 81927291` +
-Marks the person with phone number `81927291` as absent.
+You will mark the guest with phone number `81927291` as absent.
 
 ===  Start mass attendance marking : `start_marking`
 
@@ -195,7 +236,7 @@ Format: `start_marking [TICKET_ID]...`
 Examples:
 
 * `start_marking` + `87654321` + `87654322` + `87654323` + `87654324...` +
-Marks the guests with phone numbers 87654321, 87654322, 87654323, 87654324 as present
+You will mark the guests with unique numbers 87654321, 87654322, 87654323, 87654324 as present
 
 ===  Stop mass attendance marking : `stop_marking`
 
@@ -204,7 +245,7 @@ Format: `stop_marking`
 
 ===  Filter list based on specified parameters : `filter`
 
-Filter guest list based on filter guest attributes. Use the filter with no arguments to view
+Filters the guest list based on filter guest attributes. You should use the filter with no arguments to view
 the entire guest list. +
 Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
          [t/PERSON_TYPE] [t/DIET] [t/PAID]`
@@ -212,17 +253,29 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
 Examples:
 
 * `filter a/Present t/Vegetarian` +
-Filters the list with guests who are present and have a vegetarian dietary requirement.
+You will be shown a list with guests who are present and have a vegetarian dietary requirement.
 
-===   Sending emails to filtered list : `email`
+===   Sending emails to individual guests : `email`
 
-Send emails to guests in the guest list +
-Format: `email MESSAGE`
+Sends an email to the guest at a specific Index +
+Format: `email INDEX`
+
+****
+* Sends an email to the guest at the specified `INDEX`.
+* The index refers to the index number shown in the displayed guest list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+[NOTE]
+====
+All email subjects and messages have been pre-written and are available in the file at `main/data/email/emaildraft.txt`.
+You are free to edit these messages to suit your needs.
+====
 
 Examples:
 
-* `email Please be reminded to bring enough cash to pay for the event entry fee.` +
-Sends an email requesting all guests to bring enough cash to pay
+* `email 2` +
+You will send an email to the 2nd person in the list.
 
 ===   Creating a new event : `add_event`
 
@@ -232,7 +285,7 @@ Format: `add_event n/EVENT_NAME [t/DATE_TIME]`
 Examples:
 
 * `add_event n/CFG career talk t/18 Sep 2018 10AM` +
-Create an event called `CFG career talk` on the 18th of September at 10AM.
+You will create an event called `CFG career talk` on the 18th of September at 10AM.
 
 ===   Editing an event : `edit_event`
 
@@ -242,7 +295,7 @@ Format: `edit_event [n/EVENT_NAME] [t/...]`
 Examples:
 
 * `edit_event n/CFG career talk t/18 Sep 2018 11AM` +
-Change the data and time of the event `CFG career talk` to 18th of September at 11AM.
+You will change the data and time of the event `CFG career talk` to 18th of September at 11AM.
 
 ===   Deleting event : `delete_event`
 
@@ -252,7 +305,7 @@ Format: `delete_event [NAME]`
 Examples:
 
 * `delete_event wedding` +
-Deleting the event named wedding.
+You will delete the event named wedding.
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
@@ -262,7 +315,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the guest list's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the guest list's content (`add`, `delete`, `edit`, `removeTag`, `addTag`, and `clear`).
 ====
 
 Examples:
@@ -311,36 +364,40 @@ Format: `exit`
 
 === Saving the data
 
-Guest list data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+As the guest list data are saved in the hard disk automatically after any command that changes the data. +
+There is no need for you to save manually.
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous guest list. +
+Alternatively, you could export the data from your current computer using the export command. Using this data you can launch the application on a different computer and import the data.
 
-*Q*: ​ How do I import my existing data on a CSV into the application?
-*A*: Firstly, create a new event within the application. After this, use the import function and specify the path to the file. This will add the current entries that are on the CSV file into the event.
+*Q*: ​How do I import my existing data on a CSV into the application? +
+*A*: Firstly, create a new event within the application. After this, use the import function and specify the path to the file.
+You will see the guest list populate itself with the data from the specified CSV file.
 
 == Command Summary
 
 * `help` : ​Displays a help sheet containing useful commands.
-* `add` : ​Creates an entry for a person to attend the event.
-* `edit` :​ Modifies the entry of a specified person based on name.
-* `delete` : ​Removes an entry of a specified person based on name.
-* `find` : Finds persons whose names contain any of the given keywords.
+* `add` : ​Creates an entry for a guest to attend the event.
+* `edit` :​ Modifies the entry of a specified guest based on name.
+* `delete` : ​Removes an entry of a specified guest based on name.
+* `removeTag` : Removes a set of tags from all the guests in the current list.
+* `addtag` : Adds a set of tags to all the guests in the current list.
+* `find` : Finds guests whose names contain any of the given keywords.
 * `list` : Lists the current guest list
 * `import` : ​Automatically generates guest list from a given CSV file.
 * `export` : Exports guest list to a CSV file.
-* `mark` : ​Tags a person to note that they are currently at the event.
-* `unmark` : ​Removes the tag of a person attending the event based on name.
+* `mark` : ​Tags a guest to note that they are currently at the event.
+* `unmark` : ​Removes the tag of a guest attending the event based on name.
 * `start_marking` : ​Begins continuous marking of the people entering the event.
 * `stop_marking` : ​Stops the continuous marking of people.
 * `filter` : ​Filters the guest list based on tag(s) given.
-* `email` : ​Sends mass emails to all guests on the guest list.
+* `email` : ​Sends individual emails to an entry of a specified guest based on index.
 * `add_event` :​ Adds an event to the application.
 * `select_event` : ​Redirects the user to the guest list of the event given
 * `event_delete` : ​Removes the specified event
-* `undo` : Restores the address book to the state before the previous undoable command was executed.
+* `undo` : Restores the guest list to the state before the previous undoable command was executed.
 * `redo` : Reverses the most recent undo command
 * `exit` : ​Exits the application

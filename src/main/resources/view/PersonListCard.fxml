@@ -19,6 +19,7 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50"/>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50"/>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50"/>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50"/>
     </columnConstraints>
     <HBox spacing="5" alignment="CENTER_LEFT" GridPane.columnIndex="0">
       <Label fx:id="id" styleClass="cell_small_label">
@@ -31,8 +32,8 @@
     </HBox>
     <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" GridPane.columnIndex="1"/>
     <Label fx:id="email" styleClass="cell_small_label" text="\$email" GridPane.columnIndex="2"/>
-    <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance" GridPane.columnIndex="3"/>
-    <FlowPane fx:id="tags" GridPane.columnIndex="4"/>
-
+    <Label fx:id="payment" styleClass="cell_small_label" text="\$payment" GridPane.columnIndex="3"/>
+    <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance" GridPane.columnIndex="4"/>
+    <FlowPane fx:id="tags" GridPane.columnIndex="5"/>
   </GridPane>
 </HBox>
