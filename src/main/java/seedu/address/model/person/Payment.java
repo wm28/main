@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's attendance in the address book.
+ * Represents a Person's payment in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPayment(String)}
  */
 public class Payment {
