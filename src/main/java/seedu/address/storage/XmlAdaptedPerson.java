@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -31,6 +32,8 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
+    private String payment;
+    @XmlElement(required = true)
     private String attendance;
 
     @XmlElement
@@ -45,10 +48,12 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String attendance, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String payment,
+                            String attendance, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.payment = payment;
         this.attendance = attendance;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -64,6 +69,7 @@ public class XmlAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        payment = source.getPayment().paymentValue;
         attendance = source.getAttendance().attendanceValue;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -105,6 +111,15 @@ public class XmlAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        //@@author Sarah
+        if (payment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName()));
+        }
+        if (!Payment.isValidPayment(payment)) {
+            throw new IllegalValueException(Payment.MESSAGE_PAYMENT_CONSTRAINTS);
+        }
+        final Payment modelPayment = new Payment(payment);
+
         if (attendance == null) {
             throw new IllegalValueException(String
                     .format(MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName()));
@@ -114,8 +129,9 @@ public class XmlAdaptedPerson {
         }
         final Attendance modelAttendance = new Attendance(attendance);
 
+        //@@author SE-EDU
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAttendance, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelPayment, modelAttendance, modelTags);
     }
 
     @Override
@@ -132,6 +148,7 @@ public class XmlAdaptedPerson {
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
+                && Objects.equals(payment, otherPerson.payment)
                 && Objects.equals(attendance, otherPerson.attendance)
                 && tagged.equals(otherPerson.tagged);
     }

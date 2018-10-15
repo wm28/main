@@ -30,7 +30,7 @@ Windows developers are highly recommended to use JDK `9`.
 +
 [NOTE]
 IntelliJ by default has Gradle and JavaFx plugins installed. +
-Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
+Do not disable them. If you have disabled them, please go to `File` > `Settings` > `Plugins` to re-enable them.
 
 
 === Setting up the project in your computer
@@ -833,54 +833,54 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |event planner |be able to mark attendance of guests easily |minimise holdup as much as possible
 
-|`* * *` |event planner |be able to track the guest list for each event |know how many guests there are in each event in order to know which event I should focus more on
+|`* * *` |event planner |be able to send mass emails to guests |remind them about the event
 
-|`* * *` |event planner |be able to filter my guests to see who have not paid for the event |easily see who I need to remind
+|`* * *` |event planner |be able to tag guests with specific labels |take note of any extra details if necessary
+
+|`* * *` |event planner specialising in large events such as weddings|tag all my guests in the list at once |save a lot of time and increase efficiency, as opposed to editing the tags of each individual person
+
+|`* * *` |event planner specialising in large weddings |be able to track the guest list for each event |know how many guests there are in each event in order to know which event I should focus more on
+
+|`* * *` |event planner specialising in concerts |be able to filter my guests to see who have not paid for the event |easily see who I need to remind
 
 |`* * *` |event planner |be able to view all the important details of guests |get all the necessary details at one go for easier planning
 
-|`* * *` |event planner |be able to send the guests their tickets via email |ensure that all guests will have their tickets with them and there will be no complications
-
-|`* * *` |event planner |have the tickets sent to each guest to have their phone number |have an easier time marking attendance
+|`* * *` |event planner specialising in concerts and arts festivals |be able to send the guests their tickets via email |ensure that all guests will have their tickets with them and there will be no complications
 
 |`* * *` |event planner for a large event |be able to add large numbers of guests to the guest list efficiently |reduce time spent on adding them one at a time.
 
-|`* * *` |As an event planner for an event with a few organisers |be able to share the guest list for an event with my fellow organizers easily |I can inform them of any changes that I have made
-
-|`* *` |event planner |be able to send mass messages and mass emails to guests |remind them about the event
+|`* * *` |event planner for an event with a few organisers |be able to share the guest list for an event with my fellow organizers easily |I can inform them of any changes that I have made
 
 |`* *` |event planner |filter my guests based on dietary requirements |so that I can plan my event accordingly
 
-|`* *` |event planner |be able to specify the dress code of the event |ensure that the guests will be appropriately attired
+|`* *` |event planner specialising in conferences and recruitment talks |be able to specify the dress code of the event |ensure that the guests will be appropriately attired
 
-|`*` |event planner |be able to know who the VIP guests are and how many of them there are |make appropriate accommodation for them
-
-|`*` |event planner |be able to tag guests |take note of any extra details if necessary
+|`* *` |event planner specialising in government and official conferences |be able to know who the VIP guests are and how many of them there are |make appropriate accommodation for them
 
 |`*` |event planner |have the tickets to contain a QR code instead of using the guest’s phone number |scan them using a smart phone or any other phone with scanning capability
 |=======================================================================
 
-_{More to be added}_
+//_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `Invités` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Import guest data and update payment details
+=== Use case: Import guest data and update payment status
 Actor: Application User - Event Planner
 
 *MSS*
 
-1. User opens application and imports csv file/adds each guest in the application.
+1. User opens application and either imports csv file or adds each guest in the application.
 2. System asks user to enter a command.
 3. User enters a command to mark those who have paid.
 4. System updates the file accordingly.
 
 Use case ends.
 
-=== Use case: Filter guest list based on status of payment and mass message those who have not payed
+=== Use case: Filter guest list based on status of payment and mass message those who have not paid
 Actor: Application User - Event Planner
 
 *MSS*
@@ -888,9 +888,10 @@ Actor: Application User - Event Planner
 1. User opens application.
 2. System asks user to enter a command.
 3. User enters a command to filter out those who have yet to pay.
-4. System shows an indexed list of these guests with their names, phone numbers, email address, attendance status and tags specified, if there are people in that category.
-5. User enters a command to remind all in the currently displayed list.
-6. System sends all guests in the not paid list an email to remind them.
+4. System shows an indexed list of these guests with their names, phone numbers, email address, payment status,
+   attendance status and tags specified, if there are people in that category.
+5. User enters a command to email all in the currently displayed list, to remind them to make the payment.
+6. System sends all guests in the "not paid" list an email to remind them.
 
 Use case ends.
 
@@ -899,14 +900,16 @@ Actor: Application User - Event Planner
 
 *MSS*
 
-1. User opens application and imports csv file/adds each guest in the application.
+1. User opens application and either imports csv file or adds each guest in the application.
 2. System asks user to enter a command.
 3. User enters a command to filter guests based on a requirement specified (e.g. dietary requirement).
-4. System displays list of all such guests, displaying their name, phone number, email address, attendance status and tags, if there are people in that category.
+4. System displays list of all such guests, displaying their name, phone number, email address, payment status,
+   attendance status and tags, if there are people in that category.
 5. User then enters command to list all guests.
-6. System displays everyone on the guest list along with their name, phone number, email address, attendance status and tags.
+6. System displays everyone on the guest list along with their name, phone number, email address, payment status,
+   attendance status and tags.
 7. User enters command to remind all guests about the event.
-8. System sends all guests an email/text reminding them about the event.
+8. System sends all guests an email reminding them about the event.
 
 Use case ends.
 
@@ -915,8 +918,12 @@ Actor: Application User - Event Planner
 
 *MSS*
 
-1. User opens application and imports csv file/adds each guest in the application.
-2. System will display the list of guests with details of each guest, such as name, phone number, email address and tags, such as, dietary requirements, VIP, paid or not paid, etc in a row for ease of access. System will display the general information of the event at the top of the list of guests, such as name, date, time and venue of event, dress code, number of people attending the event so far, etc. System asks user to enter a command.
+1. User opens application and either imports csv file or adds each guest in the application.
+2. System will display the list of guests with details of each guest, such as name, phone number, email address, payment
+   status, attendance status and tags, such as, dietary requirements, VIP, etc in a row for ease of access. System will
+   display the general information of the event on the left of the list of guests, such as name, date, time and venue of
+   event, dress code, number of people attending the event so far, etc.
+   System asks user to enter a command.
 3. User enters command to filter by some specific requirement, so that user is able to make arrangements accordingly.
 4. System lists all guests with the specified requirement, if available.
 
@@ -927,14 +934,16 @@ Actor: Application User - Event Planner
 
 *MSS*
 
-1. User opens application and imports csv file.
+1. User opens application and either imports csv file or adds each guest in the application.
 2. System asks user to enter a command.
 3. User keys in command to create tickets for each guest on the list.
-4. System copies and pastes the details of events, such as name, date, time and venue of event, dress code, etc.
-5. System will print the guest’s phone number, that is unique to each guest, onto each ticket, obtained from either the csv file or data manually keyed in.
+4. System copies and pastes the details of events, such as name, date, time and venue of event, dress code, etc
+   onto the ticket.
+5. System will print the guest’s index number, that is unique to each guest, onto each ticket,
+   obtained from either the csv file or data manually keyed in.
 6. System will inform user that the tickets have been created.
 7. User will then key in the command to email all guests their tickets.
-8. System will email all guests on the list their tickets, according to their unique phone number.
+8. System will email all guests on the list their tickets, according to their unique index number.
 
 Use case ends.
 
@@ -955,15 +964,17 @@ Actor: Application User - Event Planner
 
 *MSS*
 
-1. User opens application and imports csv file(if they were not using the application while planning) or continues with the list on the application.
+1. User opens application and imports csv file(if they were not using the application while planning) or
+   continues with the list on the application.
 2. System asks user to enter a command.
 3. User keys in command to start marking attendance.
-4. User (manning the reception/registration desk) scans the QR code/manually keys in the guest’s phone number found on the ticket.
-5. System runs a search to match the QR code/phone number with those in the file.
-6. If QR code/phone number is found, attendance of that guest is marked.
-7. System removes all ‘marked’ guests from display and displays only those who are yet to arrive/register.
-8. User can enter a command to send a reminder text message to all in the currently displayed list (comprising of guests who have not arrived or registered yet).
-9. System sends a text message to each of those guests.
+4. User (manning the reception/registration desk) manually keys in the guest’s index number found on the ticket.
+5. System runs a search to match the index number with those in the file.
+6. If index number is found, attendance of that guest is marked.
+7. System removes all ‘marked’ guests from display and displays only those who have yet to arrive/register.
+8. User can enter a command to send an email to all in the currently displayed list (comprising of guests
+   who have not arrived or registered yet).
+9. System sends an email to each of those guests.
 10. User enters command to stop marking.
 11. System stops marking process.
 
@@ -971,7 +982,7 @@ Use case ends.
 
 *Extensions*
 
-* 6a. User enters command to unmark a guest who was marked as present accidentally (if user uses manually keyed in phone number).
+* 6a. User enters command to unmark a guest who was marked as present accidentally.
 * 6b. System unmarks the guest.
 
 Use case resumes from step 7.
@@ -981,11 +992,11 @@ Actor: Application User - Event Planner
 
 *MSS*
 
-1. User opens application
-2. System asks user to enter a command
-3. User keys in import command along with the file path of the csv file
-4. System parses the csv file line by line
-5. System adds all guests into the guest list
+1. User opens application.
+2. System asks user to enter a command.
+3. User keys in import command along with the file path of the csv file.
+4. System parses the csv file line by line.
+5. System adds all guests into the guest list.
 
 Use case ends.
 
@@ -996,15 +1007,15 @@ Use case ends.
 
 Use case resumes at step 2
 
-* 4a. User provided malformed CSV file or inappropriate guest fields (eg. email with no @maildomain.com)
-** 4a1. System skips the addition of the guest into the guest list
-** 4a2. System displays offending guest entry
+* 4a. User provided malformed CSV file or inappropriate guest fields (eg. email with no @gmail.com).
+** 4a1. System skips the addition of the guest into the guest list.
+** 4a2. System displays offending guest entry.
 
 Use case resumes at step 4
 
-* 5a. User provided CSV file with a guest that already exists in the current guest list
-** 5a1. System skips the addition of the guest into the guest list
-** 5a2. System displays both current and the new offending guest entry
+* 5a. User provided CSV file with a guest that already exists in the current guest list.
+** 5a1. System skips the addition of the guest into the guest list.
+** 5a2. System displays both current and the new offending guest entry.
 
 Use case resumes at step 4
 
@@ -1032,13 +1043,16 @@ Use case resumes at step 2
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Command line interface has to be the primary source of input. GUI is to be used only to give visual feedback to the user.
-.  Data should be stored locally in a text file that can be edited by user. DBMS must not be used to store data.
+.  Data should be stored locally in a text file that can be edited by user. Database Management System (DBMS)
+   must not be used to store data.
 .  OOP has to be followed.
 .  The software has to be independent of platforms of any kind.
 .  The software should work without needing an installer.
-.  Only free, open-source, permissive license software that do not require any installation and do not violate any other constraints can be used.
+.  Only free, open-source, permissive license software that do not require any installation and do not violate any
+   other constraints can be used.
 
 [appendix]
 == Glossary
@@ -1080,34 +1094,37 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 . Saving window preferences
 
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
+.. Resize the window to an optimal size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+//_{ more test cases ... }_
 
 === Deleting a person
 
 . Deleting a person while all persons are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all persons using the `list` command. There may be multiple persons in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+   Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
    Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size),
+   `delete y` (where y is smaller than 0), etc. +
+//   _{give more}_
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+//_{ more test cases ... }_
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+//.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
-_{ more test cases ... }_
+//_{ more test cases ... }_

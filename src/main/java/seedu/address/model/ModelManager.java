@@ -12,7 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -56,6 +58,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void addEvent(Event event) {
+        versionedAddressBook.addEvent(event);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean hasEvent() {
+        return versionedAddressBook.hasEvent();
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return versionedAddressBook.hasPerson(person);
@@ -80,6 +93,16 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void deleteTag(Tag tag) {
+        versionedAddressBook.removeTag(tag);
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        versionedAddressBook.addTag(tag);
     }
 
     //=========== Filtered Person List Accessors =============================================================

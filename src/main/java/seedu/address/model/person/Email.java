@@ -15,18 +15,14 @@ public class Email {
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
             + "the parentheses, (" + SPECIAL_CHARACTERS + ") .\n"
             + "2. This is followed by a '@' and then a domain name. "
-            + "The domain name must:\n"
-            + "    - be at least 2 characters long\n"
-            + "    - start and end with alphanumeric characters\n"
-            + "    - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.";
+            + "The email address must:\n"
+            + "    - end with gmail.com\n";
+
     // alphanumeric and special characters
     private static final String LOCAL_PART_REGEX = "^[\\w" + SPECIAL_CHARACTERS + "]+";
-    private static final String DOMAIN_FIRST_CHARACTER_REGEX = "[^\\W_]"; // alphanumeric characters except underscore
     private static final String DOMAIN_MIDDLE_REGEX = "[a-zA-Z0-9.-]*"; // alphanumeric, period and hyphen
-    private static final String DOMAIN_LAST_CHARACTER_REGEX = "[^\\W_]$";
-    public static final String EMAIL_VALIDATION_REGEX = LOCAL_PART_REGEX + "@"
-            + DOMAIN_FIRST_CHARACTER_REGEX + DOMAIN_MIDDLE_REGEX + DOMAIN_LAST_CHARACTER_REGEX;
-
+    public static final String EMAIL_VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + "gmail"
+                                + DOMAIN_MIDDLE_REGEX + "com";
     public final String value;
 
     /**
