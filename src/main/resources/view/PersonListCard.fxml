@@ -15,10 +15,10 @@
         </padding>
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="20" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="50" prefWidth="100" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="5" prefWidth="50" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="2" prefWidth="50"/>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="50"/>
         </columnConstraints>
         <HBox spacing="5" alignment="CENTER_LEFT" GridPane.columnIndex="0">
