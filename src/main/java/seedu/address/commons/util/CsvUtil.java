@@ -1,9 +1,11 @@
 package seedu.address.commons.util;
 
+import static seedu.address.commons.core.Messages.MESSAGE_FILE_ALREADY_EXIST;
 import static seedu.address.commons.core.Messages.MESSAGE_FILE_NOT_FOUND;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
@@ -29,5 +31,16 @@ public class CsvUtil {
                 .collect(Collectors.toList());
         return result;
     }
+
+    /**
+     * writes data lines to csv file
+     */
+    public static void saveDataLinesToFile(Path path, List<String> dataLines) throws IOException {
+        if (FileUtil.isFileExists(path)) {
+            throw new FileAlreadyExistsException(String.format(MESSAGE_FILE_ALREADY_EXIST, path.toAbsolutePath()));
+        }
+        FileUtil.writeToFile(path, dataLines.stream().collect(Collectors.joining("\n")));
+    }
+
 }
 //@@author

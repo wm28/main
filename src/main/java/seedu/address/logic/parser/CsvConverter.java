@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -65,6 +66,21 @@ public class CsvConverter {
             return new HashSet<>();
         }
         return ParserUtil.parseTags(Arrays.asList(tags.split(",")));
+    }
+
+    /**
+     * Coverts person to CSV format
+     */
+    public String convertToCsv(Person person) {
+        StringBuilder result = new StringBuilder();
+        result.append(person.getName() + ",");
+        result.append(person.getPhone() + ",");
+        result.append(person.getEmail() + ",");
+        result.append(person.getAttendance() + ",");
+        result.append(person.getTags().stream()
+                .map(tag -> tag.tagName)
+                .collect(Collectors.joining(",")));
+        return result.toString();
     }
 }
 //@@author
