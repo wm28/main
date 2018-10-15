@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -11,8 +9,7 @@
 
 <?import javafx.scene.layout.RowConstraints?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1">
-  <HBox>
-    <GridPane HBox.hgrow="ALWAYS">
+    <GridPane>
       <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
       </padding>
@@ -21,7 +18,6 @@
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
@@ -39,5 +35,4 @@
       <Label fx:id="email" styleClass="cell_small_label" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
       <Label fx:id="attendance" styleClass="cell_small_label" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
     </GridPane>
-  </HBox>
 </StackPane>
