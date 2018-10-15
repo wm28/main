@@ -77,7 +77,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxAndResultDisplayShowsDefaultStyle();
-        assertStatusBarChangedExceptSaveLocation();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**
@@ -95,7 +95,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
-        asserCommandBoxAndResultDisplayShowsErrorStyle();
-        assertStatusBarChangedExceptSaveLocation();
+        assertCommandBoxAndResultDisplayShowsErrorStyle();
+        assertStatusBarUnchanged();
     }
 }

@@ -30,7 +30,7 @@ Windows developers are highly recommended to use JDK `9`.
 +
 [NOTE]
 IntelliJ by default has Gradle and JavaFx plugins installed. +
-Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
+Do not disable them. If you have disabled them, please go to `File` > `Settings` > `Plugins` to re-enable them.
 
 
 === Setting up the project in your computer
@@ -833,29 +833,29 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |event planner |be able to mark attendance of guests easily |minimise holdup as much as possible
 
-|`* * *` |event planner |be able to track the guest list for each event |know how many guests there are in each event in order to know which event I should focus more on
+|`* * *` |event planner |be able to send mass emails to guests |remind them about the event
 
-|`* * *` |event planner |be able to filter my guests to see who have not paid for the event |easily see who I need to remind
+|`* * *` |event planner |be able to tag guests with specific labels |take note of any extra details if necessary
+
+|`* * *` |event planner specialising in large events such as weddings|tag all my guests in the list at once |save a lot of time and increase efficiency, as opposed to editing the tags of each individual person
+
+|`* * *` |event planner specialising in large weddings |be able to track the guest list for each event |know how many guests there are in each event in order to know which event I should focus more on
+
+|`* * *` |event planner specialising in concerts |be able to filter my guests to see who have not paid for the event |easily see who I need to remind
 
 |`* * *` |event planner |be able to view all the important details of guests |get all the necessary details at one go for easier planning
 
-|`* * *` |event planner |be able to send the guests their tickets via email |ensure that all guests will have their tickets with them and there will be no complications
-
-|`* * *` |event planner |have the tickets sent to each guest to have their phone number |have an easier time marking attendance
+|`* * *` |event planner specialising in concerts and arts festivals |be able to send the guests their tickets via email |ensure that all guests will have their tickets with them and there will be no complications
 
 |`* * *` |event planner for a large event |be able to add large numbers of guests to the guest list efficiently |reduce time spent on adding them one at a time.
 
-|`* * *` |As an event planner for an event with a few organisers |be able to share the guest list for an event with my fellow organizers easily |I can inform them of any changes that I have made
-
-|`* *` |event planner |be able to send mass messages and mass emails to guests |remind them about the event
+|`* * *` |event planner for an event with a few organisers |be able to share the guest list for an event with my fellow organizers easily |I can inform them of any changes that I have made
 
 |`* *` |event planner |filter my guests based on dietary requirements |so that I can plan my event accordingly
 
-|`* *` |event planner |be able to specify the dress code of the event |ensure that the guests will be appropriately attired
+|`* *` |event planner specialising in conferences and recruitment talks |be able to specify the dress code of the event |ensure that the guests will be appropriately attired
 
-|`*` |event planner |be able to know who the VIP guests are and how many of them there are |make appropriate accommodation for them
-
-|`*` |event planner |be able to tag guests |take note of any extra details if necessary
+|`* *` |event planner specialising in government and official conferences |be able to know who the VIP guests are and how many of them there are |make appropriate accommodation for them
 
 |`*` |event planner |have the tickets to contain a QR code instead of using the guest’s phone number |scan them using a smart phone or any other phone with scanning capability
 |=======================================================================
