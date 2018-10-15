@@ -48,6 +48,10 @@ public class CsvConverter {
         Email email = ParserUtil.parseEmail(matcher.group("email"));
         Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
         Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
+<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/CsvConverter.java
+=======
+        //@@author
+>>>>>>> master:src/main/java/seedu/address/logic/parser/CsvParser.java
         Set<Tag> tagList = splitTags(matcher.group("tags"));
 
         return new Person(name, phone, email, payment, attendance, tagList);

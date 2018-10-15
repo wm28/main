@@ -60,6 +60,7 @@ public abstract class AddressBookSystemTest {
 
     private List<String> defaultStyleWhenCorrect;
     private List<String> errorStyleWhenFailure;
+
     private MainWindowHandle mainWindowHandle;
     private TestApp testApp;
     private SystemTestSetupHelper setupHelper;
@@ -76,6 +77,7 @@ public abstract class AddressBookSystemTest {
         mainWindowHandle = setupHelper.setupMainWindowHandle();
 
         defaultStyleWhenCorrect = mainWindowHandle.getResultDisplay().getStyleClass();
+
         errorStyleWhenFailure = mainWindowHandle.getResultDisplay().getStyleClass();
         errorStyleWhenFailure.add(ResultDisplay.ERROR_IN_COMMAND);
 
@@ -255,7 +257,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Asserts that the command box and result display shows the error style.
      */
-    protected void asserCommandBoxAndResultDisplayShowsErrorStyle() {
+    protected void assertCommandBoxAndResultDisplayShowsErrorStyle() {
         assertEquals(COMMAND_BOX_ERROR_STYLE, getCommandBox().getStyleClass());
         assertEquals(errorStyleWhenFailure, getResultDisplay().getStyleClass());
     }

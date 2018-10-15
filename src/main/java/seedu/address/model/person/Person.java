@@ -50,6 +50,7 @@ public class Person {
         return email;
     }
 
+    //@@author Sarah
     public Payment getPayment() {
         return payment;
     }
@@ -57,6 +58,7 @@ public class Person {
     public Attendance getAttendance() {
         return attendance;
     }
+    //@@author
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
