@@ -63,9 +63,22 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteEvent() {
+        versionedAddressBook.deleteEvent();
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public boolean hasEvent() {
         return versionedAddressBook.hasEvent();
     }
+
+    /** Returns the details of the event currently residing in the addressbook. */
+    @Override
+    public Event getEventDetails() {
+        return versionedAddressBook.getEventDetails();
+    }
+
 
     @Override
     public boolean hasPerson(Person person) {

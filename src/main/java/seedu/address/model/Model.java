@@ -26,9 +26,9 @@ public interface Model {
 
     /**
      * Deletes the given event.
-     * The event must exist in the application.
+     * An event must have been initialised by the user in the application.
      */
-    //void deleteEvent(Event target);
+    void deleteEvent();
 
     /**
      * Adds the given event.
@@ -78,6 +78,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns the details of the event currently residing in the addressbook. */
+    Event getEventDetails();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
