@@ -27,16 +27,35 @@ import seedu.address.model.tag.Tag;
  * Converts a person between the CSV format and the Person Class object
  */
 public class CsvConverter implements PersonConverter<String> {
-    private static final Pattern GUEST_DATA_FORMAT = Pattern.compile("[\"|']?(?<name>[^\"',]*)[\"|']?,"
+    private static final Pattern PERSON_CSV_INPUT_FORMAT = Pattern.compile("[\"|']?(?<name>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<payment>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,?"
             + "(?<tags>.*)");
 
+    /**
+     * Encodes a Person object to a csv-formatted string.
+     *
+     * @param person to be encoded
+     * @return String based on the Person object
+     * @throws PersonEncodingException if the person fails to encode
+     */
     @Override
     public String encodePerson(Person person) throws PersonEncodingException {
-        return null;
+        if (person == null) {
+            throw new PersonEncodingException("Person is null");
+        }
+        StringBuilder result = new StringBuilder();
+        result.append(person.getName() + ",");
+        result.append(person.getPhone() + ",");
+        result.append(person.getEmail() + ",");
+        result.append(person.getPayment() + ",");
+        result.append(person.getAttendance() + ",");
+        result.append(person.getTags().stream()
+                .map(tag -> tag.tagName)
+                .collect(Collectors.joining(",")));
+        return result.toString();
     }
 
     /**
@@ -44,11 +63,11 @@ public class CsvConverter implements PersonConverter<String> {
      *
      * @param personInput Csv-formatted person input string
      * @return Person based on the csv-formatted input string of the guest
-     * @throws ParseException if the csv input does not conform to the expected format
+     * @throws PersonDecodingException if the csv input does not conform to the expected format
      */
     @Override
     public Person decodePerson(String personInput) throws PersonDecodingException {
-        Matcher matcher = GUEST_DATA_FORMAT.matcher(personInput.trim());
+        Matcher matcher = PERSON_CSV_INPUT_FORMAT.matcher(personInput.trim());
         Person person;
         if (!matcher.matches()) {
             throw new PersonDecodingException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -79,21 +98,6 @@ public class CsvConverter implements PersonConverter<String> {
             return new HashSet<>();
         }
         return ParserUtil.parseTags(Arrays.asList(tags.split(",")));
-    }
-
-    /**
-     * Coverts person to CSV format
-     */
-    public String convertToCsv(Person person) {
-        StringBuilder result = new StringBuilder();
-        result.append(person.getName() + ",");
-        result.append(person.getPhone() + ",");
-        result.append(person.getEmail() + ",");
-        result.append(person.getAttendance() + ",");
-        result.append(person.getTags().stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.joining(",")));
-        return result.toString();
     }
 }
 //@@author

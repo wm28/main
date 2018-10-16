@@ -16,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 //@@author wm28
-
 /**
  * Imports multiple guests into the guest list of the current event via a CSV file
  */
@@ -34,12 +33,12 @@ public class ImportCommand extends Command {
     private Path csvFile;
     private PersonConverter personConverter;
     private List<String> guestData;
-    private int totalGuests;
+    private int totalPersons;
     private int successfulImports;
 
     public ImportCommand(String fileName, PersonConverter personConverter) {
-        assert !fileName.isEmpty();
-        assert personConverter != null;
+        assert fileName != null : "FileName cannot be null";
+        assert personConverter != null : "personConverter cannot be null";
         csvFile = Paths.get(fileName);
         this.personConverter = personConverter;
     }
@@ -50,8 +49,8 @@ public class ImportCommand extends Command {
 
         try {
             guestData = CsvUtil.getDataLinesFromFile(csvFile);
-            totalGuests = guestData.size();
-            successfulImports = totalGuests;
+            totalPersons = guestData.size();
+            successfulImports = totalPersons;
             importPersons(guestData, model);
         } catch (IOException ioe) {
             throw new CommandException(ioe.getMessage(), ioe);
@@ -59,7 +58,7 @@ public class ImportCommand extends Command {
 
         model.commitAddressBook();
         return new CommandResult(
-                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalGuests, csvFile.getFileName()));
+                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalPersons, csvFile.getFileName()));
     }
 
     /**
