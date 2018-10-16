@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.converters.exceptions.PersonDecodingException;
+import seedu.address.logic.converters.exceptions.PersonEncodingException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Attendance;
@@ -32,7 +34,7 @@ public class CsvConverter implements PersonConverter<String> {
             + "(?<tags>.*)");
 
     @Override
-    public String encodePerson(Person person) throws ParseException {
+    public String encodePerson(Person person) throws PersonEncodingException {
         return null;
     }
 
@@ -44,19 +46,24 @@ public class CsvConverter implements PersonConverter<String> {
      * @throws ParseException if the csv input does not conform to the expected format
      */
     @Override
-    public Person decodePerson(String personInput) throws ParseException {
+    public Person decodePerson(String personInput) throws PersonDecodingException {
         Matcher matcher = GUEST_DATA_FORMAT.matcher(personInput.trim());
+        Person person;
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new PersonDecodingException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-        Name name = ParserUtil.parseName(matcher.group("name"));
-        Phone phone = ParserUtil.parsePhone(matcher.group("phone"));
-        Email email = ParserUtil.parseEmail(matcher.group("email"));
-        Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
-        Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
-        Set<Tag> tagList = splitTags(matcher.group("tags"));
-
-        return new Person(name, phone, email, payment, attendance, tagList);
+        try{
+            Name name = ParserUtil.parseName(matcher.group("name"));
+            Phone phone = ParserUtil.parsePhone(matcher.group("phone"));
+            Email email = ParserUtil.parseEmail(matcher.group("email"));
+            Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
+            Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
+            Set<Tag> tagList = splitTags(matcher.group("tags"));
+            person = new Person(name, phone, email, payment, attendance, tagList);
+        } catch (ParseException pe){
+            throw new PersonDecodingException(pe.getMessage(), pe);
+        }
+        return person;
     }
 
     /**
