@@ -119,8 +119,14 @@ public class AddCommandTest {
         public boolean hasEvent() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEvent() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -141,6 +147,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Event getEventDetails() {
             throw new AssertionError("This method should not be called.");
         }
 

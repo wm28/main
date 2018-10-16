@@ -69,8 +69,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         eventDetails.setEvent(e);
     }
 
+    /** Deletes the event details stored in the addressbook. */
+    public void deleteEvent() {
+        eventDetails.deleteEvent();
+    }
+
     public boolean hasEvent() {
-        return eventDetails.isNotUserInitialised();
+        return eventDetails.isUserInitialised();
     }
 
     //// person-level operations

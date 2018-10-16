@@ -46,7 +46,15 @@ public class Event {
         this.isNotInitialisedByUser = false;
     }
 
-    public boolean isNotUserInitialised() {
+    /** Deletes user-given details of the event. */
+    public void deleteEvent() {
+        Event event = new Event();
+        this.eventName.setEventName(event.eventName.getEventName());
+        this.eventTags = event.eventTags;
+        this.isNotInitialisedByUser = true;
+    }
+
+    public boolean isUserInitialised() {
         return !isNotInitialisedByUser;
     }
     /**
