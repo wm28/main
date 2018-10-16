@@ -10,13 +10,12 @@ import java.util.List;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CsvConverter;
+import seedu.address.logic.converters.PersonConverter;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 //@@author wm28
-
 /**
  * Imports multiple guests into the guest list of the current event via a CSV file
  */
@@ -32,13 +31,16 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private Path csvFile;
+    private PersonConverter personConverter;
     private List<String> guestData;
     private int totalGuests;
     private int successfulImports;
 
-    public ImportCommand(String fileName) {
+    public ImportCommand(String fileName, PersonConverter personConverter) {
         assert !fileName.isEmpty();
+        assert personConverter != null;
         csvFile = Paths.get(fileName);
+        this.personConverter = personConverter;
     }
 
     @Override
@@ -65,7 +67,7 @@ public class ImportCommand extends Command {
     private void importPersons(List<String> guestData, Model model) {
         for (String guest : guestData) {
             try {
-                Person toAdd = new CsvConverter().convertToPerson(guest);
+                Person toAdd = personConverter.decodePerson(guest);
                 addPerson(toAdd, model);
             } catch (ParseException pe) {
                 successfulImports--;
