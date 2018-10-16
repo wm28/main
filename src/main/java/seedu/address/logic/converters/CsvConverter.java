@@ -39,7 +39,7 @@ public class CsvConverter implements PersonConverter<String> {
     }
 
     /**
-     * Parses csv-formatted input into a Person object.
+     * Decodes csv-formatted input into a Person object.
      *
      * @param personInput Csv-formatted person input string
      * @return Person based on the csv-formatted input string of the guest
