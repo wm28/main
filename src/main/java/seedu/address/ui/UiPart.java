@@ -30,7 +30,8 @@ public abstract class UiPart<T> {
      */
     private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
                                                 "white", "bronze", "silver",
-                                                "gold", "platinum", "default"};
+                                                "gold", "platinum", "veg",
+                                                "halal", "default"};
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -143,8 +144,12 @@ public abstract class UiPart<T> {
             return TAG_COLORS[6];
         case "platinum":
             return TAG_COLORS[7];
-        default:
+        case "veg":
             return TAG_COLORS[8];
+        case "halal":
+            return TAG_COLORS[9];
+        default:
+            return TAG_COLORS[10];
         }
     }
 }
