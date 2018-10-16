@@ -10,8 +10,8 @@ import java.util.List;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CsvConverter;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.converters.PersonConverter;
+import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -32,13 +32,16 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private Path csvFile;
+    private PersonConverter personConverter;
     private List<String> guestData;
     private int totalGuests;
     private int successfulImports;
 
-    public ImportCommand(String fileName) {
+    public ImportCommand(String fileName, PersonConverter personConverter) {
         assert !fileName.isEmpty();
+        assert personConverter != null;
         csvFile = Paths.get(fileName);
+        this.personConverter = personConverter;
     }
 
     @Override
@@ -50,8 +53,8 @@ public class ImportCommand extends Command {
             totalGuests = guestData.size();
             successfulImports = totalGuests;
             importPersons(guestData, model);
-        } catch (IOException e) {
-            throw new CommandException(e.getMessage());
+        } catch (IOException ioe) {
+            throw new CommandException(ioe.getMessage(), ioe);
         }
 
         model.commitAddressBook();
@@ -65,9 +68,9 @@ public class ImportCommand extends Command {
     private void importPersons(List<String> guestData, Model model) {
         for (String guest : guestData) {
             try {
-                Person toAdd = new CsvConverter().convertToPerson(guest);
+                Person toAdd = personConverter.decodePerson(guest);
                 addPerson(toAdd, model);
-            } catch (ParseException pe) {
+            } catch (PersonDecodingException pe) {
                 successfulImports--;
             } catch (CommandException ce) {
                 successfulImports--;
