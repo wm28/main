@@ -18,8 +18,8 @@ public class ExportCommandParser {
     public static final String DEFAULT_FILENAME_FORMAT = "exportedGuestList.csv";
 
     /**
-     * Parses the given argument {@code String} in the context of the ImportCommand
-     * and returns an ImportCommand object for execution.
+     * Parses the given argument {@code String} in the context of the ExportCommand
+     * and returns an ExportCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
