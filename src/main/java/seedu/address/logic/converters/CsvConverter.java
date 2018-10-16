@@ -52,7 +52,7 @@ public class CsvConverter implements PersonConverter<String> {
         if (!matcher.matches()) {
             throw new PersonDecodingException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-        try{
+        try {
             Name name = ParserUtil.parseName(matcher.group("name"));
             Phone phone = ParserUtil.parsePhone(matcher.group("phone"));
             Email email = ParserUtil.parseEmail(matcher.group("email"));
@@ -60,7 +60,7 @@ public class CsvConverter implements PersonConverter<String> {
             Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
             Set<Tag> tagList = splitTags(matcher.group("tags"));
             person = new Person(name, phone, email, payment, attendance, tagList);
-        } catch (ParseException pe){
+        } catch (ParseException pe) {
             throw new PersonDecodingException(pe.getMessage(), pe);
         }
         return person;
