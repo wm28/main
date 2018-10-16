@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.converters;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.converters.exceptions.PersonDecodingException;
+import seedu.address.logic.converters.exceptions.PersonEncodingException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
@@ -23,7 +26,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Converts a person between the CSV format and the Person Class object
  */
-public class CsvConverter {
+public class CsvConverter implements PersonConverter<String> {
     private static final Pattern GUEST_DATA_FORMAT = Pattern.compile("[\"|']?(?<name>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
@@ -31,27 +34,37 @@ public class CsvConverter {
             + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,?"
             + "(?<tags>.*)");
 
+    @Override
+    public String encodePerson(Person person) throws PersonEncodingException {
+        return null;
+    }
 
     /**
-     * Parses csv-formatted input into a Person object.
+     * Decodes csv-formatted input into a Person object.
      *
-     * @param csvInput Csv-formatted person input string
+     * @param personInput Csv-formatted person input string
      * @return Person based on the csv-formatted input string of the guest
      * @throws ParseException if the csv input does not conform to the expected format
      */
-    public Person convertToPerson(String csvInput) throws ParseException {
-        Matcher matcher = GUEST_DATA_FORMAT.matcher(csvInput.trim());
+    @Override
+    public Person decodePerson(String personInput) throws PersonDecodingException {
+        Matcher matcher = GUEST_DATA_FORMAT.matcher(personInput.trim());
+        Person person;
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new PersonDecodingException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-        Name name = ParserUtil.parseName(matcher.group("name"));
-        Phone phone = ParserUtil.parsePhone(matcher.group("phone"));
-        Email email = ParserUtil.parseEmail(matcher.group("email"));
-        Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
-        Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
-        Set<Tag> tagList = splitTags(matcher.group("tags"));
-
-        return new Person(name, phone, email, payment, attendance, tagList);
+        try {
+            Name name = ParserUtil.parseName(matcher.group("name"));
+            Phone phone = ParserUtil.parsePhone(matcher.group("phone"));
+            Email email = ParserUtil.parseEmail(matcher.group("email"));
+            Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
+            Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
+            Set<Tag> tagList = splitTags(matcher.group("tags"));
+            person = new Person(name, phone, email, payment, attendance, tagList);
+        } catch (ParseException pe) {
+            throw new PersonDecodingException(pe.getMessage(), pe);
+        }
+        return person;
     }
 
     /**

@@ -22,8 +22,9 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      *
-     * @param person containing details such as tags
-     * @return the tags that match keywords in the person's tags
+     * @param person containing details such as phone number, email address,
+     *               payment status, attendance status and tags
+     * @return the details that match keywords in the person's details, as mentioned above
      */
     public boolean test(Person person) {
         HashSet<seedu.address.model.tag.Tag> set = new HashSet<>(person.getTags());
@@ -39,6 +40,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
             if (arrStr[j].equals("t")) {
                 checkKeywords.add(i, arrStr[j + 1]);
+
                 strTags = "";
 
                 for (Tag tag : set) {
