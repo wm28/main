@@ -144,7 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds {@code tag} from {@code person} in this {@code AddressBook}.
-     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent
+     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent from SE-EDU
      */
     private void addTagFromPerson(Tag tag, Person person) {
         Set<Tag> newTags = new HashSet<>(person.getTags());

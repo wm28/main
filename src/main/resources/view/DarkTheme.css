@@ -391,6 +391,16 @@
     -fx-background-color: #E5E4E2;
 }
 
+#tags .veg {
+    -fx-text-fill: white;
+    -fx-background-color: #228B22;
+}
+
+#tags .halal {
+    -fx-text-fill: black;
+    -fx-background-color: #ADFF2F;
+}
+
 #tags .default {
     -fx-text-fill: red;
     -fx-background-color: #ffffff;
