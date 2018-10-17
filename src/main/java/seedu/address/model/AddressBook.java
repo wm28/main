@@ -59,14 +59,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
         setEvent(newData.getEventDetails());
     }
 
     ///event-level operations
     public void addEvent(Event e) {
-        eventDetails.setEvent(e);
+        eventDetails.addEvent(e);
     }
 
     /** Deletes the event details stored in the addressbook. */
