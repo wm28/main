@@ -10,13 +10,12 @@ import java.util.List;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CsvConverter;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.converters.PersonConverter;
+import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 //@@author wm28
-
 /**
  * Imports multiple guests into the guest list of the current event via a CSV file
  */
@@ -32,13 +31,16 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private Path csvFile;
+    private PersonConverter personConverter;
     private List<String> guestData;
-    private int totalGuests;
+    private int totalPersons;
     private int successfulImports;
 
-    public ImportCommand(String fileName) {
-        assert !fileName.isEmpty();
+    public ImportCommand(String fileName, PersonConverter personConverter) {
+        assert fileName != null : "FileName cannot be null";
+        assert personConverter != null : "personConverter cannot be null";
         csvFile = Paths.get(fileName);
+        this.personConverter = personConverter;
     }
 
     @Override
@@ -47,16 +49,16 @@ public class ImportCommand extends Command {
 
         try {
             guestData = CsvUtil.getDataLinesFromFile(csvFile);
-            totalGuests = guestData.size();
-            successfulImports = totalGuests;
+            totalPersons = guestData.size();
+            successfulImports = totalPersons;
             importPersons(guestData, model);
-        } catch (IOException e) {
-            throw new CommandException(e.getMessage());
+        } catch (IOException ioe) {
+            throw new CommandException(ioe.getMessage(), ioe);
         }
 
         model.commitAddressBook();
         return new CommandResult(
-                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalGuests, csvFile.getFileName()));
+                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalPersons, csvFile.getFileName()));
     }
 
     /**
@@ -65,9 +67,9 @@ public class ImportCommand extends Command {
     private void importPersons(List<String> guestData, Model model) {
         for (String guest : guestData) {
             try {
-                Person toAdd = new CsvConverter().convertToPerson(guest);
+                Person toAdd = personConverter.decodePerson(guest);
                 addPerson(toAdd, model);
-            } catch (ParseException pe) {
+            } catch (PersonDecodingException pe) {
                 successfulImports--;
             } catch (CommandException ce) {
                 successfulImports--;
