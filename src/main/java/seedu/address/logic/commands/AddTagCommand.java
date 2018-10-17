@@ -29,10 +29,9 @@ public class AddTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
 
+    public static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
     private static Logger logger = Logger.getLogger("execute");
-    private static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
     private static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
-
     private final Set<Tag> tagsToAdd;
 
     /**
@@ -62,7 +61,7 @@ public class AddTagCommand extends Command {
             model.resetData(currentAddressBook);
             model.commitAddressBook();
 
-            return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, currentList.size()));
+            return new CommandResult(String.format(MESSAGE_ADDED_TAG_SUCCESS, currentList.size()));
         }
     }
 

@@ -12,7 +12,7 @@ public class CliSyntax {
     //@@author Sarah
     public static final Prefix PREFIX_PAYMENT = new Prefix("pa/");
     public static final Prefix PREFIX_ATTENDANCE = new Prefix("a/");
-    // @@author
+    //@@author
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }

@@ -52,7 +52,6 @@ public class PersonDisplay extends UiPart<Region> {
             tags.getChildren().add(tagLabel);
         });
     }
-    //@@author
 
     //@@author wm28
     /**
@@ -102,5 +101,4 @@ public class PersonDisplay extends UiPart<Region> {
                 "Local data changed, clearing selected guest details "));
         removePersonDetails();
     }
-    //@@author
 }

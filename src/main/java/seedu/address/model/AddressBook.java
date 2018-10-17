@@ -167,7 +167,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addTag(Tag tag) {
         persons.forEach(person -> addTagFromPerson(tag, person));
     }
-    //@@author
+    //@@author aaryamNUS
 
     @Override
     public String toString() {
