@@ -30,8 +30,9 @@ public class AddTagCommand extends Command {
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
 
     public static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
-    private static Logger logger = Logger.getLogger("execute");
+
     private static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
+    private static Logger logger = Logger.getLogger("execute");
     private final Set<Tag> tagsToAdd;
 
     /**

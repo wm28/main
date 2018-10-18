@@ -201,7 +201,7 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelComponentClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -215,7 +215,7 @@ The `Model`,
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
-image:ModelClassBetterOopDiagram.png[width="800"]
+image:ModelComponentClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -331,11 +331,6 @@ will be initialized with the initial address book state.
 Step 2. The user executes `filter t/vegan` command to obtain a list of people who are Vegan.
 The `filter` command calls `Model#getFilteredPersonList()`.
 
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`,
-so the address book state will not be saved into the `addressBookStateList`.
-
-
 The following sequence diagram shows how the filter operation works:
 
 image::FilterSequenceDiagram.png[width="800"]
@@ -419,7 +414,7 @@ The import and export command enables batch importation and exportation of peopl
 
 The Import/Export features are mainly facilitated by objects of 2 classes. The `CsvFile` and `CsvConverter` objects. The following class diagram shows the relationship between the classes involved in the import/export.
 
-image::ImportExportClassDiagram.png[width="800"]
+image::ImportExportClassDiagram.PNG[width="800"]
 
 The CsvConverter class enables us decode/encode between the Person class and the desired format (CSV). The CsvConverter class implements PersonConverter interface which requires the implementing class to be able to decode/encode Person objects to the desired format.
 
@@ -432,13 +427,13 @@ The 'CsvFile' class enables us to read and write 'AdaptedPerson' to a file. `Csv
 The import command will first read the csv file and loop through all the person data and add them into the model. Badly formatted csv lines will be skipped and the user are given feedback on the number of successful imports in the CommandResult Ui component. The following sequence diagram shows how the Import operation works:
 
 |====
-| image:ImportCommandSequenceDiagram.png[] | image:ImportSequenceRefFrame.png[]
+| image:ImportCommandSequenceDiagram.PNG[] | image:ImportSequenceRefFrame.PNG[]
 |====
-+
+
 The export command will only export the currently filtered list so as to allow users to select specific groups of people. The following sequence diagram shows how the Export operation works:
 
 |====
-| image:ExportCommandSequenceDiagram.png[] | image:ExportSequenceRefFrame.png[]
+| image:ExportCommandSequenceDiagram.PNG[] | image:ExportSequenceRefFrame.PNG[]
 |====
 
 '''
