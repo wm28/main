@@ -10,6 +10,7 @@ import seedu.address.model.person.Phone;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
+//@@author kronicler
 public class MarkCommandParser implements Parser<MarkCommand> {
 
     /**
