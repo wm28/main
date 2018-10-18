@@ -298,30 +298,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
-=== Filter feature
-==== Current Implementation
-
-The filter mechanism is facilitated by `VersionedAddressBook`.
-Given below is an example usage scenario and how the filter mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook`
-will be initialized with the initial address book state.
-
-Step 2. The user executes `filter t/vegan` command to obtain a list of people who are Vegan.
-The `filter` command calls `Model#getFilteredPersonList()`,
-causing the modified state of the address book after the `filter t/vegan` command executes
-to be saved in the `addressBookStateList`.
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`,
-so the address book state will not be saved into the `addressBookStateList`.
-
-
-The following sequence diagram shows how the filter operation works:
-
-image::FilterSequenceDiagram.png[width="800"]
-
-
 ==== Design Considerations
 
 ===== Aspect: How undo & redo executes
@@ -343,10 +319,100 @@ image::FilterSequenceDiagram.png[width="800"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+=== Filter feature
+==== Current Implementation
+
+The filter mechanism is facilitated by `VersionedAddressBook`.
+Given below is an example usage scenario and how the filter mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook`
+will be initialized with the initial address book state.
+
+Step 2. The user executes `filter t/vegan` command to obtain a list of people who are Vegan.
+The `filter` command calls `Model#getFilteredPersonList()`.
+
+[NOTE]
+If a command fails its execution, it will not call `Model#commitAddressBook()`,
+so the address book state will not be saved into the `addressBookStateList`.
+
+
+The following sequence diagram shows how the filter operation works:
+
+image::FilterSequenceDiagram.png[width="800"]
+
+=== Add/Delete Event feature
+==== Current Implementation
+
+The add_event mechanism is facilitated by `VersionedAddressBook`.
+Given below is an example usage scenario and how the add_event mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+Step 2. The user executes `add_event n/Wedding t/8thOct t/10AM` command to add in details about the event they are currently organising.
+The `add_event` command calls `Model#addEvent()` to add in the event details and 'Model#commitAddressBook()', causing the modified state of the address book after the `add_event n/Wedding t/8thOct t/10AM` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+[NOTE]
+If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+[NOTE]
+If the user has added in the details of the event they are organising, then another set of event details should not be stored.
+The `add_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
+
+Step 3. After the event has taken place, the user decides to organise another event with the same guest list and decides to delete the event details currently stored in the application using the 'delete_event' command.
+The `delete_event` command calls `Model#deleteEvent to delete the event's details. The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+[NOTE]
+If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+[NOTE]
+If the user has not added in the details of an event, then there are no specific event details to delete.
+The `delete_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
+
+The following sequence diagram shows how the add_event operation works:
+
+image::AddDeleteEventSequenceDiagram.png[width="800"]
+
+=== Add/Remove Tag generation feature
+==== Current Implementation
+
+The addTag/removeTag mechanism is facilitated by `AddressBook` as it provides an editable form of a `ReadOnlyAddressBook` provided by the `Model` interface.
+Additionally, it implements the following operations:
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#getFilteredPersonList()`, and `Model#resetData()` respectively.
+
+Given below is an example usage scenario and how the addTag/removeTag mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state.
+
+Step 2. The user executes the command `import guestlist.csv` to import a list of guests and add them to the current state of `AddressBook`.
+
+[NOTE]
+If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved.
+
+Step 3. The user now decides to add a set of tags to all guests in the list and executes the command `addTag t/VIP t/Platinum` to add the tags `VIP` and `Platinum`.
+
+Step 4. A `ReadOnlyAddressBook` is created and an editable address book is created using `AddressBook`. To add to this, the current filtered list is accessed using `Model#getFilteredPersonList()`
+
+Step 5. The set of tags are added to all guests in the editable address book via `AddressBook#addTag()` and `AddressBook#addTagFromPerson()`
+
+Step 6. Finally, `Model#resetData()` and `Model#commitAddressBook()` are called to reset the current state of the list with the updated tags.
+
+The `removeTag` command does the opposite, and removes a set of tags from all persons in the guest list. However, the workflow is similar to `addTag`; a new `AddressBook` is created and edited accordingly as per the command.
+
+[NOTE]
+If there are no guests in the current list, or if the removeTag command tries to remove non-existent tags, the function will not execute and the current state of the list will be preserved.
+
+The following sequence diagram summarizes how the addTag() and removeTag() function work:
+
+[NOTE]
+The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
+
+image::AddTagRemoveTagSequenceDiagram.png[width="800"]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+_{We plan on implementing a data encryption feature such that when the user chooses to, the data stored in the addressbook will be encrypted and display ceases to show all information.}_
 
 // end::dataencryption[]
 

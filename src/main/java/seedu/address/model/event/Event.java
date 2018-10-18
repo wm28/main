@@ -43,9 +43,16 @@ public class Event {
             this.eventName.setEventName(event.eventName.getEventName());
             this.eventTags = event.eventTags;
         }
-        this.isNotInitialisedByUser = false;
     }
 
+    /** Adds user-given details of the event. */
+    public void addEvent(Event event) {
+        if (!this.equals(event)) {
+            this.eventName.setEventName(event.eventName.getEventName());
+            this.eventTags = event.eventTags;
+        }
+        this.isNotInitialisedByUser = false;
+    }
     /** Deletes user-given details of the event. */
     public void deleteEvent() {
         Event event = new Event();
