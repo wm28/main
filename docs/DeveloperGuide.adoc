@@ -365,7 +365,7 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 
 The following sequence diagram shows how the add_event operation works:
 
-image::AddDeleteEventSequenceDiagram.png[width="800"]
+image::AddDeleteEventSequenceDiagram.png[width="1000"]
 
 === Add/Remove Tag generation feature
 ==== Current Implementation
@@ -403,6 +403,86 @@ The following sequence diagram summarizes how the addTag() and removeTag() funct
 The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
 
 image::AddTagRemoveTagSequenceDiagram.png[width="800"]
+
+
+// tag::importexport[]
+
+=== Import/Export Command
+==== Current Implementation
+
+The import and export command enables batch importation and exportation of people into and out of the guest list. Currently the commands only support comma-separated value file format (CSV), however, it is open for the addition of new formats.
+
+The Import/Export features are mainly facilitated by objects of 2 classes. The `CsvFile` and `CsvConverter` objects. The following class diagram shows the relationship between the classes involved in the import/export.
+
+image::ImportExportClassDiagram.PNG[width="800"]
+
+The CsvConverter class enables us decode/encode between the Person class and the desired format (CSV). The CsvConverter class implements PersonConverter interface which requires the implementing class to be able to decode/encode Person objects to the desired format.
+
+The 'CsvFile' class enables us to read and write 'AdaptedPerson' to a file. `CsvFile` Implements the `SupportedFile` class which requires it to read and write lists of `AdaptedPerson` objects.
+
+`CsvAdaptedPerson` extends `AdaptedPerson`, it represents a person in the respective file formats, which our case is CSV.
+
+'''
+
+The import command will first read the csv file and loop through all the person data and add them into the model. Badly formatted csv lines will be skipped and the user are given feedback on the number of successful imports in the CommandResult Ui component. The following sequence diagram shows how the Import operation works:
+
+|====
+| image:ImportCommandSequenceDiagram.PNG[] | image:ImportSequenceRefFrame.PNG[]
+|====
+
+The export command will only export the currently filtered list so as to allow users to select specific groups of people. The following sequence diagram shows how the Export operation works:
+
+|====
+| image:ExportCommandSequenceDiagram.PNG[] | image:ExportSequenceRefFrame.PNG[]
+|====
+
+'''
+
+Given below is an example usage scenario and how to support new file formats (Eg. VCard).
+
+Step 1. Create new class to extend `AdaptedPerson` abstract class.
+
+		Eg. VcardAdaptedPerson
+		This will represent the a person in the VCard file format.
+
+
+Step 2. Create new class to implement `PersonConverter` interface. Implement the `encodePerson` and `decodePerson` method.
+
+		Eg. VcardConverter
+		The methods in this class, contains the logic to convert between the `Person` and `AdaptedPerson` objects.
+
+
+Step 3. Create new class to implement `CsvFile` interface. Implement `readAdaptedPersons` and `writeAdaptedPersons`.
+
+		Eg. VcardFile
+		The above mentioned methods will allow you to interface with the underlying files.
+
+
+Step 4. Add checks in the `ImportCommandParser` and `ExportCommandParser` to allow the application to call the classes that you have created.
+
+==== Design Considerations
+
+===== Aspect: How to implement decoding/encoding functionality in Import/Export command
+
+*** Alternative 1 (current choice): import & export command be able to do accept a general PersonConverter
+** Pros: Reduction in code duplication when supporting other file-formats in the future. Easier to mock and do unit tests.
+** Cons: More complicated to implement.
+
+*** Alternative 2: Each format has its own command which knows how to do the required conversion
+** Pros: We do not need to check for the required import/export format required.
+** Cons: Higher testing overhead for possible numerous types of export & import command. Duplicated boilerplate code.
+
+=====  Aspect: How to implement the reading/writing of file functionality in Import/Export command
+
+*** Alternative 1: Abstract the writing/reading of files into separate classes, `SupportedFile` interface and `CsvFile` class (current choice)
+** Pros: Able to add support for other file formats with changing exisiting code.
+** Cons: Increased code complexity.
+
+*** Alternative 2: Use a utility class with static methods
+** Pros: Simple to implement.
+** Cons: Violates open-close principle. Code will only work for CSV files. Tightly coupled.
+
+// end::importexport[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

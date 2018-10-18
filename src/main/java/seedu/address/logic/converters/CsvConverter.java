@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.exceptions.PersonEncodingException;
+import seedu.address.logic.converters.fileformats.AdaptedPerson;
+import seedu.address.logic.converters.fileformats.SupportedFileFormat;
+import seedu.address.logic.converters.fileformats.csv.CsvAdaptedPerson;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Attendance;
@@ -24,9 +27,9 @@ import seedu.address.model.tag.Tag;
 
 //@@author wm28
 /**
- * Converts a person between the CSV format and the Person Class object
+ * Converts a person between the {@code CsvAdaptedPerson} and the {@code Person}
  */
-public class CsvConverter implements PersonConverter<String> {
+public class CsvConverter implements PersonConverter {
     private static final Pattern PERSON_CSV_INPUT_FORMAT = Pattern.compile("[\"|']?(?<name>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
@@ -34,15 +37,17 @@ public class CsvConverter implements PersonConverter<String> {
             + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,?"
             + "(?<tags>.*)");
 
+    private final SupportedFileFormat supportedFileFormat = SupportedFileFormat.CSV;
+
     /**
-     * Encodes a Person object to a csv-formatted string.
+     * Encodes a {@code Person} object to a csv-formatted person, {@code CsvAdaptedPerson}.
      *
      * @param person to be encoded
-     * @return String based on the Person object
+     * @return AdaptedPerson which which is an instance of the CsvAdaptedPerson class.
      * @throws PersonEncodingException if the person fails to encode
      */
     @Override
-    public String encodePerson(Person person) throws PersonEncodingException {
+    public AdaptedPerson encodePerson(Person person) throws PersonEncodingException {
         if (person == null) {
             throw new PersonEncodingException("Person is null");
         }
@@ -55,19 +60,19 @@ public class CsvConverter implements PersonConverter<String> {
         result.append(person.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.joining(",")));
-        return result.toString();
+        return new CsvAdaptedPerson(result.toString());
     }
 
     /**
-     * Decodes csv-formatted input into a Person object.
+     * Decodes csv-formatted person,{@code CsvAdaptedPerson}, into a {@code Person} object.
      *
      * @param personInput Csv-formatted person input string
      * @return Person based on the csv-formatted input string of the guest
      * @throws PersonDecodingException if the csv input does not conform to the expected format
      */
     @Override
-    public Person decodePerson(String personInput) throws PersonDecodingException {
-        Matcher matcher = PERSON_CSV_INPUT_FORMAT.matcher(personInput.trim());
+    public Person decodePerson(AdaptedPerson personInput) throws PersonDecodingException {
+        Matcher matcher = PERSON_CSV_INPUT_FORMAT.matcher(personInput.getFormattedString().trim());
         Person person;
         if (!matcher.matches()) {
             throw new PersonDecodingException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -84,6 +89,11 @@ public class CsvConverter implements PersonConverter<String> {
             throw new PersonDecodingException(pe.getMessage(), pe);
         }
         return person;
+    }
+
+    @Override
+    public SupportedFileFormat getSupportedFileFormat() {
+        return supportedFileFormat;
     }
 
     /**
