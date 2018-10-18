@@ -28,7 +28,6 @@ import seedu.address.model.person.Person;
  */
 public class MailCommand extends Command {
 
-    private static Logger logger = Logger.getLogger("execute");
     public static final String COMMAND_WORD = "email";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to the specified person "
             + "provided by INDEX.\n"
@@ -36,6 +35,7 @@ public class MailCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 ";
 
     private static final String MESSAGE_MAIL_PERSON_SUCCESS = "Successfully sent email!";
+    private static Logger logger = Logger.getLogger("execute");
     private Index index;
 
     /**
@@ -87,15 +87,15 @@ public class MailCommand extends Command {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(personToMail.getEmail().toString()));
             message.setSubject("Booking confirmation for Avengers Infinity War Part 3");
-            message.setText("Dear valued customer,\n\nYou are our lucky customer! " +
-                    "We hope you will continue to support Invites and remain a " +
-                    "loyal customer. Please accept this gold-plated AddressBook as " +
-                    "a token of our appreciation.\n\nYours Sincerely,\nThe Invites Team");
+            message.setText("Dear valued customer,\n\nYou are our lucky customer! "
+                    + "We hope you will continue to support Invites and remain a "
+                    + "loyal customer. Please accept this gold-plated AddressBook as "
+                    + "a token of our appreciation.\n\nYours Sincerely,\nThe Invites Team");
 
             Transport.send(message);
         } catch (MessagingException mex) {
-            logger.log(Level.SEVERE, "Error: could not send email, have you\n" +
-                    "given Invites application access to your Gmail account?");
+            logger.log(Level.SEVERE, "Error: could not send email, have you\n"
+                    + "given Invites application access to your Gmail account?");
             mex.printStackTrace();
         }
 
