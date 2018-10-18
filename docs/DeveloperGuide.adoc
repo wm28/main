@@ -349,7 +349,7 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 
 The following sequence diagram shows how the add_event operation works:
 
-image::AddDeleteEventSequenceDiagram.png[width="800"]
+image::AddDeleteEventSequenceDiagram.png[width="1000"]
 
 ==== Design Considerations
 
