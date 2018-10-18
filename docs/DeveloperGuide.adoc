@@ -331,11 +331,6 @@ will be initialized with the initial address book state.
 Step 2. The user executes `filter t/vegan` command to obtain a list of people who are Vegan.
 The `filter` command calls `Model#getFilteredPersonList()`.
 
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`,
-so the address book state will not be saved into the `addressBookStateList`.
-
-
 The following sequence diagram shows how the filter operation works:
 
 image::FilterSequenceDiagram.png[width="800"]
