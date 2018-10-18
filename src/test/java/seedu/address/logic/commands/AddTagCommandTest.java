@@ -23,7 +23,6 @@ import seedu.address.model.tag.Tag;
  * {@code RemoveTagCommand}.
  */
 public class AddTagCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private Set<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag("NORMAL"), new Tag("VIP")));

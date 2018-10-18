@@ -59,18 +59,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
         setEvent(newData.getEventDetails());
     }
 
     ///event-level operations
     public void addEvent(Event e) {
-        eventDetails.setEvent(e);
+        eventDetails.addEvent(e);
+    }
+
+    /** Deletes the event details stored in the addressbook. */
+    public void deleteEvent() {
+        eventDetails.deleteEvent();
     }
 
     public boolean hasEvent() {
-        return eventDetails.isNotUserInitialised();
+        return eventDetails.isUserInitialised();
     }
 
     //// person-level operations
@@ -140,7 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds {@code tag} from {@code person} in this {@code AddressBook}.
-     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent
+     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent from SE-EDU
      */
     private void addTagFromPerson(Tag tag, Person person) {
         Set<Tag> newTags = new HashSet<>(person.getTags());

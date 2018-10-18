@@ -24,7 +24,6 @@ import seedu.address.model.tag.Tag;
  * {@code RemoveTagCommand}.
  */
 public class RemoveTagCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private Set<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag("NORMAL"), new Tag("VIP")));
