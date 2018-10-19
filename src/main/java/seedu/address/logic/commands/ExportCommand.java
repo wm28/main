@@ -3,17 +3,16 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.converters.CsvConverter;
+import seedu.address.logic.converters.PersonConverter;
 import seedu.address.logic.converters.exceptions.PersonEncodingException;
+import seedu.address.logic.converters.fileformats.AdaptedPerson;
+import seedu.address.logic.converters.fileformats.SupportedFile;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -31,16 +30,18 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EXPORT_CSV_RESULT = "Successfully exported %1$d/%2$d guests to %3$s";
     public static final String MESSAGE_NO_PERSONS = "There are no persons to export!";
 
-    private Path csvFile;
-    private CsvConverter personConverter;
+    private SupportedFile supportedFile;
+    private PersonConverter personConverter;
     private int totalPersons;
     private int successfulExports;
 
-    public ExportCommand(String fileName, CsvConverter personConverter) {
-        assert fileName != null : "FileName cannot be null";
+    public ExportCommand(SupportedFile supportedFile, PersonConverter personConverter) {
+        assert supportedFile != null : "supportedFile cannot be null";
         assert personConverter != null : "personConverter cannot be null";
+        assert personConverter.getSupportedFileFormat().equals(supportedFile.getSupportedFileFormat())
+                : "supportedFile and personConverter does not support the same file format";
         this.personConverter = personConverter;
-        csvFile = Paths.get(fileName);
+        this.supportedFile = supportedFile;
     }
 
     @Override
@@ -55,21 +56,22 @@ public class ExportCommand extends Command {
         successfulExports = totalPersons;
 
         try {
-            List<String> result = exportPersons(filteredList);
-            CsvUtil.saveDataLinesToFile(csvFile, result);
+            List<AdaptedPerson> result = exportPersons(filteredList);
+            supportedFile.writeAdaptedPersons(result);
         } catch (IOException ioe) {
             throw new CommandException(ioe.getMessage(), ioe);
         }
 
         return new CommandResult(String.format(MESSAGE_EXPORT_CSV_RESULT,
-                successfulExports, totalPersons, csvFile.toString()));
+                successfulExports, totalPersons, supportedFile.getFileName()));
+
     }
 
     /**
      * Exports persons to csv-formatted strings
      */
-    private List<String> exportPersons(ObservableList<Person> personList) {
-        List<String> result = new ArrayList<>();
+    private List<AdaptedPerson> exportPersons(ObservableList<Person> personList) {
+        List<AdaptedPerson> result = new ArrayList<>();
         for (Person person : personList) {
             try {
                 result.add(personConverter.encodePerson(person));

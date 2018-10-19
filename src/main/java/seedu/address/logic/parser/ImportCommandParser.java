@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.converters.CsvConverter;
+import seedu.address.logic.converters.fileformats.csv.CsvFile;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 //@@author wm28
@@ -30,7 +31,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         } else if (!FileUtil.isValidFileExtension(trimmedArg, "csv")) {
             throw new ParseException(String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
         }
-        return new ImportCommand(trimmedArg, new CsvConverter());
+
+        return new ImportCommand(new CsvFile(trimmedArg), new CsvConverter());
     }
 }
 //@@author
