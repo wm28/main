@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -54,10 +55,10 @@ public class MailCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        assert index != null;
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        assert index != null;
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -65,21 +66,9 @@ public class MailCommand extends Command {
         Person personToMail = lastShownList.get(index.getZeroBased());
         assert personToMail != null;
 
-        final String username = "eventmanager2k18@gmail.com";
-        final String password = "cs2113t2018";
-
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-
-        Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+        Properties props = createPropertiesConfiguration();
+        EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
+        Session session = Session.getDefaultInstance(props, authenticate);
 
         try {
             Message message = new MimeMessage(session);
@@ -101,6 +90,34 @@ public class MailCommand extends Command {
 
         logger.log(Level.INFO, "Email sent successfully");
         return new CommandResult(MESSAGE_MAIL_PERSON_SUCCESS);
+    }
+
+    /**
+     * Creates a connection to the host gmail account via gmail's smtp port
+     * @return
+     */
+    private static Properties createPropertiesConfiguration() {
+        return new Properties() {
+            {
+                put("mail.smtp.auth", "true");
+                put("mail.smtp.starttls.enable", "true");
+                put("mail.smtp.host", "smtp.gmail.com");
+                put("mail.smtp.port", "587");
+            }
+        };
+    }
+
+    /**
+     * Authenticates the user account based on the credentials provided
+     */
+    private static class EmailPasswordAuthenticator extends Authenticator {
+        private String username = "eventmanager2k18@gmail.com";
+        private String password = "cs2113t2018";
+
+        @Override
+        public PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(username, password);
+        }
     }
 
     @Override
