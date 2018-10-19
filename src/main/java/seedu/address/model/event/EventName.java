@@ -7,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Event's name.
  * Guarantees: immutable; is valid as declared in {@link #isValidEventName(String)}
  */
+//@@author SandhyaGopakumar
 public class EventName {
 
     //Identity fields

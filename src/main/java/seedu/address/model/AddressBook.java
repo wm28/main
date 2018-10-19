@@ -19,7 +19,9 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    //@@author SandhyaGopakumar
     private final Event eventDetails;
+    //@@author
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -51,9 +53,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
+
+    //@@author SandhyaGopakumar
     public void setEvent(Event event) {
         this.eventDetails.setEvent(event);
     }
+    //@@author
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -63,7 +69,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         setEvent(newData.getEventDetails());
     }
 
-    ///event-level operations
+    //@@author SandhyaGopakumar
+    //event-level operations
     public void addEvent(Event e) {
         eventDetails.addEvent(e);
     }
@@ -76,6 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasEvent() {
         return eventDetails.isUserInitialised();
     }
+    //@@author
 
     //// person-level operations
 
@@ -179,10 +187,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    //@@author SandhyaGopakumar
     @Override
     public Event getEventDetails() {
         return eventDetails;
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
