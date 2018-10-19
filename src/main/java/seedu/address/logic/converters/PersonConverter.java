@@ -2,27 +2,32 @@ package seedu.address.logic.converters;
 
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.exceptions.PersonEncodingException;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.converters.fileformats.AdaptedPerson;
+import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.model.person.Person;
 
 //@@author wm28
 /**
- * Represents a Converter that is able to convert between a {@code Person} and a type {@code T}.
- * Type {@code T} can represent various formats.
+ * Represents a Converter that is able to convert between a {@code Person} and an {@code AdaptedPerson}.
  */
-public interface PersonConverter <T> {
+public interface PersonConverter {
 
     /**
-     * Parses {@code userInput} into a command and returns it.
-     * @throws ParseException if {@code userInput} does not conform the expected format
+     * Encodes {@code Person} into an {@code AdaptedPerson}.
+     * @throws PersonEncodingException if {@code person} does not conform the expected format
      */
-    T encodePerson(Person person) throws PersonEncodingException;
+    AdaptedPerson encodePerson(Person person) throws PersonEncodingException;
 
     /**
-     * Parses {@code userInput} into a command and returns it.
-     * @throws ParseException if {@code userInput} does not conform the expected format
+     * Decodes {@code AdaptedPerson} into a {@code Person}.
+     * @throws PersonDecodingException if {@code person} does not conform the expected format
      */
-    Person decodePerson(T personInput) throws PersonDecodingException;
+    Person decodePerson(AdaptedPerson person) throws PersonDecodingException;
+
+    /**
+     * Returns the file format the particular PersonConverter supports
+     */
+    SupportedFileFormat getSupportedFileFormat();
 }
 //@@author
 

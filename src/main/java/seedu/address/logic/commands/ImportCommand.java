@@ -3,15 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
-import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.converters.PersonConverter;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
+import seedu.address.logic.converters.fileformats.AdaptedPerson;
+import seedu.address.logic.converters.fileformats.SupportedFile;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -30,16 +29,18 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IMPORT_CSV_RESULT = "Successfully imported %1$d of %2$d guests from %3$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private Path csvFile;
-    private PersonConverter personConverter;
-    private List<String> guestData;
-    private int totalPersons;
+    private SupportedFile supportedFile;
+    private final PersonConverter personConverter;
     private int successfulImports;
+    private int totalImports;
 
-    public ImportCommand(String fileName, PersonConverter personConverter) {
-        assert fileName != null : "FileName cannot be null";
+
+    public ImportCommand(SupportedFile supportedFile, PersonConverter personConverter) {
+        assert supportedFile != null : "SupportedFile cannot be null";
         assert personConverter != null : "personConverter cannot be null";
-        csvFile = Paths.get(fileName);
+        assert personConverter.getSupportedFileFormat().equals(supportedFile.getSupportedFileFormat())
+                : "supportedFile and personConverter does not support the same file format";
+        this.supportedFile = supportedFile;
         this.personConverter = personConverter;
     }
 
@@ -48,26 +49,26 @@ public class ImportCommand extends Command {
         requireNonNull(model);
 
         try {
-            guestData = CsvUtil.getDataLinesFromFile(csvFile);
-            totalPersons = guestData.size();
-            successfulImports = totalPersons;
-            importPersons(guestData, model);
+            List<AdaptedPerson> persons = supportedFile.readAdaptedPersons();
+            successfulImports = persons.size();
+            totalImports = successfulImports;
+            importPersons(persons, model);
         } catch (IOException ioe) {
             throw new CommandException(ioe.getMessage(), ioe);
         }
 
         model.commitAddressBook();
         return new CommandResult(
-                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalPersons, csvFile.getFileName()));
+                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalImports, supportedFile.getFileName()));
     }
 
     /**
      * Imports persons to the guest list
      */
-    private void importPersons(List<String> guestData, Model model) {
-        for (String guest : guestData) {
+    private void importPersons(List<AdaptedPerson> persons, Model model) {
+        for (AdaptedPerson person : persons) {
             try {
-                Person toAdd = personConverter.decodePerson(guest);
+                Person toAdd = personConverter.decodePerson(person);
                 addPerson(toAdd, model);
             } catch (PersonDecodingException pe) {
                 successfulImports--;
@@ -75,7 +76,6 @@ public class ImportCommand extends Command {
                 successfulImports--;
             }
         }
-
     }
 
     /**
