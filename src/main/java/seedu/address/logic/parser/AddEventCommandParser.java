@@ -13,6 +13,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.tag.Tag;
 
+//@@author SandhyaGopakumar
 /**
  * Parses input arguments and creates a new AddEventCommand object
  */

@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+//@@author SandhyaGopakumar
 /**
  * Represents an event.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -34,13 +35,13 @@ public class Event {
         this.isNotInitialisedByUser = true;
     }
 
-    public EventName getEventName() {
-        return eventName;
+    public String getName() {
+        return eventName.getEventName();
     }
 
     public void setEvent(Event event) {
         if (!this.equals(event)) {
-            this.eventName.setEventName(event.eventName.getEventName());
+            this.eventName.setEventName(event.getName());
             this.eventTags = event.eventTags;
         }
     }
@@ -48,7 +49,7 @@ public class Event {
     /** Adds user-given details of the event. */
     public void addEvent(Event event) {
         if (!this.equals(event)) {
-            this.eventName.setEventName(event.eventName.getEventName());
+            this.eventName.setEventName(event.getName());
             this.eventTags = event.eventTags;
         }
         this.isNotInitialisedByUser = false;
@@ -56,7 +57,7 @@ public class Event {
     /** Deletes user-given details of the event. */
     public void deleteEvent() {
         Event event = new Event();
-        this.eventName.setEventName(event.eventName.getEventName());
+        this.eventName.setEventName(event.getName());
         this.eventTags = event.eventTags;
         this.isNotInitialisedByUser = true;
     }
@@ -82,7 +83,7 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getEventName().equals(getEventName());
+                && otherEvent.getName().equals(getName());
     }
 
     /**
@@ -100,7 +101,7 @@ public class Event {
         }
 
         seedu.address.model.event.Event otherEvent = (seedu.address.model.event.Event) other;
-        return otherEvent.getEventName().equals(getEventName())
+        return otherEvent.getName().equals(getName())
                 && otherEvent.getEventTags().equals(getEventTags());
     }
 
@@ -113,7 +114,7 @@ public class Event {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getEventName())
+        builder.append(getName())
                 .append(" Tags: ");
         getEventTags().forEach(builder::append);
         return builder.toString();
