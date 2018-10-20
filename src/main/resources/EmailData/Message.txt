@@ -1,0 +1,16 @@
+Subject: "Booking confirmation for "
+
+
+<!------ Note, this is a pre-generated email, please DO NOT try to reply to this email -------!>
+Dear valued customer,
+
+We would like to inform you of your booking confirmation for the following movie:
+    - Name: Avengers Part 3
+    - Time: 7:30 pm
+    - Date: 24th of December 2029
+    - Location: VivoCity multiplex
+
+Thank you for choosing Invités as your trusted ticketing partner. We hope to be of your service again.
+
+Yours Sincerely
+The Invités Management Team.

@@ -2,8 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +39,12 @@ public class MailCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 ";
 
     private static final String MESSAGE_MAIL_PERSON_SUCCESS = "Successfully sent email!";
+
     private static Logger logger = Logger.getLogger("execute");
+    private static String username;
+    private static String password;
+    private static String email_subject;
+    private static String email_message;
     private Index index;
 
     /**
@@ -66,20 +74,27 @@ public class MailCommand extends Command {
         Person personToMail = lastShownList.get(index.getZeroBased());
         assert personToMail != null;
 
+        // Retrieve all email fields and validate that they are not empty
+        try {
+            RetrieveInformation();
+        } catch (FileNotFoundException e) {
+            throw new CommandException("Error: The file Credentials.txt or Message.txt was not found!");
+        }
+        CheckFields();
+
+        // Creates a new session with the user gmail account as the host
         Properties props = createPropertiesConfiguration();
         EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
         Session session = Session.getDefaultInstance(props, authenticate);
 
         try {
+            // Creates the MIME message to be sent in the email
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("eventmanager2k18@gmail.com"));
+            message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(personToMail.getEmail().toString()));
-            message.setSubject("Booking confirmation for Avengers Infinity War Part 3");
-            message.setText("Dear valued customer,\n\nYou are our lucky customer! "
-                    + "We hope you will continue to support Invites and remain a "
-                    + "loyal customer. Please accept this gold-plated AddressBook as "
-                    + "a token of our appreciation.\n\nYours Sincerely,\nThe Invites Team");
+            message.setSubject(email_subject);
+            message.setText(email_message);
 
             Transport.send(message);
         } catch (MessagingException mex) {
@@ -97,6 +112,7 @@ public class MailCommand extends Command {
      * @return
      */
     private static Properties createPropertiesConfiguration() {
+        // Connects to Gmail using it's smtp port and previous authorization
         return new Properties() {
             {
                 put("mail.smtp.auth", "true");
@@ -108,12 +124,47 @@ public class MailCommand extends Command {
     }
 
     /**
+     * Reads and parses the files Credentials.txt and Message.txt to retrieve
+     * username, password, email message and email subject
+     */
+    private void RetrieveInformation() throws FileNotFoundException {
+        File credentials = new File("/src/main/resources/EmailData/Credentials.txt");
+        Scanner credentials_scanner = new Scanner(credentials);
+
+        File message = new File("/src/main/resources/EmailData/Message.txt");
+        Scanner message_scanner = new Scanner(message);
+
+
+    }
+
+    /**
+     * Checks whether username, password, email subject and email message are
+     * provided by the user. If not, command exception is thrown
+     * @throws CommandException
+     */
+    private void CheckFields() throws CommandException {
+        if (username == null || username.equals("")) {
+            throw new CommandException(Messages.MESSAGE_USERNAME_NOT_PROVIDED);
+        }
+        else if (password == null || password.equals("")) {
+            throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
+        }
+        else if (email_subject == null || email_subject.equals("")) {
+            throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
+        }
+        else if (email_message == null || email_message.equals("")) {
+            throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
+        }
+        else {
+            logger.log(Level.INFO, "All fields from Credentials.txt and Message.txt"
+                                         + "received successfully");
+        }
+    }
+
+    /**
      * Authenticates the user account based on the credentials provided
      */
     private static class EmailPasswordAuthenticator extends Authenticator {
-        private String username = "eventmanager2k18@gmail.com";
-        private String password = "cs2113t2018";
-
         @Override
         public PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(username, password);
