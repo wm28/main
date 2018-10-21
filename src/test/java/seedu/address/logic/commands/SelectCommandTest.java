@@ -52,8 +52,8 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        //showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        //showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertExecutionSuccess(INDEX_FIRST_PERSON);
     }
