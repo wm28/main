@@ -9,9 +9,10 @@
 <?import javafx.scene.layout.StackPane?>
 
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1">
   <HBox>
-    <GridPane HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" >
+    <GridPane HBox.hgrow="ALWAYS" alignment="TOP_LEFT" >
       <padding>
         <Insets top="10" right="5" bottom="10" left="15"/>
       </padding>
@@ -27,10 +28,12 @@
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
       </rowConstraints>
-      <Label styleClass="cell_small_label" text="Name: " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-      <Label styleClass="cell_small_label" text="Tags: " GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-      <Label fx:id="name" styleClass="cell_big_label" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-      <FlowPane fx:id="tags" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+      <Label styleClass="cell_big_label" text="Event Details" GridPane.columnIndex="0" GridPane.rowIndex="0"
+            GridPane.columnSpan="2"/>
+      <Label styleClass="cell_small_label" text="Name: " GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+      <Label styleClass="cell_small_label" text="Tags: " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+      <Label fx:id="name" styleClass="cell_small_label" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+      <FlowPane fx:id="tags" GridPane.rowIndex="2" GridPane.columnIndex="1" />
     </GridPane>
   </HBox>
 </StackPane>
