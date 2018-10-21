@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.converters.PersonConverter;
@@ -56,7 +59,7 @@ public class ImportCommand extends Command {
         } catch (IOException ioe) {
             throw new CommandException(ioe.getMessage(), ioe);
         }
-
+        EventsCenter.getInstance().post(new ShowImportReportEvent());
         model.commitAddressBook();
         return new CommandResult(
                 String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalImports, supportedFile.getFileName()));
