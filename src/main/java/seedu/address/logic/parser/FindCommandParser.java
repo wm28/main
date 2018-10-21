@@ -32,12 +32,11 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         for (int i = 0; i < checking.size(); i++) {
 
-            if((checking.get(i).charAt(0) == 'n' || checking.get(i).charAt(0) == 'e' ||
-                    checking.get(i).charAt(0) == 'p') && checking.get(i).charAt(1) == '/') {
+            if ((checking.get(i).charAt(0) == 'n' || checking.get(i).charAt(0) == 'e'
+                    || checking.get(i).charAt(0) == 'p') && checking.get(i).charAt(1) == '/') {
 
                 return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-            }
-            else {
+            } else {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }

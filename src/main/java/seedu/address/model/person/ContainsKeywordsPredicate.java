@@ -43,8 +43,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
                 strTags += " ";
                 strTags += person.getPayment();
-            }
-            else if (arrStr[j].equals("t")) {
+            } else if (arrStr[j].equals("t")) {
                 checkKeywords.add(i, arrStr[j + 1]);
 
                 strTags = "";

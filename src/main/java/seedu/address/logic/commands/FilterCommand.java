@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_FILTERED_OVERVIEW;
 
 import seedu.address.commons.core.Messages;
 
