@@ -129,7 +129,7 @@ public class XmlAdaptedPerson {
         }
         final Attendance modelAttendance = new Attendance(attendance);
 
-        //@@author SE-EDU
+        //@@author
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelPayment, modelAttendance, modelTags);
     }
