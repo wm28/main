@@ -41,8 +41,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
                 strToCheck += " ";
                 strToCheck += person.getPhone();
             } else if (arrStr[j].equals("e")) {
-                checkKeywords.add(i,
-                        arrStr[j + 1]);
+                checkKeywords.add(i, arrStr[j + 1]);
 
                 strToCheck += " ";
                 strToCheck += person.getEmail();
