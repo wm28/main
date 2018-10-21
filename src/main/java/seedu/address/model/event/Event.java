@@ -32,12 +32,16 @@ public class Event {
     public Event() {
         EventName eventName = new EventName("event not created yet");
         this.eventName = eventName;
+        Tag tag = new Tag("default");
+        this.eventTags.add(tag);
         this.isNotInitialisedByUser = true;
     }
 
     public String getName() {
         return eventName.getEventName();
     }
+
+    public EventName getEventName() { return eventName; }
 
     public void setEvent(Event event) {
         if (!this.equals(event)) {

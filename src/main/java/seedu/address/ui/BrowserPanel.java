@@ -1,72 +1,80 @@
 package seedu.address.ui;
 
-import java.net.URL;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.application.Platform;
-import javafx.event.Event;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
-import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.EventDetailsChangedEvent;
+import seedu.address.model.event.Event;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * The Browser Panel of the App.
  */
 public class BrowserPanel extends UiPart<Region> {
 
-    public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
-
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+    private seedu.address.model.event.Event event;
+
     @FXML
-    private WebView browser;
+    private HBox cardPane;
+    @FXML
+    private Label name;
 
-    public BrowserPanel() {
+    @FXML
+    private FlowPane tags;
+
+    public BrowserPanel(seedu.address.model.event.Event event) {
         super(FXML);
-
-        // To prevent triggering events for typing inside the loaded Web page.
-        getRoot().setOnKeyPressed(Event::consume);
-
-        loadDefaultPage();
+        fillInEventDetails(event);
         registerAsAnEventHandler(this);
     }
 
-    private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
-    }
-
-    public void loadPage(String url) {
-        Platform.runLater(() -> browser.getEngine().load(url));
-    }
-
     /**
-     * Loads a default HTML file with a background that matches the general theme.
+     * Fills in details of the selected {@code person} to the PersonDisplay Ui component
      */
-    private void loadDefaultPage() {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        loadPage(defaultPage.toExternalForm());
+    private void fillInEventDetails(Event event) {
+        name.setText(event.getName());
+        removeTags();
+        createTags(event);
     }
 
+    //@@author aaryamNUS
     /**
-     * Frees resources allocated to the browser.
+     * Method createTags initialises the tag labels for {@code person}
+     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
      */
-    public void freeResources() {
-        browser = null;
+    private void createTags(seedu.address.model.event.Event event) {
+        event.getEventTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add(getTagColor(tag.tagName));
+            tags.getChildren().add(tagLabel);
+        });
+    }
+
+    //@@author wm28
+    /**
+     * Removes all tags from the PersonDisplay Ui component
+     */
+    private void removeTags() {
+        tags.getChildren().clear();
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        fillInEventDetails(event.getNewDetails());
     }
 }
