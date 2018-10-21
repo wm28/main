@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1">
   <HBox>
-    <GridPane HBox.hgrow="ALWAYS" alignment="BOTTOM_LEFT" >
+    <GridPane HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" >
       <padding>
         <Insets top="10" right="5" bottom="10" left="15"/>
       </padding>

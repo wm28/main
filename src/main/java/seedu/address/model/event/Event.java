@@ -29,6 +29,12 @@ public class Event {
         this.eventTags.addAll(eventTags);
         this.isNotInitialisedByUser = false;
     }
+    public Event(EventName eventName, Set<Tag> eventTags, Boolean eventIsNotInitialisedByUser) {
+        requireAllNonNull(eventName, eventTags, eventIsNotInitialisedByUser);
+        this.eventName = eventName;
+        this.eventTags.addAll(eventTags);
+        this.isNotInitialisedByUser = eventIsNotInitialisedByUser;
+    }
     public Event() {
         EventName eventName = new EventName("event not created yet");
         this.eventName = eventName;
@@ -47,6 +53,7 @@ public class Event {
         if (!this.equals(event)) {
             this.eventName.setEventName(event.getName());
             this.eventTags = event.eventTags;
+            this.isNotInitialisedByUser = !event.isUserInitialised();
         }
     }
 
