@@ -22,10 +22,11 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      *
-     * @param person containing details such as phone number, email address,
+     * @param person containing details such as
      *               payment status, attendance status and tags
      * @return the details that match keywords in the person's details, as mentioned above
      */
+    @Override
     public boolean test(Person person) {
         HashSet<seedu.address.model.tag.Tag> set = new HashSet<>(person.getTags());
         String strTags = "";
