@@ -19,7 +19,7 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
-
+    //@@author SandhyaGopakumar
     /**
      * Returns true if an event with the same identity as {@code event} exists in the application.
      */
@@ -43,15 +43,7 @@ public interface Model {
      * The person identity of {@code editedEvent} must not be the same as another existing event in the application.
      */
     //void updateEvent(Event target, Event editedEvent);
-
-    /** Returns an unmodifiable view of the filtered event list */
-    // ObservableList<Event> getFilteredEventList();
-
-    /**
-     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    //void updateFilteredEventList(Predicate<Event> predicate);
+    //@@author
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -90,8 +82,10 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    //@@author SandhyaGopakumar
     /** Returns the details of the event currently residing in the addressbook. */
     Event getEventDetails();
+    //@@author
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

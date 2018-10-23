@@ -25,13 +25,13 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class MarkCommand extends Command {
+public class UnmarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "unmark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as present "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as absent "
             + "using their unique phone number. "
-            + "This will also change the a/ tag associated with the person to Present.\n"
+            + "This will also change the attendance associated with the person to Absent.\n"
             + "Parameters: "
             + "[PHONE] "
             + "Example: " + COMMAND_WORD
@@ -47,7 +47,7 @@ public class MarkCommand extends Command {
     /**
      * @param phone of the person in the filtered person list to edit
      */
-    public MarkCommand(Phone phone) {
+    public UnmarkCommand(Phone phone) {
         requireNonNull(phone);
         this.phone = phone;
         this.editPersonDescriptor = new EditPersonDescriptor();
@@ -103,11 +103,7 @@ public class MarkCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
-        //@@author
-        //@@author Sarah
         Payment updatedPayment = personToEdit.getPayment();
-        //@@author
-        //@@author kronicler
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
         Set<Tag> updatedTags = personToEdit.getTags();
 
@@ -123,12 +119,12 @@ public class MarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof UnmarkCommand)) {
             return false;
         }
 
         // state check
-        MarkCommand e = (MarkCommand) other;
+        UnmarkCommand e = (UnmarkCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
@@ -154,7 +150,7 @@ public class MarkCommand extends Command {
             setPhone(null);
             setEmail(null);
             setPayment(null);
-            setAttendance(new Attendance("PRESENT"));
+            setAttendance(new Attendance("ABSENT"));
             setTags(null);
         }
 
@@ -181,8 +177,7 @@ public class MarkCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
-        //@@author
-        //@@author Sarah
+
         public void setPayment(Payment payment) {
             this.payment = payment;
         }
@@ -190,8 +185,7 @@ public class MarkCommand extends Command {
         public Optional<Payment> getPayment() {
             return Optional.ofNullable(payment);
         }
-        //@@author
-        //@@author kronicler
+
         public void setAttendance(Attendance attendance) {
             this.attendance = attendance;
         }
