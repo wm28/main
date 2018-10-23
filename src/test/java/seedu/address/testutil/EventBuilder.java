@@ -47,6 +47,8 @@ public class EventBuilder {
         return this;
     }
 
-    public Event build() { return new Event(eventName, eventTags); }
+    public Event build() {
+        return new Event(eventName, eventTags);
+    }
 
 }
