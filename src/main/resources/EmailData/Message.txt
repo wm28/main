@@ -1,7 +1,5 @@
 Subject: "Booking confirmation for Avengers Part 3"
-
-
-<!------ Note, this is a pre-generated email, please DO NOT try to reply to this email -------!>
+Message : "<!------ Note, this is a pre-generated email, please DO NOT try to reply to this email -------!>
 Dear valued customer,
 
 We would like to inform you of your booking confirmation for the following movie:
@@ -13,4 +11,4 @@ We would like to inform you of your booking confirmation for the following movie
 Thank you for choosing Invités as your trusted ticketing partner. We hope to be of your service again.
 
 Yours Sincerely
-The Invités Management Team.
+The Invités Management Team."
