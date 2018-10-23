@@ -18,6 +18,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.ParseException;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -43,8 +44,8 @@ public class MailCommand extends Command {
     private static Logger logger = Logger.getLogger("execute");
     private static String username;
     private static String password;
-    private static String email_subject;
-    private static String email_message;
+    private static String emailSubject;
+    private static String emailMessage;
     private Index index;
 
     /**
@@ -77,10 +78,10 @@ public class MailCommand extends Command {
         // Retrieve all email fields and validate that they are not empty
         try {
             RetrieveInformation();
-        } catch (FileNotFoundException e) {
+            CheckFields();
+        } catch (FileNotFoundException fe){
             throw new CommandException("Error: The file Credentials.txt or Message.txt was not found!");
         }
-        CheckFields();
 
         // Creates a new session with the user gmail account as the host
         Properties props = createPropertiesConfiguration();
@@ -93,8 +94,8 @@ public class MailCommand extends Command {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(personToMail.getEmail().toString()));
-            message.setSubject(email_subject);
-            message.setText(email_message);
+            message.setSubject(emailSubject);
+            message.setText(emailMessage);
 
             Transport.send(message);
         } catch (MessagingException mex) {
@@ -128,12 +129,35 @@ public class MailCommand extends Command {
      * username, password, email message and email subject
      */
     private void RetrieveInformation() throws FileNotFoundException {
-        File credentials = new File("/src/main/resources/EmailData/Credentials.txt");
-        Scanner credentials_scanner = new Scanner(credentials);
 
-        File message = new File("/src/main/resources/EmailData/Message.txt");
-        Scanner message_scanner = new Scanner(message);
+        try {
+            File credentials = new File("src/main/resources/EmailData/Credentials.txt")
+                    .getAbsoluteFile();
+            Scanner credentialsScanner = new Scanner(credentials);
 
+            String unmodifiedUsername = credentialsScanner.nextLine();
+            String unmodifiedPassword = credentialsScanner.nextLine();
+
+            username = unmodifiedUsername.split("\"")[1];
+            password = unmodifiedPassword.split("\"")[1];
+
+        } catch (FileNotFoundException fe) {
+            throw new FileNotFoundException("Error: The file Credentials.txt was not found!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            File message = new File("src/main/resources/EmailData/Message.txt")
+                    .getAbsoluteFile();
+            Scanner messageScanner = new Scanner(message);
+
+
+        } catch (FileNotFoundException fe) {
+            throw new FileNotFoundException("Error: The file Message.txt was not found!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 
@@ -149,10 +173,10 @@ public class MailCommand extends Command {
         else if (password == null || password.equals("")) {
             throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
         }
-        else if (email_subject == null || email_subject.equals("")) {
+        else if (emailSubject == null || emailSubject.equals("")) {
             throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
         }
-        else if (email_message == null || email_message.equals("")) {
+        else if (emailMessage == null || emailMessage.equals("")) {
             throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
         }
         else {
