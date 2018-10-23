@@ -18,7 +18,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.ParseException;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -158,16 +157,15 @@ public class MailCommand extends Command {
             Scanner messageScanner = new Scanner(message);
 
             String unmodifiedSubject = messageScanner.nextLine();
-            String unmodifiedMessage = "";
+            StringBuilder unmodifiedMessage = new StringBuilder();
 
             while (messageScanner.hasNextLine()) {
-                unmodifiedMessage += messageScanner.nextLine();
+                unmodifiedMessage.append(messageScanner.nextLine());
+                unmodifiedMessage.append("\n");
             }
 
             emailSubject = unmodifiedSubject.split("\"")[1];
-
-            System.out.println(emailSubject);
-
+            emailMessage = unmodifiedMessage.toString().split("\"")[1];
 
         } catch (FileNotFoundException fe) {
             throw new FileNotFoundException("Error: The file Message.txt was not found!");
