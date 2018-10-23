@@ -507,6 +507,35 @@ Step 4. Add checks in the `ImportCommandParser` and `ExportCommandParser` to all
 
 // end::importexport[]
 
+// tag::markunmark[]
+=== Mark/Unmark Command
+The mark/unmark mechanism is facilitated by `Model`.
+Given below is an example usage scenario and how the mark/unmark command executes at each step:
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state and the currentStatePointer pointing to that single address book state.
+
+Step 2. The user executes the command `import guestlist.csv` to import a list of guest and add them to the current state of the `AddressBook`.
+
+[NOTE]
+Alternatively, the user can execute the command `add n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT t/NORMAL` to create an instance of one guest and add them to the current state of `AddressBook`.
+
+Step 3. The user will execute the command `mark 98765432` to mark the attendance of the `Person`.
+
+Step 4. An instance of `filteredPersonList` is retrieved from the `model` using `MODEL#getFliteredPersonList`. A linear search is then executed on the `filteredPersonList` to find a `Person` with the same phone number as `98765432`.
+
+[NOTE]
+If there is no matching phone number found, a `COMMANDEXCEPTION` will be thrown to indicate nobody in the list has the phone number.
+
+Step 5. After retrieving the information from the discovered `Person`, another `Person` is created with the same fields with the exception of the attendance field being changed from `ABSENT` to `PRESENT`.
+
+Step 6. Finally, the entry is updated using `MODEL#updatePerson` to transfer the new information into the `filteredPersonList` before `commitAddressBook` is executed to save the state of the `AddressBook`.
+
+The following sequence diagram shows how the add_event operation works:
+
+image::MarkUnmarkEventSequenceDiagram.png[width="800"]
+
+// end::markunmark[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

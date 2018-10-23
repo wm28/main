@@ -27,7 +27,7 @@ public class EventBuilder {
      * Initializes the EventBuilder with the data of {@code eventToCopy}.
      */
     public EventBuilder(Event eventToCopy) {
-        eventName = eventToCopy.getEventName();
+        eventName.setEventName(eventToCopy.getName());
         eventTags = new HashSet<>(eventToCopy.getEventTags());
     }
 

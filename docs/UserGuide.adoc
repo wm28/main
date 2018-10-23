@@ -274,7 +274,7 @@ Format: `email INDEX`
 
 [NOTE]
 ====
-All email subjects and messages have been pre-written and are available in the file at `main/data/email/emaildraft.txt`.
+All email subjects and messages have been pre-written and are available in the file at `main/data/EmailData/Message.txt`.
 You are free to edit these messages to suit your needs.
 ====
 

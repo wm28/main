@@ -57,6 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
 
+    //@@author SandhyaGopakumar
     @Override
     public void addEvent(Event event) {
         versionedAddressBook.addEvent(event);
@@ -79,7 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
     public Event getEventDetails() {
         return versionedAddressBook.getEventDetails();
     }
-
+    //@@author
 
     @Override
     public boolean hasPerson(Person person) {

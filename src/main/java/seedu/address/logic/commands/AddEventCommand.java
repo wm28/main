@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
+//@@author SandhyaGopakumar
 /**
  * Adds an event to the application.
  */

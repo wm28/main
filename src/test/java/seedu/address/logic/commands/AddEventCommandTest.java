@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EventBuilder;
 
+//@@author SandhyaGopakumar
 public class AddEventCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
