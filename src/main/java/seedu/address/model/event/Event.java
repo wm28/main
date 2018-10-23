@@ -18,27 +18,32 @@ public class Event {
 
     //Identity fields
     private EventName eventName;
+    private EventDate eventDate;
     private Set<Tag> eventTags = new HashSet<>();
     private boolean isNotInitialisedByUser;
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName eventName, Set<Tag> eventTags) {
+    public Event(EventName eventName, EventDate eventDate, Set<Tag> eventTags) {
         requireAllNonNull(eventName, eventTags);
         this.eventName = eventName;
+        this.eventDate = eventDate;
         this.eventTags.addAll(eventTags);
         this.isNotInitialisedByUser = false;
     }
-    public Event(EventName eventName, Set<Tag> eventTags, Boolean eventIsNotInitialisedByUser) {
+    public Event(EventName eventName, EventDate eventDate, Set<Tag> eventTags, Boolean eventIsNotInitialisedByUser) {
         requireAllNonNull(eventName, eventTags, eventIsNotInitialisedByUser);
         this.eventName = eventName;
+        this.eventDate = eventDate;
         this.eventTags.addAll(eventTags);
         this.isNotInitialisedByUser = eventIsNotInitialisedByUser;
     }
     public Event() {
         EventName eventName = new EventName("event not created yet");
         this.eventName = eventName;
-        Tag tag = new Tag("default");
+        EventDate eventDate = new EventDate("01/01/0001");
+        this.eventDate = eventDate;
+        Tag tag = new Tag("NA");
         this.eventTags.add(tag);
         this.isNotInitialisedByUser = true;
     }
@@ -47,11 +52,22 @@ public class Event {
         return eventName.getEventName();
     }
 
-    public EventName getEventName() { return eventName; }
+    public String getDate() {
+        return eventDate.getEventDate();
+    }
+
+    private EventName getEventName() {
+        return eventName;
+    }
+
+    private EventDate getEventDate() {
+        return eventDate;
+    }
 
     public void setEvent(Event event) {
         if (!this.equals(event)) {
             this.eventName.setEventName(event.getName());
+            this.eventDate.setEventDate(event.getDate());
             this.eventTags = event.eventTags;
             this.isNotInitialisedByUser = !event.isUserInitialised();
         }
@@ -61,6 +77,7 @@ public class Event {
     public void addEvent(Event event) {
         if (!this.equals(event)) {
             this.eventName.setEventName(event.getName());
+            this.eventDate.setEventDate(event.getDate());
             this.eventTags = event.eventTags;
         }
         this.isNotInitialisedByUser = false;
@@ -69,6 +86,7 @@ public class Event {
     public void deleteEvent() {
         Event event = new Event();
         this.eventName.setEventName(event.getName());
+        this.eventDate.setEventDate(event.getDate());
         this.eventTags = event.eventTags;
         this.isNotInitialisedByUser = true;
     }
@@ -94,7 +112,8 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getName().equals(getName());
+                && otherEvent.getName().equals(getName())
+                && otherEvent.getDate().equals(getDate());
     }
 
     /**
@@ -112,7 +131,8 @@ public class Event {
         }
 
         seedu.address.model.event.Event otherEvent = (seedu.address.model.event.Event) other;
-        return otherEvent.getName().equals(getName())
+        return otherEvent.getEventName().equals(getEventName())
+                && otherEvent.getEventDate().equals(getEventDate())
                 && otherEvent.getEventTags().equals(getEventTags());
     }
 
@@ -126,6 +146,7 @@ public class Event {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(getDate())
                 .append(" Tags: ");
         getEventTags().forEach(builder::append);
         return builder.toString();

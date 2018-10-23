@@ -13,6 +13,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_PAYMENT = new Prefix("pa/");
     public static final Prefix PREFIX_ATTENDANCE = new Prefix("a/");
     //@@author
+    //@@author SandhyaGopakumar
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
+    //@@author
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }

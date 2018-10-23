@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
@@ -153,5 +154,17 @@ public class ParserUtil {
             throw new ParseException(EventName.MESSAGE_EVENTNAME_CONSTRAINTS);
         }
         return new EventName(trimmedName);
+    }
+
+    /**
+     * Parses {@code String EventDate} into an {@code EventDate}.
+     */
+    public static EventDate parseEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!EventDate.isValidEventDate(trimmedDate)) {
+            throw new ParseException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
+        }
+        return new EventDate(trimmedDate);
     }
 }
