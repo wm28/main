@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED = "Error: you have not included the subject "
                                                                     + "of your email in the file src/main/"
                                                                     + "resources/EmailData/Message.txt";
-    public static final String MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED = "Error: you have not included the subject "
+    public static final String MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED = "Error: you have not included the message "
                                                                     + "of your email in the file src/main/"
                                                                     + "resources/EmailData/Message.txt";
 

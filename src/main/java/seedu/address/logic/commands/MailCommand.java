@@ -126,7 +126,10 @@ public class MailCommand extends Command {
 
     /**
      * Reads and parses the files Credentials.txt and Message.txt to retrieve
-     * username, password, email message and email subject
+     * username, password, email message and email subject. Error handling is also performed
+     * through the try-catch block, which details with FileNotFoundExceptions as well as
+     * General Exceptions. Once parsed, the private global variables in the MailCommand username,
+     * password, emailSubject, and emailMessage are set with the strings parsed from the .txt files
      */
     private void RetrieveInformation() throws FileNotFoundException {
 
@@ -135,9 +138,11 @@ public class MailCommand extends Command {
                     .getAbsoluteFile();
             Scanner credentialsScanner = new Scanner(credentials);
 
+            // Retrieve the two strings in Credentials.txt
             String unmodifiedUsername = credentialsScanner.nextLine();
             String unmodifiedPassword = credentialsScanner.nextLine();
 
+            // Parse the strings to retrieve the username and password within quotation marks
             username = unmodifiedUsername.split("\"")[1];
             password = unmodifiedPassword.split("\"")[1];
 
@@ -151,6 +156,17 @@ public class MailCommand extends Command {
             File message = new File("src/main/resources/EmailData/Message.txt")
                     .getAbsoluteFile();
             Scanner messageScanner = new Scanner(message);
+
+            String unmodifiedSubject = messageScanner.nextLine();
+            String unmodifiedMessage = "";
+
+            while (messageScanner.hasNextLine()) {
+                unmodifiedMessage += messageScanner.nextLine();
+            }
+
+            emailSubject = unmodifiedSubject.split("\"")[1];
+
+            System.out.println(emailSubject);
 
 
         } catch (FileNotFoundException fe) {
