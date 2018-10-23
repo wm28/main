@@ -31,9 +31,13 @@
       <Label styleClass="cell_big_label" text="Event Details" GridPane.columnIndex="0" GridPane.rowIndex="0"
             GridPane.columnSpan="2"/>
       <Label styleClass="cell_small_label" text="Name: " GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-      <Label styleClass="cell_small_label" text="Tags: " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+      <Label styleClass="cell_small_label" text="Date: " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+      <Label styleClass="cell_small_label" text="Venue: " GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+      <Label styleClass="cell_small_label" text="Tags: " GridPane.rowIndex="4" GridPane.columnIndex="0"/>
       <Label fx:id="name" styleClass="cell_small_label" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-      <FlowPane fx:id="tags" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+      <Label fx:id="date" styleClass="cell_small_label" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+      <Label fx:id="venue" styleClass="cell_small_label" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+      <FlowPane fx:id="tags" GridPane.rowIndex="4" GridPane.columnIndex="1" />
     </GridPane>
   </HBox>
 </StackPane>

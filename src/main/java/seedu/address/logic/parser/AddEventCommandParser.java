@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -13,9 +14,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventVenue;
 import seedu.address.model.tag.Tag;
 
-//@@author SandhyaGopakumar
 /**
  * Parses input arguments and creates a new AddEventCommand object
  */
@@ -27,15 +28,16 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
      */
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_VENUE, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
         EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         EventDate eventDate = ParserUtil.parseEventDate(argMultimap.getValue(PREFIX_DATE).get());
+        EventVenue eventVenue = ParserUtil.parseEventVenue(argMultimap.getValue(PREFIX_VENUE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Event event = new Event(eventName, eventDate, tagList);
+        Event event = new Event(eventName, eventDate, eventVenue, tagList);
         return new AddEventCommand(event);
     }
     /**

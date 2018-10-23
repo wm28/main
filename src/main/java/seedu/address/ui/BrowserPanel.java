@@ -28,6 +28,10 @@ public class BrowserPanel extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
+    @FXML
+    private Label date;
+    @FXML
+    private Label venue;
 
     @FXML
     private FlowPane tags;
@@ -42,9 +46,19 @@ public class BrowserPanel extends UiPart<Region> {
      * Fills in details of the selected {@code person} to the PersonDisplay Ui component
      */
     private void fillInEventDetails(Event event) {
-        name.setText(event.getName());
-        removeTags();
-        createTags(event);
+        if (event.isUserInitialised()) {
+            name.setText(event.getName());
+            date.setText(event.getDate());
+            venue.setText(event.getVenue());
+            removeTags();
+            createTags(event);
+        }
+        else {
+            name.setText("Please put in event details");
+            date.setText("");
+            venue.setText("");
+            removeTags();
+        }
     }
 
     //@@author aaryamNUS

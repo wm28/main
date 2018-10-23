@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventVenue;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -166,5 +167,17 @@ public class ParserUtil {
             throw new ParseException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
         }
         return new EventDate(trimmedDate);
+    }
+
+    /**
+     * Parses {@code String EventVenue} into an {@code EventVenue}.
+     */
+    public static EventVenue parseEventVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!EventVenue.isValidEventVenue(trimmedVenue)) {
+            throw new ParseException(EventVenue.MESSAGE_EVENTVENUE_CONSTRAINTS);
+        }
+        return new EventVenue(trimmedVenue);
     }
 }

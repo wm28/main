@@ -10,8 +10,10 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.EventName;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventVenue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +25,12 @@ public class XmlAdaptedEvent {
 
     @XmlElement(required = true)
     private String name;
+
+    @XmlElement(required = true)
+    private String date;
+
+    @XmlElement(required = true)
+    private String venue;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -39,8 +47,10 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedEvent(String name, List<XmlAdaptedTag> tagged, String isNotInitialisedByUser) {
+    public XmlAdaptedEvent(String name, String date, String venue, List<XmlAdaptedTag> tagged, String isNotInitialisedByUser) {
         this.name = name;
+        this.date = date;
+        this.venue = venue;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -54,13 +64,17 @@ public class XmlAdaptedEvent {
      */
     public XmlAdaptedEvent(Event source) {
         name = source.getName();
+        date = source.getDate();
+        venue = source.getVenue();
         tagged = source.getEventTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        if (source.isUserInitialised() == true)
+        if (source.isUserInitialised() == true) {
             isNotInitialisedByUser = "false";
-        else
+        }
+        else {
             isNotInitialisedByUser = "true";
+        }
     }
 
     /**
@@ -75,13 +89,29 @@ public class XmlAdaptedEvent {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+            throw new IllegalValueException(String.format
+                    (MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
         }
         if (!EventName.isValidEventName(name)) {
             throw new IllegalValueException(EventName.MESSAGE_EVENTNAME_CONSTRAINTS);
         }
         final EventName modelName = new EventName(name);
 
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
+        }
+        if (!EventDate.isValidEventDate(date)) {
+            throw new IllegalValueException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
+        }
+        final EventDate modelDate = new EventDate(date);
+
+        if (venue == null){
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventVenue.class.getSimpleName()));
+        }
+        if (!EventVenue.isValidEventVenue(venue)) {
+            throw new IllegalValueException(EventVenue.MESSAGE_EVENTVENUE_CONSTRAINTS);
+        }
+        final EventVenue modelVenue = new EventVenue(venue);
         //@@author SE-EDU
         final Set<Tag> modelTags = new HashSet<>(eventTags);
 
@@ -91,7 +121,7 @@ public class XmlAdaptedEvent {
         else
             modelisNotInitialisedByUser = false;
 
-        return new Event(modelName, modelTags, modelisNotInitialisedByUser);
+        return new Event(modelName, modelDate, modelVenue, modelTags, modelisNotInitialisedByUser);
     }
 
     @Override
@@ -106,6 +136,8 @@ public class XmlAdaptedEvent {
 
         XmlAdaptedEvent otherEvent = (XmlAdaptedEvent) other;
         return Objects.equals(name, otherEvent.name)
+                && Objects.equals(date, otherEvent.date)
+                && Objects.equals(venue, otherEvent.venue)
                 && tagged.equals(otherEvent.tagged);
     }
 }
