@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -74,12 +75,17 @@ public class MailCommand extends Command {
         Person personToMail = lastShownList.get(index.getZeroBased());
         assert personToMail != null;
 
-        // Retrieve all email fields and validate that they are not empty
+        // Retrieve all email fields and user credentials and validate that they are not null
         try {
             RetrieveInformation();
             CheckFields();
         } catch (FileNotFoundException fe){
             throw new CommandException("Error: The file Credentials.txt or Message.txt was not found!");
+        } catch (NoSuchElementException ne) {
+            throw new CommandException("Error: Please specify your credentials, email message, "
+                    + "and email subject in Credentials.txt and Message.txt");
+        } catch (ArrayIndexOutOfBoundsException ae) {
+            throw new CommandException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
         }
 
         // Creates a new session with the user gmail account as the host
@@ -98,8 +104,8 @@ public class MailCommand extends Command {
 
             Transport.send(message);
         } catch (MessagingException mex) {
-            logger.log(Level.SEVERE, "Error: could not send email, have you\n"
-                    + "given Invites application access to your Gmail account?");
+            logger.log(Level.SEVERE, "Error: could not send email,"
+                    + "Invites application not given access to host Gmail account.");
             mex.printStackTrace();
         }
 
@@ -147,6 +153,11 @@ public class MailCommand extends Command {
 
         } catch (FileNotFoundException fe) {
             throw new FileNotFoundException("Error: The file Credentials.txt was not found!");
+        } catch (ArrayIndexOutOfBoundsException ae) {
+            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
+        } catch (NoSuchElementException ne) {
+            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
+                    + "and email subject in Credentials.txt and Message.txt");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -169,6 +180,11 @@ public class MailCommand extends Command {
 
         } catch (FileNotFoundException fe) {
             throw new FileNotFoundException("Error: The file Message.txt was not found!");
+        } catch (NoSuchElementException ne) {
+            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
+                                             + "and email subject in Credentials.txt and Message.txt");
+        } catch (ArrayIndexOutOfBoundsException ae) {
+            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -177,20 +193,21 @@ public class MailCommand extends Command {
 
     /**
      * Checks whether username, password, email subject and email message are
-     * provided by the user. If not, command exception is thrown
+     * provided by the user. If any of the parameters are either null or an
+     * empty string, the respective command exception is throw.
      * @throws CommandException
      */
     private void CheckFields() throws CommandException {
-        if (username == null || username.equals("")) {
+        if (username == null || username.replaceAll("\\s+","").equals("")) {
             throw new CommandException(Messages.MESSAGE_USERNAME_NOT_PROVIDED);
         }
-        else if (password == null || password.equals("")) {
+        else if (password == null || password.replaceAll("\\s+","").equals("")) {
             throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
         }
-        else if (emailSubject == null || emailSubject.equals("")) {
+        else if (emailSubject == null || emailSubject.replaceAll("\\s+","").equals("")) {
             throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
         }
-        else if (emailMessage == null || emailMessage.equals("")) {
+        else if (emailMessage == null || emailMessage.replaceAll("\\s+","").equals("")) {
             throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
         }
         else {

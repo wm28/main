@@ -25,6 +25,9 @@ public class Messages {
     public static final String MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED = "Error: you have not included the message "
                                                                     + "of your email in the file src/main/"
                                                                     + "resources/EmailData/Message.txt";
-
-
+    public static final String MESSAGE_PARSE_ERROR_MESSAGE = "Error: You have not provided either your "
+                                                             + "email message, email subject, password, or "
+                                                             + "username in Credentials.txt or Message.txt. "
+                                                             + "Please ensure you enclose all the parameters "
+                                                             + "within quotation marks!";
 }
