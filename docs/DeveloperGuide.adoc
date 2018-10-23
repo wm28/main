@@ -355,7 +355,7 @@ The `find` command calls `Model#getFilteredPersonList()`.
 
 The following sequence diagram shows how the find operation works:
 
-image::FilterSequenceDiagram.png[width="800"]
+image::FindSequenceDiagram.png[width="800"]
 // end::find[]
 
 === Add/Delete Event feature

@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Sarah Taaher Bonna - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -6,7 +6,7 @@
 == PROJECT: Invités
 
 ---
-
+//Add in team details
 == Overview
 
 Invités - An event management system. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
@@ -22,9 +22,9 @@ Invités - An event management system. The user interacts with it using a CLI, a
                        so that the user can find a group of people at one go, instead of doing it one-by-one.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-
+//Need to change this
 * *Other contributions*:
-
+//Need to change this
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
@@ -36,7 +36,7 @@ Invités - An event management system. The user interacts with it using a CLI, a
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 
-
+//Done
 == Contributions to the User Guide
 
 
@@ -46,7 +46,7 @@ Invités - An event management system. The user interacts with it using a CLI, a
 
 include::../UserGuide.adoc[tag=filter]
 include::../UserGuide.adoc[tag=find]
-
+//Done
 == Contributions to the Developer Guide
 
 |===
@@ -58,6 +58,6 @@ include::../DeveloperGuide.adoc[tag=filter]
 include::../DeveloperGuide.adoc[tag=find]
 
 
-== PROJECT: PowerPointLabs
+== PROJECT: Invités
 
 ---
