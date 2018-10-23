@@ -165,6 +165,7 @@ You will add the tags `Veg` and `VIP` to all guests in the current list
 * `addTag t/@` +
 This will present you with an error in specifying the command, as all your tags must be alphanumeric
 
+// tag::find[]
 === Locating guests by name: `find`
 
 Finds guests whose names contain any of the given keywords. +
@@ -188,6 +189,8 @@ You will be show a list containing entries of any guest having names `Betsy`, `T
 * `find n/alex p/92746838 e/johndoe@gmail.com` +
 You will be show a list containing entries of any guest having the name `Alex`,
 phone number `92746838`, or email address `johndoe@gmail.com`
+// end::find[]
+
 === Import guests from CSV file : `import`
 
 Imports guests with data from a CSV formatted file. The structure for the values in the CSV file is predefined. +
@@ -246,6 +249,7 @@ You will mark the guests with unique numbers 87654321, 87654322, 87654323, 87654
 Stop the mass attendance marking mode. +
 Format: `stop_marking`
 
+// tag::filter[]
 ===  Filter list based on specified parameters : `filter`
 
 Filter guest list based on filter guest attributes. Only filters based on
@@ -256,7 +260,7 @@ Examples:
 
 * `filter a/Present t/Vegetarian` +
 You will be shown a list with guests who are present and have a vegetarian dietary requirement.
-
+// end::filter[]
 ===   Sending emails to individual guests : `email`
 
 Sends an email to the guest at a specific Index +
