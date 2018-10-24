@@ -87,8 +87,10 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+            //@@author Sarah
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+            //@@author
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

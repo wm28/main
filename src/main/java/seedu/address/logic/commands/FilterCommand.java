@@ -1,4 +1,3 @@
-//@@author Sarah
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -9,6 +8,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 
+//@@author Sarah
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
@@ -22,8 +22,6 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/NAME p/PHONE NUMBER e/EMAIL "
             + "pa/PAYMENT_STATUS a/ATTENDANCE_STATUS "
             + "t/TAG...";
-
-    //public static final String MESSAGE_PERSONS_FILTERED_OVERVIEW = "Filtered by: %1$s\n";
 
     private final ContainsKeywordsPredicate predicate;
 

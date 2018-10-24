@@ -1,4 +1,3 @@
-//@@author Sarah
 package seedu.address.model.person;
 
 import java.util.ArrayList;
@@ -9,8 +8,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
+//@@author Sarah
 /**
- * Tests that a {@code Person}'s {@code Tags} matches all of the keywords given.
+ * Tests that a {@code Person}'s {@code payment, attendance and tags etc.} matches all of the keywords given.
  */
 public class ContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -22,10 +22,11 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      *
-     * @param person containing details such as phone number, email address,
+     * @param person containing details such as
      *               payment status, attendance status and tags
      * @return the details that match keywords in the person's details, as mentioned above
      */
+    @Override
     public boolean test(Person person) {
         HashSet<seedu.address.model.tag.Tag> set = new HashSet<>(person.getTags());
         String strTags = "";
@@ -38,7 +39,12 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
             String str = keywords.get(i);
             String[] arrStr = str.split("/");
 
-            if (arrStr[j].equals("t")) {
+            if (arrStr[j].equals("pa")) {
+                checkKeywords.add(i, arrStr[j + 1]);
+
+                strTags += " ";
+                strTags += person.getPayment();
+            } else if (arrStr[j].equals("t")) {
                 checkKeywords.add(i, arrStr[j + 1]);
 
                 strTags = "";
@@ -48,16 +54,12 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
                     strTags += tag.tagName;
                 }
             }
+
         }
 
         final String checkStr = strTags;
 
-        System.out.print("checkStr: "); //person's tags
-        System.out.println(checkStr);
-        System.out.print("checkKeywords: "); //keywords user wants to filter with
-        System.out.println(checkKeywords);
-
-        return keywords.stream()
+        return checkKeywords.stream()
                 .allMatch(checkKeywords -> StringUtil.containsWordIgnoreCase(checkStr, checkKeywords));
     }
 

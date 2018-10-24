@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
@@ -26,6 +27,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
+
+        ArrayList<String> checking = new ArrayList<>(Arrays.asList(nameKeywords));
+
+        for (int i = 0; i < checking.size(); i++) {
+
+            if ((checking.get(i).charAt(0) == 'n' || checking.get(i).charAt(0) == 'e'
+                    || checking.get(i).charAt(0) == 'p') && checking.get(i).charAt(1) == '/') {
+
+                return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+        }
 
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
