@@ -32,6 +32,8 @@ public class BrowserPanel extends UiPart<Region> {
     private Label date;
     @FXML
     private Label venue;
+    @FXML
+    private Label startTime;
 
     @FXML
     private FlowPane tags;
@@ -50,6 +52,7 @@ public class BrowserPanel extends UiPart<Region> {
             name.setText(event.getName());
             date.setText(event.getDate());
             venue.setText(event.getVenue());
+            startTime.setText(event.getStartTime());
             removeTags();
             createTags(event);
         }
@@ -57,6 +60,7 @@ public class BrowserPanel extends UiPart<Region> {
             name.setText("Please put in event details");
             date.setText("");
             venue.setText("");
+            startTime.setText("");
             removeTags();
         }
     }

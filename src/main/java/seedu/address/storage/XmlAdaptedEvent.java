@@ -13,11 +13,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventStartTime;
 import seedu.address.model.event.EventVenue;
 import seedu.address.model.tag.Tag;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Event.
  */
 public class XmlAdaptedEvent {
 
@@ -32,6 +33,9 @@ public class XmlAdaptedEvent {
     @XmlElement(required = true)
     private String venue;
 
+    @XmlElement(required = true)
+    private String startTime;
+
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -39,18 +43,19 @@ public class XmlAdaptedEvent {
     private String isNotInitialisedByUser;
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedEvent.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedEvent() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
-    public XmlAdaptedEvent(String name, String date, String venue, List<XmlAdaptedTag> tagged, String isNotInitialisedByUser) {
+    public XmlAdaptedEvent(String name, String date, String venue, String startTime, List<XmlAdaptedTag> tagged, String isNotInitialisedByUser) {
         this.name = name;
         this.date = date;
         this.venue = venue;
+        this.startTime = startTime;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -58,14 +63,15 @@ public class XmlAdaptedEvent {
     }
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Event into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedEvent
      */
     public XmlAdaptedEvent(Event source) {
         name = source.getName();
         date = source.getDate();
         venue = source.getVenue();
+        startTime  =source.getStartTime();
         tagged = source.getEventTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -78,9 +84,9 @@ public class XmlAdaptedEvent {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted event object into the model's Event object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted event
      */
     public Event toModelType() throws IllegalValueException {
         final List<Tag> eventTags = new ArrayList<>();
@@ -112,8 +118,18 @@ public class XmlAdaptedEvent {
             throw new IllegalValueException(EventVenue.MESSAGE_EVENTVENUE_CONSTRAINTS);
         }
         final EventVenue modelVenue = new EventVenue(venue);
+
+        if (startTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventStartTime.class.getSimpleName()));
+        }
+        if (!EventStartTime.isValidEventStartTime(startTime)) {
+           throw new IllegalValueException(EventStartTime.MESSAGE_EVENTSTARTTIME_CONSTRAINTS);
+        }
+        final EventStartTime modelStartTime = new EventStartTime(startTime);
+
         //@@author SE-EDU
         final Set<Tag> modelTags = new HashSet<>(eventTags);
+        //@@author
 
         Boolean modelisNotInitialisedByUser;
         if (isNotInitialisedByUser == "true")
@@ -121,7 +137,7 @@ public class XmlAdaptedEvent {
         else
             modelisNotInitialisedByUser = false;
 
-        return new Event(modelName, modelDate, modelVenue, modelTags, modelisNotInitialisedByUser);
+        return new Event(modelName, modelDate, modelVenue, modelStartTime, modelTags, modelisNotInitialisedByUser);
     }
 
     @Override
@@ -138,6 +154,7 @@ public class XmlAdaptedEvent {
         return Objects.equals(name, otherEvent.name)
                 && Objects.equals(date, otherEvent.date)
                 && Objects.equals(venue, otherEvent.venue)
+                && Objects.equals(startTime, otherEvent.startTime)
                 && tagged.equals(otherEvent.tagged);
     }
 }

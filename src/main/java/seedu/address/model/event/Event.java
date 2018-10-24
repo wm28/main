@@ -19,25 +19,29 @@ public class Event {
     private EventName eventName;
     private EventDate eventDate;
     private EventVenue eventVenue;
+    private EventStartTime eventStartTime;
     private Set<Tag> eventTags = new HashSet<>();
     private boolean isNotInitialisedByUser;
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName eventName, EventDate eventDate, EventVenue eventVenue, Set<Tag> eventTags) {
-        requireAllNonNull(eventName, eventTags);
+    public Event(EventName eventName, EventDate eventDate, EventVenue eventVenue,
+                 EventStartTime eventStartTime, Set<Tag> eventTags) {
+        requireAllNonNull(eventName, eventDate, eventVenue, eventStartTime, eventTags);
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventVenue = eventVenue;
+        this.eventStartTime = eventStartTime;
         this.eventTags.addAll(eventTags);
         this.isNotInitialisedByUser = false;
     }
     public Event(EventName eventName, EventDate eventDate, EventVenue eventVenue,
-                 Set<Tag> eventTags, Boolean eventIsNotInitialisedByUser) {
-        requireAllNonNull(eventName, eventTags, eventIsNotInitialisedByUser);
+                 EventStartTime eventStartTime, Set<Tag> eventTags, Boolean eventIsNotInitialisedByUser) {
+        requireAllNonNull(eventName, eventDate, eventVenue, eventStartTime, eventTags, eventIsNotInitialisedByUser);
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventVenue = eventVenue;
+        this.eventStartTime = eventStartTime;
         this.eventTags.addAll(eventTags);
         this.isNotInitialisedByUser = eventIsNotInitialisedByUser;
     }
@@ -48,6 +52,8 @@ public class Event {
         this.eventDate = eventDate;
         EventVenue eventVenue = new EventVenue("NA");
         this.eventVenue = eventVenue;
+        EventStartTime eventStartTime = new EventStartTime("1:00 pm");
+        this.eventStartTime = eventStartTime;
         Tag tag = new Tag("NA");
         this.eventTags.add(tag);
         this.isNotInitialisedByUser = true;
@@ -65,6 +71,10 @@ public class Event {
         return eventVenue.getEventVenue();
     }
 
+    public String getStartTime() {
+        return eventStartTime.getEventStartTime();
+    }
+
     private EventName getEventName() {
         return eventName;
     }
@@ -77,11 +87,16 @@ public class Event {
         return eventVenue;
     }
 
+    private EventStartTime getEventStartTime() {
+        return eventStartTime;
+    }
+
     public void setEvent(Event event) {
         if (!this.equals(event)) {
             this.eventName.setEventName(event.getName());
             this.eventDate.setEventDate(event.getDate());
             this.eventVenue.setEventVenue(event.getVenue());
+            this.eventStartTime.setEventStartTime(event.getStartTime());
             this.eventTags = event.eventTags;
             this.isNotInitialisedByUser = !event.isUserInitialised();
         }
@@ -93,6 +108,7 @@ public class Event {
             this.eventName.setEventName(event.getName());
             this.eventDate.setEventDate(event.getDate());
             this.eventVenue.setEventVenue(event.getVenue());
+            this.eventStartTime.setEventStartTime(event.getStartTime());
             this.eventTags = event.eventTags;
         }
         this.isNotInitialisedByUser = false;
@@ -103,6 +119,7 @@ public class Event {
         this.eventName.setEventName(event.getName());
         this.eventDate.setEventDate(event.getDate());
         this.eventVenue.setEventVenue(event.getVenue());
+        this.eventStartTime.setEventStartTime(event.getStartTime());
         this.eventTags = event.eventTags;
         this.isNotInitialisedByUser = true;
     }
@@ -130,7 +147,8 @@ public class Event {
         return otherEvent != null
                 && otherEvent.getName().equals(getName())
                 && otherEvent.getDate().equals(getDate())
-                && otherEvent.getVenue().equals(getVenue());
+                && otherEvent.getVenue().equals(getVenue())
+                && otherEvent.getStartTime().equals(getStartTime());
     }
 
     /**
@@ -151,13 +169,14 @@ public class Event {
         return otherEvent.getEventName().equals(getEventName())
                 && otherEvent.getEventDate().equals(getEventDate())
                 && otherEvent.getEventVenue().equals(getEventVenue())
+                && otherEvent.getEventStartTime().equals(getEventStartTime())
                 && otherEvent.getEventTags().equals(getEventTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(eventName, eventDate, eventVenue, eventTags);
+        return Objects.hash(eventName, eventDate, eventVenue, eventStartTime, eventTags);
     }
 
     @Override
@@ -168,6 +187,8 @@ public class Event {
                 .append(getDate())
                 .append(" Venue: ")
                 .append(getVenue())
+                .append(" Start Time: ")
+                .append(getStartTime())
                 .append(" Tags: ");
         getEventTags().forEach(builder::append);
         return builder.toString();
