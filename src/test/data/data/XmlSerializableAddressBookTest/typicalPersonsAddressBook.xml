@@ -57,10 +57,4 @@
         <payment>PENDING</payment>
         <attendance>PRESENT</attendance>
     </persons>
-    <event>
-        <name>Conference</name>
-        <date>10/10/2017</date>
-        <venue>SRC RM 1</venue>
-        <startTime>12:00 PM</startTime>
-    </event>
 </addressbook>
