@@ -47,7 +47,9 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public Event getEventDetails() { return model.getEventDetails(); }
+    public Event getEventDetails() {
+        return model.getEventDetails();
+    }
 
     @Override
     public ListElementPointer getHistorySnapshot() {

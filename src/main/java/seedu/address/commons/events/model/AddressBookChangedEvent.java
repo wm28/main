@@ -18,5 +18,7 @@ public class AddressBookChangedEvent extends BaseEvent {
         return "number of persons " + data.getPersonList().size();
     }
 
-    public Event getNewDetails() { return this.data.getEventDetails(); }
+    public Event getNewDetails() {
+        return this.data.getEventDetails();
+    }
 }

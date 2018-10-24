@@ -51,7 +51,8 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
-    public XmlAdaptedEvent(String name, String date, String venue, String startTime, List<XmlAdaptedTag> tagged, String isNotInitialisedByUser) {
+    public XmlAdaptedEvent(String name, String date, String venue,
+                           String startTime, List<XmlAdaptedTag> tagged, String isNotInitialisedByUser) {
         this.name = name;
         this.date = date;
         this.venue = venue;
@@ -71,14 +72,13 @@ public class XmlAdaptedEvent {
         name = source.getName();
         date = source.getDate();
         venue = source.getVenue();
-        startTime  =source.getStartTime();
+        startTime = source.getStartTime();
         tagged = source.getEventTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
         if (source.isUserInitialised() == true) {
             isNotInitialisedByUser = "false";
-        }
-        else {
+        } else {
             isNotInitialisedByUser = "true";
         }
     }
@@ -104,15 +104,17 @@ public class XmlAdaptedEvent {
         final EventName modelName = new EventName(name);
 
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format
+                    (MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
         }
         if (!EventDate.isValidEventDate(date)) {
             throw new IllegalValueException(EventDate.MESSAGE_EVENTDATE_CONSTRAINTS);
         }
         final EventDate modelDate = new EventDate(date);
 
-        if (venue == null){
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventVenue.class.getSimpleName()));
+        if (venue == null) {
+            throw new IllegalValueException(String.format
+                    (MISSING_FIELD_MESSAGE_FORMAT, EventVenue.class.getSimpleName()));
         }
         if (!EventVenue.isValidEventVenue(venue)) {
             throw new IllegalValueException(EventVenue.MESSAGE_EVENTVENUE_CONSTRAINTS);
@@ -120,10 +122,11 @@ public class XmlAdaptedEvent {
         final EventVenue modelVenue = new EventVenue(venue);
 
         if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventStartTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format
+                    (MISSING_FIELD_MESSAGE_FORMAT, EventStartTime.class.getSimpleName()));
         }
         if (!EventStartTime.isValidEventStartTime(startTime)) {
-           throw new IllegalValueException(EventStartTime.MESSAGE_EVENTSTARTTIME_CONSTRAINTS);
+            throw new IllegalValueException(EventStartTime.MESSAGE_EVENTSTARTTIME_CONSTRAINTS);
         }
         final EventStartTime modelStartTime = new EventStartTime(startTime);
 
@@ -131,11 +134,12 @@ public class XmlAdaptedEvent {
         final Set<Tag> modelTags = new HashSet<>(eventTags);
         //@@author
 
-        Boolean modelisNotInitialisedByUser;
-        if (isNotInitialisedByUser == "true")
+        boolean modelisNotInitialisedByUser;
+        if (isNotInitialisedByUser == "true") {
             modelisNotInitialisedByUser = true;
-        else
+        } else {
             modelisNotInitialisedByUser = false;
+        }
 
         return new Event(modelName, modelDate, modelVenue, modelStartTime, modelTags, modelisNotInitialisedByUser);
     }

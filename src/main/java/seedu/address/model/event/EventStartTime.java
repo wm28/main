@@ -11,7 +11,8 @@ public class EventStartTime {
 
     //Identity fields
     public static final String MESSAGE_EVENTSTARTTIME_CONSTRAINTS =
-            "Event's start time should only contain alphanumeric characters and spaces in the 12 hour format and should not be blank.";
+            "Event's start time should only contain alphanumeric characters "
+                    + "and spaces in the 12 hour format and should not be blank.";
 
     public static final String EVENTSTARTTIME_VALIDATION_REGEX = "(1[012]|[1-9]):[0-5][0-9](\\s)?(?i)(am|pm)";
 

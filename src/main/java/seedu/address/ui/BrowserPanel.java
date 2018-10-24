@@ -55,8 +55,7 @@ public class BrowserPanel extends UiPart<Region> {
             startTime.setText(event.getStartTime());
             removeTags();
             createTags(event);
-        }
-        else {
+        } else {
             name.setText("Please put in event details");
             date.setText("");
             venue.setText("");
