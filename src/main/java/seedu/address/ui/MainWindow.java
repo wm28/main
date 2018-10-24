@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -19,6 +20,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.Logic;
+import seedu.address.logic.converters.ImportError;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -204,8 +206,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
 
-    public void showImportReport() {
-        ImportReportWindow importReportWindow = new ImportReportWindow();
+    public void showImportReport(List<ImportError> errors) {
+        ImportReportWindow importReportWindow = new ImportReportWindow(errors);
         importReportWindow.show();
     }
 
@@ -218,6 +220,6 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowImportReportEvent(ShowImportReportEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        showImportReport();
+        showImportReport(event.errors);
     }
 }
