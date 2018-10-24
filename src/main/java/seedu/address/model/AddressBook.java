@@ -55,6 +55,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //@@author SandhyaGopakumar
+
+    /**
+     * Replaces the current details of the event with {@code event}.
+     */
     public void setEvent(Event event) {
         this.eventDetails.setEvent(event);
     }
@@ -71,6 +75,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //@@author SandhyaGopakumar
     //event-level operations
+    /** Adds the details given by the user to event. */
     public void addEvent(Event e) {
         eventDetails.addEvent(e);
     }
@@ -80,6 +85,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         eventDetails.deleteEvent();
     }
 
+    /** Returns true if the event details given by the user is being stored in the addressbook. */
     public boolean hasEvent() {
         return eventDetails.isUserInitialised();
     }
@@ -187,12 +193,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    //@@author SandhyaGopakumar
     @Override
     public Event getEventDetails() {
         return eventDetails;
     }
-    //@@author
 
     @Override
     public boolean equals(Object other) {

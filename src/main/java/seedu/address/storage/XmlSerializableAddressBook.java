@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,8 +21,13 @@ public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
+    public static final String MESSAGE_DUPLICATE_EVENT = "An event already exists.";
+
     @XmlElement
     private List<XmlAdaptedPerson> persons;
+
+    @XmlElement
+    private XmlAdaptedEvent event;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -29,6 +35,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         persons = new ArrayList<>();
+        event = new XmlAdaptedEvent();
     }
 
     /**
@@ -37,6 +44,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        event = new XmlAdaptedEvent(src.getEventDetails());
     }
 
     /**
@@ -54,6 +62,11 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+        Event event = this.event.toModelType();
+        if (addressBook.hasEvent()) {
+            throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
+        }
+        addressBook.setEvent(event);
         return addressBook;
     }
 
@@ -66,6 +79,7 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableAddressBook) other).persons)
+                && event.equals(((XmlSerializableAddressBook) other).event);
     }
 }
