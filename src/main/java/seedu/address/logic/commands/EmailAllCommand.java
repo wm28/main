@@ -29,7 +29,7 @@ public class EmailAllCommand extends Email {
             + "current filtered list\n"
             + "Example: " + COMMAND_WORD;
 
-    private static final String MESSAGE_MAIL_ALL_PERSON_SUCCESS = "Successfully sent an email to %1$d persons,"
+    private static final String MESSAGE_MAIL_ALL_PERSON_SUCCESS = "Successfully sent an email to %1$d persons, "
             + "could not send an email to %2$d guests will addresses: %3$s!";
 
     private static Logger logger = Logger.getLogger("execute");
@@ -54,6 +54,13 @@ public class EmailAllCommand extends Email {
 
         for (Person personToMail : lastShownList) {
             assert personToMail != null;
+
+            if (!isValidEmail(personToMail.getEmail().toString())) {
+                failedEmails++;
+                String invalidEmail = " || " + personToMail.getEmail().toString() + " || ";
+                invalidEmails.append(invalidEmail);
+                continue;
+            }
 
             // Retrieve all email fields and user credentials and validate that they are not null
             try {
@@ -81,8 +88,6 @@ public class EmailAllCommand extends Email {
                 break;
             }
 
-            successfulEmails++;
-
             // Creates a new session with the user gmail account as the host
             Properties props = createPropertiesConfiguration();
 
@@ -95,6 +100,8 @@ public class EmailAllCommand extends Email {
 
             createAndSendEmail(username, emailSubject, emailMessage,
                     personToMail.getEmail().toString(), session);
+
+            successfulEmails++;
         }
 
         logger.log(Level.INFO, "All emails sent successfully!");
@@ -134,6 +141,11 @@ public class EmailAllCommand extends Email {
     public void createAndSendEmail(String username, String emailSubject, String emailMessage,
                                    String recipient, Session session) throws CommandException {
         super.createAndSendEmail(username, emailSubject, emailMessage, recipient, session);
+    }
+
+    @Override
+    public boolean isValidEmail(String guestAddress) {
+        return super.isValidEmail(guestAddress);
     }
 
     @Override

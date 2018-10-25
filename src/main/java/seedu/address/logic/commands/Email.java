@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -140,8 +142,21 @@ public abstract class Email extends Command {
 
             Transport.send(message);
         } catch (MessagingException mex) {
-            throw new CommandException("Error: could not send email, please ensure you have strong"
+            throw new CommandException("Error: could not send email, please ensure you have strong "
                     + "internet connectivity.");
         }
+    }
+
+    /**
+     *
+     * @param guestAddress is the address of the guest you wish to send an email to
+     * @return a boolean 
+     */
+    public boolean isValidEmail (String guestAddress) {
+        String  expression="^[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence input = guestAddress;
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
     }
 }

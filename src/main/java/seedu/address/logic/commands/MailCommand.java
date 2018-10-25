@@ -67,6 +67,9 @@ public class MailCommand extends Email {
 
         Person personToMail = lastShownList.get(index.getZeroBased());
         assert personToMail != null;
+        if (!isValidEmail(personToMail.getEmail().toString())) {
+            throw new CommandException("Error: The email of the recipient is invalid!");
+        }
 
         // Retrieve all email fields and user credentials and validate that they are not null
         try {
@@ -140,6 +143,11 @@ public class MailCommand extends Email {
     public void createAndSendEmail(String username, String emailSubject, String emailMessage,
                                    String recipient, Session session) throws CommandException {
         super.createAndSendEmail(username, emailSubject, emailMessage, recipient, session);
+    }
+
+    @Override
+    public boolean isValidEmail(String guestAddress) {
+        return super.isValidEmail(guestAddress);
     }
 
     @Override
