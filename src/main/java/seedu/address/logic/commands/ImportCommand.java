@@ -87,5 +87,20 @@ public class ImportCommand extends Command {
         }
         model.addPerson(toAdd);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ImportCommand)) {
+            return false;
+        }
+
+        ImportCommand otherIc = (ImportCommand) other;
+        return supportedFile.getFileName().equals(otherIc.supportedFile.getFileName())
+                && personConverter.getSupportedFileFormat().equals(otherIc.personConverter.getSupportedFileFormat());
+    }
 }
 //@@author
