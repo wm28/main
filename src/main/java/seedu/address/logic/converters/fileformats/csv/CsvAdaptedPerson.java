@@ -17,5 +17,10 @@ public class CsvAdaptedPerson extends AdaptedPerson {
     public String getFormattedString() {
         return csvFormattedPerson;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return csvFormattedPerson.equals(((CsvAdaptedPerson) other).getFormattedString());
+    }
 }
 //@@author
