@@ -11,6 +11,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.exceptions.PersonEncodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
+import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.logic.converters.fileformats.csv.CsvAdaptedPerson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -181,5 +182,11 @@ public class CsvConverterTest {
         CsvConverter csvConverter = new CsvConverter();
         thrown.expect(PersonEncodingException.class);
         csvConverter.encodePerson(null);
+    }
+
+    @Test
+    public void getSupportedFileFormat_correctFileFormat_returnsFileFormat() throws Exception {
+        CsvConverter csvConverter = new CsvConverter();
+        assertTrue(csvConverter.getSupportedFileFormat().equals(SupportedFileFormat.CSV));
     }
 }
