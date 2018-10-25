@@ -40,20 +40,56 @@ public class CsvConverterTest {
     public static final String INVALID_TAG_QUOTATIONS = "\"vegetarian"; // '"' not allowed
     public static final String INVALID_TAG_SPACES = "\"No shrimp"; // spaces are not allowed
 
+    public static final String VALID_CSV = VALID_NAME + ","
+            + VALID_PHONE + ","
+            + VALID_EMAIL + ","
+            + VALID_PAYMENT + ","
+            + VALID_ATTENDANCE + ","
+            + VALID_TAG_FRIEND + ","
+            + VALID_TAG_DIET;
+
+    public static final String INVALID_NAME_CSV = INVALID_NAME + ","
+            + VALID_PHONE + ","
+            + VALID_EMAIL + ","
+            + VALID_PAYMENT + ","
+            + VALID_ATTENDANCE + ","
+            + VALID_TAG_FRIEND + ","
+            + VALID_TAG_DIET;
+
+    public static final String INVALID_PHONE_CSV = VALID_NAME + ","
+            + INVALID_PHONE + ","
+            + VALID_EMAIL + ","
+            + VALID_PAYMENT + ","
+            + VALID_ATTENDANCE + ","
+            + VALID_TAG_FRIEND + ","
+            + VALID_TAG_DIET;
+
+    public static final String INVALID_EMAIL_CSV = VALID_NAME + ","
+            + VALID_PHONE + ","
+            + INVALID_EMAIL + ","
+            + VALID_PAYMENT + ","
+            + VALID_ATTENDANCE + ","
+            + VALID_TAG_FRIEND + ","
+            + VALID_TAG_DIET;
+
+    public static final String INVALID_TAGS_CSV = VALID_NAME + ","
+            + VALID_PHONE + ","
+            + VALID_EMAIL + ","
+            + VALID_PAYMENT + ","
+            + VALID_ATTENDANCE + ","
+            + VALID_TAG_FRIEND + ","
+            + INVALID_TAG_SPACES + ","
+            + INVALID_TAG_QUOTATIONS;
+
+    public static final String INSUFFICIENT_FIELDS_CSV = VALID_NAME + ","
+            + VALID_PHONE + ","
+            + INVALID_PHONE;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void decodePerson_validAdaptedPerson_decodeSuccessful() throws Exception {
-        String VALID_CSV = VALID_NAME + ","
-                + VALID_PHONE + ","
-                + VALID_EMAIL + ","
-                + VALID_PAYMENT + ","
-                + VALID_ATTENDANCE + ","
-                + VALID_TAG_FRIEND + ","
-                + VALID_TAG_DIET;
-
         PersonBuilder personBuilder = new PersonBuilder();
         personBuilder.withName(VALID_NAME)
                 .withPhone(VALID_PHONE)
@@ -72,14 +108,6 @@ public class CsvConverterTest {
 
     @Test
     public void decodePerson_invalidPersonName_throwsPersonDecodingException() throws Exception {
-        String INVALID_NAME_CSV = INVALID_NAME + ","
-                + VALID_PHONE + ","
-                + VALID_EMAIL + ","
-                + VALID_PAYMENT + ","
-                + VALID_ATTENDANCE + ","
-                + VALID_TAG_FRIEND + ","
-                + VALID_TAG_DIET;
-
         CsvConverter csvConverter = new CsvConverter();
         AdaptedPerson invalidNameAdaptedPerson = new CsvAdaptedPerson(INVALID_NAME_CSV);
         thrown.expect(PersonDecodingException.class);
@@ -89,14 +117,6 @@ public class CsvConverterTest {
 
     @Test
     public void decodePerson_invalidPhoneNumber_throwsPersonDecodingException() throws Exception {
-        String INVALID_PHONE_CSV = VALID_NAME + ","
-                + INVALID_PHONE + ","
-                + VALID_EMAIL + ","
-                + VALID_PAYMENT + ","
-                + VALID_ATTENDANCE + ","
-                + VALID_TAG_FRIEND + ","
-                + VALID_TAG_DIET;
-
         CsvConverter csvConverter = new CsvConverter();
         AdaptedPerson invalidPhoneAdaptedPerson = new CsvAdaptedPerson(INVALID_PHONE_CSV);
         thrown.expect(PersonDecodingException.class);
@@ -106,14 +126,6 @@ public class CsvConverterTest {
 
     @Test
     public void decodePerson_invalidEmail_throwsPersonDecodingException() throws Exception {
-        String INVALID_EMAIL_CSV = VALID_NAME + ","
-                + VALID_PHONE + ","
-                + INVALID_EMAIL + ","
-                + VALID_PAYMENT + ","
-                + VALID_ATTENDANCE + ","
-                + VALID_TAG_FRIEND + ","
-                + VALID_TAG_DIET;
-
         CsvConverter csvConverter = new CsvConverter();
         AdaptedPerson invalidEmailAdaptedPerson = new CsvAdaptedPerson(INVALID_EMAIL_CSV);
         thrown.expect(PersonDecodingException.class);
@@ -123,15 +135,6 @@ public class CsvConverterTest {
 
     @Test
     public void decodePerson_invalidTags_throwsPersonDecodingException() throws Exception {
-        String INVALID_TAGS_CSV = VALID_NAME + ","
-                + VALID_PHONE + ","
-                + VALID_EMAIL + ","
-                + VALID_PAYMENT + ","
-                + VALID_ATTENDANCE + ","
-                + VALID_TAG_FRIEND + ","
-                + INVALID_TAG_SPACES + ","
-                + INVALID_TAG_QUOTATIONS;
-
         CsvConverter csvConverter = new CsvConverter();
         AdaptedPerson invalidTagsAdaptedPerson = new CsvAdaptedPerson(INVALID_TAGS_CSV);
         thrown.expect(PersonDecodingException.class);
@@ -141,10 +144,6 @@ public class CsvConverterTest {
 
     @Test
     public void decodePerson_insufficientCsvData_throwsPersonDecodingException() throws Exception {
-        String INSUFFICIENT_FIELDS_CSV = VALID_NAME + ","
-                + VALID_PHONE + ","
-                + INVALID_PHONE;
-
         CsvConverter csvConverter = new CsvConverter();
         AdaptedPerson insufficientFieldsAdaptedPerson = new CsvAdaptedPerson(INSUFFICIENT_FIELDS_CSV);
         thrown.expect(PersonDecodingException.class);
@@ -163,14 +162,6 @@ public class CsvConverterTest {
                 .withPayment(VALID_PAYMENT)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_DIET);
         Person validPerson = personBuilder.build();
-
-        String VALID_CSV = VALID_NAME + ","
-                + VALID_PHONE + ","
-                + VALID_EMAIL + ","
-                + VALID_PAYMENT + ","
-                + VALID_ATTENDANCE + ","
-                + VALID_TAG_FRIEND + ","
-                + VALID_TAG_DIET;
         CsvConverter csvConverter = new CsvConverter();
         AdaptedPerson validAdaptedPerson = csvConverter.encodePerson(validPerson);
 
