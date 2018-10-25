@@ -1,4 +1,3 @@
-//@@author Sarah
 package seedu.address.model.person;
 
 import static org.junit.Assert.assertFalse;
@@ -8,6 +7,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
+//@@author Sarah
 public class AttendanceTest {
 
     @Test

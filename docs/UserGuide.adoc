@@ -168,23 +168,26 @@ This will present you with an error in specifying the command, as all your tags 
 === Locating guests by name: `find`
 
 Finds guests whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]` +
+Example: find n/NAME p/PHONE e/EMAIL
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only names, phone numbers and email addresses are searched, depending on prefixes given.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
+* `find n/John` +
 You will be shown a list that contains the entries of `john` and `John Doe`
-* `find Betsy Tim John` +
+* `find n/Betsy n/Tim n/John` +
 You will be show a list containing entries of any guest having names `Betsy`, `Tim`, or `John`
-
+* `find n/alex p/92746838 e/johndoe@gmail.com` +
+You will be show a list containing entries of any guest having the name `Alex`,
+phone number `92746838`, or email address `johndoe@gmail.com`
 === Import guests from CSV file : `import`
 
 Imports guests with data from a CSV formatted file. The structure for the values in the CSV file is predefined. +
@@ -245,9 +248,10 @@ Format: `stop_marking`
 
 ===  Filter list based on specified parameters : `filter`
 
-Filter guest list based on filter guest attributes. +
-Format: `filter [p/PHONE_NUMBER] [e/EMAIL] [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
-         [t/DIET] [t/PERSON_TYPE]`
+Filter guest list based on filter guest attributes. Only filters based on
+payment status, attendance status and tags. +
+Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
+         [t/DIET] [t/PERSON_TYPE] [t/...]`
 Examples:
 
 * `filter a/Present t/Vegetarian` +
@@ -383,7 +387,7 @@ You will see the guest list populate itself with the data from the specified CSV
 * `delete` : ​Removes an entry of a specified guest based on name.
 * `removeTag` : Removes a set of tags from all the guests in the current list.
 * `addtag` : Adds a set of tags to all the guests in the current list.
-* `find` : Finds guests whose names contain any of the given keywords.
+* `find` : Finds guests whose names, phone numbers or email addresses contain any of the given keywords.
 * `list` : Lists the current guest list
 * `import` : ​Automatically generates guest list from a given CSV file.
 * `export` : Exports guest list to a CSV file.

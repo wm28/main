@@ -30,4 +30,5 @@ public class Messages {
                                                              + "username in Credentials.txt or Message.txt. "
                                                              + "Please ensure you enclose all the parameters "
                                                              + "within quotation marks!";
+    public static final String MESSAGE_PERSONS_FILTERED_OVERVIEW = "Filtered by: %1$s\n";
 }

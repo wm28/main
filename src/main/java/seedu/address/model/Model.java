@@ -33,7 +33,7 @@ public interface Model {
 
     /**
      * Adds the given event.
-     * {@code event} must not already exist in the application.
+     * {@code event} with details given by the user must not already exist in the application.
      */
     void addEvent(Event event);
 
