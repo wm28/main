@@ -7,7 +7,6 @@ import java.util.List;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.converters.CsvConverter;
 import seedu.address.logic.converters.PersonConverter;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
@@ -99,9 +98,9 @@ public class ImportCommand extends Command {
             return false;
         }
 
-        ImportCommand otherIC = (ImportCommand) other;
-        return supportedFile.getFileName().equals(otherIC.supportedFile.getFileName())
-                && personConverter.getSupportedFileFormat().equals(otherIC.personConverter.getSupportedFileFormat());
+        ImportCommand otherIc = (ImportCommand) other;
+        return supportedFile.getFileName().equals(otherIc.supportedFile.getFileName())
+                && personConverter.getSupportedFileFormat().equals(otherIc.personConverter.getSupportedFileFormat());
     }
 }
 //@@author
