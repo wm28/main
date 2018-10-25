@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 //@@author kronicler
 /**
- * Represents a Person's ID in the guestlist.
- * Guarantees: immutable; is valid as declared in {@link #isValidID(String)}
+ * Represents a Person's ID in the guest list.
+ * Guarantees: immutable; is valid as declared in {@link #isValidId(String)}
  */
-public class ID {
+public class Id {
     public static final String MESSAGE_ID_CONSTRAINTS =
-            "ID should only contain numeric characters, it can be left blank";
+            "Id should only contain numeric characters, it can be left blank";
 
     /*
      * Ensures that only a string of numeric characters are accepted
@@ -24,16 +24,16 @@ public class ID {
      *
      * @param id is a string of numbers that the Person holds.
      */
-    public ID(String id) {
+    public Id(String id) {
         requireNonNull(id);
-        checkArgument(isValidID(id), MESSAGE_ID_CONSTRAINTS);
+        checkArgument(isValidId(id), MESSAGE_ID_CONSTRAINTS);
         idValue = id;
     }
 
     /**
      * Returns true if a given string is a valid ID.
      */
-    public static boolean isValidID(String test) {
+    public static boolean isValidId(String test) {
         return test.matches(ID_VALIDATION_REGEX);
     }
 
@@ -46,8 +46,8 @@ public class ID {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ID // instanceof handles nulls
-                && idValue.equals(((ID) other).idValue)); // state check
+                || (other instanceof Id // instanceof handles nulls
+                && idValue.equals(((Id) other).idValue)); // state check
     }
 
     @Override
