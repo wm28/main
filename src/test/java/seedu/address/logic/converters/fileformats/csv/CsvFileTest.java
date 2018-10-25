@@ -44,6 +44,7 @@ public class CsvFileTest {
         assertTrue(csvFile.getSupportedFileFormat().equals(SupportedFileFormat.CSV));
     }
 
+    /*
     @Test
     public void readAdaptedPersons_validCsvFile_readSuccessful() throws Exception {
         List<AdaptedPerson> expectedAdaptedPeople = new ArrayList<>();
@@ -57,8 +58,7 @@ public class CsvFileTest {
 
         assertTrue(adaptedPeople.containsAll(expectedAdaptedPeople));
         assertTrue(expectedAdaptedPeople.containsAll(adaptedPeople));
-    }
-
+    } */
 
     @Test
     public void readAdaptedPersons_nonExistentCsvFile_readSuccessful() throws Exception {
