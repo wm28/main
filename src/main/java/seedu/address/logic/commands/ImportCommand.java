@@ -24,7 +24,7 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports guests into current event through a CSV file. "
             + "Parameters: FILE_PATH\n"
-            + "Example: " + COMMAND_WORD + " guestlist.csv";
+            + "Example: " + COMMAND_WORD + " guestbook.csv";
 
     public static final String MESSAGE_IMPORT_CSV_RESULT = "Successfully imported %1$d of %2$d guests from %3$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

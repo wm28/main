@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 
 //@@author aaryamNUS
 /**
- * Adds a set of tags from all the people in the current GuestList
+ * Adds a set of tags from all the people in the current GuestBook
  */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addTag";
