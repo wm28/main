@@ -7,6 +7,7 @@ import java.util.List;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.converters.CsvConverter;
 import seedu.address.logic.converters.PersonConverter;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
@@ -86,6 +87,21 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.addPerson(toAdd);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ImportCommand)) {
+            return false;
+        }
+
+        ImportCommand otherIC = (ImportCommand) other;
+        return supportedFile.getFileName().equals(otherIC.supportedFile.getFileName())
+                && personConverter.getSupportedFileFormat().equals(otherIC.personConverter.getSupportedFileFormat());
     }
 }
 //@@author
