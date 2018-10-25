@@ -3,17 +3,12 @@ package seedu.address.logic.converters.fileformats.csv;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.SupportedFileFormat;
-
-
 
 public class CsvFileTest {
 
