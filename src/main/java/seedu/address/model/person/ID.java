@@ -1,9 +1,9 @@
-//@@author kronicler
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author kronicler
 /**
  * Represents a Person's ID in the guestlist.
  * Guarantees: immutable; is valid as declared in {@link #isValidID(String)}
