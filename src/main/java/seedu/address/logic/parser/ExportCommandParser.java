@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ExportCommandParser {
 
-    public static final String DEFAULT_FILENAME_FORMAT = "exportedGuestList.csv";
+    public static final String DEFAULT_FILENAME_FORMAT = "exportedGuestBook.csv";
 
     /**
      * Parses the given argument {@code String} in the context of the ExportCommand

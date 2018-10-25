@@ -26,7 +26,7 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports guests to a CSV file. "
             + "Parameters: FILE_PATH\n"
-            + "Example: " + COMMAND_WORD + " guestlist.csv";
+            + "Example: " + COMMAND_WORD + " guestbook.csv";
     public static final String MESSAGE_EXPORT_CSV_RESULT = "Successfully exported %1$d/%2$d guests to %3$s";
     public static final String MESSAGE_NO_PERSONS = "There are no persons to export!";
 

@@ -24,7 +24,7 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports guests into current event through a CSV file. "
             + "Parameters: FILE_PATH\n"
-            + "Example: " + COMMAND_WORD + " guestlist.csv";
+            + "Example: " + COMMAND_WORD + " guestbook.csv";
 
     public static final String MESSAGE_IMPORT_CSV_RESULT = "Successfully imported %1$d of %2$d guests from %3$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -86,6 +86,21 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         model.addPerson(toAdd);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ImportCommand)) {
+            return false;
+        }
+
+        ImportCommand otherIc = (ImportCommand) other;
+        return supportedFile.getFileName().equals(otherIc.supportedFile.getFileName())
+                && personConverter.getSupportedFileFormat().equals(otherIc.personConverter.getSupportedFileFormat());
     }
 }
 //@@author
