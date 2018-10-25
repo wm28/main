@@ -37,7 +37,7 @@ public class MailCommand extends Email {
     private static Logger logger = Logger.getLogger("execute");
     private static String username;
     private static String password;
-    public Index index;
+    private Index index;
 
     /**
      * @param index of the person in the filtered person list to edit

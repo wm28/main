@@ -81,8 +81,8 @@ public class EmailAllCommand extends Email {
                 successfulEmails = 0;
 
                 for (Person person : lastShownList) {
-                    String person_email = person.getEmail().toString() + " ";
-                    invalidEmails.append(person_email);
+                    String personEmail = person.getEmail().toString() + " ";
+                    invalidEmails.append(personEmail);
                 }
 
                 break;

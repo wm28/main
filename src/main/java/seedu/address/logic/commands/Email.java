@@ -173,7 +173,7 @@ public abstract class Email extends Command {
      * Source: http://zparacha.com/ultimate-java-regular-expression-to-validate-email-address
      */
     public boolean isValidEmail (String guestAddress) {
-        String  expression="^[\\w\\-]([\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        String expression = "^[\\w\\-]([\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
 
         // Create a pattern object using the expression provided
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
