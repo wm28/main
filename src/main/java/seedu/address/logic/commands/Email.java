@@ -132,11 +132,17 @@ public abstract class Email extends Command {
     public void createAndSendEmail(String username, String emailSubject, String emailMessage,
                               String recipient, Session session) throws CommandException {
         try {
-            // Creates the MIME message to be sent in the email
+            // Creates a default MimeMessage object
             Message message = new MimeMessage(session);
+
+            // Set the email of the host
             message.setFrom(new InternetAddress(username));
+
+            // Set the email of the guest
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(recipient));
+
+            // Set email subject and message
             message.setSubject(emailSubject);
             message.setText(emailMessage);
 
@@ -148,15 +154,32 @@ public abstract class Email extends Command {
     }
 
     /**
+     * This method checks whether a given email address has the valid format, through the use
+     * of a Java Regular expression, which is a special sequence of characters that allows you
+     * to match and find other strings or sets of strings
+     *
+     * A basic outline of the 'expression' string is given below:
+     *
+     * Subexpression                                Meaning
+     *      ^                           Matches the beginning of the line
+     *      $                           Matches the end of the line
+     *    [...]                         Matches with any character in the brackets
+     *     \w                           Matches any word characters
+     *    {2,4}                         Matches between 2 and 4 occurrences of preceding expressions
      *
      * @param guestAddress is the address of the guest you wish to send an email to
-     * @return a boolean 
+     * @return a boolean that determines whether the given email address is of the correct format
+     * The following regular expression was adapted from zParacha.com,
+     * Source: http://zparacha.com/ultimate-java-regular-expression-to-validate-email-address
      */
     public boolean isValidEmail (String guestAddress) {
-        String  expression="^[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        CharSequence input = guestAddress;
+        String  expression="^[\\w\\-]([\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+
+        // Create a pattern object using the expression provided
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(input);
+
+        // Create the corresponding matcher object
+        Matcher matcher = pattern.matcher(guestAddress);
         return matcher.matches();
     }
 }

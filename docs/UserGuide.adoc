@@ -52,6 +52,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Please refer to <<Features>> subsection to see more detailed documentation of the functions that
    are included in this application
+.  If you would like to perform emailing services through our application, please complete the steps as shown
+   in the section <<Setting up your Gmail Account>>
 
 [[Features]]
 == Features
@@ -148,7 +150,7 @@ This will present you with an error in specifying the command, as you have not p
 * `removeTag t/@!*` +
 This will present you with an error in specifying the command, as all your tags must be alphanumeric
 
-=== Adds a set of tags to all guests : `addTag`
+=== Adding a set of tags to all guests : `addTag`
 
 This command allows you to add a set of tags to all guests in the guest list. +
 Format: `addTag [t/TAG]...`
@@ -188,7 +190,7 @@ You will be show a list containing entries of any guest having names `Betsy`, `T
 * `find n/alex p/92746838 e/johndoe@gmail.com` +
 You will be show a list containing entries of any guest having the name `Alex`,
 phone number `92746838`, or email address `johndoe@gmail.com`
-=== Import guests from CSV file : `import`
+=== Importing guests from CSV file : `import`
 
 Imports guests with data from a CSV formatted file. The structure for the values in the CSV file is predefined. +
 Format: `import FILE_PATH`
@@ -198,7 +200,7 @@ Examples:
 * `import directory/subdirectory/guestlist.csv` +
 You will populate the guest list with the data imported from the CSV file in the specified path.
 
-=== Export guests to CSV file : `export`
+=== Exporting guests to CSV file : `export`
 
 Exports guests' data to a CSV formatted file. The structure for the values in the CSV file is predefined. +
 Format: `export FILE_PATH`
@@ -208,7 +210,7 @@ Examples:
 * `export directory/subdirectory/guestlist.csv` +
 You will export the current guest list entries into a CSV file in the specified path.
 
-=== Mark a guest as present : `mark`
+=== Marking a guest as present : `mark`
 
 Marks a guest as present using a unique number assigned to them. This will also change the
 `a/PRESENT`​ tag associated with the guest to Present. +
@@ -219,7 +221,7 @@ Examples:
 * `mark 81927291` +
 You will mark the guest with phone number `81927291` as present.
 
-=== Mark a guest as absent : `unmark`
+=== Marking a guest as absent : `unmark`
 
 Marks a guest as absent using their unique number. This will also change the
 `a/PRESENT`​ tag associated with the guest to Absent. +
@@ -270,14 +272,42 @@ Format: `email INDEX`
 
 [NOTE]
 ====
-All email subjects and messages have been pre-written and are available in the file at `main/data/EmailData/Message.txt`.
-You are free to edit these messages to suit your needs.
+All email subjects and messages have been pre-written and are available in the file at `src/main/resources/EmailData/Message.txt`.
+You are free to edit these messages to suit your own needs.
 ====
 
 Examples:
 
 * `email 2` +
 You will send an email to the 2nd person in the list.
+
+=== Sending an email to all guests : `emailAll`
+Sends an email to all of the guests in the current list +
+Format: `emailAll`
+
+Examples:
+
+* `emailAll` +
+Sends an email to all the guests in the list.
+
+=== Sending emails to specified guests, ignoring potential spam : `forceEmail`
+Sends an email to the guest specified by the index, regardless of how many emails have been sent to that guest +
+Format: `forceEmail INDEX`
+
+****
+* Sends an email to the guest at the specified `INDEX`.
+* The index refers to the index number shown in the displayed guest list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+[NOTE]
+====
+If you try to send multiple emails to the same guest, the system will inform you of this and not allow you to spam the guest.
+However, the `forceEmail` command will allow you to send another email, regardless of how many emails have been sent before.
+====
+
+* `forceEmail` +
+Forces an email to be sent to the guest specified by INDEX.
 
 ===   Creating a new event : `add_event`
 
@@ -379,6 +409,26 @@ Alternatively, you could export the data from your current computer using the ex
 *A*: Firstly, create a new event within the application. After this, use the import function and specify the path to the file.
 You will see the guest list populate itself with the data from the specified CSV file.
 
+== Setting up your Gmail Account
+
+In order for you to use the commands `email`, `emailAll`, and `forceEmail`, you must allow Invités to access your email account and
+send emails. Currently, our application only supports Gmail accounts, but we do plan on supporting
+other email domains.
+
+If you do have a Gmail account, please follow these steps to enable email services:
+
+1. Login to your Gmail account using your preferred online browser (e.g. Chrome, Firefox).
+2. Click on your profile picture on the top right, and click on `Google Account`
+3. Once you are re-directed, under the `Sign-in and security` section, click on `Apps with account access`
+4. Scroll down till you find the section `Allow less secure apps` on the right. Set this option to `ON`.
+5. In the Invités application, please specify your username and password in the file `Credentials.txt` at `/src/main/resources/EmailData/` in your project folder.
+6. Please specify an email subject and message in the file `Message.txt` also at `/src/main/resources/EmailData/` in your project folder.
+7. You are now ready to send emails to your guests through Invités!
+
+[WARNING]
+Currently there is no other way to enable mailing services than to let your Gmail account allow less secure apps, and hence your account may be
+susceptible to an increased number of spam emails from untrusted applications. However, our team is working quickly to find a more secure replacement.
+
 == Command Summary
 
 * `help` : ​Displays a help sheet containing useful commands.
@@ -388,7 +438,7 @@ You will see the guest list populate itself with the data from the specified CSV
 * `removeTag` : Removes a set of tags from all the guests in the current list.
 * `addtag` : Adds a set of tags to all the guests in the current list.
 * `find` : Finds guests whose names, phone numbers or email addresses contain any of the given keywords.
-* `list` : Lists the current guest list
+* `list` : Lists the current guest list.
 * `import` : ​Automatically generates guest list from a given CSV file.
 * `export` : Exports guest list to a CSV file.
 * `mark` : ​Tags a guest to note that they are currently at the event.
@@ -397,9 +447,11 @@ You will see the guest list populate itself with the data from the specified CSV
 * `stop_marking` : ​Stops the continuous marking of people.
 * `filter` : ​Filters the guest list based on keywords given.
 * `email` : ​Sends individual emails to an entry of a specified guest based on index.
+* `emailAll` : Sends an email to all of the guests in the current list.
+* `forceEmail` : Sends an email to the guest specified by the index, regardless of how many emails have been sent to that guest.
 * `add_event` :​ Adds an event to the application.
-* `select_event` : ​Redirects the user to the guest list of the event given
-* `event_delete` : ​Removes the specified event
+* `select_event` : ​Redirects the user to the guest list of the event given.
+* `event_delete` : ​Removes the specified event.
 * `undo` : Restores the guest list to the state before the previous undoable command was executed.
-* `redo` : Reverses the most recent undo command
-* `exit` : ​Exits the application
+* `redo` : Reverses the most recent undo command.
+* `exit` : ​Exits the application.
