@@ -2,23 +2,16 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -31,7 +24,7 @@ import seedu.address.model.person.Person;
 /**
  * Sends an email to the specified person in the guest list.
  */
-public class MailCommand extends Command {
+public class MailCommand extends Email {
 
     public static final String COMMAND_WORD = "email";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to the specified person "
@@ -42,11 +35,9 @@ public class MailCommand extends Command {
     private static final String MESSAGE_MAIL_PERSON_SUCCESS = "Successfully sent email!";
 
     private static Logger logger = Logger.getLogger("execute");
+    private Index index;
     private static String username;
     private static String password;
-    private static String emailSubject;
-    private static String emailMessage;
-    private Index index;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -66,6 +57,8 @@ public class MailCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        String emailSubject;
+        String emailMessage;
 
         assert index != null;
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -77,8 +70,18 @@ public class MailCommand extends Command {
 
         // Retrieve all email fields and user credentials and validate that they are not null
         try {
-            RetrieveInformation();
-            CheckFields();
+            // Array of strings to store all the necessary information
+            String[] information;
+
+            // Retrieve the information through a method in the super class Email
+            information = retrieveInformation();
+            username = information[0];
+            password = information[1];
+            emailSubject = information[2];
+            emailMessage = information[3];
+
+            // Verify the information exists through the method in the super class Email
+            checkFields(username, password, emailSubject, emailMessage);
         } catch (FileNotFoundException fe){
             throw new CommandException("Error: The file Credentials.txt or Message.txt was not found!");
         } catch (NoSuchElementException ne) {
@@ -90,140 +93,53 @@ public class MailCommand extends Command {
 
         // Creates a new session with the user gmail account as the host
         Properties props = createPropertiesConfiguration();
-        EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
+
+        // Authenticate the user credentials
+        emailPasswordAuthenticator authenticate = new emailPasswordAuthenticator();
+
+        // Create a new session using the authenticated credentials and the properties of
+        // the gmail host
         Session session = Session.getDefaultInstance(props, authenticate);
 
-        try {
-            // Creates the MIME message to be sent in the email
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(personToMail.getEmail().toString()));
-            message.setSubject(emailSubject);
-            message.setText(emailMessage);
-
-            Transport.send(message);
-        } catch (MessagingException mex) {
-            logger.log(Level.SEVERE, "Error: could not send email,"
-                    + "Invites application not given access to host Gmail account.");
-            mex.printStackTrace();
-        }
+        createAndSendEmail(username, emailSubject, emailMessage,
+                           personToMail.getEmail().toString(), session);
 
         logger.log(Level.INFO, "Email sent successfully");
         return new CommandResult(MESSAGE_MAIL_PERSON_SUCCESS);
     }
 
-    /**
-     * Creates a connection to the host gmail account via gmail's smtp port
-     * @return
-     */
-    private static Properties createPropertiesConfiguration() {
-        // Connects to Gmail using it's smtp port and previous authorization
-        return new Properties() {
-            {
-                put("mail.smtp.auth", "true");
-                put("mail.smtp.starttls.enable", "true");
-                put("mail.smtp.host", "smtp.gmail.com");
-                put("mail.smtp.port", "587");
-            }
-        };
+    @Override
+    public Properties createPropertiesConfiguration() {
+        return super.createPropertiesConfiguration();
     }
 
-    /**
-     * Reads and parses the files Credentials.txt and Message.txt to retrieve
-     * username, password, email message and email subject. Error handling is also performed
-     * through the try-catch block, which details with FileNotFoundExceptions as well as
-     * General Exceptions. Once parsed, the private global variables in the MailCommand username,
-     * password, emailSubject, and emailMessage are set with the strings parsed from the .txt files
-     */
-    private void RetrieveInformation() throws FileNotFoundException {
-
-        try {
-            File credentials = new File("src/main/resources/EmailData/Credentials.txt")
-                    .getAbsoluteFile();
-            Scanner credentialsScanner = new Scanner(credentials);
-
-            // Retrieve the two strings in Credentials.txt
-            String unmodifiedUsername = credentialsScanner.nextLine();
-            String unmodifiedPassword = credentialsScanner.nextLine();
-
-            // Parse the strings to retrieve the username and password within quotation marks
-            username = unmodifiedUsername.split("\"")[1];
-            password = unmodifiedPassword.split("\"")[1];
-
-        } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException("Error: The file Credentials.txt was not found!");
-        } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
-        } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
-                    + "and email subject in Credentials.txt and Message.txt");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            File message = new File("src/main/resources/EmailData/Message.txt")
-                    .getAbsoluteFile();
-            Scanner messageScanner = new Scanner(message);
-
-            String unmodifiedSubject = messageScanner.nextLine();
-            StringBuilder unmodifiedMessage = new StringBuilder();
-
-            while (messageScanner.hasNextLine()) {
-                unmodifiedMessage.append(messageScanner.nextLine());
-                unmodifiedMessage.append("\n");
-            }
-
-            emailSubject = unmodifiedSubject.split("\"")[1];
-            emailMessage = unmodifiedMessage.toString().split("\"")[1];
-
-        } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException("Error: The file Message.txt was not found!");
-        } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
-                                             + "and email subject in Credentials.txt and Message.txt");
-        } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
+    @Override
+    public String[] retrieveInformation() throws FileNotFoundException {
+        return super.retrieveInformation();
     }
 
-    /**
-     * Checks whether username, password, email subject and email message are
-     * provided by the user. If any of the parameters are either null or an
-     * empty string, the respective command exception is throw.
-     * @throws CommandException
-     */
-    private void CheckFields() throws CommandException {
-        if (username == null || username.replaceAll("\\s+","").equals("")) {
-            throw new CommandException(Messages.MESSAGE_USERNAME_NOT_PROVIDED);
-        }
-        else if (password == null || password.replaceAll("\\s+","").equals("")) {
-            throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
-        }
-        else if (emailSubject == null || emailSubject.replaceAll("\\s+","").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
-        }
-        else if (emailMessage == null || emailMessage.replaceAll("\\s+","").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
-        }
-        else {
-            logger.log(Level.INFO, "All fields from Credentials.txt and Message.txt"
-                                         + "received successfully");
-        }
+    @Override
+    public void checkFields(String username, String password, String emailSubject,
+                             String emailMessage) throws CommandException{
+        super.checkFields(username, password, emailSubject, emailMessage);
+        logger.log(Level.INFO, "All fields from Credentials.txt and Message.txt"
+                + "received successfully");
     }
 
     /**
      * Authenticates the user account based on the credentials provided
      */
-    private static class EmailPasswordAuthenticator extends Authenticator {
+    private static class emailPasswordAuthenticator extends Authenticator {
         @Override
         public PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(username, password);
         }
+    }
+
+    @Override
+    public void createAndSendEmail(String username, String emailSubject, String emailMessage,
+                                   String recipient, Session session) throws CommandException {
+        super.createAndSendEmail(username, emailSubject, emailMessage, recipient, session);
     }
 
     @Override
