@@ -35,9 +35,9 @@ public class MailCommand extends Email {
     private static final String MESSAGE_MAIL_PERSON_SUCCESS = "Successfully sent email!";
 
     private static Logger logger = Logger.getLogger("execute");
-    private Index index;
     private static String username;
     private static String password;
+    private Index index;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -82,7 +82,7 @@ public class MailCommand extends Email {
 
             // Verify the information exists through the method in the super class Email
             checkFields(username, password, emailSubject, emailMessage);
-        } catch (FileNotFoundException fe){
+        } catch (FileNotFoundException fe) {
             throw new CommandException("Error: The file Credentials.txt or Message.txt was not found!");
         } catch (NoSuchElementException ne) {
             throw new CommandException("Error: Please specify your credentials, email message, "
@@ -95,7 +95,7 @@ public class MailCommand extends Email {
         Properties props = createPropertiesConfiguration();
 
         // Authenticate the user credentials
-        emailPasswordAuthenticator authenticate = new emailPasswordAuthenticator();
+        EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
 
         // Create a new session using the authenticated credentials and the properties of
         // the gmail host
@@ -120,7 +120,7 @@ public class MailCommand extends Email {
 
     @Override
     public void checkFields(String username, String password, String emailSubject,
-                             String emailMessage) throws CommandException{
+                             String emailMessage) throws CommandException {
         super.checkFields(username, password, emailSubject, emailMessage);
         logger.log(Level.INFO, "All fields from Credentials.txt and Message.txt"
                 + "received successfully");
@@ -129,7 +129,7 @@ public class MailCommand extends Email {
     /**
      * Authenticates the user account based on the credentials provided
      */
-    private static class emailPasswordAuthenticator extends Authenticator {
+    private static class EmailPasswordAuthenticator extends Authenticator {
         @Override
         public PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(username, password);

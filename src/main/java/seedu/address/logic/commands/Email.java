@@ -21,7 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * This abstract class is inherited by Mail, EMailAll, and ForceEmail commands,
  * in order to reduce code duplicity.
  */
-public abstract class Email extends Command{
+public abstract class Email extends Command {
 
     /**
      * Checks whether username, password, email subject and email message are
@@ -31,16 +31,13 @@ public abstract class Email extends Command{
      */
     public void checkFields(String username, String password,
                             String emailSubject, String emailMessage) throws CommandException {
-        if (username == null || username.replaceAll("\\s+","").equals("")) {
+        if (username == null || username.replaceAll("\\s+", "").equals("")) {
             throw new CommandException(Messages.MESSAGE_USERNAME_NOT_PROVIDED);
-        }
-        else if (password == null || password.replaceAll("\\s+","").equals("")) {
+        } else if (password == null || password.replaceAll("\\s+", "").equals("")) {
             throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
-        }
-        else if (emailSubject == null || emailSubject.replaceAll("\\s+","").equals("")) {
+        } else if (emailSubject == null || emailSubject.replaceAll("\\s+", "").equals("")) {
             throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
-        }
-        else if (emailMessage == null || emailMessage.replaceAll("\\s+","").equals("")) {
+        } else if (emailMessage == null || emailMessage.replaceAll("\\s+", "").equals("")) {
             throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
         }
     }
