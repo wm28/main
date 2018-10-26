@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -21,6 +19,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+
+import static java.util.Objects.requireNonNull;
 
 //@@author aaryamNUS
 /**
@@ -88,9 +88,9 @@ public class MailCommand extends Command {
                     InternetAddress.parse(personToMail.getEmail().toString()));
             message.setSubject("Booking confirmation for Avengers Infinity War Part 3");
             message.setText("Dear valued customer,\n\nYou are our lucky customer! "
-                    + "We hope you will continue to support Invites and remain a "
+                    + "We hope you will continue to support Invités and remain a "
                     + "loyal customer. Please accept this gold-plated AddressBook as "
-                    + "a token of our appreciation.\n\nYours Sincerely,\nThe Invites Team");
+                    + "a token of our appreciation.\n\nYours Sincerely,\nThe Invités Team");
 
             Transport.send(message);
         } catch (MessagingException mex) {
