@@ -14,7 +14,8 @@ Invités - An event management system. The user interacts with it using a CLI, a
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to filter data*
-** What it does: allows the user to filter data based on keywords provided by user, such as .
+** What it does: allows the user to filter data based on keywords provided by user,
+                 such as payment status, attendance status and/or tags.
 ** Justification: This feature improves the product significantly because a user can find people who have yet to pay or are absent on the day of the event.
                   This will help users to be able to find people that fit the conditions they are looking for, without having to traverse the list manually.
 
@@ -22,19 +23,18 @@ Invités - An event management system. The user interacts with it using a CLI, a
                        so that the user can find a group of people at one go, instead of doing it one-by-one.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-//Need to change this
-* *Other contributions*:
+//Done
+* *Other contributions*: Created Payment and Attendance attributes of a person
 //Need to change this
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for existing features to increase coverage from % to % (Pull requests https://github.com[#TBC], https://github.com[#TBC])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[TBC], https://github.com[TBC], https://github.com[TBC])
 
 //Done
 == Contributions to the User Guide
@@ -45,6 +45,7 @@ Invités - An event management system. The user interacts with it using a CLI, a
 |===
 
 include::../UserGuide.adoc[tag=filter]
+
 include::../UserGuide.adoc[tag=find]
 //Done
 == Contributions to the Developer Guide
