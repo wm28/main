@@ -20,16 +20,16 @@ public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "add_event";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the application. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_DATE + "DATE"
-            + PREFIX_VENUE + "VENUE"
-            + PREFIX_START_TIME + "START TIME"
+            + PREFIX_NAME + "NAME " + " "
+            + PREFIX_DATE + "DATE" + " "
+            + PREFIX_VENUE + "VENUE" + " "
+            + PREFIX_START_TIME + "START TIME" + " "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Wedding "
-            + PREFIX_DATE + "10/10/2018 "
-            + PREFIX_VENUE + "Mandarin Hotel, 5th floor, Room 1A"
-            + PREFIX_START_TIME + "10 AM"
+            + PREFIX_NAME + "Wedding " + " "
+            + PREFIX_DATE + "10/10/2018 " + " "
+            + PREFIX_VENUE + "Mandarin Hotel, 5th floor, Room 1A" + " "
+            + PREFIX_START_TIME + "10:00 AM" + " "
             + PREFIX_TAG + "ClassicTheme";
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "An event already exists in the application";
