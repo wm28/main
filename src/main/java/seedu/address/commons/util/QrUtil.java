@@ -20,8 +20,8 @@ import javafx.scene.paint.Color;
  */
 public class QrUtil {
 
-    private static int MAX_DATA_SIZE = 100;
-    private static int QR_SIZE = 256;
+    public static final int MAX_DATA_SIZE = 100;
+    public static final int QR_SIZE = 256;
 
     /**
      * Generates a QR code based on the input string. The current output is to an image file, however, depending
@@ -31,11 +31,11 @@ public class QrUtil {
      */
     public static void generateQr(String data) {
         try {
-            if( data.length() > MAX_DATA_SIZE){
+            if (data.length() > MAX_DATA_SIZE) {
                 throw new WriterException("Data size too large");
             }
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bt = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 256, 256);
+            BitMatrix bt = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, QR_SIZE, QR_SIZE);
 
             //Solution below adapted from https://docs.oracle.com/javafx/2/image_ops/jfxpub-image_ops.htm
             WritableImage writableImage = new WritableImage(256, 256);
