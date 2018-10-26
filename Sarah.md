@@ -65,6 +65,10 @@ public class FilterCommand extends Command {
         public void setPayment(Payment payment) {
             this.payment = payment;
         }
+
+        public Optional<Payment> getPayment() {
+            return Optional.ofNullable(payment);
+        }
 ```
 ###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
@@ -110,15 +114,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         for (int i = 0; i < checking.size(); i++) {
 
-            if((checking.get(i).charAt(0) == 'n' || checking.get(i).charAt(0) == 'e' ||
-                    (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == '/')
-                    || (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == 'a') ||
-                    checking.get(i).charAt(0) == 'a' || checking.get(i).charAt(0) == 't')
+            if ((checking.get(i).charAt(0) == 'n' || checking.get(i).charAt(0) == 'e'
+                    || (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == '/')
+                    || (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == 'a')
+                    || checking.get(i).charAt(0) == 'a' || checking.get(i).charAt(0) == 't')
                     && (checking.get(i).charAt(1) == '/' || checking.get(i).charAt(2) == '/')) {
 
                 return new FilterCommand(new ContainsKeywordsPredicate(Arrays.asList(keywords)));
-            }
-            else {
+            } else {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             }
@@ -178,10 +181,11 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      *
-     * @param person containing details such as phone number, email address,
+     * @param person containing details such as
      *               payment status, attendance status and tags
      * @return the details that match keywords in the person's details, as mentioned above
      */
+    @Override
     public boolean test(Person person) {
         HashSet<seedu.address.model.tag.Tag> set = new HashSet<>(person.getTags());
         String strTags = "";
@@ -199,8 +203,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
                 strTags += " ";
                 strTags += person.getPayment();
-            }
-            else if (arrStr[j].equals("t")) {
+            } else if (arrStr[j].equals("t")) {
                 checkKeywords.add(i, arrStr[j + 1]);
 
                 strTags = "";
@@ -257,14 +260,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
                 strToCheck += " ";
                 strToCheck += person.getName();
-            }
-            else if (arrStr[j].equals("p")) {
+            } else if (arrStr[j].equals("p")) {
                 checkKeywords.add(i, arrStr[j + 1]);
 
                 strToCheck += " ";
                 strToCheck += person.getPhone();
-            }
-            else if (arrStr[j].equals("e")) {
+            } else if (arrStr[j].equals("e")) {
                 checkKeywords.add(i, arrStr[j + 1]);
 
                 strToCheck += " ";

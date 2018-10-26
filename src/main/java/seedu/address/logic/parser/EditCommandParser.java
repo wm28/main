@@ -62,7 +62,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAttendance(ParserUtil.parseAttendance(
                     argMultimap.getValue(PREFIX_ATTENDANCE).get()));
         }
-        //@@author SE-EDU
+        //@@author
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
