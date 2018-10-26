@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 
 //@@author aaryamNUS
 /**
- * Removes a set of tags from all the people in the current GuestList
+ * Removes a set of tags from all the people in the current GuestBook
  */
 public class RemoveTagCommand extends Command {
     public static final String COMMAND_WORD = "removeTag";

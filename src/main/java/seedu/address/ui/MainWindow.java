@@ -34,7 +34,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -122,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
+        BrowserPanel browserPanel = new BrowserPanel(logic.getEventDetails());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
@@ -198,9 +197,6 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
 
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {

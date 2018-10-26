@@ -63,4 +63,10 @@
         <payment isPrivate="false">PENDING</payment>
         <attendance isPrivate="false">PRESENT</attendance>
     </persons>
+    <event>
+        <name>Wedding</name>
+        <date isPrivate="false">10/01/2018</date>
+        <venue isPrivate="false">Marriot Hotel</venue>
+        <startTime isPrivate="false">10:00 PM</startTime>
+    </event>
 </addressbook>

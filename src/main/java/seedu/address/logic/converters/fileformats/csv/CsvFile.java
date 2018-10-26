@@ -1,5 +1,6 @@
 package seedu.address.logic.converters.fileformats.csv;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_FILE_ALREADY_EXIST;
 import static seedu.address.commons.core.Messages.MESSAGE_FILE_NOT_FOUND;
 
@@ -26,6 +27,7 @@ public class CsvFile implements SupportedFile {
     private final SupportedFileFormat supportedFileFormat = SupportedFileFormat.CSV;
 
     public CsvFile(String fileName) {
+        requireNonNull(fileName);
         this.fileName = Paths.get(fileName);
     }
 
