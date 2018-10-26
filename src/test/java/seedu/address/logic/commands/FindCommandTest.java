@@ -5,8 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
@@ -133,7 +131,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_NoPersonsFound() {
+    public void execute_multipleKeywords_noPersonsFound() {
 
         //using payment -> returns not equal
         NameContainsKeywordsPredicate predicate1 = preparePredicate("pa/NOT PAID"
