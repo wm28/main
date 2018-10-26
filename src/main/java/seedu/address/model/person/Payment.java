@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Payment {
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =
-            "Payment should only contain alphanumeric characters, spaces and . such as N.A. , " +
-                    "and it should not be blank";
+            "Payment should only contain alphanumeric characters, spaces and . such as N.A. , "
+                    + "and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
