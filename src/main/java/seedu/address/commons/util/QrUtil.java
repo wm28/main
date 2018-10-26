@@ -35,14 +35,15 @@ public class QrUtil {
                 throw new WriterException("Data size too large");
             }
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix bt = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, QR_SIZE, QR_SIZE);
+            BitMatrix bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, QR_SIZE, QR_SIZE);
+
 
             //Solution below adapted from https://docs.oracle.com/javafx/2/image_ops/jfxpub-image_ops.htm
             WritableImage writableImage = new WritableImage(256, 256);
             PixelWriter pixelWriter = writableImage.getPixelWriter();
-            for (int i = 0; i < bt.getHeight(); i++) {
-                for (int j = 0; j < bt.getWidth(); j++) {
-                    if (bt.get(i, j)) {
+            for (int i = 0; i < bitMatrix.getHeight(); i++) {
+                for (int j = 0; j < bitMatrix.getWidth(); j++) {
+                    if (bitMatrix.get(i, j)) {
                         pixelWriter.setColor(i, j, Color.BLACK);
                     } else {
                         pixelWriter.setColor(i, j, Color.WHITE);
