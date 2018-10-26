@@ -46,7 +46,7 @@ public class EmailAllCommand extends Email {
         if (emailCommandSimpleton == null) {
             emailCommandSimpleton = new EmailAllCommand();
         }
-         return emailCommandSimpleton;
+        return emailCommandSimpleton;
     }
 
     /**
