@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.FileNotFoundException;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
@@ -10,8 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -106,6 +112,23 @@ public class MailCommand extends Email {
 
         createAndSendEmail(username, emailSubject, emailMessage,
                            personToMail.getEmail().toString(), session);
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("eventmanager2k18@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(personToMail.getEmail().toString()));
+            message.setSubject("Booking confirmation for Avengers Infinity War Part 3");
+            message.setText("Dear valued customer,\n\nYou are our lucky customer! "
+                    + "We hope you will continue to support Invités and remain a "
+                    + "loyal customer. Please accept this gold-plated AddressBook as "
+                    + "a token of our appreciation.\n\nYours Sincerely,\nThe Invités Team");
+
+            Transport.send(message);
+        } catch (MessagingException mex) {
+            logger.log(Level.SEVERE, "Error: could not send email, have you\n"
+                    + "given Invites application access to your Gmail account?");
+            mex.printStackTrace();
+        }
 
         logger.log(Level.INFO, "Email sent successfully");
         return new CommandResult(MESSAGE_MAIL_PERSON_SUCCESS);

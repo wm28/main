@@ -14,8 +14,9 @@ public class AddTagCommand extends Command {
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
 
     public static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
-    private static Logger logger = Logger.getLogger("execute");
+
     private static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
+    private static Logger logger = Logger.getLogger("execute");
     private final Set<Tag> tagsToAdd;
 
     /**
@@ -62,6 +63,106 @@ public class AddTagCommand extends Command {
         // state check
         AddTagCommand e = (AddTagCommand) other;
         return tagsToAdd.equals(e.tagsToAdd);
+    }
+}
+```
+###### \java\seedu\address\logic\commands\MailCommand.java
+``` java
+/**
+ * Sends an email to the specified person in the guest list.
+ */
+public class MailCommand extends Command {
+
+    public static final String COMMAND_WORD = "email";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to the specified person "
+            + "provided by INDEX.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "Example: " + COMMAND_WORD + " 1 ";
+
+    private static final String MESSAGE_MAIL_PERSON_SUCCESS = "Successfully sent email!";
+    private static Logger logger = Logger.getLogger("execute");
+    private Index index;
+
+    /**
+     * @param index of the person in the filtered person list to edit
+     */
+    public MailCommand(Index index) {
+        requireNonNull(index);
+
+        this.index = index;
+    }
+
+    /**
+     * Sends an email to the person at the specified INDEX
+     * @param model
+     * Note: the following code was adapted from the SendEmail.java class code provided by @Rish on stackoverflow
+     */
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        assert index != null;
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToMail = lastShownList.get(index.getZeroBased());
+        assert personToMail != null;
+
+        final String username = "eventmanager2k18@gmail.com";
+        final String password = "cs2113t2018";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("eventmanager2k18@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(personToMail.getEmail().toString()));
+            message.setSubject("Booking confirmation for Avengers Infinity War Part 3");
+            message.setText("Dear valued customer,\n\nYou are our lucky customer! "
+                    + "We hope you will continue to support Invites and remain a "
+                    + "loyal customer. Please accept this gold-plated AddressBook as "
+                    + "a token of our appreciation.\n\nYours Sincerely,\nThe Invites Team");
+
+            Transport.send(message);
+        } catch (MessagingException mex) {
+            logger.log(Level.SEVERE, "Error: could not send email, have you\n"
+                    + "given Invites application access to your Gmail account?");
+            mex.printStackTrace();
+        }
+
+        logger.log(Level.INFO, "Email sent successfully");
+        return new CommandResult(MESSAGE_MAIL_PERSON_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof MailCommand)) {
+            return false;
+        }
+
+        // state check
+        MailCommand e = (MailCommand) other;
+        return index.equals(e.index);
     }
 }
 ```
@@ -196,6 +297,33 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
     }
 }
 ```
+###### \java\seedu\address\logic\parser\MailCommandParser.java
+``` java
+public class MailCommandParser implements Parser<MailCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the MailCommand
+     * and returns a MailCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public MailCommand parse(String args) throws ParseException {
+        //ensure the arguments are not empty
+        assert args != null;
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MailCommand.MESSAGE_USAGE), pe);
+        }
+
+        return new MailCommand(index);
+    }
+}
+```
 ###### \java\seedu\address\logic\parser\RemoveTagCommandParser.java
 ``` java
 /**
@@ -296,23 +424,6 @@ public class RemoveTagCommandParser implements Parser<RemoveTagCommand> {
         return persons.asUnmodifiableObservableList();
     }
 
-    @Override
-    public Event getEventDetails() {
-        return eventDetails;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
-    }
-
-    @Override
-    public int hashCode() {
-        return persons.hashCode();
-    }
-}
 ```
 ###### \java\seedu\address\ui\PersonCard.java
 ``` java

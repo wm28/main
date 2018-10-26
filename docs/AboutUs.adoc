@@ -30,7 +30,7 @@ Responsibilities: Events functionality
 
 === Sarah Taaher Bonna
 image::sarahtaaherbonna.png[width="150", align="left"]
-{empty}[http://github.com/SarahTaaherBonna[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/SarahTaaherBonna[github]] [<<SarahTaaherBonna#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data filtering
