@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.FileNotFoundException;
 
 import java.util.List;
@@ -9,10 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-
-import static java.util.Objects.requireNonNull;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
