@@ -33,10 +33,21 @@ public class EmailAllCommand extends Email {
             + "could not send an email to %2$d guests will addresses: %3$s!";
 
     private static Logger logger = Logger.getLogger("execute");
+    private static EmailAllCommand emailCommandSimpleton = null;
     private static String username;
     private static String password;
 
-    public EmailAllCommand() {}
+    private EmailAllCommand() {}
+
+    /**
+     * Applying the Simpleton design pattern to EmailAllCommand
+     */
+    public static EmailAllCommand getInstance() {
+        if (emailCommandSimpleton == null) {
+            emailCommandSimpleton = new EmailAllCommand();
+        }
+         return emailCommandSimpleton;
+    }
 
     /**
      * Sends an email to all the persons in the current filtered list
