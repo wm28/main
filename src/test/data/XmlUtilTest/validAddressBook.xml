@@ -4,7 +4,7 @@
         <name>Hans Muster</name>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@gmail.com</email>
-        <payment isPrivate="false">NOT PAID</payment>
+        <payment isPrivate="false">NOTPAID</payment>
         <attendance isPrivate="false">PRESENT</attendance>
     </persons>
     <persons>
@@ -39,14 +39,14 @@
         <name>Lydia Kunz</name>
         <phone isPrivate="false">9482427</phone>
         <email isPrivate="false">lydia@gmail.com</email>
-        <payment isPrivate="false">NOT PAID</payment>
+        <payment isPrivate="false">NOTPAID</payment>
         <attendance isPrivate="false">ABSENT</attendance>
     </persons>
     <persons>
         <name>Anna Best</name>
         <phone isPrivate="false">9482442</phone>
         <email isPrivate="false">anna@gmail.com</email>
-        <payment isPrivate="false">NOT PAID</payment>
+        <payment isPrivate="false">NOTPAID</payment>
         <attendance isPrivate="false">PRESENT</attendance>
     </persons>
     <persons>
