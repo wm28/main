@@ -105,7 +105,7 @@ public class MailCommand extends Email {
         Session session = Session.getDefaultInstance(props, authenticate);
 
         createAndSendEmail(username, emailSubject, emailMessage,
-                           personToMail.getEmail().toString(), session);
+                personToMail.getEmail().toString(), session);
 
         logger.log(Level.INFO, "Email sent successfully");
         return new CommandResult(MESSAGE_MAIL_PERSON_SUCCESS);
@@ -123,7 +123,7 @@ public class MailCommand extends Email {
 
     @Override
     public void checkFields(String username, String password, String emailSubject,
-                             String emailMessage) throws CommandException {
+                            String emailMessage) throws CommandException {
         super.checkFields(username, password, emailSubject, emailMessage);
         logger.log(Level.INFO, "All fields from Credentials.txt and Message.txt"
                 + "received successfully");
