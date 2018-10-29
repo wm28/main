@@ -24,7 +24,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * in order to reduce code duplicity.
  */
 public abstract class Email extends Command {
-
     /**
      * Checks whether username, password, email subject and email message are
      * provided by the user. If any of the parameters are either null or an
@@ -68,12 +67,11 @@ public abstract class Email extends Command {
             information[1] = unmodifiedPassword.split("\"")[1];
 
         } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException("Error: The file Credentials.txt was not found!");
+            throw new FileNotFoundException(String.format(Messages.MESSAGE_FILE_NOT_FOUND, "Credentials.txt"));
         } catch (ArrayIndexOutOfBoundsException ae) {
             throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
         } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
-                    + "and email subject in Credentials.txt and Message.txt");
+            throw new NoSuchElementException(Messages.MESSAGE_NO_SUCH_ELEMENT_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -95,10 +93,9 @@ public abstract class Email extends Command {
             information[3] = unmodifiedMessage.toString().split("\"")[1];
 
         } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException("Error: The file Message.txt was not found!");
+            throw new FileNotFoundException(String.format(Messages.MESSAGE_FILE_NOT_FOUND, "Message.txt"));
         } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
-                    + "and email subject in Credentials.txt and Message.txt");
+            throw new NoSuchElementException(Messages.MESSAGE_NO_SUCH_ELEMENT_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException ae) {
             throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
         } catch (Exception ex) {
@@ -148,8 +145,7 @@ public abstract class Email extends Command {
 
             Transport.send(message);
         } catch (MessagingException mex) {
-            throw new CommandException("Error: could not send email, please ensure you have strong "
-                    + "internet connectivity.");
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION);
         }
     }
 

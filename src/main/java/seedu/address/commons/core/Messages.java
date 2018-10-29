@@ -30,5 +30,9 @@ public class Messages {
                                                              + "username in Credentials.txt or Message.txt. "
                                                              + "Please ensure you enclose all the parameters "
                                                              + "within quotation marks!";
+    public static final String MESSAGE_NO_SUCH_ELEMENT_MESSAGE = "Error: Please specify your credentials, email message,"
+                                                             + "and email subject in Credentials.txt and Message.txt";
+    public static final String MESSAGE_NO_INTERNET_CONNECTION = "Error: could not send email, please ensure you have strong "
+                                                             + "internet connectivity";
     public static final String MESSAGE_PERSONS_FILTERED_OVERVIEW = "Filtered by: %1$s\n";
 }

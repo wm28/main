@@ -71,7 +71,6 @@ public class MailCommand extends Email {
             throw new CommandException("Error: The email of the recipient is invalid!");
         }
 
-        // Retrieve all email fields and user credentials and validate that they are not null
         try {
             // Array of strings to store all the necessary information
             String[] information;
@@ -85,13 +84,8 @@ public class MailCommand extends Email {
 
             // Verify the information exists through the method in the super class Email
             checkFields(username, password, emailSubject, emailMessage);
-        } catch (FileNotFoundException fe) {
-            throw new CommandException("Error: The file Credentials.txt or Message.txt was not found!");
-        } catch (NoSuchElementException ne) {
-            throw new CommandException("Error: Please specify your credentials, email message, "
-                    + "and email subject in Credentials.txt and Message.txt");
-        } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new CommandException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
+        } catch (FileNotFoundException fex) {
+            throw new CommandException("Error: The file Message.txt or Credentials.txt was not found");
         }
 
         // Creates a new session with the user gmail account as the host
