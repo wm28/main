@@ -55,6 +55,15 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@gmail.com").withAttendance("PRESENT").withPayment("PENDING").build();
 
+    //Csv formatted person
+    public static final String CSV_ALICE = "Alice Pauline,94351253,alice@gmail.com,PENDING,PRESENT,VEGETARIAN,NoNuts";
+    public static final String CSV_BENSON = "Benson Meier,98765432,johnd@gmail.com,PAID,ABSENT,NORMAL,NoSeafood,GUEST";
+    public static final String CSV_CARL = "Carl Kurz,95352563,heinz@gmail.com,NOT PAID,PRESENT";
+    public static final String CSV_DANIEL = "Daniel Meier,87652533,cornelia@gmail.com,PAID,ABSENT,NORMAL,VIP";
+    public static final String CSV_ELLE = "Elle Meyer,9482224,werner@gmail.com,NOT PAID,PRESENT";
+    public static final String CSV_FIONA = "Fiona Kunz,9482427,lydia@gmail.com,PAID,ABSENT";
+    public static final String CSV_GEORGE = "George Best,9482442,anna@gmail.com,PENDING,PRESENT";
+
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@gmail.com").withAttendance("PRESENT").withPayment("NOT PAID").build();

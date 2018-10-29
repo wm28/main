@@ -4,11 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.FileSystemUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,32 +14,27 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.SupportedFileFormat;
+import seedu.address.testutil.TypicalPersons;
 
 public class CsvFileTest {
 
     public static final String VALID_CSV_FILE = "src\\test\\data\\data\\CsvTest\\typicalPersonsGuestList.csv";
-    public static final String VALID_PERSON_ONE_CSV_FILE =
-            "Alma Andrade,80000867,80000867@gmail.com,PAID,ABSENT,halal";
-    public static final String VALID_PERSON_TWO_CSV_FILE =
-            "Eamon Webster,80000030,80000030@gmail.com,PAID,ABSENT,vegetarian";
-    public static final String VALID_PERSON_THREE_CSV_FILE =
-            "Edan Morse,80000200,80000200@gmail.com,PAID,ABSENT,vegan";
-    public static final String VALID_PERSON_FOUR_CSV_FILE =
-            "ElsieMae Vasquez,80000044,80000044@gmail.com,PAID,ABSENT";
 
     public static final String NON_EXISTENT_CSV_FILE = "src\\test\\data\\data\\CsvTest\\nonExistentGuestList.csv";
     public static final String EXPORTED_CSV_FILE =
             "src\\test\\data\\data\\CsvTest\\exportedTypicalPersonsGuestList.csv";
 
-    public static final List<AdaptedPerson> ADAPTED_PEOPLE;
+    public static final List<AdaptedPerson> ADAPTED_TYPICAL_PERSONS;
 
     static {
-        ADAPTED_PEOPLE = new ArrayList<>();
-        ADAPTED_PEOPLE.add(new CsvAdaptedPerson(VALID_PERSON_ONE_CSV_FILE));
-        ADAPTED_PEOPLE.add(new CsvAdaptedPerson(VALID_PERSON_TWO_CSV_FILE));
-        ADAPTED_PEOPLE.add(new CsvAdaptedPerson(VALID_PERSON_THREE_CSV_FILE));
-        ADAPTED_PEOPLE.add(new CsvAdaptedPerson(VALID_PERSON_FOUR_CSV_FILE));
-
+        ADAPTED_TYPICAL_PERSONS = new ArrayList<>();
+        ADAPTED_TYPICAL_PERSONS.add(new CsvAdaptedPerson(TypicalPersons.CSV_ALICE));
+        ADAPTED_TYPICAL_PERSONS.add(new CsvAdaptedPerson(TypicalPersons.CSV_BENSON));
+        ADAPTED_TYPICAL_PERSONS.add(new CsvAdaptedPerson(TypicalPersons.CSV_CARL));
+        ADAPTED_TYPICAL_PERSONS.add(new CsvAdaptedPerson(TypicalPersons.CSV_DANIEL));
+        ADAPTED_TYPICAL_PERSONS.add(new CsvAdaptedPerson(TypicalPersons.CSV_ELLE));
+        ADAPTED_TYPICAL_PERSONS.add(new CsvAdaptedPerson(TypicalPersons.CSV_FIONA));
+        ADAPTED_TYPICAL_PERSONS.add(new CsvAdaptedPerson(TypicalPersons.CSV_GEORGE));
     }
 
     @Rule
@@ -64,7 +57,7 @@ public class CsvFileTest {
         CsvFile csvFile = new CsvFile(VALID_CSV_FILE);
         List<AdaptedPerson> adaptedPeople = csvFile.readAdaptedPersons();
 
-        assertTrue(adaptedPeople.equals(ADAPTED_PEOPLE));
+        assertTrue(adaptedPeople.equals(ADAPTED_TYPICAL_PERSONS));
     }
 
     @Test
@@ -78,7 +71,7 @@ public class CsvFileTest {
     public void writeAdaptedPersons_validCsvFile_writeSuccessful() throws Exception {
         try {
             CsvFile csvFile = new CsvFile(EXPORTED_CSV_FILE);
-            csvFile.writeAdaptedPersons(ADAPTED_PEOPLE);
+            csvFile.writeAdaptedPersons(ADAPTED_TYPICAL_PERSONS);
 
             File actualOutputFile = new File(EXPORTED_CSV_FILE);
             File expectedOutputFile = new File(VALID_CSV_FILE);
