@@ -4,8 +4,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -92,8 +92,7 @@ public class StatusBarFooter extends UiPart<Region> {
         if (event.isUserInitialised()) {
             LocalDate eventDate = event.getFullDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate now = LocalDate.now();
-            Period period = Period.between(now, eventDate);
-            int numberOfDaysLeft = period.getDays();
+            final long numberOfDaysLeft = ChronoUnit.DAYS.between(now, eventDate);
             Platform.runLater(() -> daysLeft.setText(String.format(DAYS_LEFT_STATUS, numberOfDaysLeft)));
         } else {
             Platform.runLater(() -> daysLeft.setText(String.format(DAYS_LEFT_STATUS, "NO DETAILS")));
