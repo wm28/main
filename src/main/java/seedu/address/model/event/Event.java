@@ -2,8 +2,11 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.text.ParseException;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
