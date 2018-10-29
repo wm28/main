@@ -2,10 +2,8 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.text.ParseException;
+import java.util.*;
 
 import seedu.address.model.tag.Tag;
 
@@ -48,7 +46,7 @@ public class Event {
     public Event() {
         EventName eventName = new EventName("event not created yet");
         this.eventName = eventName;
-        EventDate eventDate = new EventDate("01/01/0001");
+        EventDate eventDate = new EventDate("01/10/2018");
         this.eventDate = eventDate;
         EventVenue eventVenue = new EventVenue("NA");
         this.eventVenue = eventVenue;
@@ -65,6 +63,10 @@ public class Event {
 
     public String getDate() {
         return eventDate.getEventDate();
+    }
+
+    public Date getFullDate() {
+        return eventDate.getFullEventDate();
     }
 
     public String getVenue() {

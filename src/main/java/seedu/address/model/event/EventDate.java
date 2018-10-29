@@ -3,6 +3,9 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Represents a Event's date.
  * Guarantees: immutable; is valid as declared in {@link #isValidEventDate(String)}
@@ -11,9 +14,8 @@ public class EventDate {
 
     //Identity fields
     public static final String MESSAGE_EVENTDATE_CONSTRAINTS =
-            "Event's date should only contain numbers and forward slash and should follow the dd/mm/yyyy format.";
-
-    public static final String EVENTDATE_VALIDATION_REGEX = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
+            "Event's date should be valid, contain only numbers and "
+                    + "forward slash and should follow the dd/mm/yyyy format.";
 
     private String fullEventDate;
 
@@ -40,11 +42,30 @@ public class EventDate {
     public void setEventDate(String eventDate) {
         this.fullEventDate = eventDate;
     }
+
+    public Date getFullEventDate() {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormatter.setLenient(false);
+        Date eventDate = null;
+        try {
+            eventDate = dateFormatter.parse(this.fullEventDate);
+        } catch (Exception e) {
+            eventDate = null;
+        }
+        return eventDate;
+    }
     /**
      * Returns true if a given string is a valid event date.
      */
     public static boolean isValidEventDate(String test) {
-        return test.matches(EVENTDATE_VALIDATION_REGEX);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormatter.setLenient(false);
+        try {
+            dateFormatter.parse(test);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 
