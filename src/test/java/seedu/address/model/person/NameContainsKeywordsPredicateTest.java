@@ -94,7 +94,7 @@ public class NameContainsKeywordsPredicateTest {
 //        // Mixed-case keywords
 //        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/aLIce", "e/bOB"));
 //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
-//        //@@author
+//        @@author
     }
 
     @Test
