@@ -35,4 +35,5 @@ public class Messages {
     public static final String MESSAGE_NO_INTERNET_CONNECTION = "Error: could not send email, please ensure you have strong "
                                                              + "internet connectivity";
     public static final String MESSAGE_PERSONS_FILTERED_OVERVIEW = "Filtered by: %1$s\n";
+    public static final String MESSAGE_INCORRECT_TAG_FORMAT = "Tags names should be alphanumeric";
 }

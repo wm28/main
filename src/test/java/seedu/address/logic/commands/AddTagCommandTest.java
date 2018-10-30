@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -20,11 +20,12 @@ import seedu.address.model.tag.Tag;
 //@@author aaryamNUS
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code RemoveTagCommand}.
+ * {@code AddTagCommand}.
  */
 public class AddTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
     private Set<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag("NORMAL"), new Tag("VIP")));
     private Set<Tag> allNewTags = new HashSet<>(Arrays.asList(new Tag("HUSBAND"), new Tag("TEST")));
 
@@ -77,19 +78,19 @@ public class AddTagCommandTest {
         AddTagCommand addTagSecondCommand = new AddTagCommand(allNewTags);
 
         // same object -> returns true
-        assertTrue(addTagFirstCommand.equals(addTagFirstCommand));
+        assertEquals(addTagFirstCommand, addTagFirstCommand);
 
-        // not same values -> returns false
+        // same values -> returns true
         AddTagCommand addTagFirstCommandCopy = new AddTagCommand(tagsToAdd);
-        assertFalse(addTagFirstCommand.equals(addTagFirstCommandCopy));
+        assertEquals(addTagFirstCommand, addTagFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(addTagFirstCommand.equals(new Tag("Veg")));
+        assertNotEquals(addTagFirstCommand, new Tag("Veg"));
 
         // null -> returns false
-        assertFalse(addTagFirstCommand.equals(new Tag("Test")));
+        assertNotEquals(addTagFirstCommand, new Tag("Test"));
 
         // different objects -> returns false
-        assertFalse(addTagFirstCommand.equals(addTagSecondCommand));
+        assertNotEquals(addTagFirstCommand, addTagSecondCommand);
     }
 }
