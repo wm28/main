@@ -18,17 +18,20 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "    ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidPath_throwsParseException() {
-        assertParseFailure(parser, "path@.csv", String.format(MESSAGE_INVALID_FILE_PATH, ImportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "path@.csv",
+                String.format(MESSAGE_INVALID_FILE_PATH, ImportCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidFileExtension_throwsParseException() {
-        assertParseFailure(parser, "testing.txt", String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "testing.txt",
+                String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
     }
 
     @Test
