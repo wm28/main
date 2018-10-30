@@ -61,39 +61,39 @@ public class NameContainsKeywordsPredicateTest {
         //@@author Sarah
         // phone
         // One keyword
-//        NameContainsKeywordsPredicate predicate2 = new NameContainsKeywordsPredicate(
-//                Collections.singletonList("p/Alice"));
-//        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
-//
-//        // Multiple keywords
-//        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/Alice", "p/Bob"));
-//        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
-//
-//        // Only one matching keyword
-//        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/Bob", "p/Carol"));
-//        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Carol").build()));
-//
-//        // Mixed-case keywords
-//        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/aLIce", "p/bOB"));
-//        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
-//
-//        // email
-//        // One keyword
-//        NameContainsKeywordsPredicate predicate3 = new NameContainsKeywordsPredicate(
-//                Collections.singletonList("e/Alice"));
-//        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
-//
-//        // Multiple keywords
-//        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/Alice", "e/Bob"));
-//        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
-//
-//        // Only one matching keyword
-//        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/Bob", "e/Carol"));
-//        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Carol").build()));
-//
-//        // Mixed-case keywords
-//        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/aLIce", "e/bOB"));
-//        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
+        //        NameContainsKeywordsPredicate predicate2 = new NameContainsKeywordsPredicate(
+        //                Collections.singletonList("p/Alice"));
+        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
+        //
+        //        // Multiple keywords
+        //        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/Alice", "p/Bob"));
+        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
+        //
+        //        // Only one matching keyword
+        //        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/Bob", "p/Carol"));
+        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Carol").build()));
+        //
+        //        // Mixed-case keywords
+        //        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/aLIce", "p/bOB"));
+        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
+        //
+        //        // email
+        //        // One keyword
+        //        NameContainsKeywordsPredicate predicate3 = new NameContainsKeywordsPredicate(
+        //                Collections.singletonList("e/Alice"));
+        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
+        //
+        //        // Multiple keywords
+        //        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/Alice", "e/Bob"));
+        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
+        //
+        //        // Only one matching keyword
+        //        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/Bob", "e/Carol"));
+        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Carol").build()));
+        //
+        //        // Mixed-case keywords
+        //        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/aLIce", "e/bOB"));
+        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
         //@@author
     }
 
