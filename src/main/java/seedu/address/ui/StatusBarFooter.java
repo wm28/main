@@ -90,10 +90,7 @@ public class StatusBarFooter extends UiPart<Region> {
 
     private void setDaysLeft(seedu.address.model.event.Event event) {
         if (event.isUserInitialised()) {
-            LocalDate eventDate = event.getFullDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate now = LocalDate.now();
-            final long numberOfDaysLeft = ChronoUnit.DAYS.between(now, eventDate);
-            Platform.runLater(() -> daysLeft.setText(String.format(DAYS_LEFT_STATUS, numberOfDaysLeft)));
+            Platform.runLater(() -> daysLeft.setText(String.format(DAYS_LEFT_STATUS, event.getDaysLeft())));
         } else {
             Platform.runLater(() -> daysLeft.setText(String.format(DAYS_LEFT_STATUS, "NO DETAILS")));
         }

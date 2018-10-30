@@ -17,7 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class EventBuilder {
 
     public static final String DEFAULT_NAME = "Conference";
-    public static final String DEFAULT_DATE = "24/10/2018";
+    public static final String DEFAULT_DATE = "24/10/2019";
     public static final String DEFAULT_VENUE = "SRC 1";
     public static final String DEFAULT_STARTTIME = "10:00 AM";
 

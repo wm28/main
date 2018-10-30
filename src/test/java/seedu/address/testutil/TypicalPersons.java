@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 
@@ -72,9 +73,28 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
             .withPayment(VALID_PAYMENT_DANNY).build();
 
+    public static final Event typicalEvent = new EventBuilder().withName("Graduation party").withDate("10/01/2019")
+            .withVenue("Hilton").withStartTime("6:00 PM").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
+
+    public static Event getTypicalEvent() {
+        return typicalEvent;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons and typical event.
+     */
+    public static AddressBook getTypicalAddressBookWithEvent() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.addEvent(getTypicalEvent());
+        return ab;
+    }
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

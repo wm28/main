@@ -3,7 +3,10 @@ package seedu.address.ui;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.ui.StatusBarFooter.*;
+import static seedu.address.ui.StatusBarFooter.DAYS_LEFT_STATUS;
+import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,9 +15,14 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Date;
 
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
+
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.AddressBookBuilder;
@@ -64,7 +72,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
 
         // after address book is updated
         postNow(EVENT_STUB);
-        assertStatusBarContent(String.format(DAYS_LEFT_STATUS, INITIAL_DAYS_LEFT), RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
+        assertStatusBarContent(String.format(DAYS_LEFT_STATUS, INITIAL_DAYS_LEFT),
+                RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
                 String.format(SYNC_STATUS_UPDATED, new Date(injectedClock.millis()).toString()),
                 String.format(TOTAL_PERSONS_STATUS, EVENT_STUB.data.getPersonList().size()));
     }

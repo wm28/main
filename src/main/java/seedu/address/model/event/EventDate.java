@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
@@ -58,13 +61,22 @@ public class EventDate {
      * Returns true if a given string is a valid event date.
      */
     public static boolean isValidEventDate(String test) {
+        requireNonNull(test);
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
         dateFormatter.setLenient(false);
+        Date eventDate = null;
         try {
-            dateFormatter.parse(test);
-            return true;
+            eventDate = dateFormatter.parse(test);
         } catch (Exception e) {
             return false;
+        }
+        LocalDate eventLocalDate = eventDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate now = LocalDate.now();
+        final long numberOfDaysLeft = ChronoUnit.DAYS.between(now, eventLocalDate);
+        if (numberOfDaysLeft < 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
