@@ -42,10 +42,10 @@ image::Ui.png[width="790"]
    example commands that you can use:
 
 * `help` : Displays a summary of the list of commands that the application offers.
-* `add` : Adds a guest to the guest list.
-* `Delete` : Deletes an entry from the guest list.
-* `Mark` : Marks the attendance of a guest from `ABSENT` to `PRESENT`.
-* `Exit` : exits the application.
+* `add_guest` : Adds a guest to the guest list.
+* `delete_guest` : Deletes an entry from the guest list.
+* `mark` : Marks the attendance of a guest from `ABSENT` to `PRESENT`.
+* `exit` : exits the application.
 
 .  You should type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -61,7 +61,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by you e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Bob Lee`.
+* Words in `UPPER_CASE` are the parameters to be supplied by you e.g. in `add_guest n/NAME`, `NAME` is a parameter which can be used as `add_guest n/Bob Lee`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Bob Lee t/VIP` or as `n/Bob Lee`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/VIP`, `t/VIP t/Vegetarian` etc.
 * You can specify parameters in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -72,29 +72,29 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Displays a summary of the list of commands that the application offers +
 Format: `help`
 
-=== Adding a guest: `add`
+=== Adding a guest: `add_guest`
 
 Adds a guest to the guest list +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT [t/TAG]...`
+Format: `add_guest n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT [t/TAG]...`
 
 [TIP]
 A guest can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent t/VIP t/Vegetarian t/Not Paid`
-* `add n/John Doe p/91028392 e/johndoe@gmail.com a/Present t/Groom t/Non-Vegetarian t/Paid`
+* `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent t/VIP t/Vegetarian t/Not Paid`
+* `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present t/Groom t/Non-Vegetarian t/Paid`
 
 === Listing all guests : `list`
 
 Shows a list of all guests in the guest list. +
 Format: `list`
 
-=== Editing a guest : `edit`
+=== Editing a guest : `edit_guest`
 
 Edits an existing guest entry in the guest list. +
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
-         [t/PERSON_TYPE] [t/DIET] [t/PAID]...`
+Format: `edit_guest INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
+         [t/GUEST_TYPE] [t/DIET] [t/PAID]...`
 
 ****
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index *must be a positive integer* 1, 2, 3, ...
@@ -106,13 +106,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
 
 Examples:
 
-* `edit 2 n/Bob Chan` +
-Edits the name of the 2nd person to be `Bob Chan` respectively.
+* `edit_guest 2 n/Bob Chan` +
+Edits the name of the 2nd guest to be `Bob Chan` respectively.
 
-=== Deleting a guest : `delete`
+=== Deleting a guest : `delete_guest`
 
 Deletes the specified guest from the guest list. +
-Format: `delete INDEX`
+Format: `delete_guest INDEX`
 
 ****
 * Deletes the guest at the specified `INDEX`.
@@ -123,11 +123,11 @@ Format: `delete INDEX`
 Examples:
 
 * `list` +
-`delete 2` +
-Deletes the 2nd person in the guest list.
+`delete_guest 2` +
+Deletes the 2nd guest in the guest list.
 * `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+`delete_guest 1` +
+Deletes the 1st guest in the results of the `find` command.
 
 === Removing a set of tags from all guests : `removeTag`
 
@@ -257,7 +257,7 @@ Format: `stop_marking`
 Filter guest list based on filter guest attributes. Only filters based on
 payment status, attendance status and tags. +
 Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
-         [t/DIET] [t/PERSON_TYPE] [t/...]`
+         [t/DIET] [t/GUEST_TYPE] [t/...]`
 Examples:
 
 * `filter a/Present t/Vegetarian` +
@@ -283,7 +283,7 @@ You are free to edit these messages to suit your own needs.
 Examples:
 
 * `email 2` +
-You will send an email to the 2nd person in the list.
+You will send an email to the 2nd guest in the list.
 
 === Sending an email to all guests : `emailAll`
 Sends an email to all of the guests in the current list +
@@ -351,24 +351,24 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the guest list's content (`add`, `delete`, `edit`, `removeTag`, `addTag`, and `clear`).
+Undoable commands: those commands that modify the guest list's content (`add_guest`, `delete_guest`, `edit_guest`, `removeTag`, `addTag`, and `clear`).
 ====
 
 Examples:
 
-* `delete 1` +
+* `delete_guest 1` +
 `list` +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `delete_guest 1` command) +
 
 * `select 1` +
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `delete_guest 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `delete_guest 1` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -377,19 +377,19 @@ Format: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `delete_guest 1` +
+`undo` (reverses the `delete_guest 1` command) +
+`redo` (reapplies the `delete_guest 1` command) +
 
-* `delete 1` +
+* `delete_guest 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `delete_guest 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`undo` (reverses the `delete_guest 1` command) +
+`redo` (reapplies the `delete_guest 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
@@ -436,9 +436,9 @@ susceptible to an increased number of spam emails from untrusted applications. H
 == Command Summary
 
 * `help` : ​Displays a help sheet containing useful commands.
-* `add` : ​Creates an entry for a guest to attend the event.
-* `edit` :​ Modifies the entry of a specified guest based on name.
-* `delete` : ​Removes an entry of a specified guest based on name.
+* `add_guest` : ​Creates an entry for a guest to attend the event.
+* `edit_guest` :​ Modifies the entry of a specified guest based on name.
+* `delete_guest` : ​Removes an entry of a specified guest based on name.
 * `removeTag` : Removes a set of tags from all the guests in the current list.
 * `addtag` : Adds a set of tags to all the guests in the current list.
 * `find` : Finds guests whose names, phone numbers or email addresses contain any of the given keywords.
@@ -453,9 +453,9 @@ susceptible to an increased number of spam emails from untrusted applications. H
 * `email` : ​Sends individual emails to an entry of a specified guest based on index.
 * `emailAll` : Sends an email to all of the guests in the current list.
 * `forceEmail` : Sends an email to the guest specified by the index, regardless of how many emails have been sent to that guest.
-* `add_event` :​ Adds an event to the application.
-* `select_event` : ​Redirects the user to the guest list of the event given.
-* `event_delete` : ​Removes the specified event.
+* `add_event` :​ Adds the details of your event.
+* `edit_event` : Edits the details of the event.
+* `delete_event` : ​Removes the specified event details.
 * `undo` : Restores the guest list to the state before the previous undoable command was executed.
 * `redo` : Reverses the most recent undo command.
 * `exit` : ​Exits the application.

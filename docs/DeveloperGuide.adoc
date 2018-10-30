@@ -143,7 +143,7 @@ image::LogicClassDiagram.png[width="800"]
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
-.Component interactions for `delete 1` command (part 1)
+.Component interactions for `delete_guest 1` command (part 1)
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
@@ -151,7 +151,7 @@ Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address 
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
-.Component interactions for `delete 1` command (part 2)
+.Component interactions for `delete_guest 1` command (part 2)
 image::SDforDeletePersonEventHandling.png[width="800"]
 
 [NOTE]
@@ -189,7 +189,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+.  The command execution can affect the `Model` (e.g. adding a guest) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -259,18 +259,18 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_guest 5` command to delete the 5th guest in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_guest n/David ...` to add a new guest. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the guest was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -306,7 +306,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the guest being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -415,7 +415,7 @@ Step 5. The set of tags are added to all guests in the editable address book via
 
 Step 6. Finally, `Model#resetData()` and `Model#commitAddressBook()` are called to reset the current state of the list with the updated tags.
 
-The `removeTag` command does the opposite, and removes a set of tags from all persons in the guest list. However, the workflow is similar to `addTag`; a new `AddressBook` is created and edited accordingly as per the command.
+The `removeTag` command does the opposite, and removes a set of tags from all guests in the guest list. However, the workflow is similar to `addTag`; a new `AddressBook` is created and edited accordingly as per the command.
 
 [NOTE]
 If there are no guests in the current list, or if the removeTag command tries to remove non-existent tags, the function will not execute and the current state of the list will be preserved.
@@ -443,11 +443,11 @@ The CsvConverter class enables us decode/encode between the Person class and the
 
 The 'CsvFile' class enables us to read and write 'AdaptedPerson' to a file. `CsvFile` Implements the `SupportedFile` class which requires it to read and write lists of `AdaptedPerson` objects.
 
-`CsvAdaptedPerson` extends `AdaptedPerson`, it represents a person in the respective file formats, which our case is CSV.
+`CsvAdaptedPerson` extends `AdaptedPerson`, it represents a guest in the respective file formats, which our case is CSV.
 
 '''
 
-The import command will first read the csv file and loop through all the person data and add them into the model. Badly formatted csv lines will be skipped and the user are given feedback on the number of successful imports in the CommandResult Ui component. The following sequence diagram shows how the Import operation works:
+The import command will first read the csv file and loop through all the guest data and add them into the model. Badly formatted csv lines will be skipped and the user are given feedback on the number of successful imports in the CommandResult Ui component. The following sequence diagram shows how the Import operation works:
 
 |====
 | image:ImportCommandSequenceDiagram.PNG[] | image:ImportSequenceRefFrame.PNG[]
@@ -466,7 +466,7 @@ Given below is an example usage scenario and how to support new file formats (Eg
 Step 1. Create new class to extend `AdaptedPerson` abstract class.
 
 		Eg. VcardAdaptedPerson
-		This will represent the a person in the VCard file format.
+		This will represent the a guest in the VCard file format.
 
 
 Step 2. Create new class to implement `PersonConverter` interface. Implement the `encodePerson` and `decodePerson` method.
@@ -517,7 +517,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 Step 2. The user executes the command `import guestlist.csv` to import a list of guest and add them to the current state of the `AddressBook`.
 
 [NOTE]
-Alternatively, the user can execute the command `add n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT t/NORMAL` to create an instance of one guest and add them to the current state of `AddressBook`.
+Alternatively, the user can execute the command `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT t/NORMAL` to create an instance of one guest and add them to the current state of `AddressBook`.
 
 Step 3. The user will execute the command `mark 98765432` to mark the attendance of the `Person`.
 
@@ -772,7 +772,7 @@ Each individual exercise in this section is component-based (i.e. you would not 
 [TIP]
 Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
 
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
+. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all guests in the list.
 +
 ****
 * Hints
@@ -799,9 +799,9 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 * Hints
 ** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a guest, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each guest, and remove the `tag` from each guest.
 ** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
@@ -810,7 +810,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last guest in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
@@ -875,10 +875,10 @@ image::getting-started-ui-status-after.png[width="500"]
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
 ** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
 * Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
+** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of guests when the application just started.
+** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of guests whenever there are new changes to the addressbook.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
+** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of guests status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
@@ -908,15 +908,15 @@ By creating this command, you will get a chance to learn how to implement a feat
 *Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
-Edits the remark for a person specified in the `INDEX`. +
+Edits the remark for a guest specified in the `INDEX`. +
 Format: `remark INDEX r/[REMARK]`
 
 Examples:
 
 * `remark 1 r/Likes to drink coffee.` +
-Edits the remark for the first person to `Likes to drink coffee.`
+Edits the remark for the first guest to `Likes to drink coffee.`
 * `remark 1 r/` +
-Removes the remark for the first person.
+Removes the remark for the first guest.
 
 ==== Step-by-step Instructions
 
@@ -950,7 +950,7 @@ for `RemarkCommandParser`.
 . Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each guest later.
 
 **Main:**
 
@@ -979,7 +979,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 **Main:**
 
 . Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
-. You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
+. You may assume that the user will not be able to use the `add_guest` and `edit_guest` commands to modify the remarks field (i.e. the person will be created without a remark).
 . Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
@@ -1017,7 +1017,7 @@ We now have everything set up... but we still can't modify the remarks. Let's fi
 
 **Main:**
 
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a person.
+. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a guest.
 
 **Tests:**
 
@@ -1054,7 +1054,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |event planner |be able to tag guests with specific labels |take note of any extra details if necessary
 
-|`* * *` |event planner specialising in large events such as weddings|tag all my guests in the list at once |save a lot of time and increase efficiency, as opposed to editing the tags of each individual person
+|`* * *` |event planner specialising in large events such as weddings|tag all my guests in the list at once |save a lot of time and increase efficiency, as opposed to editing the tags of each individual guest
 
 |`* * *` |event planner specialising in large weddings |be able to track the guest list for each event |know how many guests there are in each event in order to know which event I should focus more on
 
@@ -1259,7 +1259,7 @@ Use case resumes at step 2
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 guests without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Command line interface has to be the primary source of input. GUI is to be used only to give visual feedback to the user.
@@ -1321,18 +1321,18 @@ These instructions only provide a starting point for testers to work on; testers
 
 //_{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a guest
 
-. Deleting a person while all persons are listed
+. Deleting a guest while all guests are listed
 
-.. Prerequisites: List all persons using the `list` command. There may be multiple persons in the list.
-.. Test case: `delete 1` +
+.. Prerequisites: List all guests using the `list` command. There may be multiple guests in the list.
+.. Test case: `delete_guest 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
    Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size),
-   `delete y` (where y is smaller than 0), etc. +
+.. Test case: `delete_guest 0` +
+   Expected: No guest is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete_guest`, `delete_guest x` (where x is larger than the list size),
+   `delete_guest y` (where y is smaller than 0), etc. +
 //   _{give more}_
    Expected: Similar to previous.
 
