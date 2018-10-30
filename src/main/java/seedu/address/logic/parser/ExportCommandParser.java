@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.converters.CsvConverter;
@@ -14,7 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new ExportCommand object
  */
-public class ExportCommandParser {
+public class ExportCommandParser implements Parser<ExportCommand> {
 
     public static final String DEFAULT_FILENAME_FORMAT = "exportedGuestBook.csv";
 
@@ -29,9 +30,9 @@ public class ExportCommandParser {
         if (trimmedArg.isEmpty()) {
             return new ExportCommand(new CsvFile(DEFAULT_FILENAME_FORMAT), new CsvConverter());
         } else if (!FileUtil.isValidPath(trimmedArg)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_FILE_PATH, ImportCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_FILE_PATH, ExportCommand.MESSAGE_USAGE));
         } else if (!FileUtil.isValidFileExtension(trimmedArg, "csv")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_FILE_EXTENSION, ExportCommand.MESSAGE_USAGE));
         }
         return new ExportCommand(new CsvFile(trimmedArg), new CsvConverter());
     }

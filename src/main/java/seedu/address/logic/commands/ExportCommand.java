@@ -81,5 +81,20 @@ public class ExportCommand extends Command {
         }
         return result;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ExportCommand)) {
+            return false;
+        }
+
+        ExportCommand otherEc = (ExportCommand) other;
+        return supportedFile.getFileName().equals(otherEc.supportedFile.getFileName())
+                && personConverter.getSupportedFileFormat().equals(otherEc.personConverter.getSupportedFileFormat());
+    }
 }
 //@@author
