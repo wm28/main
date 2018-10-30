@@ -14,7 +14,6 @@ import seedu.address.logic.converters.fileformats.csv.CsvFile;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
-
 //@@author wm28
 
 /**
@@ -47,7 +46,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             default:
                 throw new ParseException(String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
             }
-        } else{
+        } else {
             throw new ParseException(String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
         }
     }
