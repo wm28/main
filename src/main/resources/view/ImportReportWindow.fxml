@@ -14,8 +14,6 @@
   <icons>
     <Image url="@/docs/images/InvitésLogo.jpg"/>
   </icons>
-
-
   <scene>
     <Scene>
       <stylesheets>
@@ -24,7 +22,7 @@
       </stylesheets>
       <VBox>
         <StackPane VBox.vgrow="NEVER" styleClass="stack-pane">
-          <Label styleClass="cell_big_label" text="Import Errors" alignment="TOP_CENTER"/>
+          <Label fx:id="importReportTitle" text="Import Errors" alignment="TOP_CENTER"/>
           <padding>
             <Insets top="20" right="20" bottom="20" left="20"/>
           </padding>
@@ -39,10 +37,8 @@
               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
             <columns>
-              <TableColumn fx:id="inputDataColumn" text="Input data">
-              </TableColumn>
-              <TableColumn fx:id="errorMessageColumn" text="Error">
-              </TableColumn>
+              <TableColumn minWidth="100" fx:id="inputDataColumn" text="Input data"/>
+              <TableColumn minWidth="100" fx:id="errorMessageColumn" text="Error"/>
             </columns>
           </TableView>
         </StackPane>
@@ -52,7 +48,7 @@
             <Insets top="20" right="20" bottom="20" left="20"/>
           </padding>
 
-          <Button text="ok" onAction="#handleImportReportWindow" alignment="BOTTOM_CENTER"/>
+          <Button text="ok" onAction="#handleCloseImportReportWindow" alignment="BOTTOM_CENTER"/>
         </StackPane>
       </VBox>
 

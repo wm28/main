@@ -7,16 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.converters.ImportError;
 import seedu.address.logic.converters.PersonConverter;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.SupportedFile;
 import seedu.address.model.Model;
+import seedu.address.model.error.ImportError;
 import seedu.address.model.person.Person;
 
 //@@author wm28
@@ -64,12 +63,12 @@ public class ImportCommand extends Command {
             throw new CommandException(ioe.getMessage(), ioe);
         }
 
-        if (!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             EventsCenter.getInstance().post(new ShowImportReportEvent(errors));
         }
         model.commitAddressBook();
-        return new CommandResult(
-                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalImports, supportedFile.getFileName()));
+        return new CommandResult(String.format(MESSAGE_IMPORT_CSV_RESULT,
+                successfulImports, totalImports, supportedFile.getFileName()));
     }
 
     /**

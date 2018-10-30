@@ -1,4 +1,4 @@
-package seedu.address.logic.converters;
+package seedu.address.model.error;
 
 import javafx.beans.property.SimpleStringProperty;
 
@@ -22,10 +22,6 @@ public class ImportError {
         return dataInput;
     }
 
-    public void setDataInput(String dataInput) {
-        this.dataInput.set(dataInput);
-    }
-
     public String getErrorMessage() {
         return errorMessage.get();
     }
@@ -34,7 +30,4 @@ public class ImportError {
         return errorMessage;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage.set(errorMessage);
-    }
 }

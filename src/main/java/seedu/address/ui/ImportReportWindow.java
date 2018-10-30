@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.converters.ImportError;
+import seedu.address.model.error.ImportError;
 
 
 /**
@@ -30,18 +30,14 @@ public class ImportReportWindow extends UiPart<Stage> {
     @FXML
     private TableColumn<ImportError, String> errorMessageColumn;
 
-    public ImportReportWindow(Stage root) {
-        super(FXML, root);
-    }
-
     public ImportReportWindow(List<ImportError> errors) {
-        this(new Stage());
+        super(FXML, new Stage());
         this.errors = errors;
         setConnections();
     }
 
     @FXML
-    private void handleImportReportWindow() {
+    private void handleCloseImportReportWindow() {
         getRoot().close();
     }
 
@@ -56,10 +52,7 @@ public class ImportReportWindow extends UiPart<Stage> {
     private void setConnections() {
         errorMessageColumn.setCellValueFactory(importError -> importError.getValue().errorMessageProperty());
         inputDataColumn.setCellValueFactory(importError -> importError.getValue().dataInputProperty());
-        if (errors != null){
-            importErrorTable.setItems(FXCollections.observableArrayList(errors));
-        }
-
+        importErrorTable.setItems(FXCollections.observableArrayList(errors));
     }
 }
 

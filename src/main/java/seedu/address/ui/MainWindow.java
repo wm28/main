@@ -20,8 +20,8 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.Logic;
-import seedu.address.logic.converters.ImportError;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.error.ImportError;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -205,7 +205,9 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel.freeResources();
     }
 
-
+    /**
+     * Creates and shows the ImportReportWindow
+     */
     public void showImportReport(List<ImportError> errors) {
         ImportReportWindow importReportWindow = new ImportReportWindow(errors);
         importReportWindow.show();

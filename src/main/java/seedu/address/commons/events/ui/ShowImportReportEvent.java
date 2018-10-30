@@ -3,7 +3,7 @@ package seedu.address.commons.events.ui;
 import java.util.List;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.logic.converters.ImportError;
+import seedu.address.model.error.ImportError;
 
 /**
  * An event requesting to show the import report
@@ -11,7 +11,7 @@ import seedu.address.logic.converters.ImportError;
 public class ShowImportReportEvent extends BaseEvent {
     public final List<ImportError> errors;
 
-    public ShowImportReportEvent(List<ImportError> errors){
+    public ShowImportReportEvent(List<ImportError> errors) {
         this.errors = errors;
     }
 
