@@ -17,9 +17,6 @@ import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.testutil.TypicalPersons;
 
 public class CsvFileTest {
-
-    public static final String VALID_CSV_FILE = "src\\test\\data\\data\\CsvTest\\typicalPersonsGuestList.csv";
-
     public static final String NON_EXISTENT_CSV_FILE = "src\\test\\data\\data\\CsvTest\\nonExistentGuestList.csv";
     public static final String EXPORTED_CSV_FILE =
             "src\\test\\data\\data\\CsvTest\\exportedTypicalPersonsGuestList.csv";
@@ -48,13 +45,13 @@ public class CsvFileTest {
 
     @Test
     public void getSupportedFileFormat_correctFileFormat_returnsFileFormat() {
-        CsvFile csvFile = new CsvFile(VALID_CSV_FILE);
+        CsvFile csvFile = new CsvFile(TypicalPersons.TYPICAL_PERSONS_CSV);
         assertTrue(csvFile.getSupportedFileFormat().equals(SupportedFileFormat.CSV));
     }
 
     @Test
     public void readAdaptedPersons_validCsvFile_readSuccessful() throws Exception {
-        CsvFile csvFile = new CsvFile(VALID_CSV_FILE);
+        CsvFile csvFile = new CsvFile(TypicalPersons.TYPICAL_PERSONS_CSV);
         List<AdaptedPerson> adaptedPeople = csvFile.readAdaptedPersons();
 
         assertTrue(adaptedPeople.equals(ADAPTED_TYPICAL_PERSONS));
@@ -74,7 +71,7 @@ public class CsvFileTest {
             csvFile.writeAdaptedPersons(ADAPTED_TYPICAL_PERSONS);
 
             File actualOutputFile = new File(EXPORTED_CSV_FILE);
-            File expectedOutputFile = new File(VALID_CSV_FILE);
+            File expectedOutputFile = new File(TypicalPersons.TYPICAL_PERSONS_CSV);
 
             assertTrue(FileUtils.contentEqualsIgnoreEOL(actualOutputFile, expectedOutputFile, "UTF-8"));
         } finally {

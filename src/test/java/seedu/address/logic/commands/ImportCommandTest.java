@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.function.Predicate;
 
-
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
