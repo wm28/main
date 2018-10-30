@@ -203,6 +203,11 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
                 strTags += " ";
                 strTags += person.getPayment();
+            } else if (arrStr[j].equals("a")) {
+                checkKeywords.add(i, arrStr[j + 1]);
+
+                strTags += " ";
+                strTags += person.getAttendance();
             } else if (arrStr[j].equals("t")) {
                 checkKeywords.add(i, arrStr[j + 1]);
 
@@ -301,13 +306,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Payment {
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =
-            "Payment should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Payment should only contain alphanumeric characters, spaces and . such as N.A. , "
+                    + "and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s.-]*";
 
     public final String paymentValue;
 

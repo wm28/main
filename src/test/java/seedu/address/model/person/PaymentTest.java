@@ -33,5 +33,6 @@ public class PaymentTest {
         assertTrue(Payment.isValidPayment("PAID"));
         assertTrue(Payment.isValidPayment("NOT PAID"));
         assertTrue(Payment.isValidPayment("PENDING"));
+        assertTrue(Payment.isValidPayment("N.A."));
     }
 }

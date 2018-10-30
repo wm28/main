@@ -52,3 +52,7 @@
     }
 }
 ```
+###### \java\seedu\address\storage\XmlAdaptedEvent.java
+``` java
+        final Set<Tag> modelTags = new HashSet<>(eventTags);
+```
