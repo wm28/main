@@ -43,7 +43,8 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
             editEventDetails.setEventVenue(ParserUtil.parseEventVenue(argMultimap.getValue(PREFIX_VENUE).get()));
         }
         if (argMultimap.getValue(PREFIX_START_TIME).isPresent()) {
-            editEventDetails.setEventStartTime(ParserUtil.parseEventStartTime(argMultimap.getValue(PREFIX_START_TIME).get()));
+            editEventDetails.setEventStartTime(ParserUtil.parseEventStartTime
+                    (argMultimap.getValue(PREFIX_START_TIME).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDetails::setEventTags);
 
