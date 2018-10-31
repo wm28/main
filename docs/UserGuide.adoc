@@ -22,7 +22,7 @@ as weddings, school gatherings, orientation camps, etc. Some of the main feature
 keeping of attendance of the guests. To add to this, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
 This removes your need having to input all the information manually, as well as subsequently, gives you an alternative if you decide to organise another event using the same guest list.
 
-This will give all you an easier time to manage the reception as you will be equipped with tools that will minimise errors in catering,
+This will give you an easier time to manage the reception as you will be equipped with tools that will minimise errors in catering,
 organisation, and orders. Moreover, this application aims to reduce the frustrations for you when planning events and address your needs in a platform that is more user friendly, personalised, and
 efficient.
 

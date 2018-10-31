@@ -20,7 +20,20 @@ phone numbers and email addresses, as these were unique fields, and the user may
 guests at one go. Rather than use the Filter command, which would yield results one-by-one,
 the Find command allows the user to find a few guests at the same time.
 
-Project Scope -
+Project Scope - Invités is an application targeted at event managers and planners,
+that allows you to better organise, cater, and manage the reception for large events
+such as weddings, school gatherings, orientation camps, etc. Some of the main features
+include the ability to send mass emails, keep track of payments, as well as the tab
+keeping of attendance of the guests. To add to this, by employing a standardised format,
+the application is able to take in Comma Separated Values (CSV) files and import data for
+a particular event. This removes your need having to input all the information manually,
+as well as subsequently, gives you an alternative if you decide to organise another event
+using the same guest list.
+
+This will give you an easier time to manage the reception as you will be equipped with
+tools that will minimise errors in catering, organisation, and orders. Moreover, this
+application aims to reduce the frustrations for you when planning events and address your
+needs in a platform that is more user friendly, personalised, and efficient.
 
 Team:
 
