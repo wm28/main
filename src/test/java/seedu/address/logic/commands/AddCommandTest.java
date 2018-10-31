@@ -136,6 +136,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateEvent(Event editedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }

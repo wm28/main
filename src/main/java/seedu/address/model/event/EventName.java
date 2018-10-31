@@ -14,7 +14,7 @@ public class EventName {
     public static final String MESSAGE_EVENTNAME_CONSTRAINTS =
             "Event names should only contain alphanumeric characters and spaces, and it should not be blank";
 
-    public static final String EVENTNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String EVENTNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ']*";
 
     private String fullEventName;
 
