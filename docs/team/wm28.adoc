@@ -1,0 +1,62 @@
+= Tan Wei Ming - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Invités
+
+---
+
+== Overview
+
+//Add project description
+
+== Summary of contributions
+
+* *Major enhancement*: added *the ability to import/export guests using CSV files*
+** What it does: Allows users to export and import guests using CSV files. For unsuccessful imports, an import report window will be generated to show the offending section of data and its associated issues.
+** Justification: The import feature is critical to the application because it allows event planners to save time by adding guests in batches. The export feature also allows event planners to share guest data easily.
+** Highlights: This enhancement is designed to support future file formats easily. This required an in-depth analysis of design alternatives.
+
+* *Minor enhancement*: added utility class to generate QR codes
+** Credits: https://mvnrepository.com/artifact/com.google.zxing/core[XZing Core] 
+
+* *Minor enhancement*: added a full preview of guests in the user interface
+
+* *Minor enhancement*: remodelled the guest list in the user interface
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Updated about us page
+** Community:
+*** PRs reviewed: https://github.com[], https://github.com[], https://github.com[], https://github.com[]
+
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=import]
+include::../UserGuide.adoc[tag=export]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=importexport]
+
+
+== PROJECT: PowerPointLabs
+
+---
+
+_{Optionally, you may include other projects in your portfolio.}_
