@@ -49,7 +49,7 @@ public class EventBuilder {
     /**
      * Sets the {@code EventName} of the {@code Event} that we are building.
      */
-    public EventBuilder withName(String name) {
+    public EventBuilder withEventName(String name) {
         this.eventName = new EventName(name);
         return this;
     }
@@ -57,7 +57,7 @@ public class EventBuilder {
     /**
      * Sets the {@code EventDate} of the {@code Event} that we are building
      */
-    public EventBuilder withDate(String date) {
+    public EventBuilder withEventDate(String date) {
         this.eventDate = new EventDate(date);
         return this;
     }
@@ -65,7 +65,7 @@ public class EventBuilder {
     /**
      * Sets the {@code EventVenue} of the {@code Event} that we are building
      */
-    public EventBuilder withVenue(String venue) {
+    public EventBuilder withEventVenue(String venue) {
         this.eventVenue = new EventVenue(venue);
         return this;
     }
@@ -73,7 +73,7 @@ public class EventBuilder {
     /**
      * Sets the {@code EventStartTime} of the {@code Event} that we are building
      */
-    public EventBuilder withStartTime(String startTime) {
+    public EventBuilder withEventStartTime(String startTime) {
         this.eventStartTime = new EventStartTime(startTime);
         return this;
     }
@@ -81,7 +81,7 @@ public class EventBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Event} that we are building.
      */
-    public EventBuilder withTags(String ... tags) {
+    public EventBuilder withEventTags(String ... tags) {
         this.eventTags = SampleDataUtil.getTagSet(tags);
         return this;
     }

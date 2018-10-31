@@ -75,6 +75,12 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.hasEvent();
     }
 
+    @Override
+    public void updateEvent(Event editedEvent) {
+        versionedAddressBook.setEvent(editedEvent);
+        indicateAddressBookChanged();
+    }
+
     /** Returns the details of the event currently residing in the addressbook. */
     @Override
     public Event getEventDetails() {
