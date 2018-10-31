@@ -58,13 +58,13 @@ Team:
 //Done
 * *Other contributions*: Created Payment and Attendance attributes of a person
 //Need to change this
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from % to % (Pull requests https://github.com[#TBC], https://github.com[#TBC])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[TBC], https://github.com[TBC], https://github.com[TBC])
+//** Enhancements to existing features:
+//*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+//*** Wrote additional tests for existing features to increase coverage from % to % (Pull requests https://github.com[#TBC], https://github.com[#TBC])
+//** Documentation:
+//*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+//** Community:
+//*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[TBC], https://github.com[TBC], https://github.com[TBC])
 
 //Done
 == Contributions to the User Guide
