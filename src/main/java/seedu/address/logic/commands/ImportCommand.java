@@ -3,8 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.converters.PersonConverter;
@@ -12,6 +15,7 @@ import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.SupportedFile;
 import seedu.address.model.Model;
+import seedu.address.model.error.ImportError;
 import seedu.address.model.person.Person;
 
 //@@author wm28
@@ -31,6 +35,7 @@ public class ImportCommand extends Command {
 
     private SupportedFile supportedFile;
     private final PersonConverter personConverter;
+    private List<ImportError> errors;
     private int successfulImports;
     private int totalImports;
 
@@ -42,6 +47,7 @@ public class ImportCommand extends Command {
                 : "supportedFile and personConverter does not support the same file format";
         this.supportedFile = supportedFile;
         this.personConverter = personConverter;
+        errors = new ArrayList<>();
     }
 
     @Override
@@ -57,9 +63,12 @@ public class ImportCommand extends Command {
             throw new CommandException(ioe.getMessage(), ioe);
         }
 
+        if (!errors.isEmpty()) {
+            EventsCenter.getInstance().post(new ShowImportReportEvent(errors));
+        }
         model.commitAddressBook();
-        return new CommandResult(
-                String.format(MESSAGE_IMPORT_CSV_RESULT, successfulImports, totalImports, supportedFile.getFileName()));
+        return new CommandResult(String.format(MESSAGE_IMPORT_CSV_RESULT,
+                successfulImports, totalImports, supportedFile.getFileName()));
     }
 
     /**
@@ -71,8 +80,10 @@ public class ImportCommand extends Command {
                 Person toAdd = personConverter.decodePerson(person);
                 addPerson(toAdd, model);
             } catch (PersonDecodingException pe) {
+                errors.add(new ImportError(person.getFormattedString(), pe.getMessage()));
                 successfulImports--;
             } catch (CommandException ce) {
+                errors.add(new ImportError(person.getFormattedString(), ce.getMessage()));
                 successfulImports--;
             }
         }
