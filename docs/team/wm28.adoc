@@ -19,7 +19,7 @@
 ** Highlights: This enhancement is designed to support future file formats easily. This required an in-depth analysis of design alternatives.
 
 * *Minor enhancement*: added utility class to generate QR codes
-** Credits: https://mvnrepository.com/artifact/com.google.zxing/core[XZing Core] 
+** Credits: https://mvnrepository.com/artifact/com.google.zxing/core[XZing Core]
 
 * *Minor enhancement*: added a full preview of guests in the user interface
 
