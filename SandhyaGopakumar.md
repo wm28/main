@@ -8,11 +8,17 @@ public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "add_event";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the application. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "NAME " + " "
+            + PREFIX_DATE + "DATE" + " "
+            + PREFIX_VENUE + "VENUE" + " "
+            + PREFIX_START_TIME + "START TIME" + " "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Wedding "
-            + PREFIX_TAG + "18 Sep 2018 10AM ";
+            + PREFIX_NAME + "Wedding " + " "
+            + PREFIX_DATE + "10/10/2018 " + " "
+            + PREFIX_VENUE + "Mandarin Hotel, 5th floor, Room 1A" + " "
+            + PREFIX_START_TIME + "10:00 AM" + " "
+            + PREFIX_TAG + "ClassicTheme";
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "An event already exists in the application";
     private final Event toAdd;
@@ -78,38 +84,6 @@ public class DeleteEventCommand extends Command {
     }
 }
 ```
-###### \java\seedu\address\logic\parser\AddEventCommandParser.java
-``` java
-/**
- * Parses input arguments and creates a new AddEventCommand object
- */
-public class AddEventCommandParser implements Parser<AddEventCommand> {
-    /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public AddEventCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-        }
-        EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Event event = new Event(eventName, tagList);
-        return new AddEventCommand(event);
-    }
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-}
-```
 ###### \java\seedu\address\logic\parser\AddressBookParser.java
 ``` java
         case AddEventCommand.COMMAND_WORD:
@@ -120,12 +94,22 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         case DeleteEventCommand.COMMAND_WORD:
             return new DeleteEventCommand();
 ```
+###### \java\seedu\address\logic\parser\CliSyntax.java
+``` java
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_VENUE = new Prefix("v/");
+    public static final Prefix PREFIX_START_TIME = new Prefix("st/");
+```
 ###### \java\seedu\address\model\AddressBook.java
 ``` java
     private final Event eventDetails;
 ```
 ###### \java\seedu\address\model\AddressBook.java
 ``` java
+
+    /**
+     * Replaces the current details of the event with {@code event}.
+     */
     public void setEvent(Event event) {
         this.eventDetails.setEvent(event);
     }
@@ -133,6 +117,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 ###### \java\seedu\address\model\AddressBook.java
 ``` java
     //event-level operations
+    /** Adds the details given by the user to event. */
     public void addEvent(Event e) {
         eventDetails.addEvent(e);
     }
@@ -142,130 +127,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         eventDetails.deleteEvent();
     }
 
+    /** Returns true if the event details given by the user is being stored in the addressbook. */
     public boolean hasEvent() {
         return eventDetails.isUserInitialised();
     }
-```
-###### \java\seedu\address\model\AddressBook.java
-``` java
-    @Override
-    public Event getEventDetails() {
-        return eventDetails;
-    }
-```
-###### \java\seedu\address\model\event\Event.java
-``` java
-/**
- * Represents an event.
- * Guarantees: details are present and not null, field values are validated, immutable.
- */
-public class Event {
-
-    //Identity fields
-    private EventName eventName;
-    private Set<Tag> eventTags = new HashSet<>();
-    private boolean isNotInitialisedByUser;
-    /**
-     * Every field must be present and not null.
-     */
-    public Event(EventName eventName, Set<Tag> eventTags) {
-        requireAllNonNull(eventName, eventTags);
-        this.eventName = eventName;
-        this.eventTags.addAll(eventTags);
-        this.isNotInitialisedByUser = false;
-    }
-    public Event() {
-        EventName eventName = new EventName("event not created yet");
-        this.eventName = eventName;
-        this.isNotInitialisedByUser = true;
-    }
-
-    public String getName() {
-        return eventName.getEventName();
-    }
-
-    public void setEvent(Event event) {
-        if (!this.equals(event)) {
-            this.eventName.setEventName(event.getName());
-            this.eventTags = event.eventTags;
-        }
-    }
-
-    /** Adds user-given details of the event. */
-    public void addEvent(Event event) {
-        if (!this.equals(event)) {
-            this.eventName.setEventName(event.getName());
-            this.eventTags = event.eventTags;
-        }
-        this.isNotInitialisedByUser = false;
-    }
-    /** Deletes user-given details of the event. */
-    public void deleteEvent() {
-        Event event = new Event();
-        this.eventName.setEventName(event.getName());
-        this.eventTags = event.eventTags;
-        this.isNotInitialisedByUser = true;
-    }
-
-    public boolean isUserInitialised() {
-        return !isNotInitialisedByUser;
-    }
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getEventTags() {
-        return Collections.unmodifiableSet(eventTags);
-    }
-
-    /**
-     * Returns true if both events of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two events.
-     */
-    public boolean isSameEvent(seedu.address.model.event.Event otherEvent) {
-        if (otherEvent == this) {
-            return true;
-        }
-
-        return otherEvent != null
-                && otherEvent.getName().equals(getName());
-    }
-
-    /**
-     * Returns true if both events have the same identity and data fields.
-     * This defines a stronger notion of equality between two events.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof seedu.address.model.event.Event)) {
-            return false;
-        }
-
-        seedu.address.model.event.Event otherEvent = (seedu.address.model.event.Event) other;
-        return otherEvent.getName().equals(getName())
-                && otherEvent.getEventTags().equals(getEventTags());
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(eventName, eventTags);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Tags: ");
-        getEventTags().forEach(builder::append);
-        return builder.toString();
-    }
-
-}
 ```
 ###### \java\seedu\address\model\event\EventName.java
 ``` java
@@ -364,7 +229,7 @@ public class EventNotFoundException extends RuntimeException {}
 
     /**
      * Adds the given event.
-     * {@code event} must not already exist in the application.
+     * {@code event} with details given by the user must not already exist in the application.
      */
     void addEvent(Event event);
 

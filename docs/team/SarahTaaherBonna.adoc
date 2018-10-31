@@ -6,10 +6,42 @@
 == PROJECT: Invités
 
 ---
-//Add in team details
+//Add in project scope
 == Overview
 
+The purpose of this portfolio is to document my role and contributions to the project.
+
 Invités - An event management system. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+
+Responsibility - My task was to handle data filtration. I split this task into two. First, I created a Filter command
+to handle data filtration for the payment status, attendance status and the tags, as these fields
+were not unique to any person. Next, I modified the existing Find command to handle names,
+phone numbers and email addresses, as these were unique fields, and the user may want to find a few
+guests at one go. Rather than use the Filter command, which would yield results one-by-one,
+the Find command allows the user to find a few guests at the same time.
+
+Project Scope - Invités is an application targeted at event managers and planners,
+that allows you to better organise, cater, and manage the reception for large events
+such as weddings, school gatherings, orientation camps, etc. Some of the main features
+include the ability to send mass emails, keep track of payments, as well as the tab
+keeping of attendance of the guests. To add to this, by employing a standardised format,
+the application is able to take in Comma Separated Values (CSV) files and import data for
+a particular event. This removes your need having to input all the information manually,
+as well as subsequently, gives you an alternative if you decide to organise another event
+using the same guest list.
+
+This will give you an easier time to manage the reception as you will be equipped with
+tools that will minimise errors in catering, organisation, and orders. Moreover, this
+application aims to reduce the frustrations for you when planning events and address your
+needs in a platform that is more user friendly, personalised, and efficient.
+
+Team:
+
+1. Aaryam - Mail feature
+2. Sandhya - Events feature
+3. Sarah - Data Filtration feature
+4. Tze Guang - Attendance-taking feature
+5. Wei Ming - Data Importation feature
 
 == Summary of contributions
 
@@ -26,15 +58,13 @@ Invités - An event management system. The user interacts with it using a CLI, a
 //Done
 * *Other contributions*: Created Payment and Attendance attributes of a person
 //Need to change this
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from % to % (Pull requests https://github.com[#TBC], https://github.com[#TBC])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[TBC], https://github.com[TBC], https://github.com[TBC])
+//** Enhancements to existing features:
+//*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+//*** Wrote additional tests for existing features to increase coverage from % to % (Pull requests https://github.com[#TBC], https://github.com[#TBC])
+//** Documentation:
+//*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+//** Community:
+//*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[TBC], https://github.com[TBC], https://github.com[TBC])
 
 //Done
 == Contributions to the User Guide
@@ -47,6 +77,7 @@ Invités - An event management system. The user interacts with it using a CLI, a
 include::../UserGuide.adoc[tag=filter]
 
 include::../UserGuide.adoc[tag=find]
+
 //Done
 == Contributions to the Developer Guide
 

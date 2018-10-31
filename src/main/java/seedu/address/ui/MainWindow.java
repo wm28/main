@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -17,8 +18,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.error.ImportError;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -198,9 +201,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
 
+    /**
+     * Creates and shows the ImportReportWindow
+     */
+    public void showImportReport(List<ImportError> errors) {
+        ImportReportWindow importReportWindow = new ImportReportWindow(errors);
+        importReportWindow.show();
+    }
+
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleShowImportReportEvent(ShowImportReportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        showImportReport(event.errors);
     }
 }
