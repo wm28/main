@@ -39,10 +39,6 @@ public class EmailWindow extends UiPart<Stage> {
         }
     };
 
-    public EmailWindow() {
-        super(FXML, new Stage());
-    }
-
     @FXML
     private VBox emailContainer;
 
@@ -63,6 +59,10 @@ public class EmailWindow extends UiPart<Stage> {
 
     @FXML
     private TextField subjectField;
+
+    public EmailWindow() {
+        super(FXML, new Stage());
+    }
 
     /**
      * This is the event handler when the Send Email Button is pressed.
