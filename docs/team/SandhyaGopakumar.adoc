@@ -5,14 +5,13 @@
 
 == PROJECT: Invités
 
----
-
-== Overview
-
 Invités is an application targeted at event managers and planners. The application that allows its users to efficiently *organise, cater, and manage* large events such
 as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments, and take note of attendance of the guests.
 To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
 This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
+
+== Overview
+
 
 == Summary of contributions
 
@@ -40,9 +39,9 @@ This eliminates the need to key in the guest details manually and subsequently, 
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 //TODO:
-include::../UserGuide.adoc[tag=add_event]
+include::../UserGuide.adoc[tag=event]
 
-include::../UserGuide.adoc[tag=delete_event]
+//include::../UserGuide.adoc[tag=delete_event]
 
 //include::../UserGuide.adoc[tag=delete_event]
 
