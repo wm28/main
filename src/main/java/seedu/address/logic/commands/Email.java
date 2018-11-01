@@ -90,7 +90,7 @@ public abstract class Email extends Command {
      * fields are provided by the child classes
      */
     public void createAndSendEmail(String username, String emailSubject, String emailMessage,
-                              String recipient, Session session) throws CommandException {
+                                   String recipient, Session session) throws CommandException {
         try {
             // Creates a default MimeMessage object
             Message message = new MimeMessage(session);

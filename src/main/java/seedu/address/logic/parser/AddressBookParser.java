@@ -138,7 +138,7 @@ public class AddressBookParser {
             return new MailCommandParser().parse(arguments);
 
         case EmailAllCommand.COMMAND_WORD:
-            return EmailAllCommand.getInstance();
+            return new EmailAllCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
