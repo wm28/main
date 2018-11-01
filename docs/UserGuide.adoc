@@ -222,29 +222,46 @@ Examples:
 You will export the currently filtered guest list entries into a CSV file in the specified path.
 // end::export[]
 
+// tag::mark[]
 === Marking a guest as present : `mark`
 
 Marks a guest as present using a unique number assigned to them. This will also change the
 `a/PRESENT`​ tag associated with the guest to Present. +
-Format: `mark [p/PHONE_NUMBER]`
+Format: `mark [PHONE_NUMBER]`
+
+[NOTE]
+`PHONE_NUMBER` does not use the p/ prefix. +
+`PHONE_NUMBER` only accepts a string of numbers, other characters will trigger an invalid command format error.
 
 Examples:
 
 * `mark 81927291` +
 You will mark the guest with phone number `81927291` as present.
+// end::mark[]
 
+// tag::unmark[]
 === Marking a guest as absent : `unmark`
 
 Marks a guest as absent using their unique number. This will also change the
 `a/PRESENT`​ tag associated with the guest to Absent. +
-Format: `unmark [p/PHONE_NUMBER]`
+Format: `unmark [PHONE_NUMBER]`
+
+[NOTE]
+`PHONE_NUMBER` does not use the p/ prefix. +
+`PHONE_NUMBER` only accepts a string of numbers, other characters will trigger an invalid command format error.
+
 
 Examples:
 
 * `unmark 81927291` +
 You will mark the guest with phone number `81927291` as absent.
+// end::unmark[]
 
+// tag::start_marking[]
 ===  Start mass attendance marking : `start_marking`
+
+[NOTE]
+This feature is not implemented yet
 
 Start the mass attendance marking mode. Allows you to mark attendance without using
 the mark prefix. +
@@ -254,11 +271,17 @@ Examples:
 
 * `start_marking` + `87654321` + `87654322` + `87654323` + `87654324...` +
 You will mark the guests with unique numbers 87654321, 87654322, 87654323, 87654324 as present
+// end::start_marking[]
 
+// tag::stop_marking[]
 ===  Stop mass attendance marking : `stop_marking`
+
+[NOTE]
+This feature is not implemented yet
 
 Stop the mass attendance marking mode. +
 Format: `stop_marking`
+// end::stop_marking[]
 
 // tag::filter[]
 ===  Filter list based on specified parameters : `filter`
