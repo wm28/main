@@ -39,7 +39,7 @@ public class XmlUtilTest {
     private static final String VALID_NAME = "Hans Muster";
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
-    private static final String VALID_PAYMENT = "NOT PAID";
+    private static final String VALID_PAYMENT = "NOTPAID";
     private static final String VALID_ATTENDANCE = "PRESENT";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("NORMAL"));
 
