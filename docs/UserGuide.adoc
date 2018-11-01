@@ -258,7 +258,7 @@ You will mark the guest with phone number `81927291` as absent.
 // end::unmark[]
 
 // tag::start_marking[]
-===  Start mass attendance marking : `start_marking`
+===  Start mass attendance marking : `start_marking` [To be implemented in future releases]
 
 [NOTE]
 This feature is not implemented yet
@@ -274,7 +274,7 @@ You will mark the guests with unique numbers 87654321, 87654322, 87654323, 87654
 // end::start_marking[]
 
 // tag::stop_marking[]
-===  Stop mass attendance marking : `stop_marking`
+===  Stop mass attendance marking : `stop_marking` [To be implemented in future releases]
 
 [NOTE]
 This feature is not implemented yet

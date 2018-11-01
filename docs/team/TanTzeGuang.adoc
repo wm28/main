@@ -9,7 +9,14 @@
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Invités is a desktop application used by people who manage and plan events to streamline their processes and better manage the events that they are handling.
+The user interacts with it mainly using a CLI, and it has a GUI created with JavaFX.
+
+Project scope - Invités is an event management system that provides an intuitive platform for event planners to better organise and manage
+the reception during small or large events such as school orientation camps, committee events or more formal occasions such as weddings.
+The main features that streamline the processes of the event planner is the ability to send mass emails to attendees,
+keep track of payments, as well as attendance tracking during the event itself. If the event planner used other applications
+to store his data, they can easily import their data over from CSV files that can be generated from Microsoft Excel.
 
 == Summary of contributions
 
@@ -18,29 +25,18 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 ** Justification: This feature is necessary in the implementation of our guest list as it is a core feature that gives the event planner peace of mind as it is a tool for them to ensure that the event is run smoothly.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
-
 * *Code contributed*: [https://github.com/kronicler/main/blob/master/kronicler.md[Functional code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Integrated a new Github plugin (CircleCI) to my personal forked repo to ensure that the my build succeeds before a pull request is done to
+main repo.
 
 == Contributions to the User Guide
 
@@ -65,8 +61,3 @@ include::../UserGuide.adoc[tag=stop_marking]
 
 include::../DeveloperGuide.adoc[tag=markunmark]
 
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
