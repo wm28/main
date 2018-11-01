@@ -365,7 +365,7 @@ Examples:
 
 * `delete_event` +
 You will delete the event details.
-// tag::event[]
+// end::event[]
 // tag::undoredo[]
 === Undoing previous command : `undo`
 

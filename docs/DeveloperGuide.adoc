@@ -358,16 +358,19 @@ The following sequence diagram shows how the find operation works:
 image::FindSequenceDiagram.png[width="800"]
 // end::find[]
 
+// tag::event[]
 === Add/Delete Event feature
 ==== Current Implementation
 
-The add_event mechanism is facilitated by `VersionedAddressBook`.
-Given below is an example usage scenario and how the add_event mechanism behaves at each step.
+The add_event and delete_event mechanisms are facilitated by `VersionedAddressBook`.
+Given below is an example usage scenario and how the add_event and delete_event mechanisms behave at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 Step 2. The user executes `add_event n/Wedding t/8thOct t/10AM` command to add in details about the event they are currently organising.
-The `add_event` command calls `Model#addEvent()` to add in the event details and 'Model#commitAddressBook()', causing the modified state of the address book after the `add_event n/Wedding t/8thOct t/10AM` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The `add_event` command calls `Model#addEvent()` to add in the event details.
+It calls'Model#commitAddressBook()' as well, causing the modified state of the address book after the `add_event n/Wedding t/8thOct t/10AM` command executes to be saved in the `addressBookStateList`.
+The `currentStatePointer` is shifted to the newly inserted address book state.
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
@@ -376,8 +379,9 @@ If a command fails its execution, it will not call `Model#commitAddressBook()`, 
 If the user has added in the details of the event they are organising, then another set of event details should not be stored.
 The `add_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
 
-Step 3. After the event has taken place, the user decides to organise another event with the same guest list and decides to delete the event details currently stored in the application using the 'delete_event' command.
-The `delete_event` command calls `Model#deleteEvent to delete the event's details. The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. After the event has taken place, the user decides to organise another event with the same guest list and decides to delete the event details using the 'delete_event' command.
+The `delete_event` command calls `Model#deleteEvent to delete the event's details.
+The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
@@ -389,6 +393,31 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 The following sequence diagram shows how the add_event operation works:
 
 image::AddDeleteEventSequenceDiagram.png[width="1000"]
+
+=== Edit Event feature
+==== Current Implementation
+
+The edit_event mechanism is facilitated by `VersionedAddressBook`.
+Given below is an example usage scenario and how the edit_event mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+Step 2. The user executes `add_event n/Wedding d/8/12/2019 v/Hilton st/10:00 AM` command to add in details about the event they are currently organising.
+
+Step 3. Due to a sudden change of plans, the user wishes to change the event's date and venue.
+The user executes 'edit_event d/10/12/2019 v/Novotel' command. The 'edit_event' command calls `Model#updateEvent' to update the event's details.
+The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+[NOTE]
+If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+[NOTE]
+If the user has not added in the details of an event, then there are no specific event details to delete.
+The `edit_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
+
+//The following sequence diagram shows how the edit_event operation works:
+
+// end::event[]
 
 === Add/Remove Tag generation feature
 ==== Current Implementation
