@@ -59,8 +59,7 @@ public abstract class Email extends Command {
 
         if (newEmailWindow.isSendButton()) {
             information = newEmailWindow.getInformation();
-        }
-        else if (newEmailWindow.isQuitButton()) {
+        } else if (newEmailWindow.isQuitButton()) {
             throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
         }
 

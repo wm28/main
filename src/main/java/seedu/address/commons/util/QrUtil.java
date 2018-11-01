@@ -57,9 +57,7 @@ public class QrUtil {
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
             ImageIO.write(bufferedImage, "png", file);
             //@@author
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
     }

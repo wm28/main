@@ -22,10 +22,10 @@ public class Messages {
     public static final String MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED = "Error: you have not included the message "
                                                                     + "of your email!";
     public static final String MESSAGE_NO_EMAIL_SENT_MESSAGE = "No emails sent to any guests!";
-    public static final String MESSAGE_NO_SUCH_ELEMENT_MESSAGE = "Error: Please specify your credentials, email message,"
-                                                             + "and email subject in Credentials.txt and Message.txt";
-    public static final String MESSAGE_NO_INTERNET_CONNECTION = "Error: could not send email, please ensure you have strong "
-                                                             + "internet connectivity";
+    public static final String MESSAGE_NO_SUCH_ELEMENT_MESSAGE = "Error: Please specify your credentials, email message"
+                                                             + ", and email subject in Credentials.txt and Message.txt";
+    public static final String MESSAGE_NO_INTERNET_CONNECTION = "Error: could not send email, please ensure you "
+                                                             + "have strong internet connectivity";
     public static final String MESSAGE_PERSONS_FILTERED_OVERVIEW = "Filtered by: %1$s\n";
     public static final String MESSAGE_INCORRECT_TAG_FORMAT = "Tags names should be alphanumeric";
 }

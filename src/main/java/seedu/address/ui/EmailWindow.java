@@ -32,11 +32,6 @@ public class EmailWindow extends UiPart<Stage> {
     private boolean isStillOpen = false;
     private boolean isSendButtonPressed = false;
     private boolean isQuitButtonPressed = false;
-
-    public EmailWindow() {
-        super(FXML, new Stage());
-    }
-
     private Email email = new Email() {
         @Override
         public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -44,8 +39,21 @@ public class EmailWindow extends UiPart<Stage> {
         }
     };
 
+    public EmailWindow() {
+        super(FXML, new Stage());
+    }
+
     @FXML
-    private VBox emailContainer;
+    private Button quitButton;
+
+    @FXML
+    private Button sendButton;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private TextArea messageField;
 
     @FXML
     private TextField emailField;
@@ -54,16 +62,7 @@ public class EmailWindow extends UiPart<Stage> {
     private TextField subjectField;
 
     @FXML
-    private TextArea messageField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private Button quitButton;
-
-    @FXML
-    private Button sendButton;
+    private VBox emailContainer;
 
     /**
      * This is the event handler when the Send Email Button is pressed.
@@ -80,25 +79,25 @@ public class EmailWindow extends UiPart<Stage> {
         information[2] = subjectField.getText();
         information[3] = messageField.getText();
 
-        if (emailField.getText() == null ||
-                emailField.getText().replaceAll("\\s+", "").equals("")) {
+        if (emailField.getText() == null
+                || emailField.getText().replaceAll("\\s+", "").equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, Messages.MESSAGE_USERNAME_NOT_PROVIDED, ButtonType.OK);
             alert.showAndWait();
             isStillOpen = true;
-        } else if (passwordField.getText() == null ||
-                passwordField.getText().replaceAll("\\s+", "").equals("")) {
+        } else if (passwordField.getText() == null
+                || passwordField.getText().replaceAll("\\s+", "").equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, Messages.MESSAGE_PASSWORD_NOT_PROVIDED, ButtonType.OK);
             alert.showAndWait();
 
             isStillOpen = true;
-        } else if (subjectField.getText() == null ||
-                subjectField.getText().replaceAll("\\s+", "").equals("")) {
+        } else if (subjectField.getText() == null
+                || subjectField.getText().replaceAll("\\s+", "").equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED, ButtonType.OK);
             alert.showAndWait();
 
             isStillOpen = true;
-        } else if (messageField.getText() == null ||
-                messageField.getText().replaceAll("\\s+", "").equals("")) {
+        } else if (messageField.getText() == null
+                || messageField.getText().replaceAll("\\s+", "").equals("")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED, ButtonType.OK);
             alert.showAndWait();
 
