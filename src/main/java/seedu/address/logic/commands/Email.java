@@ -49,7 +49,7 @@ public abstract class Email extends Command {
      * username, password, email message and email subject. Error handling is also performed
      * through the try-catch block, which details with CommandException as well as
      * General Exceptions. Once parsed, the private global variables in the MailCommand username,
-     * password, emailSubject, and emailMessage are set with the strings parsed from the .txt files
+     * password, emailSubject, and emailMessage are set with the strings received from the EmailWindow
      */
     public String[] retrieveInformation() throws CommandException {
         String[] information = new String[4];
