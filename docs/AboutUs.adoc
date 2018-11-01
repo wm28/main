@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Srivastava Aaryam
 image::aaryamnus.png[width="150", align="left"]
-{empty}[http://github.com/aaryamNUS[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/aaryamNUS[github]] [<<aaryamNUS#, portfolio>>]
 
 Role: Team lead +
 Responsibilities: Mass email sending functionality
@@ -39,7 +39,7 @@ Responsibilities: Data filtering
 
 === Tan Tze Guang
 image::kronicler.png[width="150", align="left"]
-{empty}[http://github.com/kronicler[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/kronicler[github]] [<<TanTzeGuang#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Attendance taking functionality
@@ -48,7 +48,7 @@ Responsibilities: Attendance taking functionality
 
 === Tan Wei Ming
 image::wm28.png[width="150", align="left"]
-{empty}[http://github.com/wm28[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/wm28[github]] [<<wm28#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data importation

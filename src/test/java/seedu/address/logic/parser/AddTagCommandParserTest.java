@@ -33,4 +33,10 @@ public class AddTagCommandParserTest {
         assertParseFailure(parser, "    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTagCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_nonAlphanumeric_throwsParseException() {
+        assertParseFailure(parser, "%$", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddTagCommand.MESSAGE_USAGE));
+    }
 }

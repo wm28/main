@@ -27,6 +27,14 @@
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-prompt-text-fill: silver;
+}
+
+.text-area {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-prompt-text-fill: silver;
+    -fx-background-color: darkgrey;
 }
 
 .tab-pane {
@@ -417,3 +425,46 @@
     -fx-font-size: 25pt;
     -fx-text-fill: white;
 }
+
+#emailContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    background-color: #383838; /* Used in the default.html file */
+}
+
+#emailLabel {
+    -fx-text-fill: white;
+}
+
+#passwordLabel {
+    -fx-text-fill: white;
+}
+
+#messageLabel {
+    -fx-text-fill: white;
+}
+
+#subjectLabel {
+    -fx-text-fill: white;
+}
+
+#emailField {
+    -fx-text-fill: black;
+    -fx-background-color: lightgrey;
+}
+
+#passwordField {
+    -fx-text-fill: black;
+    -fx-background-color: lightgrey;
+}
+
+#messageField {
+    -fx-text-fill: black;
+    -fx-background-color: lightgrey;
+}
+
+#subjectField {
+    -fx-text-fill: black;
+    -fx-background-color: lightgrey;
+}
+
+

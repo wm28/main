@@ -89,6 +89,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.zxing/core
     compile 'com.google.zxing:core:3.3.3'
 
+    // https://mvnrepository.com/artifact/com.google.zxing/javase
+    compile 'com.google.zxing:javase:3.3.3'
+
 }
 
 shadowJar {
@@ -136,7 +139,7 @@ nonGuiTests.dependsOn test
 task(allTests)
 
 // `allTests` implies both `guiTests` and `nonGuiTests`
-//allTests.dependsOn guiTests
+// allTests.dependsOn guiTests
 allTests.dependsOn nonGuiTests
 
 test {

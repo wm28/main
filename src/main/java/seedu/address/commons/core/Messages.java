@@ -14,21 +14,18 @@ public class Messages {
     public static final String MESSAGE_FILE_NOT_FOUND = "%1$s does not exists!";
     public static final String MESSAGE_FILE_ALREADY_EXIST = "%1$s already exists!";
     public static final String MESSAGE_USERNAME_NOT_PROVIDED = "Error: you have not provided your username "
-                                                                + "for authentication in the file src/main/"
-                                                                + "resources/EmailData/Credentials.txt";
+                                                                + "for authentication!";
     public static final String MESSAGE_PASSWORD_NOT_PROVIDED = "Error: you have not provided your password "
-                                                                + "for authentication in the file src/main/"
-                                                                + "resources/EmailData/Credentials.txt";
+                                                                + "for authentication!";
     public static final String MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED = "Error: you have not included the subject "
-                                                                    + "of your email in the file src/main/"
-                                                                    + "resources/EmailData/Message.txt";
+                                                                    + "of your email!";
     public static final String MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED = "Error: you have not included the message "
-                                                                    + "of your email in the file src/main/"
-                                                                    + "resources/EmailData/Message.txt";
-    public static final String MESSAGE_PARSE_ERROR_MESSAGE = "Error: You have not provided either your "
-                                                             + "email message, email subject, password, or "
-                                                             + "username in Credentials.txt or Message.txt. "
-                                                             + "Please ensure you enclose all the parameters "
-                                                             + "within quotation marks!";
+                                                                    + "of your email!";
+    public static final String MESSAGE_NO_EMAIL_SENT_MESSAGE = "No emails sent to any guests!";
+    public static final String MESSAGE_NO_SUCH_ELEMENT_MESSAGE = "Error: Please specify your credentials, email message"
+                                                             + ", and email subject in Credentials.txt and Message.txt";
+    public static final String MESSAGE_NO_INTERNET_CONNECTION = "Error: could not send email, please ensure you "
+                                                             + "have strong internet connectivity";
     public static final String MESSAGE_PERSONS_FILTERED_OVERVIEW = "Filtered by: %1$s\n";
+    public static final String MESSAGE_INCORRECT_TAG_FORMAT = "Tags names should be alphanumeric";
 }

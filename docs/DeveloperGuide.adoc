@@ -419,13 +419,14 @@ The `edit_event` command uses `Model#hasEvent()` to check if this is the case. I
 
 // end::event[]
 
+// tag::tags[]
 === Add/Remove Tag generation feature
 ==== Current Implementation
 
 The addTag/removeTag mechanism is facilitated by `AddressBook` as it provides an editable form of a `ReadOnlyAddressBook` provided by the `Model` interface.
 Additionally, it implements the following operations:
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#getFilteredPersonList()`, and `Model#resetData()` respectively.
+`Model#commitAddressBook()`, `Model#getFilteredPersonList()`, and `Model#resetData()` respectively.
 
 Given below is an example usage scenario and how the addTag/removeTag mechanism behaves at each step.
 
@@ -450,12 +451,26 @@ The `removeTag` command does the opposite, and removes a set of tags from all gu
 If there are no guests in the current list, or if the removeTag command tries to remove non-existent tags, the function will not execute and the current state of the list will be preserved.
 
 The following sequence diagram summarizes how the addTag() and removeTag() function work:
-
-[NOTE]
 The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
 
-image::AddTagRemoveTagSequenceDiagram.png[width="800"]
+|====
+| image:AddTagRemoveTagSequenceDiagram.png[] Figure 1 - AddTag and RemoveTag Sequence Diagram | *Figure 1* on the left shows how the addTag() and removeTag() function work.
 
+                                                                                                The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
+|====
+
+==== Design Considerations
+
+===== Aspect: How to create an EditableAddressBook for AddTag and RemoveTag?
+
+*** Alternative 1 (current choice): edit the `AddressBook` model to allow an addTag and removeTag command to execute
+** Pros: Easier to use by the functions and also to test
+** Cons: Variability is difficult, as new editions to the model must be made
+
+*** Alternative 2: Make the AddressBook editable by default
+** Pros: Current AddressBook can easily be changed by any functions
+** Cons: Makes the content of the AddressBook less secure by giving all functions access to edit
+// end::tags[]
 
 // tag::importexport[]
 
@@ -564,6 +579,9 @@ The following sequence diagram shows how the add_event operation works:
 image::MarkUnmarkEventSequenceDiagram.png[width="800"]
 
 // end::markunmark[]
+
+// tag::emailimplementation[]
+=== Email Functionality - _Coming in v2.0_
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

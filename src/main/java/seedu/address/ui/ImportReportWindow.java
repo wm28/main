@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.error.ImportError;
 
-
 /**
  * Controller for a import report window.
  */

@@ -33,4 +33,10 @@ public class RemoveTagCommandParserTest {
         assertParseFailure(parser, "t", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemoveTagCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_nonAlphanumeric_throwsParseException() {
+        assertParseFailure(parser, "%$", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                RemoveTagCommand.MESSAGE_USAGE));
+    }
 }
