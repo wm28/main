@@ -263,6 +263,7 @@ Examples:
 * `filter a/Present t/Vegetarian` +
 You will be shown a list with guests who are present and have a vegetarian dietary requirement.
 // end::filter[]
+
 ===   Sending emails to individual guests : `email`
 
 Sends an email to the guest at a specific Index +
