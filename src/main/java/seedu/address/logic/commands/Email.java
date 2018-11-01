@@ -45,9 +45,9 @@ public abstract class Email extends Command {
     }
 
     /**
-     * Reads and parses the files Credentials.txt and Message.txt to retrieve
+     * Creates a new EmailWindow controller which subsequently launches a GUI Window to retrieve
      * username, password, email message and email subject. Error handling is also performed
-     * through the try-catch block, which details with FileNotFoundExceptions as well as
+     * through the try-catch block, which details with CommandException as well as
      * General Exceptions. Once parsed, the private global variables in the MailCommand username,
      * password, emailSubject, and emailMessage are set with the strings parsed from the .txt files
      */
@@ -62,6 +62,7 @@ public abstract class Email extends Command {
         } else if (newEmailWindow.isQuitButton()) {
             throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
         }
+        else throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
 
         return information;
     }
