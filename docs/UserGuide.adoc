@@ -269,8 +269,11 @@ Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
          [t/DIET] [t/GUEST_TYPE] [t/...]`
 Examples:
 
+* `filter pa/NOTPAID a/PRESENT` +
+You will be shown a list with guests who have yet to pay and are present.
+
 * `filter a/Present t/Vegetarian` +
-You will be shown a list with guests who are present and have a vegetarian dietary requirement.
+You will be shown a list with guests who are present and have a vegetarian dietary req
 // end::filter[]
 
 // tag::email[]
@@ -426,7 +429,7 @@ Examples:
 
 * `delete_event` +
 You will delete the event details.
-// tag::event[]
+// end::event[]
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
