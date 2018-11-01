@@ -1,0 +1,63 @@
+= Tan Tze Guang - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Invités
+
+---
+
+== Overview
+
+Invités is a desktop application used by people who manage and plan events to streamline their processes and better manage the events that they are handling.
+The user interacts with it mainly using a CLI, and it has a GUI created with JavaFX.
+
+Project scope - Invités is an event management system that provides an intuitive platform for event planners to better organise and manage
+the reception during small or large events such as school orientation camps, committee events or more formal occasions such as weddings.
+The main features that streamline the processes of the event planner is the ability to send mass emails to attendees,
+keep track of payments, as well as attendance tracking during the event itself. If the event planner used other applications
+to store his data, they can easily import their data over from CSV files that can be generated from Microsoft Excel.
+
+== Summary of contributions
+
+* *Major enhancement*: added the function to mark attendance of the attendees in the Guest list
+** What it does: This function allows the person planning an event to keep track of the number of attendees whom have arrived at the event by marking them as present or absent during the event itself.
+** Justification: This feature is necessary in the implementation of our guest list as it is a core feature that gives the event planner peace of mind as it is a tool for them to ensure that the event is run smoothly.
+** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+
+* *Code contributed*: [https://github.com/kronicler/main/blob/master/kronicler.md[Functional code]] [https://github.com[Test code]]
+
+* *Other contributions*:
+
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+** Tools:
+*** Integrated a new Github plugin (CircleCI) to my personal forked repo to ensure that the my build succeeds before a pull request is done to
+main repo.
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=mark]
+
+include::../UserGuide.adoc[tag=unmark]
+
+include::../UserGuide.adoc[tag=start_marking]
+
+include::../UserGuide.adoc[tag=stop_marking]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=markunmark]
+
