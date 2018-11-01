@@ -44,7 +44,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@gmail.com";
     public static final String VALID_EMAIL_DANNY = "danny@gmail.com";
     public static final String VALID_PAYMENT_AMY = "PAID";
-    public static final String VALID_PAYMENT_BOB = "NOT PAID";
+    public static final String VALID_PAYMENT_BOB = "NOTPAID";
     public static final String VALID_PAYMENT_DANNY = "PAID";
     public static final String VALID_TAG_DIET_AMY = "NORMAL";
     public static final String VALID_TAG_DIET_BOB = "NORMAL";

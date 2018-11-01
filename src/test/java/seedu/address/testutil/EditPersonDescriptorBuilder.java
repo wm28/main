@@ -82,7 +82,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    //@@author SE-EDU
+    //@@author
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
