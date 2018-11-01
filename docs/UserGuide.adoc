@@ -17,13 +17,13 @@ endif::[]
 By: `Team F09-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-Invités is an application targeted at event managers and planners, that allows you to better *organise, cater, and manage* the reception for large events such
-as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments, as well as the tab
-keeping of attendance of the guests. To add to this, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
-This removes your need having to input all the information manually, as well as subsequently, gives you an alternative if you decide to organise another event using the same guest list.
+Invités is an application targeted at event managers and planners. The application allows you to efficiently *organise, cater, and manage* large events such
+as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments and take note of attendance of the guests.
+To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
+This eliminates the need to input all the information manually and subsequently, gives you an alternative if you decide to organise another event using the same guest list.
 
-This will give you an easier time to manage the reception as you will be equipped with tools that will minimise errors in catering,
-organisation, and orders. Moreover, this application aims to reduce the frustrations for you when planning events and address your needs in a platform that is more user friendly, personalised, and
+This will give you an easier time while managing the reception at your event as you will be equipped with tools that will minimise errors in catering,
+organisation, and orders. Moreover, this application aims to reduce your frustration while planning events by addressing your needs in a platform that is more user friendly, personalised, and
 efficient.
 
 The main purpose of this User Guide is to give you a detailed overview of all the features in our application and how to use them.
@@ -82,8 +82,8 @@ A guest can have any number of tags (including 0)
 
 Examples:
 
-* `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent t/VIP t/Vegetarian t/Not Paid`
-* `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present t/Groom t/Non-Vegetarian t/Paid`
+* `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOT PAID t/VIP t/Vegetarian`
+* `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID t/Groom t/Non-Vegetarian`
 
 === Listing all guests : `list`
 
@@ -93,8 +93,8 @@ Format: `list`
 === Editing a guest : `edit_guest`
 
 Edits an existing guest entry in the guest list. +
-Format: `edit_guest INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]
-         [t/GUEST_TYPE] [t/DIET] [t/PAID]...`
+Format: `edit_guest INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]  [pa/PAID]
+         [t/GUEST_TYPE] [t/DIET]...`
 
 ****
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index *must be a positive integer* 1, 2, 3, ...
@@ -312,37 +312,60 @@ However, the `forceEmail` command will allow you to send another email, regardle
 
 * `forceEmail` +
 Forces an email to be sent to the guest specified by INDEX.
+// tag::event[]
+===   Adding event details : `add_event`
 
-===   Creating a new event : `add_event`
+Add the details for an event +
+Format: `add_event n/EVENT_NAME d/DATE v/VENUE st/START_TIME [t/OTHER_TAGS]`
 
-Creates a new event +
-Format: `add_event n/EVENT_NAME [t/DATE_TIME]`
-
-Examples:
-
-* `add_event n/CFG career talk t/18 Sep 2018 10AM` +
-You will create an event called `CFG career talk` on the 18th of September at 10AM.
-
-===   Editing an event : `edit_event`
-
-Edit the currently selected event +
-Format: `edit_event [n/EVENT_NAME] [t/...]`
-
-Examples:
-
-* `edit_event n/CFG career talk t/18 Sep 2018 11AM` +
-You will change the data and time of the event `CFG career talk` to 18th of September at 11AM.
-
-===   Deleting event : `delete_event`
-
-Deletes an event by specifying its name
-Format: `delete_event [NAME]`
+****
+* Adds the specified event details.
+* All compulsory fields(name, date, venue and start time) must be specified. The optional field(tags) may be omitted.
+* Event name and venue have to be alphanumeric and may contain spaces. Otherwise, the system will inform you about the correct format to be followed. Special characters like '#', ',' and '-' may be used for the venue field.
+* Event date has to follow the 'dd/mm/yyyy' format and has to exist in the calendar. Ensure that the event date falls after the current system date. Otherwise, the system will inform you about the correct format to be followed.
+* Event's start time should follow the 'h:mm AM/PM' format with h between 1 to 12. Otherwise, the system will inform you about the correct format to be followed.
+* Event tags must be alphanumeric. Spaces are not allowed
+****
 
 Examples:
 
-* `delete_event wedding` +
-You will delete the event named wedding.
+* `add_event n/CFG career talk d/12/01/2019 v/YIH Paris Room st/9:00 AM t/SmartCasualAttire` +
+You will create an event called `CFG career talk` that will take place on 12th January, 2019 at YIH Paris Room. The event will start at 9:00 AM and attendees are expected to dress in smart casual attire.
 
+===   Editing the event's details : `edit_event`
+
+Edit the details of the event +
+Format: `edit_event [n/EVENT_NAME] [d/DATE] [v/VENUE] [st/START_TIME] [t/...]`
+
+****
+* Edits the event details(previously specified by the you using the add_event command).
+* Ensure that you have specified some event details before using this command. Otherwise, the system will inform you about the lack of event details.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
+* You can remove all event tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit_event n/CFG Career Workshop t/CasualAttire` +
+You will change the name of the event to 'CFG Career Workshop and replace the existing tags with the 'CasualAttire' tag.
+
+===   Deleting event details : `delete_event`
+
+Deletes the event details currently present in the application
+Format: `delete_event`
+
+****
+* Deletes the event details(previously specified by you using the add_event command).
+* Ensure that you have specified some details before using this command. Otherwise, the system will inform you about the lack of event details.
+****
+
+Examples:
+
+* `delete_event` +
+You will delete the event details.
+// tag::event[]
 // tag::undoredo[]
 === Undoing previous command : `undo`
 

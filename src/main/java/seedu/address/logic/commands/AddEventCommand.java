@@ -27,7 +27,7 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Wedding " + " "
-            + PREFIX_DATE + "10/10/2018 " + " "
+            + PREFIX_DATE + "10/10/2019 " + " "
             + PREFIX_VENUE + "Mandarin Hotel, 5th floor, Room 1A" + " "
             + PREFIX_START_TIME + "10:00 AM" + " "
             + PREFIX_TAG + "ClassicTheme";
