@@ -67,21 +67,19 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_removeTag() throws Exception {
+    public void parseCommand_removeTag_failure() throws Exception {
         RemoveTagCommand command = (RemoveTagCommand) parser.parseCommand(
-                RemoveTagCommand.COMMAND_WORD + " " + PREFIX_TAG + "Veg " + PREFIX_TAG + "Silver");
-        assertNotEquals(new RemoveTagCommand(new HashSet<>(Arrays.asList(new Tag("Veg"),
-                new Tag("Silver")
-        ))), command);
+                RemoveTagCommand.COMMAND_WORD + " " + PREFIX_TAG + "Gold " + PREFIX_TAG + "Halal");
+        assertNotEquals(new RemoveTagCommand(new HashSet<>(Arrays.asList(new Tag("Gold"),
+                new Tag("Halal")))), command);
     }
 
     @Test
     public void parseCommand_addTag() throws Exception {
         AddTagCommand command = (AddTagCommand) parser.parseCommand(
                 AddTagCommand.COMMAND_WORD + " " + PREFIX_TAG + "Veg " + PREFIX_TAG + "Silver");
-        assertNotEquals(new AddTagCommand(new HashSet<>(Arrays.asList(new Tag("Veg"),
-                new Tag("Silver")
-        ))), command);
+        assertEquals(new AddTagCommand(new HashSet<>(Arrays.asList(new Tag("Veg"),
+                new Tag("Silver")))), command);
     }
 
     @Test

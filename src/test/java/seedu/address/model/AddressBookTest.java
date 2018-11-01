@@ -105,11 +105,8 @@ public class AddressBookTest {
     }
 
     //@@author aaryamNUS
-    /**
-     * Note: This code snippet was inspired from the PR "Model: Add deleteTag(Tag)" by @yamgent
-     */
     @Test
-    public void removeTag_nonExistentTag_addressBookUnchanged() throws Exception {
+    public void removeTag_nonExistentTag_addressBookUnchanged() {
         addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_UNUSED));
 
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(BOB).withPerson(AMY).build();
@@ -177,5 +174,4 @@ public class AddressBookTest {
             return eventDetails;
         }
     }
-
 }

@@ -53,7 +53,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Please refer to <<Features>> subsection to see more detailed documentation of the functions that
    are included in this application
 .  If you would like to perform emailing services through our application, please complete the steps as shown
-   in the section <<Setting up your Gmail Account>>
+   in <<Enabling Email Services>>
 
 [[Features]]
 == Features
@@ -276,7 +276,12 @@ You will be shown a list with guests who have yet to pay and are present.
 You will be shown a list with guests who are present and have a vegetarian dietary req
 // end::filter[]
 
+// tag::email[]
 ===   Sending emails to individual guests : `email`
+
+|===
+|_Please ensure you have gone through <<Enabling Email Services>> in order for this feature to work!_
+|===
 
 Sends an email to the guest at a specific Index +
 Format: `email INDEX`
@@ -289,25 +294,49 @@ Format: `email INDEX`
 
 [NOTE]
 ====
-All email subjects and messages have been pre-written and are available in the file at `src/main/resources/EmailData/Message.txt`.
-You are free to edit these messages to suit your own needs.
+The `undo/redo` feature will *not work* with the `email` command as once you have sent an email, you cannot reverse this action.
+====
+
+*Examples*:
+
+* `email 2` +
+1. First, you will be presented with an EmailWindow similar to Figure 1 below. This window is for you to input your email address, password, email subject and message.
+2. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in Figure 2.
+3. Once all fields are filled, you can click the `Send` button to send your email to the *2nd guest* in the list. You can also click the `Quit` button if you don't want to send your email.
+
+|====
+| image:EmailWindow.png[] Figure 1 - EmailWindow | image:EmailWindowError.png[] Figure 2 - Field Errors
+|====
+
+=== Sending an email to all guests : `emailAll`
+|===
+|_Please ensure you have gone through <<Enabling Email Services>> in order for this feature to work!_
+|===
+
+Sends an email to all of the guests in the current list +
+Format: `emailAll`
+
+[NOTE]
+====
+The `undo/redo` feature will *not work* with the `email` command as once you have sent an email, you cannot reverse this action.
 ====
 
 Examples:
 
-* `email 2` +
-You will send an email to the 2nd guest in the list.
-
-=== Sending an email to all guests : `emailAll`
-Sends an email to all of the guests in the current list +
-Format: `emailAll`
-
-Examples:
-
 * `emailAll` +
-Sends an email to all the guests in the list.
+1. First, you will be presented with an EmailWindow similar to Figure 1 below. This window is for you to input your email address, password, email subject and message.
+2. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in Figure 2.
+3. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
 
-=== Sending emails to specified guests, ignoring potential spam : `forceEmail`
+|====
+| image:EmailWindow.png[] Figure 1 - EmailWindow | image:EmailWindowError.png[] Figure 2 - Field Errors
+|====
+
+=== Sending emails to specified guests, ignoring potential spam : `forceEmail` - _Coming in v2.0_
+|===
+|_Please ensure you have gone through <<Enabling Email Services>> in order for this feature to work!_
+|===
+
 Sends an email to the guest specified by the index, regardless of how many emails have been sent to that guest +
 Format: `forceEmail INDEX`
 
@@ -319,15 +348,37 @@ Format: `forceEmail INDEX`
 
 [NOTE]
 ====
+The `undo/redo` feature will *not work* with the `email` command as once you have sent an email, you cannot reverse this action.
+
 If you try to send multiple emails to the same guest, the system will inform you of this and not allow you to spam the guest.
 However, the `forceEmail` command will allow you to send another email, regardless of how many emails have been sent before.
 ====
 
 * `forceEmail` +
 Forces an email to be sent to the guest specified by INDEX.
+
+1. First, you will be presented with an EmailWindow similar to Figure 1 below. This window is for you to input your email address, password, email subject and message.
+2. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in Figure 2.
+3. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
+
+|====
+| image:EmailWindow.png[] Figure 1 - EmailWindow | image:EmailWindowError.png[] Figure 2 - Field Errors
+|====
+
+=== Sending emails to specific groups of guests : `emailSpecialised` - _Coming in v2.0_
+|===
+|_Please ensure you have gone through <<Enabling Email Services>> in order for this feature to work!_
+|===
+
+[NOTE]
+====
+The `undo/redo` feature will *not work* with the `email` command as once you have sent an email, you cannot reverse this action.
+====
+
+// end::email[]
+
 // tag::event[]
 ===   Adding event details : `add_event`
-
 Add the details for an event +
 Format: `add_event n/EVENT_NAME d/DATE v/VENUE st/START_TIME [t/OTHER_TAGS]`
 
@@ -449,26 +500,32 @@ Alternatively, you could export the data from your current computer using the ex
 *A*: Firstly, create a new event within the application. After this, use the import function and specify the path to the file.
 You will see the guest list populate itself with the data from the specified CSV file.
 
-== Setting up your Gmail Account
+// tag::settingupemail[]
+== Enabling Email Services
 
-In order for you to use the commands `email`, `emailAll`, and `forceEmail`, you must allow Invités to access your email account and
+In order for you to use the commands `email`, `emailAll`, `forceEmail`, and `emailSpecialised` you must allow Invités to access your email account and
 send emails. Currently, our application only supports Gmail accounts, but we do plan on supporting
 other email domains.
 
-If you do have a Gmail account, please follow these steps to enable email services:
+If you do have a *Gmail* account, please follow these steps to enable email services:
 
 1. Login to your Gmail account using your preferred online browser (e.g. Chrome, Firefox).
 2. Click on your profile picture on the top right, and click on `Google Account`
 3. Once you are re-directed, under the `Sign-in and security` section, click on `Apps with account access`
 4. Scroll down till you find the section `Allow less secure apps` on the right. Set this option to `ON`.
-5. In the Invités application, please specify your username and password in the file `Credentials.txt` at `/src/main/resources/EmailData/` in your project folder.
-6. Please specify an email subject and message in the file `Message.txt` also at `/src/main/resources/EmailData/` in your project folder.
-7. You are now ready to send emails to your guests through Invités!
+5. You are now ready to send emails to your guests through Invités!
 
 [WARNING]
 Currently there is no other way to enable mailing services than to let your Gmail account allow less secure apps, and hence your account may be
 susceptible to an increased number of spam emails from untrusted applications. However, our team is working quickly to find a more secure replacement.
 
+|===
+|_For *testing* purposes, you may use a default Gmail account we have created to save you some time:_
+|Email Address: _invitestestpe1@gmail.com_
+|Password: _practicalexam1_
+|===
+
+// end::settingupemail[]
 == Command Summary
 
 * `help` : ​Displays a help sheet containing useful commands.
@@ -489,6 +546,7 @@ susceptible to an increased number of spam emails from untrusted applications. H
 * `email` : ​Sends individual emails to an entry of a specified guest based on index.
 * `emailAll` : Sends an email to all of the guests in the current list.
 * `forceEmail` : Sends an email to the guest specified by the index, regardless of how many emails have been sent to that guest.
+* `emailSpecialised` : Sends an email to the guests with the specified tags.
 * `add_event` :​ Adds the details of your event.
 * `edit_event` : Edits the details of the event.
 * `delete_event` : ​Removes the specified event details.
