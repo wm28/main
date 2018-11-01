@@ -89,6 +89,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.zxing/core
     compile 'com.google.zxing:core:3.3.3'
 
+    // https://mvnrepository.com/artifact/com.google.zxing/javase
+    compile 'com.google.zxing:javase:3.3.3'
+
 }
 
 shadowJar {

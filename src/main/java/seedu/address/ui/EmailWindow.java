@@ -44,25 +44,25 @@ public class EmailWindow extends UiPart<Stage> {
     }
 
     @FXML
+    private VBox emailContainer;
+
+    @FXML
+    private TextField emailField;
+
+    @FXML
+    private TextArea messageField;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
     private Button quitButton;
 
     @FXML
     private Button sendButton;
 
     @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private TextArea messageField;
-
-    @FXML
-    private TextField emailField;
-
-    @FXML
     private TextField subjectField;
-
-    @FXML
-    private VBox emailContainer;
 
     /**
      * This is the event handler when the Send Email Button is pressed.

@@ -29,7 +29,7 @@ public class QrUtil {
      *
      * Limits data to MAX_DATA_SIZE to make QR code suitable for the current QR_SIZE
      */
-    public static void generateQR(String data) {
+    public static void generateQr(String data) {
         try {
             if (data.length() > MAX_DATA_SIZE) {
                 throw new WriterException("Data size too large");
