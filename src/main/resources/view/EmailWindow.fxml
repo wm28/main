@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0">
+<!-- @@author aaryamNUS -->
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         minWidth="450" minHeight="600" title="Email A Guest" maximized="true">
+    <icons>
+        <Image url="@/docs/images/InvitésLogo.jpg"/>
+    </icons>
 
-</AnchorPane>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css"/>
+                <URL value="@Extensions.css"/>
+            </stylesheets>
+
+            <VBox fx:id="emailContainer" spacing="10">
+                <Label fx:id="emailLabel" text="Your Email Address:"/>
+                <TextField fx:id="emailField" promptText="Your Email Address"/>
+
+                <Label fx:id="passwordLabel" text="Your Password:"/>
+                <PasswordField fx:id="passwordField" promptText="Your Password"/>
+
+                <Label fx:id="subjectLabel" text="Email Subject:"/>
+                <TextField fx:id="subjectField" promptText="Email Subject"/>
+
+                <Label fx:id="messageLabel" text="Email Message:"/>
+                <TextArea fx:id="messageField" promptText="Email Message"/>
+
+                <Button fx:id="sendButton" text="Send" onAction="#handleSendEmailButtonAction"/>
+                <Button fx:id="quitButton" text="Quit" onAction="#handleQuitButtonAction"/>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

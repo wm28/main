@@ -200,7 +200,6 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-
     /**
      * Creates and shows the ImportReportWindow
      */

@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,35 +69,32 @@ public class MailCommand extends Email {
             throw new CommandException("Error: The email of the recipient is invalid!");
         }
 
-        try {
-            // Array of strings to store all the necessary information
-            String[] information;
+        // Array of strings to store all the necessary information
+        String[] information;
+        // Retrieve the information through a method in the super class Email
+        information = retrieveInformation();
 
-            // Retrieve the information through a method in the super class Email
-            information = retrieveInformation();
+        try {
             username = information[0];
             password = information[1];
             emailSubject = information[2];
             emailMessage = information[3];
 
-            // Verify the information exists through the method in the super class Email
-            checkFields(username, password, emailSubject, emailMessage);
-        } catch (FileNotFoundException fex) {
-            throw new CommandException("Error: The file Message.txt or Credentials.txt was not found");
+            // Creates a new session with the user gmail account as the host
+            Properties props = createPropertiesConfiguration();
+
+            // Authenticate the user credentials
+            EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
+
+            // Create a new session using the authenticated credentials and the properties of
+            // the gmail host
+            Session session = Session.getDefaultInstance(props, authenticate);
+
+            createAndSendEmail(username, emailSubject, emailMessage,
+                    personToMail.getEmail().toString(), session);
+        } catch (NullPointerException ne) {
+            logger.log(Level.SEVERE, "Error: retrieving information was unsuccessful!");
         }
-
-        // Creates a new session with the user gmail account as the host
-        Properties props = createPropertiesConfiguration();
-
-        // Authenticate the user credentials
-        EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
-
-        // Create a new session using the authenticated credentials and the properties of
-        // the gmail host
-        Session session = Session.getDefaultInstance(props, authenticate);
-
-        createAndSendEmail(username, emailSubject, emailMessage,
-                personToMail.getEmail().toString(), session);
 
         logger.log(Level.INFO, "Email sent successfully");
         return new CommandResult(MESSAGE_MAIL_PERSON_SUCCESS);
@@ -111,16 +106,8 @@ public class MailCommand extends Email {
     }
 
     @Override
-    public String[] retrieveInformation() throws FileNotFoundException {
+    public String[] retrieveInformation() throws CommandException {
         return super.retrieveInformation();
-    }
-
-    @Override
-    public void checkFields(String username, String password, String emailSubject,
-                            String emailMessage) throws CommandException {
-        super.checkFields(username, password, emailSubject, emailMessage);
-        logger.log(Level.INFO, "All fields from Credentials.txt and Message.txt"
-                + "received successfully");
     }
 
     /**

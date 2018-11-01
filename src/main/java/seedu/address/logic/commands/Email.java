@@ -1,10 +1,7 @@
 package seedu.address.logic.commands;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
 import java.util.Properties;
-import java.util.Scanner;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,15 +12,19 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.ui.EmailWindow;
 
 //@@author aaryamNUS
 /**
- * This abstract class is inherited by Mail, EMailAll, and ForceEmail commands,
+ * This abstract class is inherited by Mail, EmailAll, and ForceEmail commands,
  * in order to reduce code duplicity.
  */
 public abstract class Email extends Command {
+    private static final Logger logger = LogsCenter.getLogger(Email.class);
+
     /**
      * Checks whether username, password, email subject and email message are
      * provided by the user. If any of the parameters are either null or an
@@ -50,56 +51,17 @@ public abstract class Email extends Command {
      * General Exceptions. Once parsed, the private global variables in the MailCommand username,
      * password, emailSubject, and emailMessage are set with the strings parsed from the .txt files
      */
-    public String[] retrieveInformation() throws FileNotFoundException {
+    public String[] retrieveInformation() throws CommandException {
         String[] information = new String[4];
+        EmailWindow newEmailWindow = new EmailWindow();
 
-        try {
-            File credentials = new File("src/main/resources/EmailData/Credentials.txt")
-                    .getAbsoluteFile();
-            Scanner credentialsScanner = new Scanner(credentials);
+        newEmailWindow.showAndWait();
 
-            // Retrieve the two strings in Credentials.txt
-            String unmodifiedUsername = credentialsScanner.nextLine();
-            String unmodifiedPassword = credentialsScanner.nextLine();
-
-            // Parse the strings to retrieve the username and password within quotation marks
-            information[0] = unmodifiedUsername.split("\"")[1];
-            information[1] = unmodifiedPassword.split("\"")[1];
-
-        } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException(String.format(Messages.MESSAGE_FILE_NOT_FOUND, "Credentials.txt"));
-        } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
-        } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException(Messages.MESSAGE_NO_SUCH_ELEMENT_MESSAGE);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (newEmailWindow.isSendButton()) {
+            information = newEmailWindow.getInformation();
         }
-
-        try {
-            File message = new File("src/main/resources/EmailData/Message.txt")
-                    .getAbsoluteFile();
-            Scanner messageScanner = new Scanner(message);
-
-            String unmodifiedSubject = messageScanner.nextLine();
-            StringBuilder unmodifiedMessage = new StringBuilder();
-
-            while (messageScanner.hasNextLine()) {
-                unmodifiedMessage.append(messageScanner.nextLine());
-                unmodifiedMessage.append("\n");
-            }
-
-            information[2] = unmodifiedSubject.split("\"")[1];
-            information[3] = unmodifiedMessage.toString().split("\"")[1];
-
-        } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException(String.format(Messages.MESSAGE_FILE_NOT_FOUND, "Message.txt"));
-        } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException(Messages.MESSAGE_NO_SUCH_ELEMENT_MESSAGE);
-        } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        else if (newEmailWindow.isQuitButton()) {
+            throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
         }
 
         return information;
