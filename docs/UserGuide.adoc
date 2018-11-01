@@ -168,14 +168,15 @@ You will add the tags `Veg` and `VIP` to all guests in the current list
 This will present you with an error in specifying the command, as all your tags must be alphanumeric
 
 // tag::find[]
-=== Locating guests by name: `find`
+=== Locating guests by name, phone number or email address: `find`
 
-Finds guests whose names contain any of the given keywords. +
+Finds guests whose names, phone numbers and/or email addresses
+contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]` +
 Example: find n/NAME p/PHONE e/EMAIL
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only names, phone numbers and email addresses are searched, depending on prefixes given.
 * Only full words will be matched e.g. `Han` will not match `Hans`
