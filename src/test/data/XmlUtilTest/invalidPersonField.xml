@@ -4,7 +4,7 @@
     <name>Hans Muster</name>
     <phone>9482asf424</phone>
     <email>hans@example</email>
-    <payment>NOT PAID</payment>
+    <payment>NOTPAID</payment>
     <attendance>PRESENT</attendance>
     <tagged>NORMAL</tagged>
 </person>

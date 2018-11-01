@@ -28,10 +28,11 @@ public class PaymentTest {
         // invalid Payment
         assertFalse(Payment.isValidPayment("")); // empty string
         assertFalse(Payment.isValidPayment(" ")); // spaces only
+        assertFalse(Payment.isValidPayment("NOT PAID")); // spaces between words
 
         // valid Payment
         assertTrue(Payment.isValidPayment("PAID"));
-        assertTrue(Payment.isValidPayment("NOT PAID"));
+        assertTrue(Payment.isValidPayment("NOTPAID"));
         assertTrue(Payment.isValidPayment("PENDING"));
         assertTrue(Payment.isValidPayment("N.A."));
     }

@@ -41,17 +41,13 @@ This eliminates the need to key in the guest details manually and subsequently, 
 //TODO:
 include::../UserGuide.adoc[tag=event]
 
-//include::../UserGuide.adoc[tag=delete_event]
-
-//include::../UserGuide.adoc[tag=delete_event]
-
 == Contributions to the Developer Guide
 //TODO:
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=Add/Delete Event feature]
+include::../DeveloperGuide.adoc[tag=event]
 
-//include::../DeveloperGuide.adoc[tag=dataencryption]
+//include::../DeveloperGuide.adoc[tag=Edit Event feature]
 

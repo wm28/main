@@ -45,12 +45,12 @@ public class TypicalPersons {
             .withTags("NORMAL", "NoSeafood", "GUEST").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@gmail.com").withAttendance("PRESENT")
-            .withPayment("NOT PAID").build();
+            .withPayment("NOTPAID").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@gmail.com").withPayment("PAID")
             .withAttendance("ABSENT").withTags("NORMAL", "VIP").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@gmail.com").withAttendance("PRESENT").withPayment("NOT PAID").build();
+            .withEmail("werner@gmail.com").withAttendance("PRESENT").withPayment("NOTPAID").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@gmail.com").withAttendance("ABSENT").withPayment("PAID").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
@@ -58,7 +58,7 @@ public class TypicalPersons {
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@gmail.com").withAttendance("PRESENT").withPayment("NOT PAID").build();
+            .withEmail("stefan@gmail.com").withAttendance("PRESENT").withPayment("NOTPAID").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@gmail.com").withAttendance("ABSENT").withPayment("PENDING").build();
 
