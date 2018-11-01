@@ -27,6 +27,11 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_EVENT_NAME = "Arduino Workshop";
+    public static final String VALID_EVENT_DATE = "15/10/2018";
+    public static final String VALID_EVENT_VENUE = "LT 6";
+    public static final String VALID_EVENT_START_TIME = "12:00 PM";
+    public static final String VALID_EVENT_TAG = "NUSEngin";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_DANNY = "Danny Timbo";

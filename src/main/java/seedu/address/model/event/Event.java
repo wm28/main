@@ -2,7 +2,11 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -48,7 +52,7 @@ public class Event {
     public Event() {
         EventName eventName = new EventName("event not created yet");
         this.eventName = eventName;
-        EventDate eventDate = new EventDate("01/01/0001");
+        EventDate eventDate = new EventDate("1/10/2019");
         this.eventDate = eventDate;
         EventVenue eventVenue = new EventVenue("NA");
         this.eventVenue = eventVenue;
@@ -65,6 +69,10 @@ public class Event {
 
     public String getDate() {
         return eventDate.getEventDate();
+    }
+
+    public Date getFullDate() {
+        return eventDate.getFullEventDate();
     }
 
     public String getVenue() {
@@ -135,6 +143,13 @@ public class Event {
         return Collections.unmodifiableSet(eventTags);
     }
 
+    public long getDaysLeft() {
+        LocalDate eventDate = this.getFullDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate now = LocalDate.now();
+        final long numberOfDaysLeft = ChronoUnit.DAYS.between(now, eventDate);
+        return numberOfDaysLeft;
+    }
+
     /**
      * Returns true if both events of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two events.
@@ -148,7 +163,8 @@ public class Event {
                 && otherEvent.getName().equals(getName())
                 && otherEvent.getDate().equals(getDate())
                 && otherEvent.getVenue().equals(getVenue())
-                && otherEvent.getStartTime().equals(getStartTime());
+                && otherEvent.getStartTime().equals(getStartTime())
+                && otherEvent.getEventTags().equals(getEventTags());
     }
 
     /**

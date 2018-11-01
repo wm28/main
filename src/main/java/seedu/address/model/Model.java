@@ -38,11 +38,11 @@ public interface Model {
     void addEvent(Event event);
 
     /**
-     * Replaces the given event {@code target} with {@code editedEvent}.
-     * {@code target} must exist in the application.
-     * The person identity of {@code editedEvent} must not be the same as another existing event in the application.
+     * Replaces the existing event with {@code editedEvent}.
+     * The existing event must have been initialised by the user.
+     * The event details of {@code editedEvent} must not be the same as the existing event.
      */
-    //void updateEvent(Event target, Event editedEvent);
+    void updateEvent(Event editedEvent);
     //@@author
 
     /**
