@@ -21,7 +21,7 @@ Responsibilities: Mass email sending functionality
 
 === Sandhya Gopakumar
 image::sandhyagopakumar.png[width="150", align="left"]
-{empty}[http://github.com/SandhyaGopakumar[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/SandhyaGopakumar[github]] [<<SandhyaGopakumar#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Events functionality

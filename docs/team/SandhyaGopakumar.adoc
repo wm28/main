@@ -1,37 +1,37 @@
-= John Doe - Project Portfolio
+= Sandhya Gopakumar - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Invités
 
 ---
 
 == Overview
 
-//Add application details
+Invités is an application targeted at event managers and planners. The application that allows its users to efficiently *organise, cater, and manage* large events such
+as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments, and take note of attendance of the guests.
+To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
+This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the event details component*
-** What it does: allows the user to enter the confirmed details for the event they are organising with the help of our application.
-** Justification: This feature improves the product significantly because a user will want to view specific details that they need to prioritise in the days leading up to the event.
-** Highlights: This enhancement affects the existing logic, model, ui and storage components as it involves the creation of a new model class, the add_event and delete_event commands.
-** Credits: Reused some ideas from the SE-EDU AddressBook Level 4 model component
+* *Major enhancement*: Added *the event details component*
+** What it does: Allows the user to enter the confirmed details for the event they are organising.
+** Justification: This feature improves the product significantly because a user will want to view specific details that they need to prioritise/reiterate in the days leading up to the event.
+** Highlights: This enhancement affects the existing logic, model, ui and storage components as it involves the creation of a new model class, the add_event ,delete_event and edit_event commands.
+** Credits: Reused some ideas from the SE-EDU AddressBook Level 4
 
 * *Minor enhancement*: Added a stackpane to the status bar footer to display a countdown to the user's event. This serves as a reminder of the user's deadline.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 //TODO: edit these links
 * *Other contributions*:
-//TODO: edit the following
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-//TODO:
+** Morphed the add, delete, edit commands to add_guest, delete_guest and edit_guest.
+
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[TBC],
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+//*** PRs reviewed (with non-trivial review comments): https://github.com[TBC],
+//*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 
 == Contributions to the User Guide
 
@@ -40,9 +40,11 @@
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 //TODO:
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=add_event]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=delete_event]
+
+//include::../UserGuide.adoc[tag=delete_event]
 
 == Contributions to the Developer Guide
 //TODO:
@@ -50,7 +52,7 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=Add/Delete Event feature]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+//include::../DeveloperGuide.adoc[tag=dataencryption]
 
