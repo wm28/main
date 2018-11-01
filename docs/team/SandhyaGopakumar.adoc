@@ -39,9 +39,9 @@ This eliminates the need to key in the guest details manually and subsequently, 
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 //TODO:
-include::../UserGuide.adoc[tag=add_event]
+include::../UserGuide.adoc[tag=event]
 
-include::../UserGuide.adoc[tag=delete_event]
+//include::../UserGuide.adoc[tag=delete_event]
 
 //include::../UserGuide.adoc[tag=delete_event]
 
