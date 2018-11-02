@@ -36,7 +36,7 @@ The main purpose of this User Guide is to give you a detailed overview of all th
 .  Double click on the jar file and wait a couple of seconds as the application loads. If you're successful, a main screen will load
    similar to the one shown below:
 +
-image::ui_v2.png[width="790"]
+image::Ui.png[width="790"]
 +
 .  As the Command Line Input is your primary method of manipulation, here are some
    example commands that you can use:
