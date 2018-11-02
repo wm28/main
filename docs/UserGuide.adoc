@@ -205,6 +205,17 @@ Format: `import FILE_PATH`
 Guest fields, with the exception of tags, shall be enclosed in double quotation marks if it contains a comma. Tags shall not contain any commas.
 ====
 
+The CSV guest entries which are badly formatted or those which corresponds to an already existing guest in the guest list, will trigger an import report window as shown in figure 1. The window will show the offending CSV guest entries with their associated error messages.
+
+|====
+| image:ImportReportWindow.png[] Figure 1 - ImportReportWindow
+|====
+
+[NOTE]
+====
+A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.
+====
+
 Examples:
 
 * `import directory/subdirectory/guestlist.csv` +
@@ -216,6 +227,11 @@ You will populate the guest list with the data imported from the CSV file in the
 
 Exports guests' data to a CSV formatted file. The structure for the values in the CSV file is predefined. +
 Format: `export FILE_PATH`
+
+[NOTE]
+====
+If no `FILE_PATH` is provided, guests will be exported using the default filename, `exportedGuestBook.csv`.
+====
 
 Examples:
 
