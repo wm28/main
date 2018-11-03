@@ -196,6 +196,7 @@ public class ExportCommandTest {
         public AdaptedPerson encodePerson(Person person) throws PersonEncodingException {
             throw new PersonEncodingException("Person fails to encode");
         }
+
         @Override
         public SupportedFileFormat getSupportedFileFormat() {
             return SupportedFileFormat.CSV;
@@ -268,7 +269,7 @@ public class ExportCommandTest {
         }
 
         @Override
-        public void updateEvent(Event editedEvent){
+        public void updateEvent(Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }
 

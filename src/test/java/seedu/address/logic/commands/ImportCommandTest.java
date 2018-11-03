@@ -238,7 +238,6 @@ public class ImportCommandTest {
 
     }
 
-
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -284,12 +283,12 @@ public class ImportCommandTest {
         }
 
         @Override
-        public void updateEvent(Event editedEvent){
+        public void updatePerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Person target, Person editedPerson) {
+        public void updateEvent(Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }
 
