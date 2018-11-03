@@ -17,9 +17,9 @@ import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.testutil.TypicalPersons;
 
 public class CsvFileTest {
-    public static final String NON_EXISTENT_CSV_FILE = "src\\test\\data\\data\\CsvTest\\nonExistentGuestList.csv";
+    public static final String NON_EXISTENT_CSV_FILE = "src/test/data/data/CsvTest/nonExistentGuestList.csv";
     public static final String EXPORTED_CSV_FILE =
-            "src\\test\\data\\data\\CsvTest\\exportedTypicalPersonsGuestList.csv";
+            "src/test/data/data/CsvTest/exportedTypicalPersonsGuestList.csv";
 
     public static final List<AdaptedPerson> ADAPTED_TYPICAL_PERSONS;
 

@@ -32,7 +32,7 @@ import seedu.address.model.person.Person;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-    public static final String TYPICAL_PERSONS_CSV = "src\\test\\data\\data\\CsvTest\\typicalPersonsGuestList.csv";
+    public static final String TYPICAL_PERSONS_CSV = "src/test/data/data/CsvTest/typicalPersonsGuestList.csv";
 
     public static final int NUM_PERSONS = 7;
 
