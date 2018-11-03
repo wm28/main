@@ -36,7 +36,7 @@ public class EmailAllCommand extends Email {
     private static String username;
     private static String password;
 
-    private EmailAllCommand() {}
+    public EmailAllCommand() {}
 
     /**
      * Applying the Simpleton design pattern to EmailAllCommand
