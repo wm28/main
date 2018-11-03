@@ -74,7 +74,13 @@ Format: `help`
 
 === Adding a guest: `add_guest`
 
-Adds a guest to the guest list +
+Adds a guest to the guest list. +
+No spaces or special characters allowed in Payment and Attendance. +
+Payment accepts "PAID", "NOTPAID" , "PENDING" or "N.A.".
+Attendance accepts "ABSENT", "PRESENT" or "N.A." +
+Payment and attendance are case-insensitive. +
+If any options other than the ones given are entered, the guest will be added if
+other fields are fine, but payment and/or attendance will be blank. +
 Format: `add_guest n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT [t/TAG]...`
 
 [TIP]
@@ -82,8 +88,8 @@ A guest can have any number of tags (including 0)
 
 Examples:
 
-* `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOT PAID t/VIP t/Vegetarian`
-* `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID t/Groom t/Non-Vegetarian`
+* `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOTPAID t/VIP t/Vegetarian`
+* `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID t/Groom t/NonVegetarian`
 
 === Listing all guests : `list`
 
@@ -93,6 +99,12 @@ Format: `list`
 === Editing a guest : `edit_guest`
 
 Edits an existing guest entry in the guest list. +
+No spaces or special characters allowed in Payment and Attendance. +
+Payment accepts "PAID", "NOTPAID" , "PENDING" or "N.A.".
+Attendance accepts "ABSENT", "PRESENT" or "N.A." +
+Payment and attendance are case-insensitive. +
+If any options other than the ones given are entered, the guest will be edited,
+but payment and/or attendance will be blank. +
 Format: `edit_guest INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]  [pa/PAID]
          [t/GUEST_TYPE] [t/DIET]...`
 
@@ -172,7 +184,7 @@ This will present you with an error in specifying the command, as all your tags 
 
 Find guests whose names, phone numbers and/or email addresses
 contain any of the given keywords. Keywords should not have spaces or any
-special character. +
+special characters. +
 Format: `find n/KEYWORD p/MORE_KEYWORDS e/MORE_KEYWORDS` +
 Example: find n/NAME p/PHONE e/EMAIL
 
@@ -193,6 +205,13 @@ You will be show a list containing entries of any guest having names `Betsy`, `T
 * `find n/alex p/92746838 e/johndoe@gmail.com` +
 You will be show a list containing entries of any guest having the name `Alex`,
 phone number `92746838`, or email address `johndoe@gmail.com`
+* `find n/david n/edan` +
+You will be shown a list that contains the entries of any guests having the
+name `david` and `edan` +
+* `find n/david edan` +
+You will be shown a list that contains the entries of any guests having the
+name `david` *but not* `edan`
+
 // end::find[]
 
 // tag::import[]
