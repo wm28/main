@@ -137,7 +137,7 @@ Examples:
 * `list` +
 `delete_guest 2` +
 Deletes the 2nd guest in the guest list.
-* `find Betsy` +
+* `find n/Betsy` +
 `delete_guest 1` +
 Deletes the 1st guest in the results of the `find` command.
 
