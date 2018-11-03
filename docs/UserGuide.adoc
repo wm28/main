@@ -170,9 +170,10 @@ This will present you with an error in specifying the command, as all your tags 
 // tag::find[]
 === Locating guests by name, phone number or email address: `find`
 
-Finds guests whose names, phone numbers and/or email addresses
-contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]` +
+Find guests whose names, phone numbers and/or email addresses
+contain any of the given keywords. Keywords should not have spaces or any
+special character. +
+Format: `find n/KEYWORD p/MORE_KEYWORDS e/MORE_KEYWORDS` +
 Example: find n/NAME p/PHONE e/EMAIL
 
 ****
@@ -265,7 +266,8 @@ Format: `stop_marking`
 ===  Filter list based on specified parameters : `filter`
 
 Filter guest list based on filter guest attributes. Only filters based on
-payment status, attendance status and tags. +
+payment status, attendance status and tags. Keywords should not have spaces or any
+special character. +
 Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
          [t/DIET] [t/GUEST_TYPE] [t/...]`
 Examples:
