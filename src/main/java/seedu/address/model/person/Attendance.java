@@ -19,7 +19,6 @@ public class Attendance {
      */
     public static final String ATTENDANCE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s.-]*";
 
-    public String attendanceCheck = null;
     public final String attendanceValue;
 
     /**
@@ -30,13 +29,14 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_ATTENDANCE_CONSTRAINTS);
+        String attendanceChecker = null;
         if (attendance.equalsIgnoreCase("ABSENT")
                 || attendance.equalsIgnoreCase("PRESENT")
                 || attendance.equalsIgnoreCase("N.A.")) {
-            attendanceCheck = attendance;
+            attendanceChecker = attendance;
         }
 
-        attendanceValue = attendanceCheck;
+        attendanceValue = attendanceChecker;
     }
 
     /**

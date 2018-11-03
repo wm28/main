@@ -19,7 +19,6 @@ public class Payment {
      */
     public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}.-]*";
 
-    public String paymentChecker = null;
     public final String paymentValue;
 
     /**
@@ -30,6 +29,7 @@ public class Payment {
     public Payment(String payment) {
         requireNonNull(payment);
         checkArgument(isValidPayment(payment), MESSAGE_PAYMENT_CONSTRAINTS);
+        String paymentChecker = null;
         if (payment.equalsIgnoreCase("PAID")
                 || payment.equalsIgnoreCase("NOTPAID")
                 || payment.equalsIgnoreCase("N.A.")
