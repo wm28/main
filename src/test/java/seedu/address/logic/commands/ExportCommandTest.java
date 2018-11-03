@@ -1,12 +1,20 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import static org.junit.Assert.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_FILE_ALREADY_EXIST;
+
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.util.List;
+import java.util.function.Predicate;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.converters.PersonConverter;
@@ -23,18 +31,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalPersons;
 
-import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
-import java.util.List;
-import java.util.function.Predicate;
-
-import static org.junit.Assert.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_FILE_ALREADY_EXIST;
-
 public class ExportCommandTest {
 
-    private String ALREADY_EXISTING_CSV_FILENAME = "existing.csv";
-    public static final String VALID_CSV_FILENAME = "valid.csv";
+    private static final String ALREADY_EXISTING_CSV_FILENAME = "existing.csv";
+    private static final String VALID_CSV_FILENAME = "valid.csv";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

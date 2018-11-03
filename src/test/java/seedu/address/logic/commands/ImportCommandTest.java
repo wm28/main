@@ -36,8 +36,8 @@ import seedu.address.testutil.TypicalPersons;
 
 public class ImportCommandTest {
 
-    public static final String VALID_CSV_FILENAME = "valid.csv";
-    public static final String INVALID_CSV_FILENAME = "valid.csv";
+    private static final String VALID_CSV_FILENAME = "valid.csv";
+    private static final String INVALID_CSV_FILENAME = "valid.csv";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

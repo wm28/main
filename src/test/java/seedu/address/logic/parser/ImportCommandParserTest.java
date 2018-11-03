@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNSUPPORTED_FILE_EXTENSION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
+import static seedu.address.commons.core.Messages.MESSAGE_UNSUPPORTED_FILE_EXTENSION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -13,7 +13,6 @@ import seedu.address.logic.converters.CsvConverter;
 import seedu.address.logic.converters.fileformats.csv.CsvFile;
 
 public class ImportCommandParserTest {
-
     private ImportCommandParser parser = new ImportCommandParser();
 
     @Test
