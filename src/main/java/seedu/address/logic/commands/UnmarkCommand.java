@@ -35,7 +35,7 @@ public class UnmarkCommand extends Command {
             + "Parameters: "
             + "[PHONE] "
             + "Example: " + COMMAND_WORD
-            + "91234567 ";
+            + " 91234567 ";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";

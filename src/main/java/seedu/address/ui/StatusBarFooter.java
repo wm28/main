@@ -21,9 +21,10 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
  */
 public class StatusBarFooter extends UiPart<Region> {
 
+    public static final String DAYS_LEFT_STATUS = "Number of days left to your event: %s";
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
-    public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
+    public static final String TOTAL_PERSONS_STATUS = "%d guest(s) total";
 
     /**
      * Used to generate time stamps.
@@ -45,13 +46,16 @@ public class StatusBarFooter extends UiPart<Region> {
     private StatusBar totalPersonsStatus;
     @FXML
     private StatusBar saveLocationStatus;
+    @FXML
+    private StatusBar daysLeft;
 
 
-    public StatusBarFooter(Path saveLocation, int totalPersons) {
+    public StatusBarFooter(Path saveLocation, int totalPersons, seedu.address.model.event.Event event) {
         super(FXML);
         setSyncStatus(SYNC_STATUS_INITIAL);
         setSaveLocation(Paths.get(".").resolve(saveLocation).toString());
         setTotalPersons(totalPersons);
+        setDaysLeft(event);
         registerAsAnEventHandler(this);
     }
 
@@ -81,6 +85,14 @@ public class StatusBarFooter extends UiPart<Region> {
         Platform.runLater(() -> totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, totalPersons)));
     }
 
+    private void setDaysLeft(seedu.address.model.event.Event event) {
+        if (event.isUserInitialised()) {
+            Platform.runLater(() -> daysLeft.setText(String.format(DAYS_LEFT_STATUS, event.getDaysLeft())));
+        } else {
+            Platform.runLater(() -> daysLeft.setText(String.format(DAYS_LEFT_STATUS, "NO DETAILS")));
+        }
+
+    }
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
         long now = clock.millis();
@@ -88,5 +100,6 @@ public class StatusBarFooter extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
         setTotalPersons(abce.data.getPersonList().size());
+        setDaysLeft(abce.data.getEventDetails());
     }
 }

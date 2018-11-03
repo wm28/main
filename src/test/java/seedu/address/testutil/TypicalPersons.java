@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 
@@ -47,12 +48,12 @@ public class TypicalPersons {
             .withTags("NORMAL", "NoSeafood", "GUEST").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@gmail.com").withAttendance("PRESENT")
-            .withPayment("NOT PAID").build();
+            .withPayment("NOTPAID").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@gmail.com").withPayment("PAID")
             .withAttendance("ABSENT").withTags("NORMAL", "VIP").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@gmail.com").withAttendance("PRESENT").withPayment("NOT PAID").build();
+            .withEmail("werner@gmail.com").withAttendance("PRESENT").withPayment("NOTPAID").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@gmail.com").withAttendance("ABSENT").withPayment("PAID").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
@@ -69,7 +70,7 @@ public class TypicalPersons {
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@gmail.com").withAttendance("PRESENT").withPayment("NOT PAID").build();
+            .withEmail("stefan@gmail.com").withAttendance("PRESENT").withPayment("NOTPAID").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@gmail.com").withAttendance("ABSENT").withPayment("PENDING").build();
 
@@ -84,9 +85,29 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
             .withPayment(VALID_PAYMENT_DANNY).build();
 
+    public static final Event typicalEvent = new EventBuilder()
+            .withEventName("Graduation party").withEventDate("10/01/2019")
+            .withEventVenue("Hilton").withEventStartTime("6:00 PM").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
+
+    public static Event getTypicalEvent() {
+        return typicalEvent;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons and typical event.
+     */
+    public static AddressBook getTypicalAddressBookWithEvent() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        ab.addEvent(getTypicalEvent());
+        return ab;
+    }
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

@@ -33,5 +33,6 @@ public class AttendanceTest {
         // valid Attendance
         assertTrue(Attendance.isValidAttendance("PRESENT"));
         assertTrue(Attendance.isValidAttendance("ABSENT"));
+        assertTrue(Attendance.isValidAttendance("N.A."));
     }
 }

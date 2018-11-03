@@ -1,23 +1,23 @@
-//@@author Sarah
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author Sarah
 /**
  * Represents a Person's payment in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPayment(String)}
  */
 public class Payment {
     public static final String MESSAGE_PAYMENT_CONSTRAINTS =
-            "Payment should only contain alphanumeric characters, spaces and . such as N.A. , "
-                    + "and it should not be blank";
+            "Payment should only contain alphanumeric characters and . such as N.A. , "
+                    + ", it should not be blank and should not have spaces.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s.-]*";
+    public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}.-]*";
 
     public final String paymentValue;
 
@@ -29,7 +29,15 @@ public class Payment {
     public Payment(String payment) {
         requireNonNull(payment);
         checkArgument(isValidPayment(payment), MESSAGE_PAYMENT_CONSTRAINTS);
-        paymentValue = payment;
+        String paymentChecker = null;
+        if (payment.equalsIgnoreCase("PAID")
+                || payment.equalsIgnoreCase("NOTPAID")
+                || payment.equalsIgnoreCase("N.A.")
+                || payment.equalsIgnoreCase("PENDING")) {
+            paymentChecker = payment;
+        }
+
+        paymentValue = paymentChecker;
     }
 
     /**

@@ -1,9 +1,9 @@
-//@@ author Sarah
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@ author Sarah
 /**
  * Represents a Person's attendance in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
@@ -29,7 +29,14 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_ATTENDANCE_CONSTRAINTS);
-        attendanceValue = attendance;
+        String attendanceChecker = null;
+        if (attendance.equalsIgnoreCase("ABSENT")
+                || attendance.equalsIgnoreCase("PRESENT")
+                || attendance.equalsIgnoreCase("N.A.")) {
+            attendanceChecker = attendance;
+        }
+
+        attendanceValue = attendanceChecker;
     }
 
     /**
