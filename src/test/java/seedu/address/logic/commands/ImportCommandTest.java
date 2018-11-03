@@ -284,7 +284,7 @@ public class ImportCommandTest {
         }
 
         @Override
-        public void updateEvent() {
+        public void updateEvent(Event editedEvent){
             throw new AssertionError("This method should not be called.");
         }
 
