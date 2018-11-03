@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
+import static seedu.address.commons.core.Messages.MESSAGE_UNSUPPORTED_FILE_EXTENSION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -31,7 +31,7 @@ public class ImportCommandParserTest {
     @Test
     public void parse_invalidFileExtension_throwsParseException() {
         assertParseFailure(parser, "testing.txt",
-                String.format(MESSAGE_INVALID_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_UNSUPPORTED_FILE_EXTENSION, ImportCommand.MESSAGE_USAGE));
     }
 
     @Test

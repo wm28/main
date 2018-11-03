@@ -1,15 +1,17 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNSUPPORTED_FILE_EXTENSION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 
 import seedu.address.commons.util.FileUtil;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ExportCommand;
-import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.converters.CsvConverter;
+import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.logic.converters.fileformats.csv.CsvFile;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.Optional;
 
 //@@author wm28
 /**
@@ -27,14 +29,27 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      */
     public ExportCommand parse(String arg) throws ParseException {
         String trimmedArg = arg.trim();
+        Optional<SupportedFileFormat> fileFormat;
+
         if (trimmedArg.isEmpty()) {
-            return new ExportCommand(new CsvFile(DEFAULT_FILENAME_FORMAT), new CsvConverter());
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         } else if (!FileUtil.isValidPath(trimmedArg)) {
             throw new ParseException(String.format(MESSAGE_INVALID_FILE_PATH, ExportCommand.MESSAGE_USAGE));
-        } else if (!FileUtil.isValidFileExtension(trimmedArg, "csv")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_FILE_EXTENSION, ExportCommand.MESSAGE_USAGE));
         }
-        return new ExportCommand(new CsvFile(trimmedArg), new CsvConverter());
+
+        fileFormat = SupportedFileFormat.findSupportedFileFormat(trimmedArg);
+
+        if (fileFormat.isPresent()) {
+            switch (fileFormat.get()) {
+            case CSV:
+                return new ExportCommand(new CsvFile(trimmedArg), new CsvConverter());
+            default:
+                throw new ParseException(String.format(MESSAGE_UNSUPPORTED_FILE_EXTENSION,
+                        ExportCommand.MESSAGE_USAGE));
+            }
+        } else {
+            throw new ParseException(String.format(MESSAGE_UNSUPPORTED_FILE_EXTENSION, ExportCommand.MESSAGE_USAGE));
+        }
     }
 }
 //@@author

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_EXTENSION;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNSUPPORTED_FILE_EXTENSION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -15,10 +16,9 @@ public class ExportCommandParserTest {
     private ExportCommandParser parser = new ExportCommandParser();
 
     @Test
-    public void parse_emptyArgFallsBackToDefaultFileName_success() {
-        CsvFile csvFile = new CsvFile(ExportCommandParser.DEFAULT_FILENAME_FORMAT);
-        ExportCommand expectedExportCommand = new ExportCommand(csvFile, new CsvConverter());
-        assertParseSuccess(parser, "   ", expectedExportCommand);
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "    ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ExportCommandParserTest {
         ExportCommand expectedExportCommand = new ExportCommand(new CsvFile(filename), new CsvConverter());
         assertParseSuccess(parser, filename, expectedExportCommand);
     }
-    
+
     @Test
     public void parse_invalidPath_throwsParseException() {
         assertParseFailure(parser, "path@.csv",
@@ -37,7 +37,7 @@ public class ExportCommandParserTest {
     @Test
     public void parse_invalidFileExtension_throwsParseException() {
         assertParseFailure(parser, "testing.txt",
-                String.format(MESSAGE_INVALID_FILE_EXTENSION, ExportCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_UNSUPPORTED_FILE_EXTENSION, ExportCommand.MESSAGE_USAGE));
     }
 
 }
