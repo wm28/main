@@ -32,7 +32,6 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
     public static final String TYPICAL_PERSONS_CSV = "src\\test\\data\\data\\CsvTest\\typicalPersonsGuestList.csv";
-    public static final String TYPICAL_PERSONS_XML = "src\\test\\data\\data\\CsvTest\\typicalPersonsAddressBook.csv";
 
     public static final int NUM_PERSONS = 7;
 
