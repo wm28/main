@@ -19,7 +19,8 @@ public class Payment {
      */
     public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}.-]*";
 
-    public String paymentValue;
+    public String paymentChecker = null;
+    public final String paymentValue;
 
     /**
      * Constructs a {@code Payment}.
@@ -33,8 +34,10 @@ public class Payment {
                 || payment.equalsIgnoreCase("NOTPAID")
                 || payment.equalsIgnoreCase("N.A.")
                 || payment.equalsIgnoreCase("PENDING")) {
-            paymentValue = payment;
+            paymentChecker = payment;
         }
+
+        paymentValue = paymentChecker;
     }
 
     /**

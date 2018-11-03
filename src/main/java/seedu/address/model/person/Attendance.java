@@ -19,7 +19,8 @@ public class Attendance {
      */
     public static final String ATTENDANCE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s.-]*";
 
-    public String attendanceValue = null;
+    public String attendanceCheck = null;
+    public final String attendanceValue;
 
     /**
      * Constructs a {@code Attendance}.
@@ -32,8 +33,10 @@ public class Attendance {
         if (attendance.equalsIgnoreCase("ABSENT")
                 || attendance.equalsIgnoreCase("PRESENT")
                 || attendance.equalsIgnoreCase("N.A.")) {
-            attendanceValue = attendance;
+            attendanceCheck = attendance;
         }
+
+        attendanceValue = attendanceCheck;
     }
 
     /**
