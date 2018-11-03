@@ -19,7 +19,7 @@ public class Attendance {
      */
     public static final String ATTENDANCE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s.-]*";
 
-    public final String attendanceValue;
+    public String attendanceValue = null;
 
     /**
      * Constructs a {@code Attendance}.
@@ -29,7 +29,11 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_ATTENDANCE_CONSTRAINTS);
-        attendanceValue = attendance;
+        if (attendance.equalsIgnoreCase("ABSENT")
+                || attendance.equalsIgnoreCase("PRESENT")
+                || attendance.equalsIgnoreCase("N.A.")) {
+            attendanceValue = attendance;
+        }
     }
 
     /**

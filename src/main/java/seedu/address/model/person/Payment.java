@@ -1,9 +1,9 @@
-//@@author Sarah
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author Sarah
 /**
  * Represents a Person's payment in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPayment(String)}
@@ -19,7 +19,7 @@ public class Payment {
      */
     public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}.-]*";
 
-    public final String paymentValue;
+    public String paymentValue;
 
     /**
      * Constructs a {@code Payment}.
@@ -29,7 +29,12 @@ public class Payment {
     public Payment(String payment) {
         requireNonNull(payment);
         checkArgument(isValidPayment(payment), MESSAGE_PAYMENT_CONSTRAINTS);
-        paymentValue = payment;
+        if (payment.equalsIgnoreCase("PAID")
+                || payment.equalsIgnoreCase("NOTPAID")
+                || payment.equalsIgnoreCase("N.A.")
+                || payment.equalsIgnoreCase("PENDING")) {
+            paymentValue = payment;
+        }
     }
 
     /**
