@@ -29,7 +29,14 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_ATTENDANCE_CONSTRAINTS);
-        attendanceValue = attendance;
+        String attendanceChecker = null;
+        if (attendance.equalsIgnoreCase("ABSENT")
+                || attendance.equalsIgnoreCase("PRESENT")
+                || attendance.equalsIgnoreCase("N.A.")) {
+            attendanceChecker = attendance;
+        }
+
+        attendanceValue = attendanceChecker;
     }
 
     /**
