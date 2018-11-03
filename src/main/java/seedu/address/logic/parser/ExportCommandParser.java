@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNSUPPORTED_FILE_EXTENSION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
+import static seedu.address.commons.core.Messages.MESSAGE_UNSUPPORTED_FILE_EXTENSION;
+
+import java.util.Optional;
 
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.ExportCommand;
@@ -11,7 +13,6 @@ import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.logic.converters.fileformats.csv.CsvFile;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.Optional;
 
 //@@author wm28
 /**
