@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,17 +46,33 @@ public class EmailAllCommand extends Email {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
+
         String emailSubject;
         String emailMessage;
+        String recipients;
+        StringBuilder recipientBuilder = new StringBuilder();
+
+        // These variables are used in the command success message MESSAGE_MAIL_ALL_PERSON_SUCCESS
         StringBuilder invalidEmails = new StringBuilder();
         int successfulEmails = 0;
         int failedEmails = 0;
 
         // Array of strings to store all the necessary information
         String[] information;
-        // Retrieve the information through a method in the super class Email
+
+        // Retrieve the information through a method in the abstract super class Email
         information = retrieveInformation();
+
+        username = information[0];
+        password = information[1];
+        emailSubject = information[2];
+        emailMessage = information[3];
+
+        // Check for duplicate emails to ensure each guest only receives one email, even if
+        // multiple guests have registered under the same email
+        HashSet<String> personsToSendEmail = new HashSet<>();
 
         for (Person personToMail : lastShownList) {
             assert personToMail != null;
@@ -65,47 +81,43 @@ public class EmailAllCommand extends Email {
                 failedEmails++;
                 String invalidEmail = " || " + personToMail.getEmail().toString() + " || ";
                 invalidEmails.append(invalidEmail);
-                continue;
-            }
-
-            // Retrieve all email fields and user credentials and validate that they are not null
-            try {
-                emailSubject = information[2];
-                emailMessage = information[3];
-                username = information[0];
-                password = information[1];
-
-            } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e) {
-                failedEmails = lastShownList.size();
-                successfulEmails = 0;
-
-                for (Person person : lastShownList) {
-                    String personEmail = person.getEmail().toString() + " ";
-                    invalidEmails.append(personEmail);
+            } else if (isValidEmail(personToMail.getEmail().toString())){
+                if (personsToSendEmail.contains(personToMail.getEmail().toString())) {
+                    logger.log(Level.INFO, "Guest email address has already been sent an email!");
+                } else {
+                    personsToSendEmail.add(personToMail.getEmail().toString());
+                    successfulEmails++;
                 }
-
-                break;
             }
-
-            // Creates a new session with the user gmail account as the host
-            Properties props = createPropertiesConfiguration();
-
-            // Authenticate the user credentials
-            EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
-
-            // Create a new session using the authenticated credentials and the properties of
-            // the Gmail host
-            Session session = Session.getDefaultInstance(props, authenticate);
-
-            createAndSendEmail(username, emailSubject, emailMessage,
-                    personToMail.getEmail().toString(), session);
-
-            successfulEmails++;
         }
+
+        // Creates a new session with the user gmail account as the host
+        Properties props = createPropertiesConfiguration();
+
+        // Authenticate the user credentials
+        EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
+
+        // Create a new session using the authenticated credentials and the properties of
+        // the Gmail host
+        Session session = Session.getDefaultInstance(props, authenticate);
+
+        // Create a string with all the recipients
+        for (String personToEmail : personsToSendEmail) {
+            String individualGuest = personToEmail + ",";
+            recipientBuilder.append(individualGuest);
+        }
+
+        recipients = removeLastChar(recipientBuilder.toString());
+        createAndSendEmail(username, emailSubject, emailMessage,
+                recipients, session);
 
         logger.log(Level.INFO, "All emails sent successfully!");
         return new CommandResult(String.format(MESSAGE_MAIL_ALL_PERSON_SUCCESS, successfulEmails,
                 failedEmails, invalidEmails));
+    }
+
+    private static String removeLastChar(String string) {
+        return string.substring(0, string.length() - 1);
     }
 
     @Override

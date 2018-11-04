@@ -71,7 +71,7 @@ public abstract class Email extends Command {
      * fields are provided by the child classes
      */
     public void createAndSendEmail(String username, String emailSubject, String emailMessage,
-                                   String recipient, Session session) throws CommandException {
+                                   String recipients, Session session) throws CommandException {
         try {
             // Creates a default MimeMessage object
             Message message = new MimeMessage(session);
@@ -80,8 +80,8 @@ public abstract class Email extends Command {
             message.setFrom(new InternetAddress(username));
 
             // Set the email of the guest
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(recipient));
+            message.setRecipients(Message.RecipientType.BCC,
+                    InternetAddress.parse(recipients));
 
             // Set email subject and message
             message.setSubject(emailSubject);
