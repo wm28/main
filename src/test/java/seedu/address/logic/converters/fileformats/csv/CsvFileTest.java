@@ -21,7 +21,7 @@ public class CsvFileTest {
     public static final String EXPORTED_CSV_FILE =
             "src/test/data/data/CsvTest/exportedTypicalPersonsGuestList.csv";
     public static final String INVALID_CSV_FILE_PATH = "invalidPath/NoSuchPath/test.csv";
-    
+
     public static final List<AdaptedPerson> ADAPTED_TYPICAL_PERSONS;
 
     static {
