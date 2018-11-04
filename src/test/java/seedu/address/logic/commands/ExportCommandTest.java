@@ -37,7 +37,7 @@ public class ExportCommandTest {
 
     private static final String ALREADY_EXISTING_CSV_FILENAME = "existing.csv";
     private static final String VALID_CSV_FILENAME = "valid.csv";
-    public static final String INVALID_CSV_FILE_PATH = "invalidPath/NoSuchPath/test.csv";
+    private static final String INVALID_CSV_FILE_PATH = "invalidPath/NoSuchPath/test.csv";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
