@@ -82,39 +82,13 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        //@@author SandhyaGopakumar
-        case DeleteEventCommand.COMMAND_WORD:
-            return new DeleteEventCommand();
-        //@@author
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-            //@@author Sarah
+        //@@author Sarah
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
-            //@@author
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
-
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+        //@@author
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
@@ -134,11 +108,40 @@ public class AddressBookParser {
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
 
+        //@@author aaryamNUS
         case MailCommand.COMMAND_WORD:
             return new MailCommandParser().parse(arguments);
 
         case EmailAllCommand.COMMAND_WORD:
-            return new EmailAllCommand();
+            return new EmailAllCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommandParser().parse(arguments);
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommandParser().parse(arguments);
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommandParser().parse(arguments);
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommandParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommandParser().parse(arguments);
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommandParser().parse(arguments);
+
+        //@@author SandhyaGopakumar
+        case DeleteEventCommand.COMMAND_WORD:
+            return new DeleteEventCommandParser().parse(arguments);
+        //@@author
+
+        //@@author aaryamNUS
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommandParser().parse(arguments);
+        //@@author
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

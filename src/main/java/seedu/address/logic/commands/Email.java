@@ -7,8 +7,10 @@ import java.util.regex.Pattern;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -26,25 +28,6 @@ public abstract class Email extends Command {
     private static final Logger logger = LogsCenter.getLogger(Email.class);
 
     /**
-     * Checks whether username, password, email subject and email message are
-     * provided by the user. If any of the parameters are either null or an
-     * empty string, the respective command exception is throw.
-     * @throws CommandException whenever a field in the email of credentials is missing
-     */
-    public void checkFields(String username, String password,
-                            String emailSubject, String emailMessage) throws CommandException {
-        if (username == null || username.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_USERNAME_NOT_PROVIDED);
-        } else if (password == null || password.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
-        } else if (emailSubject == null || emailSubject.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
-        } else if (emailMessage == null || emailMessage.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
-        }
-    }
-
-    /**
      * Creates a new EmailWindow controller which subsequently launches a GUI Window to retrieve
      * username, password, email message and email subject. Error handling is also performed
      * through the try-catch block, which details with CommandException as well as
@@ -52,13 +35,16 @@ public abstract class Email extends Command {
      * password, emailSubject, and emailMessage are set with the strings received from the EmailWindow
      */
     public String[] retrieveInformation() throws CommandException {
-        String[] information = new String[4];
+        String[] information;
         EmailWindow newEmailWindow = new EmailWindow();
 
         newEmailWindow.showAndWait();
 
         if (newEmailWindow.isSendButton()) {
             information = newEmailWindow.getInformation();
+            if (!isValidEmail(information[0])) {
+                throw new CommandException(Messages.MESSAGE_INVALID_EMAIL);
+            }
         } else if (newEmailWindow.isQuitButton()) {
             throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
         } else {
@@ -107,8 +93,10 @@ public abstract class Email extends Command {
             message.setText(emailMessage);
 
             Transport.send(message);
+        } catch (NoSuchProviderException | AddressException e) {
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
         } catch (MessagingException mex) {
-            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION);
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
         }
     }
 

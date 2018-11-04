@@ -25,8 +25,6 @@ public abstract class UiPart<T> {
      * Orange - Absent, Yellow - Present, Light Blue - VIP,
      * White - Guest Speaker, Black - Not Paid, Purple - Paid,
      * Default - a tag that is not supported by the application specifications
-     *
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
      */
     private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
                                                 "white", "bronze", "silver",
@@ -120,12 +118,11 @@ public abstract class UiPart<T> {
     //@@author aaryamNUS
     /**
      Method getTagColor returns the specific color style for {@code tagName}'s label.
-     Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
      */
     public String getTagColor(String tagName) {
         /**
-         * Using the hashcode of the tag name ensures the color of the tag remains consistent
-         * during different iterations of the code by generating a random color
+         * Using a switch statement with the tag name ensures the color of the tag remains consistent
+         * during different iterations of the code
          */
         switch (tagName.replaceAll("\\s+", "").toLowerCase()) {
         case "absent":
