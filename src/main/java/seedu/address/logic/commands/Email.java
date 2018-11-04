@@ -122,4 +122,5 @@ public abstract class Email extends Command {
         Matcher matcher = pattern.matcher(guestAddress);
         return matcher.matches();
     }
+
 }
