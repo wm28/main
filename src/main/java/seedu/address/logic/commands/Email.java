@@ -1,20 +1,16 @@
 package seedu.address.logic.commands;
 
 import java.util.Properties;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.ui.EmailWindow;
@@ -25,7 +21,6 @@ import seedu.address.ui.EmailWindow;
  * in order to reduce code duplicity.
  */
 public abstract class Email extends Command {
-    private static final Logger logger = LogsCenter.getLogger(Email.class);
 
     /**
      * Creates a new EmailWindow controller which subsequently launches a GUI Window to retrieve
@@ -93,9 +88,7 @@ public abstract class Email extends Command {
             message.setText(emailMessage);
 
             Transport.send(message);
-        } catch (NoSuchProviderException | AddressException e) {
-            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
-        } catch (MessagingException mex) {
+        } catch (MessagingException e) {
             throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
         }
     }

@@ -26,8 +26,7 @@ public class ClearCommandParser implements Parser<ClearCommand> {
 
         if (args == null || args.replaceAll("\\s+", "").equals("")) {
             logger.log(Level.INFO, "ClearCommand arguments are null");
-        }
-        else {
+        } else {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     ClearCommand.MESSAGE_USAGE));
         }

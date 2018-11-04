@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,8 +26,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         if (args == null || args.replaceAll("\\s+", "").equals("")) {
             logger.log(Level.INFO, "HelpCommand arguments are null");
-        }
-        else {
+        } else {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     HelpCommand.MESSAGE_USAGE));
         }

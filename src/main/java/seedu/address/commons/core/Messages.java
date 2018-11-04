@@ -27,6 +27,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_EMAIL = "Error: The email address you have provided is invalid!";
     public static final String MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS = "Error: could not send "
                                                              + "email, either your "
-                                                             + "internet connection is not strong or the credentials provided "
-                                                             + "are invalid!";
+                                                             + "internet connection is not strong or the "
+                                                             + "credentials provided are invalid!";
 }

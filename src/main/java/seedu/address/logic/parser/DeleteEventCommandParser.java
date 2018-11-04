@@ -26,8 +26,7 @@ public class DeleteEventCommandParser implements Parser<DeleteEventCommand> {
 
         if (args == null || args.replaceAll("\\s+", "").equals("")) {
             logger.log(Level.INFO, "DeleteEventCommand arguments are null");
-        }
-        else {
+        } else {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteEventCommand.MESSAGE_USAGE));
         }

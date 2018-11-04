@@ -27,8 +27,7 @@ public class EmailAllCommandParser implements Parser<EmailAllCommand> {
 
         if (args == null || args.replaceAll("\\s+", "").equals("")) {
             logger.log(Level.INFO, "EmailAllCommand arguments are null");
-        }
-        else {
+        } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EmailAllCommand.MESSAGE_USAGE));
         }
