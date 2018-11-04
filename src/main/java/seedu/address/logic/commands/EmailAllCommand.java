@@ -30,8 +30,8 @@ public class EmailAllCommand extends Email {
             + "Please ensure you don't enter any characters after the command word!\n"
             + "Example: " + COMMAND_WORD;
 
-    private static final String MESSAGE_MAIL_ALL_PERSON_SUCCESS = "Successfully sent an email to %1$d persons, "
-            + "could not send an email to %2$d guests will addresses: %3$s!";
+    private static final String MESSAGE_MAIL_ALL_PERSON_SUCCESS = "Successfully sent an email to %1$d emails, "
+            + "could not send an email to %2$d emails will addresses: %3$s!";
 
     private static Logger logger = Logger.getLogger("execute");
     private static String username;
@@ -74,13 +74,21 @@ public class EmailAllCommand extends Email {
         // multiple guests have registered under the same email
         HashSet<String> personsToSendEmail = new HashSet<>();
 
+        // Contains all the email addresses that aren't of a valid format
+        HashSet<String> invalidEmailAddresses = new HashSet<>();
+
         for (Person personToMail : lastShownList) {
             assert personToMail != null;
 
             if (!isValidEmail(personToMail.getEmail().toString())) {
-                failedEmails++;
-                String invalidEmail = " || " + personToMail.getEmail().toString() + " || ";
-                invalidEmails.append(invalidEmail);
+                if (invalidEmailAddresses.contains(personToMail.getEmail().toString())) {
+                    logger.log(Level.INFO, "Guest email address has already been marked as invalid!");
+                } else {
+                    invalidEmailAddresses.add(personToMail.getEmail().toString());
+                    failedEmails++;
+                    String invalidEmail = " || " + personToMail.getEmail().toString() + " || ";
+                    invalidEmails.append(invalidEmail);
+                }
             } else if (isValidEmail(personToMail.getEmail().toString())) {
                 if (personsToSendEmail.contains(personToMail.getEmail().toString())) {
                     logger.log(Level.INFO, "Guest email address has already been sent an email!");
@@ -116,6 +124,12 @@ public class EmailAllCommand extends Email {
                 failedEmails, invalidEmails));
     }
 
+    /**
+     * Removes the last character out of the recipients String as it contains
+     * an unwanted ',' character
+     * @param string is the original recipients string
+     * @return the substring
+     */
     private static String removeLastChar(String string) {
         return string.substring(0, string.length() - 1);
     }
