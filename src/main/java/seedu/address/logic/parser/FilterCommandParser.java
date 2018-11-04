@@ -32,9 +32,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         for (int i = 0; i < checking.size(); i++) {
 
-            if ((checking.get(i).charAt(0) == 'n' || checking.get(i).charAt(0) == 'e'
-                    || (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == '/')
-                    || (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == 'a')
+            if (((checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == 'a')
                     || checking.get(i).charAt(0) == 'a' || checking.get(i).charAt(0) == 't')
                     && (checking.get(i).charAt(1) == '/' || checking.get(i).charAt(2) == '/')) {
 

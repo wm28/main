@@ -74,7 +74,13 @@ Format: `help`
 
 === Adding a guest: `add_guest`
 
-Adds a guest to the guest list +
+Adds a guest to the guest list. +
+No spaces or special characters allowed in Payment and Attendance. +
+Payment accepts "PAID", "NOTPAID" , "PENDING" or "N.A.".
+Attendance accepts "ABSENT", "PRESENT" or "N.A." +
+Payment and attendance are case-insensitive. +
+If any options other than the ones given are entered, the guest will be added if
+other fields are fine, but payment and/or attendance will be blank. +
 Format: `add_guest n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT [t/TAG]...`
 
 [TIP]
@@ -82,8 +88,8 @@ A guest can have any number of tags (including 0)
 
 Examples:
 
-* `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOT PAID t/VIP t/Vegetarian`
-* `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID t/Groom t/Non-Vegetarian`
+* `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOTPAID t/VIP t/Vegetarian`
+* `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID t/Groom t/NonVegetarian`
 
 === Listing all guests : `list`
 
@@ -93,6 +99,12 @@ Format: `list`
 === Editing a guest : `edit_guest`
 
 Edits an existing guest entry in the guest list. +
+No spaces or special characters allowed in Payment and Attendance. +
+Payment accepts "PAID", "NOTPAID" , "PENDING" or "N.A.".
+Attendance accepts "ABSENT", "PRESENT" or "N.A." +
+Payment and attendance are case-insensitive. +
+If any options other than the ones given are entered, the guest will be edited,
+but payment and/or attendance will be blank. +
 Format: `edit_guest INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]  [pa/PAID]
          [t/GUEST_TYPE] [t/DIET]...`
 
@@ -125,7 +137,7 @@ Examples:
 * `list` +
 `delete_guest 2` +
 Deletes the 2nd guest in the guest list.
-* `find Betsy` +
+* `find n/Betsy` +
 `delete_guest 1` +
 Deletes the 1st guest in the results of the `find` command.
 
@@ -170,9 +182,10 @@ This will present you with an error in specifying the command, as all your tags 
 // tag::find[]
 === Locating guests by name, phone number or email address: `find`
 
-Finds guests whose names, phone numbers and/or email addresses
-contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]` +
+Find guests whose names, phone numbers and/or email addresses
+contain any of the given keywords. Keywords should not have spaces or any
+special characters. +
+Format: `find n/KEYWORD p/MORE_KEYWORDS e/MORE_KEYWORDS` +
 Example: find n/NAME p/PHONE e/EMAIL
 
 ****
@@ -192,6 +205,13 @@ You will be show a list containing entries of any guest having names `Betsy`, `T
 * `find n/alex p/92746838 e/johndoe@gmail.com` +
 You will be show a list containing entries of any guest having the name `Alex`,
 phone number `92746838`, or email address `johndoe@gmail.com`
+* `find n/david n/edan` +
+You will be shown a list that contains the entries of any guests having the
+name `david` and `edan` +
+* `find n/david edan` +
+You will be shown a list that contains the entries of any guests having the
+name `david` *but not* `edan`
+
 // end::find[]
 
 // tag::import[]
@@ -205,6 +225,17 @@ Format: `import FILE_PATH`
 Guest fields, with the exception of tags, shall be enclosed in double quotation marks if it contains a comma. Tags shall not contain any commas.
 ====
 
+The CSV guest entries which are badly formatted or those which corresponds to an already existing guest in the guest list, will trigger an import report window as shown in figure 1. The window will show the offending CSV guest entries with their associated error messages.
+
+|====
+| image:ImportReportWindow.png[] Figure 1 - ImportReportWindow
+|====
+
+[NOTE]
+====
+A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.
+====
+
 Examples:
 
 * `import directory/subdirectory/guestlist.csv` +
@@ -216,6 +247,11 @@ You will populate the guest list with the data imported from the CSV file in the
 
 Exports guests' data to a CSV formatted file. The structure for the values in the CSV file is predefined. +
 Format: `export FILE_PATH`
+
+[NOTE]
+====
+If no `FILE_PATH` is provided, guests will be exported using the default filename, `exportedGuestBook.csv`.
+====
 
 Examples:
 
@@ -288,7 +324,8 @@ Format: `stop_marking`
 ===  Filter list based on specified parameters : `filter`
 
 Filter guest list based on filter guest attributes. Only filters based on
-payment status, attendance status and tags. +
+payment status, attendance status and tags. Keywords should not have spaces or any
+special character. +
 Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
          [t/DIET] [t/GUEST_TYPE] [t/...]`
 Examples:
