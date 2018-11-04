@@ -1,11 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddTagCommand;
+import seedu.address.model.tag.Tag;
 
 //@@author aaryamNUS
 /**
@@ -13,7 +20,6 @@ import seedu.address.logic.commands.AddTagCommand;
  * any prefix, tags with only the prefix, and if no input is presented
  */
 public class AddTagCommandParserTest {
-
     private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test
