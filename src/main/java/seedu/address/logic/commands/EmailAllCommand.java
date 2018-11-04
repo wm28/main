@@ -81,7 +81,7 @@ public class EmailAllCommand extends Email {
                 failedEmails++;
                 String invalidEmail = " || " + personToMail.getEmail().toString() + " || ";
                 invalidEmails.append(invalidEmail);
-            } else if (isValidEmail(personToMail.getEmail().toString())){
+            } else if (isValidEmail(personToMail.getEmail().toString())) {
                 if (personsToSendEmail.contains(personToMail.getEmail().toString())) {
                     logger.log(Level.INFO, "Guest email address has already been sent an email!");
                 } else {
