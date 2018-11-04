@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_FILE_ALREADY_EXIST;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.NoSuchFileException;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -35,6 +37,7 @@ public class ExportCommandTest {
 
     private static final String ALREADY_EXISTING_CSV_FILENAME = "existing.csv";
     private static final String VALID_CSV_FILENAME = "valid.csv";
+    public static final String INVALID_CSV_FILE_PATH = "invalidPath/NoSuchPath/test.csv";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -66,6 +69,16 @@ public class ExportCommandTest {
                 new CsvConverterAlwaysSuccessfulConversion());
         CommandResult commandResult = exportCommand.execute(new ModelStubContainingTypicalPersons(), commandHistory);
         assertEquals(String.format(MESSAGE_FILE_ALREADY_EXIST, ALREADY_EXISTING_CSV_FILENAME),
+                commandResult.feedbackToUser);
+    }
+
+    @Test
+    public void execute_exportToInvalidFilePath_throwsCommandException() throws Exception {
+        thrown.expect(CommandException.class);
+        ExportCommand exportCommand = new ExportCommand(new CsvFileWithInvalidFilePath(),
+                new CsvConverterAlwaysSuccessfulConversion());
+        CommandResult commandResult = exportCommand.execute(new ModelStubContainingTypicalPersons(), commandHistory);
+        assertEquals(String.format(MESSAGE_INVALID_FILE_PATH, INVALID_CSV_FILE_PATH),
                 commandResult.feedbackToUser);
     }
 
@@ -143,6 +156,21 @@ public class ExportCommandTest {
         @Override
         public String getFileName() {
             return ALREADY_EXISTING_CSV_FILENAME;
+        }
+    }
+
+    /**
+     * A CsvFile stub that has an invalid file path
+     */
+    private class CsvFileWithInvalidFilePath extends CsvFileStub {
+        @Override
+        public void writeAdaptedPersons(List<AdaptedPerson> adaptedPersons) throws IOException {
+            throw new NoSuchFileException(INVALID_CSV_FILE_PATH);
+        }
+
+        @Override
+        public String getFileName() {
+            return INVALID_CSV_FILE_PATH;
         }
     }
 
