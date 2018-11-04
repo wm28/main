@@ -16,6 +16,11 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Redo success!";
     public static final String MESSAGE_FAILURE = "No more commands to redo!";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo the last command.\n"
+            + "Parameters: none\n"
+            + "Please ensure you don't enter any characters after the command word!\n"
+            + "Example: " + COMMAND_WORD;
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
