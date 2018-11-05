@@ -77,7 +77,7 @@ public class TypicalPersons {
             .withEventName("Graduation party").withEventDate("10/01/2019")
             .withEventVenue("Hilton").withEventStartTime("6:00 PM").build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "n/Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
 
