@@ -31,12 +31,14 @@ public class MailCommandParserTest {
 
     @Test
     public void parse_nullArgs_throwsParseException() {
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MailCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MailCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_negativeIndex_throwsParseException() {
-        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MailCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MailCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -46,11 +48,13 @@ public class MailCommandParserTest {
 
     @Test
     public void parse_invalidAdditionalArguments_throwsParseException() {
-        assertParseFailure(parser, "1 garbage", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MailCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 garbage", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MailCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "abc", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MailCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "abc", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MailCommand.MESSAGE_USAGE));
     }
 }

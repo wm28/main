@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.EmailSpecificCommand;
 
 //@@author aaryamNUS
