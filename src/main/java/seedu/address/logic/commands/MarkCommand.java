@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class MarkCommand extends Command {
+public class MarkCommand extends GeneralMarkCommand {
 
     public static final String COMMAND_WORD = "mark";
 
@@ -37,7 +37,7 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " 91234567";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person as PRESENT: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
 
     private final Phone phone;
@@ -48,71 +48,14 @@ public class MarkCommand extends Command {
      * @param phone of the person in the filtered person list to edit
      */
     public MarkCommand(Phone phone) {
-        requireNonNull(phone);
+        super(phone);
         this.phone = phone;
         this.editPersonDescriptor = new EditPersonDescriptor();
     }
 
-    /**
-     * Scans through the list and compares the phone numbers to the one that is being searched
-     * Assigns the index of the found person to the index of the command.
-     * @param lastShownList {@code CommandHistory} which the command should operate on.
-     * @throws CommandException if there are no matching persons in the list
-     */
-    public void retrieveIndex(List<Person> lastShownList) throws CommandException {
-        int x = 0;
-        boolean isNotFound = true;
-        for (Person p : lastShownList) {
-            Phone temp = p.getPhone();
-            if (phone.equals(temp)) {
-                isNotFound = false;
-                break;
-            }
-            x++;
-        }
-        if (isNotFound) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
-        }
-
-        index = Index.fromZeroBased(x);
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        retrieveIndex(lastShownList);
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, editedPerson));
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        //@@author
-        //@@author Sarah
-        Payment updatedPayment = personToEdit.getPayment();
-        //@@author
-        //@@author kronicler
-        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
-        Set<Tag> updatedTags = personToEdit.getTags();
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
-                updatedAttendance, updatedTags);
+        return super.performAttendanceTaking(model,history,true);
     }
 
     @Override

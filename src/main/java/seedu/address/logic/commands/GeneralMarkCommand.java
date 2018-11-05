@@ -22,39 +22,107 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 //@@author kronicler
+
 /**
  * Edits the details of an existing person in the address book.
  */
-public class UnmarkCommand extends GeneralMarkCommand {
+public abstract class GeneralMarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "unmark";
+    public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as absent "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as present "
             + "using their unique phone number. "
-            + "This will also change the attendance associated with the person to Absent.\n"
+            + "This will also change the a/ tag associated with the person to Present.\n"
             + "Parameters: "
             + "[PHONE] "
             + "Example: " + COMMAND_WORD
-            + " 91234567 ";
+            + " 91234567";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked person as ABSENT: %1$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person as PRESENT: %1$s";
+    public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Marked Person as ABSENT: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
 
     private final Phone phone;
     private Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param phone of the person in the filtered person list to edit
      */
-    public UnmarkCommand(Phone phone) {
-        super(phone);
+    public GeneralMarkCommand(Phone phone) {
+        requireNonNull(phone);
         this.phone = phone;
-        this.editPersonDescriptor = new EditPersonDescriptor();
     }
 
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        return super.performAttendanceTaking(model,history,false);
+    /**
+     * Scans through the list and compares the phone numbers to the one that is being searched
+     * Assigns the index of the found person to the index of the command.
+     * @param lastShownList {@code CommandHistory} which the command should operate on.
+     * @throws CommandException if there are no matching persons in the list
+     */
+    public void retrieveIndex(List<Person> lastShownList) throws CommandException {
+        int x = 0;
+        boolean isNotFound = true;
+        for (Person p : lastShownList) {
+            Phone temp = p.getPhone();
+            if (phone.equals(temp)) {
+                isNotFound = false;
+                break;
+            }
+            x++;
+        }
+        if (isNotFound) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
+        index = Index.fromZeroBased(x);
+    }
+
+    public CommandResult performAttendanceTaking(Model model, CommandHistory history, boolean isMark) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        retrieveIndex(lastShownList);
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (isMark) {
+            editPersonDescriptor = new EditPersonDescriptor("PRESENT");
+        }
+        else {
+            editPersonDescriptor = new EditPersonDescriptor("ABSENT");
+        }
+
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        model.updatePerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        if (isMark) {
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,editedPerson));
+        }
+        return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS, editedPerson));
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    public Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = personToEdit.getName();
+        Phone updatedPhone = personToEdit.getPhone();
+        Email updatedEmail = personToEdit.getEmail();
+        //@@author
+        //@@author Sarah
+        Payment updatedPayment = personToEdit.getPayment();
+        //@@author
+        //@@author kronicler
+        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
+        Set<Tag> updatedTags = personToEdit.getTags();
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
+                updatedAttendance, updatedTags);
     }
 
     @Override
@@ -65,12 +133,12 @@ public class UnmarkCommand extends GeneralMarkCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UnmarkCommand)) {
+        if (!(other instanceof GeneralMarkCommand)) {
             return false;
         }
 
         // state check
-        UnmarkCommand e = (UnmarkCommand) other;
+        GeneralMarkCommand e = (GeneralMarkCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
@@ -91,12 +159,12 @@ public class UnmarkCommand extends GeneralMarkCommand {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor() {
+        public EditPersonDescriptor(String updateAttendance) {
             setName(null);
             setPhone(null);
             setEmail(null);
             setPayment(null);
-            setAttendance(new Attendance("ABSENT"));
+            setAttendance(new Attendance(updateAttendance));
             setTags(null);
         }
 
@@ -123,7 +191,8 @@ public class UnmarkCommand extends GeneralMarkCommand {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
-
+        //@@author
+        //@@author Sarah
         public void setPayment(Payment payment) {
             this.payment = payment;
         }
@@ -131,7 +200,8 @@ public class UnmarkCommand extends GeneralMarkCommand {
         public Optional<Payment> getPayment() {
             return Optional.ofNullable(payment);
         }
-
+        //@@author
+        //@@author kronicler
         public void setAttendance(Attendance attendance) {
             this.attendance = attendance;
         }
