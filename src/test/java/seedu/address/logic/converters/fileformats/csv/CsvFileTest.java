@@ -20,6 +20,7 @@ public class CsvFileTest {
     public static final String NON_EXISTENT_CSV_FILE = "src/test/data/data/CsvTest/nonExistentGuestList.csv";
     public static final String EXPORTED_CSV_FILE =
             "src/test/data/data/CsvTest/exportedTypicalPersonsGuestList.csv";
+    public static final String INVALID_CSV_FILE_PATH = "invalidPath/NoSuchPath/test.csv";
 
     public static final List<AdaptedPerson> ADAPTED_TYPICAL_PERSONS;
 
@@ -62,6 +63,13 @@ public class CsvFileTest {
         CsvFile csvFile = new CsvFile(NON_EXISTENT_CSV_FILE);
         thrown.expect(IOException.class);
         csvFile.readAdaptedPersons();
+    }
+
+    @Test
+    public void writeAdaptedPersons_invalidFilePath_throwsNullPointerException() throws Exception {
+        thrown.expect(IOException.class);
+        CsvFile csvFile = new CsvFile(INVALID_CSV_FILE_PATH);
+        csvFile.writeAdaptedPersons(ADAPTED_TYPICAL_PERSONS);
     }
 
     @Test
