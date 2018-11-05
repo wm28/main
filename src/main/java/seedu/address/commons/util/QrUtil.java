@@ -21,10 +21,11 @@ public class QrUtil {
     public static final int QR_SIZE = 256;
 
     /**
-     * Generates a QR code based on the input string. The current output is to an image file, however, depending
-     * on the implementation of the mail sending API, this can be changed to return something more suitable.
-     * <p>
-     * Limits data to MAX_DATA_SIZE to make QR code suitable for the current QR_SIZE
+     * Generates a QR code based on the input string.
+     * @param data A string representing the data to be encoded into a QR code
+     * @return The encoded QR code
+     * @throws WriterException if length of {@code data} is greater than MAX_DATA_SIZE or when {@code data} fails to
+     * encode
      */
     public static BufferedImage generateQr(String data) throws WriterException {
         if (data.length() > MAX_DATA_SIZE) {
