@@ -89,7 +89,7 @@ public abstract class Email extends Command {
      * command as it attaches a QR code in the email message for the event manager to scan
      */
     public void createAndSendEmailWithTicket(String username, String emailSubject, String emailMessage,
-                                   String recipients, Session session, String guestUniqueID)
+                                   String recipients, Session session, String guestUniqueId)
                                    throws CommandException {
         try {
             // Creates a default MimeMessage object
@@ -121,7 +121,7 @@ public abstract class Email extends Command {
             // Generate a QR code, which represents the guest ticket
             // QR code is generated using a guest's UID, hence it is ensured to be unique
             QrUtil getGuestTicket = new QrUtil();
-            BufferedImage ticket = getGuestTicket.generateQr(guestUniqueID);
+            BufferedImage ticket = getGuestTicket.generateQr(guestUniqueId);
 
             // Create a temporary image file to store the BufferedImage and for it to be
             // read by DataSource()
@@ -207,5 +207,4 @@ public abstract class Email extends Command {
         Matcher matcher = pattern.matcher(guestAddress);
         return matcher.matches();
     }
-
 }

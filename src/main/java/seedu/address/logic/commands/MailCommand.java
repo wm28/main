@@ -122,8 +122,8 @@ public class MailCommand extends Email {
 
     @Override
     public void createAndSendEmailWithTicket(String username, String emailSubject, String emailMessage,
-                                   String recipient, Session session, String guestUniqueID) throws CommandException {
-        super.createAndSendEmailWithTicket(username, emailSubject, emailMessage, recipient, session, guestUniqueID);
+                                   String recipient, Session session, String guestUniqueId) throws CommandException {
+        super.createAndSendEmailWithTicket(username, emailSubject, emailMessage, recipient, session, guestUniqueId);
     }
 
     @Override
