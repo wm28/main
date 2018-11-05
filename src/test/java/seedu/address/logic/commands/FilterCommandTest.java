@@ -69,8 +69,8 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL
-        , ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL,
+                ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
     @Test

@@ -73,7 +73,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
             .withPayment(VALID_PAYMENT_DANNY).build();
 
-    public static final Event typicalEvent = new EventBuilder()
+    public static final Event TYPICAL_EVENT = new EventBuilder()
             .withEventName("Graduation party").withEventDate("10/01/2019")
             .withEventVenue("Hilton").withEventStartTime("6:00 PM").build();
 
@@ -82,7 +82,7 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     public static Event getTypicalEvent() {
-        return typicalEvent;
+        return TYPICAL_EVENT;
     }
 
     /**
