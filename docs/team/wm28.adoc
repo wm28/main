@@ -23,18 +23,17 @@
 
 * *Minor enhancement*: added a full preview of guests in the user interface
 
-* *Minor enhancement*: remodelled the guest list in the user interface
-
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
-*** Updated about us page
+*** Managed releases `v1.2.9`, `v1.3.1` (2 releases) on GitHub
+*** Setup about us page
+** Enhancements to existing features:
+*** Remodelled the guest list in the user interface (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/88[#88], https://github.com/CS2113-AY1819S1-F09-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-F09-3/main/pull/152[#152])
 ** Community:
-*** PRs reviewed: https://github.com[], https://github.com[], https://github.com[], https://github.com[]
-
-_{you can add/remove categories in the list above}_
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-3/main/issues/153[1], https://github.com/CS2113-AY1819S1-W12-3/main/issues/148[2])
 
 == Contributions to the User Guide
 
@@ -45,6 +44,8 @@ _{you can add/remove categories in the list above}_
 
 include::../UserGuide.adoc[tag=import]
 include::../UserGuide.adoc[tag=export]
+include::../UserGuide.adoc[tag=csvformat]
+
 
 == Contributions to the Developer Guide
 
@@ -53,10 +54,3 @@ include::../UserGuide.adoc[tag=export]
 |===
 
 include::../DeveloperGuide.adoc[tag=importexport]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
