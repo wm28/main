@@ -77,7 +77,6 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
-    //@@author wm28
     /**
      * Removes all tags from the PersonDisplay Ui component
      */

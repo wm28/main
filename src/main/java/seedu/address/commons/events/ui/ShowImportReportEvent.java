@@ -12,6 +12,7 @@ public class ShowImportReportEvent extends BaseEvent {
     public final List<ImportError> errors;
 
     public ShowImportReportEvent(List<ImportError> errors) {
+        assert errors != null : "ImportError list cannot be null";
         this.errors = errors;
     }
 

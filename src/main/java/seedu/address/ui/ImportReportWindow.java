@@ -16,7 +16,7 @@ import seedu.address.model.error.ImportError;
  */
 public class ImportReportWindow extends UiPart<Stage> {
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(ImportReportWindow.class);
     private static final String FXML = "ImportReportWindow.fxml";
     private List<ImportError> errors;
 
@@ -38,6 +38,8 @@ public class ImportReportWindow extends UiPart<Stage> {
     @FXML
     private void handleCloseImportReportWindow() {
         getRoot().close();
+        logger.fine("Import report closed");
+
     }
 
     /**
