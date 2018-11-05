@@ -29,8 +29,8 @@ public class RemoveTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
 
-    public static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully removed all tags from %1$d persons";
-    public static final String MESSAGE_NO_PERSON_WITH_TAG = "No persons in the list have the specified tags";
+    private static final String MESSAGE_REMOVED_TAG_SUCCESS = "Successfully removed all tags from %1$d persons";
+    private static final String MESSAGE_NO_PERSON_WITH_TAG = "No persons in the list have the specified tags";
 
     private static Logger logger = Logger.getLogger("calculateNumberOfPeopleToChange");
     private int numberOfPeopleToChange = 0;
@@ -50,39 +50,15 @@ public class RemoveTagCommand extends Command {
 
         List<Person> currentList = model.getFilteredPersonList();
         ReadOnlyAddressBook currentAddressBookReadOnly = model.getAddressBook();
-        // Uses edited AddressBook API to make an editable AddressBook for removeTag() to work
+
+        // Uses edited AddressBook Model to make an editable AddressBook for removeTag() to work
         AddressBook currentAddressBook = new AddressBook(currentAddressBookReadOnly);
 
+        // Calculates number of guests to change, and performs the removeTag() command afterwards
         calculateNumberOfPeopleToChange(currentList);
+        removeTags(model, currentAddressBook);
 
-        if (numberOfPeopleToChange == 0) {
-            throw new CommandException(MESSAGE_NO_PERSON_WITH_TAG);
-        } else {
-            for (Tag tagToBeRemoved: tagsToRemove) {
-                currentAddressBook.removeTag(tagToBeRemoved);
-            }
-            logger.log(Level.INFO, "All tags removed successfully");
-
-            model.resetData(currentAddressBook);
-            model.commitAddressBook();
-
-            return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, numberOfPeopleToChange));
-        }
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-        // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
-            return false;
-        }
-        // state check
-        RemoveTagCommand e = (RemoveTagCommand) other;
-        return tagsToRemove.equals(e.tagsToRemove);
+        return new CommandResult(String.format(MESSAGE_REMOVED_TAG_SUCCESS, numberOfPeopleToChange));
     }
 
     /**
@@ -97,7 +73,6 @@ public class RemoveTagCommand extends Command {
 
         for (Person personToBeEdited : currentList) {
             currentTags = personToBeEdited.getTags();
-
             for (Tag tagToBeRemoved: tagsToRemove) {
                 try {
                     if (currentTags.contains(tagToBeRemoved)) {
@@ -109,5 +84,38 @@ public class RemoveTagCommand extends Command {
                 }
             }
         }
+    }
+
+    /**
+     * Performs the remove tag function by removing a set of tags from all guests in the
+     * guest list and then updated the model addressBook accordingly
+     */
+    private void removeTags(Model model, AddressBook currentAddressBook) throws CommandException {
+        if (numberOfPeopleToChange == 0) {
+            throw new CommandException(MESSAGE_NO_PERSON_WITH_TAG);
+        } else {
+            for (Tag tagToBeRemoved: tagsToRemove) {
+                currentAddressBook.removeTag(tagToBeRemoved);
+            }
+            logger.log(Level.INFO, "All tags removed successfully");
+
+            model.resetData(currentAddressBook);
+            model.commitAddressBook();
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof RemoveTagCommand)) {
+            return false;
+        }
+        // state check
+        RemoveTagCommand e = (RemoveTagCommand) other;
+        return tagsToRemove.equals(e.tagsToRemove);
     }
 }
