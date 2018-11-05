@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,7 +13,6 @@ import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -55,7 +50,7 @@ public class MarkCommand extends GeneralMarkCommand {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        return super.performAttendanceTaking(model,history,true);
+        return super.performAttendanceTaking(model, true);
     }
 
     @Override

@@ -78,7 +78,14 @@ public abstract class GeneralMarkCommand extends Command {
         index = Index.fromZeroBased(x);
     }
 
-    public CommandResult performAttendanceTaking(Model model, CommandHistory history, boolean isMark) throws CommandException {
+    /**
+     * Performs the task of attendance taking in the guest list.
+     * This method handles both marking the person as Present or Absent.
+     * @param model which the command should operate on to find the person's information
+     * @throws CommandException when there is no such person with the identifier in the list
+     */
+    public CommandResult performAttendanceTaking(Model model, boolean isMark)
+            throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -88,8 +95,7 @@ public abstract class GeneralMarkCommand extends Command {
 
         if (isMark) {
             editPersonDescriptor = new EditPersonDescriptor("PRESENT");
-        }
-        else {
+        } else {
             editPersonDescriptor = new EditPersonDescriptor("ABSENT");
         }
 
@@ -98,7 +104,7 @@ public abstract class GeneralMarkCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         if (isMark) {
-            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,editedPerson));
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, editedPerson));
         }
         return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS, editedPerson));
     }
