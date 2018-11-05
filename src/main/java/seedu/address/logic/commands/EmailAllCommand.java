@@ -19,34 +19,25 @@ import seedu.address.model.person.Person;
 
 //@@author aaryamNUS
 /**
- * Sends an email to the specified person in the guest list.
+ * Sends an email to all of the guests in the specified list.
  */
 public class EmailAllCommand extends Email {
 
     public static final String COMMAND_WORD = "emailAll";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to all guests in the "
             + "current filtered list\n"
+            + "Parameters: none\n"
+            + "Please ensure you don't enter any characters after the command word!\n"
             + "Example: " + COMMAND_WORD;
 
     private static final String MESSAGE_MAIL_ALL_PERSON_SUCCESS = "Successfully sent an email to %1$d persons, "
             + "could not send an email to %2$d guests will addresses: %3$s!";
 
     private static Logger logger = Logger.getLogger("execute");
-    private static EmailAllCommand emailCommandSimpleton = null;
     private static String username;
     private static String password;
 
-    private EmailAllCommand() {}
-
-    /**
-     * Applying the Simpleton design pattern to EmailAllCommand
-     */
-    public static EmailAllCommand getInstance() {
-        if (emailCommandSimpleton == null) {
-            emailCommandSimpleton = new EmailAllCommand();
-        }
-        return emailCommandSimpleton;
-    }
+    public EmailAllCommand() {}
 
     /**
      * Sends an email to all the persons in the current filtered list
