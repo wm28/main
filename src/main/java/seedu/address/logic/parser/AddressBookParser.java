@@ -16,6 +16,7 @@ import seedu.address.logic.commands.DeleteEventCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EmailAllCommand;
+import seedu.address.logic.commands.EmailSpecificCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FilterCommand;
@@ -111,6 +112,9 @@ public class AddressBookParser {
         //@@author aaryamNUS
         case MailCommand.COMMAND_WORD:
             return new MailCommandParser().parse(arguments);
+
+        case EmailSpecificCommand.COMMAND_WORD:
+            return new EmailSpecificCommandParser().parse(arguments);
 
         case EmailAllCommand.COMMAND_WORD:
             return new EmailAllCommandParser().parse(arguments);
