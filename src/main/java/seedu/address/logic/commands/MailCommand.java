@@ -35,6 +35,8 @@ public class MailCommand extends Email {
     private static Logger logger = Logger.getLogger("execute");
     private static String username;
     private static String password;
+    private static String emailSubject;
+    private static String emailMessage;
     private Index index;
 
     /**
@@ -55,31 +57,17 @@ public class MailCommand extends Email {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        String emailSubject;
-        String emailMessage;
-
-        assert index != null;
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
 
         Person personToMail = lastShownList.get(index.getZeroBased());
-        assert personToMail != null;
-        if (!isValidEmail(personToMail.getEmail().toString())) {
-            throw new CommandException("Error: The email of the recipient is invalid!");
-        }
+        errorChecking(personToMail, lastShownList);
 
         // Array of strings to store all the necessary information
         String[] information;
         // Retrieve the information through a method in the super class Email
         information = retrieveInformation();
+        setInformation(information);
 
         try {
-            username = information[0];
-            password = information[1];
-            emailSubject = information[2];
-            emailMessage = information[3];
-
             // Creates a new session with the user gmail account as the host
             Properties props = createPropertiesConfiguration();
 
@@ -87,17 +75,44 @@ public class MailCommand extends Email {
             EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
 
             // Create a new session using the authenticated credentials and the properties of
-            // the gmail host
+            // the Gmail host
             Session session = Session.getDefaultInstance(props, authenticate);
 
-            createAndSendEmail(username, emailSubject, emailMessage,
-                    personToMail.getEmail().toString(), session);
+            createAndSendEmailWithTicket(username, emailSubject, emailMessage,
+                    personToMail.getEmail().toString(), session, personToMail.getEmail().toString());
         } catch (NullPointerException ne) {
             logger.log(Level.SEVERE, "Error: retrieving information was unsuccessful!");
         }
 
         logger.log(Level.INFO, "Email sent successfully");
         return new CommandResult(MESSAGE_MAIL_PERSON_SUCCESS);
+    }
+
+    /**
+     * Sets the information retrieved from an EmailWindow
+     */
+    private static void setInformation(String[] information) {
+        username = information[0];
+        password = information[1];
+        emailSubject = information[2];
+        emailMessage = information[3];
+    }
+
+    /**
+     * Makes sure that INDEX is not null and that the email address of the
+     * guest to mail is valid
+     * @param personToMail the guest to be sent an email
+     */
+    private void errorChecking(Person personToMail, List<Person> lastShownList) throws CommandException {
+        assert index != null;
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        assert personToMail != null;
+        if (!isValidEmail(personToMail.getEmail().toString())) {
+            throw new CommandException("Error: The email of the recipient is invalid!");
+        }
     }
 
     @Override
@@ -121,9 +136,9 @@ public class MailCommand extends Email {
     }
 
     @Override
-    public void createAndSendEmail(String username, String emailSubject, String emailMessage,
-                                   String recipient, Session session) throws CommandException {
-        super.createAndSendEmail(username, emailSubject, emailMessage, recipient, session);
+    public void createAndSendEmailWithTicket(String username, String emailSubject, String emailMessage,
+                                   String recipient, Session session, String guestUniqueId) throws CommandException {
+        super.createAndSendEmailWithTicket(username, emailSubject, emailMessage, recipient, session, guestUniqueId);
     }
 
     @Override
