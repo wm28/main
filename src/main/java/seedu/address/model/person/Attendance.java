@@ -11,7 +11,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Attendance {
 
     public static final String MESSAGE_ATTENDANCE_CONSTRAINTS =
-            "Attendance should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Attendance should only contain alphanumeric characters, spaces and '.', "
+                    + "and it should not be blank."
+            + " The following words are accepted (ignoring case): \"ABSENT\", \"PRESENT\", \"N.A.\""
+            + " Any words besides these will not be accepted and a blank field will be seen.";
 
     /*
      * The first character of the address must not be a whitespace,
