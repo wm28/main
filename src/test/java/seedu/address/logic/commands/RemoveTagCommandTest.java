@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -24,6 +24,7 @@ import seedu.address.model.tag.Tag;
  * {@code RemoveTagCommand}.
  */
 public class RemoveTagCommandTest {
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private Set<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag("NORMAL"), new Tag("VIP")));
@@ -100,19 +101,19 @@ public class RemoveTagCommandTest {
         RemoveTagCommand removeTagSecondCommand = new RemoveTagCommand(tagsToRemove);
 
         // same object -> returns true
-        assertTrue(removeTagFirstCommand.equals(removeTagFirstCommand));
+        assertEquals(removeTagFirstCommand, removeTagFirstCommand);
 
         // not same values -> returns false
         RemoveTagCommand removeTagFirstCommandCopy = new RemoveTagCommand(noCommonTags);
-        assertFalse(removeTagFirstCommand.equals(removeTagFirstCommandCopy));
+        assertNotEquals(removeTagFirstCommand, removeTagFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(removeTagFirstCommand.equals(new Tag("Veg")));
+        assertNotEquals(removeTagFirstCommand, new Tag("Veg"));
 
         // null -> returns false
-        assertFalse(removeTagFirstCommand.equals(new Tag("Test")));
+        assertNotEquals(removeTagFirstCommand, new Tag("Test"));
 
         // different objects -> returns false
-        assertFalse(removeTagFirstCommand.equals(removeTagSecondCommand));
+        assertNotEquals(removeTagFirstCommand, removeTagSecondCommand);
     }
 }

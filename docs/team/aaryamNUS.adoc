@@ -1,0 +1,69 @@
+= Aaryam Srivastava - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Invités
+== Introduction
+|===
+|_The purpose of this portfolio is to document my contributions, both technical and documentation-wise, to the project Invités._
+|===
+
+Invités is a desktop application to help event managers and planners better organise and manage large events.
+Moreover, the application can mainly be controlled by a 3rd party using the Command Line Interface,
+as well as a User Interface.
+
+Invités was developed as part of team my team's Software Engineering Project, and some of its main features the ability to
+send mass emails, keep track of payments, as well as the tab keeping of attendance of the guests. To add to this, by
+using a standardised format, the application is able to take in Comma Separated Values (CSV) files and import
+data for a particular event. The team that worked with me on this project, as well as the features they implemented,
+as listed below:
+
+1. Aaryam Srivastava - Mass Emailing
+2. Sandhya Gopakumar - Events Creation
+3. Sarah Taaher Bonna - Data Filtering
+4. Tan Tze Guang - Attendance Taking
+5. Tan Wei Ming - Data Importation
+
+== Summary of contributions
+|===
+|_The purpose of this section is to list the contributions I have made to project Invités_
+|===
+
+* *Major enhancement*: added the ability to *send emails* to guests
+** What it does: allows you to either send emails to individual guests using `email`, `forceEmail`, or `emailSpecialised` or
+send mass emails to all your guests using `emailAll`
+** Justification: This feature will allow event managers to streamline their event notification process, as they can easily and quickly
+inform all of their guests at once, regarding details of the event or otherwise.
+
+* *Minor enhancement*: added a `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Other contributions*:
+** Project management:
+*** Managed releases v1.1 - v1.3 (3 releases) on GitHub
+*** Setup Travis and AppVeyor
+*** Setup auto-publishing of documentation
+*** Setup issue and milestone tracker
+** Enhancements to existing features
+*** Changed UI response for incorrect commands
+** Community
+*** PRs reviewed for all milestones
+** Tools
+*** Integrated a third party library (JavaMail API)
+
+== Contributions to the User Guide
+
+|===
+|_This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users_
+|===
+
+include::../UserGuide.adoc[tag=email]
+include::../UserGuide.adoc[tag=settingupemail]
+
+== Contributions to the Developer Guide
+
+|===
+|_This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project_
+|===
+
+include::../DeveloperGuide.adoc[tag=tags]

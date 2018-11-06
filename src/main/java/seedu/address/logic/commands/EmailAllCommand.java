@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
@@ -20,34 +19,25 @@ import seedu.address.model.person.Person;
 
 //@@author aaryamNUS
 /**
- * Sends an email to the specified person in the guest list.
+ * Sends an email to all of the guests in the specified list.
  */
 public class EmailAllCommand extends Email {
 
     public static final String COMMAND_WORD = "emailAll";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to all guests in the "
             + "current filtered list\n"
+            + "Parameters: none\n"
+            + "Please ensure you don't enter any characters after the command word!\n"
             + "Example: " + COMMAND_WORD;
 
     private static final String MESSAGE_MAIL_ALL_PERSON_SUCCESS = "Successfully sent an email to %1$d persons, "
             + "could not send an email to %2$d guests will addresses: %3$s!";
 
     private static Logger logger = Logger.getLogger("execute");
-    private static EmailAllCommand emailCommandSimpleton = null;
     private static String username;
     private static String password;
 
-    private EmailAllCommand() {}
-
-    /**
-     * Applying the Simpleton design pattern to EmailAllCommand
-     */
-    public static EmailAllCommand getInstance() {
-        if (emailCommandSimpleton == null) {
-            emailCommandSimpleton = new EmailAllCommand();
-        }
-        return emailCommandSimpleton;
-    }
+    public EmailAllCommand() {}
 
     /**
      * Sends an email to all the persons in the current filtered list
@@ -63,6 +53,11 @@ public class EmailAllCommand extends Email {
         int successfulEmails = 0;
         int failedEmails = 0;
 
+        // Array of strings to store all the necessary information
+        String[] information;
+        // Retrieve the information through a method in the super class Email
+        information = retrieveInformation();
+
         for (Person personToMail : lastShownList) {
             assert personToMail != null;
 
@@ -75,19 +70,12 @@ public class EmailAllCommand extends Email {
 
             // Retrieve all email fields and user credentials and validate that they are not null
             try {
-                // Array of strings to store all the necessary information
-                String[] information;
-
-                // Retrieve the information through a method in the super class Email
-                information = retrieveInformation();
                 emailSubject = information[2];
                 emailMessage = information[3];
                 username = information[0];
                 password = information[1];
 
-                // Verify the information exists through the method in the super class Email
-                checkFields(username, password, emailSubject, emailMessage);
-            } catch (FileNotFoundException | NoSuchElementException | ArrayIndexOutOfBoundsException e) {
+            } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e) {
                 failedEmails = lastShownList.size();
                 successfulEmails = 0;
 
@@ -126,16 +114,8 @@ public class EmailAllCommand extends Email {
     }
 
     @Override
-    public String[] retrieveInformation() throws FileNotFoundException {
+    public String[] retrieveInformation() throws CommandException {
         return super.retrieveInformation();
-    }
-
-    @Override
-    public void checkFields(String username, String password, String emailSubject,
-                            String emailMessage) throws CommandException {
-        super.checkFields(username, password, emailSubject, emailMessage);
-        logger.log(Level.INFO, "All fields from Credentials.txt and Message.txt"
-                + "received successfully");
     }
 
     /**

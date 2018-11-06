@@ -63,5 +63,5 @@ The following list highlights the main features our application provides, rangin
 ## Acknowledgements
 Some parts of this application were adapted from the sample application: https://github.com/se-edu/addressbook-level4[Address Book Level 4] by *_SE-EDU_*.
 
-#### Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5], https://mvnrepository.com/artifact/com.google.zxing/core[ZXing core]
+#### Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5], https://mvnrepository.com/artifact/com.google.zxing/core[ZXing core], https://javaee.github.io/javamail/docs/api/[JavaMail API], https://mvnrepository.com/artifact/commons-io/commons-io[Apache Commons IO]
 ### Licence : link:LICENSE[MIT]

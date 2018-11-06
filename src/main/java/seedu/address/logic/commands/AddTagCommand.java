@@ -28,8 +28,7 @@ public class AddTagCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
-
-    public static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
+    static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
 
     private static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
     private static Logger logger = Logger.getLogger("execute");
@@ -48,7 +47,7 @@ public class AddTagCommand extends Command {
         requireNonNull(model);
 
         ReadOnlyAddressBook currentAddressBookReadOnly = model.getAddressBook();
-        // Uses edited AddressBook API to make an editable AddressBook for removeTag() to work
+        // Uses edited AddressBook API to make an editable AddressBook for addTag() to work
         AddressBook currentAddressBook = new AddressBook(currentAddressBookReadOnly);
         List<Person> currentList = model.getFilteredPersonList();
 
@@ -73,7 +72,7 @@ public class AddTagCommand extends Command {
             return true;
         }
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof AddTagCommand)) {
             return false;
         }
         // state check

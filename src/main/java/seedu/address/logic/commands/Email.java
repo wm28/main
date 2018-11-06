@@ -1,10 +1,6 @@
 package seedu.address.logic.commands;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
 import java.util.Properties;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,92 +13,37 @@ import javax.mail.internet.MimeMessage;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.ui.EmailWindow;
 
 //@@author aaryamNUS
 /**
- * This abstract class is inherited by Mail, EMailAll, and ForceEmail commands,
+ * This abstract class is inherited by Mail, EmailAll, and ForceEmail commands,
  * in order to reduce code duplicity.
  */
 public abstract class Email extends Command {
 
     /**
-     * Checks whether username, password, email subject and email message are
-     * provided by the user. If any of the parameters are either null or an
-     * empty string, the respective command exception is throw.
-     * @throws CommandException whenever a field in the email of credentials is missing
-     */
-    public void checkFields(String username, String password,
-                            String emailSubject, String emailMessage) throws CommandException {
-        if (username == null || username.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_USERNAME_NOT_PROVIDED);
-        } else if (password == null || password.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
-        } else if (emailSubject == null || emailSubject.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
-        } else if (emailMessage == null || emailMessage.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
-        }
-    }
-
-    /**
-     * Reads and parses the files Credentials.txt and Message.txt to retrieve
+     * Creates a new EmailWindow controller which subsequently launches a GUI Window to retrieve
      * username, password, email message and email subject. Error handling is also performed
-     * through the try-catch block, which details with FileNotFoundExceptions as well as
+     * through the try-catch block, which details with CommandException as well as
      * General Exceptions. Once parsed, the private global variables in the MailCommand username,
-     * password, emailSubject, and emailMessage are set with the strings parsed from the .txt files
+     * password, emailSubject, and emailMessage are set with the strings received from the EmailWindow
      */
-    public String[] retrieveInformation() throws FileNotFoundException {
-        String[] information = new String[4];
+    public String[] retrieveInformation() throws CommandException {
+        String[] information;
+        EmailWindow newEmailWindow = new EmailWindow();
 
-        try {
-            File credentials = new File("src/main/resources/EmailData/Credentials.txt")
-                    .getAbsoluteFile();
-            Scanner credentialsScanner = new Scanner(credentials);
+        newEmailWindow.showAndWait();
 
-            // Retrieve the two strings in Credentials.txt
-            String unmodifiedUsername = credentialsScanner.nextLine();
-            String unmodifiedPassword = credentialsScanner.nextLine();
-
-            // Parse the strings to retrieve the username and password within quotation marks
-            information[0] = unmodifiedUsername.split("\"")[1];
-            information[1] = unmodifiedPassword.split("\"")[1];
-
-        } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException("Error: The file Credentials.txt was not found!");
-        } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
-        } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
-                    + "and email subject in Credentials.txt and Message.txt");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            File message = new File("src/main/resources/EmailData/Message.txt")
-                    .getAbsoluteFile();
-            Scanner messageScanner = new Scanner(message);
-
-            String unmodifiedSubject = messageScanner.nextLine();
-            StringBuilder unmodifiedMessage = new StringBuilder();
-
-            while (messageScanner.hasNextLine()) {
-                unmodifiedMessage.append(messageScanner.nextLine());
-                unmodifiedMessage.append("\n");
+        if (newEmailWindow.isSendButton()) {
+            information = newEmailWindow.getInformation();
+            if (!isValidEmail(information[0])) {
+                throw new CommandException(Messages.MESSAGE_INVALID_EMAIL);
             }
-
-            information[2] = unmodifiedSubject.split("\"")[1];
-            information[3] = unmodifiedMessage.toString().split("\"")[1];
-
-        } catch (FileNotFoundException fe) {
-            throw new FileNotFoundException("Error: The file Message.txt was not found!");
-        } catch (NoSuchElementException ne) {
-            throw new NoSuchElementException("Error: Please specify your credentials, email message, "
-                    + "and email subject in Credentials.txt and Message.txt");
-        } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new ArrayIndexOutOfBoundsException(Messages.MESSAGE_PARSE_ERROR_MESSAGE);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } else if (newEmailWindow.isQuitButton()) {
+            throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
+        } else {
+            throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
         }
 
         return information;
@@ -130,7 +71,7 @@ public abstract class Email extends Command {
      * fields are provided by the child classes
      */
     public void createAndSendEmail(String username, String emailSubject, String emailMessage,
-                              String recipient, Session session) throws CommandException {
+                                   String recipient, Session session) throws CommandException {
         try {
             // Creates a default MimeMessage object
             Message message = new MimeMessage(session);
@@ -147,9 +88,8 @@ public abstract class Email extends Command {
             message.setText(emailMessage);
 
             Transport.send(message);
-        } catch (MessagingException mex) {
-            throw new CommandException("Error: could not send email, please ensure you have strong "
-                    + "internet connectivity.");
+        } catch (MessagingException e) {
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
         }
     }
 
