@@ -32,6 +32,9 @@ import seedu.address.model.person.Person;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
+    public static final String TYPICAL_PERSONS_CSV = "src/test/data/data/CsvTest/typicalPersonsGuestList.csv";
+
+    public static final int NUM_PERSONS = 7;
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAttendance("PRESENT").withEmail("alice@gmail.com")
@@ -56,6 +59,15 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@gmail.com").withAttendance("PRESENT").withPayment("PENDING").build();
 
+    //Csv formatted person
+    public static final String CSV_ALICE = "Alice Pauline,94351253,alice@gmail.com,PENDING,PRESENT,VEGETARIAN,NoNuts";
+    public static final String CSV_BENSON = "Benson Meier,98765432,johnd@gmail.com,PAID,ABSENT,NORMAL,NoSeafood,GUEST";
+    public static final String CSV_CARL = "Carl Kurz,95352563,heinz@gmail.com,NOTPAID,PRESENT";
+    public static final String CSV_DANIEL = "Daniel Meier,87652533,cornelia@gmail.com,PAID,ABSENT,NORMAL,VIP";
+    public static final String CSV_ELLE = "Elle Meyer,9482224,werner@gmail.com,NOTPAID,PRESENT";
+    public static final String CSV_FIONA = "Fiona Kunz,9482427,lydia@gmail.com,PAID,ABSENT";
+    public static final String CSV_GEORGE = "George Best,9482442,anna@gmail.com,PENDING,PRESENT";
+
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@gmail.com").withAttendance("PRESENT").withPayment("NOTPAID").build();
@@ -73,16 +85,16 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
             .withPayment(VALID_PAYMENT_DANNY).build();
 
-    public static final Event typicalEvent = new EventBuilder()
+    public static final Event TYPICAL_EVENT = new EventBuilder()
             .withEventName("Graduation party").withEventDate("10/01/2019")
             .withEventVenue("Hilton").withEventStartTime("6:00 PM").build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "n/Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
 
     public static Event getTypicalEvent() {
-        return typicalEvent;
+        return TYPICAL_EVENT;
     }
 
     /**

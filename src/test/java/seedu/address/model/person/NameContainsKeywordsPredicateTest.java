@@ -44,56 +44,54 @@ public class NameContainsKeywordsPredicateTest {
         // One keyword
         NameContainsKeywordsPredicate predicate1 = new NameContainsKeywordsPredicate(
                 Collections.singletonList("n/Alice"));
-        assertTrue(predicate1.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate1.test(new PersonBuilder().withName("Alice").build()));
 
         // Multiple keywords
         predicate1 = new NameContainsKeywordsPredicate(Arrays.asList("n/Alice", "n/Bob"));
-        assertTrue(predicate1.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate1.test(new PersonBuilder().withName("Alice").build()));
+        assertTrue(predicate1.test(new PersonBuilder().withName("Bob").build()));
 
         // Only one matching keyword
         predicate1 = new NameContainsKeywordsPredicate(Arrays.asList("n/Bob", "n/Carol"));
-        assertTrue(predicate1.test(new PersonBuilder().withName("Alice Carol").build()));
+        assertTrue(predicate1.test(new PersonBuilder().withName("Bob").build()));
 
         // Mixed-case keywords
         predicate1 = new NameContainsKeywordsPredicate(Arrays.asList("n/aLIce", "n/bOB"));
-        assertTrue(predicate1.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertTrue(predicate1.test(new PersonBuilder().withName("Alice").build()));
+        assertTrue(predicate1.test(new PersonBuilder().withName("Bob").build()));
 
         //@@author Sarah
         // phone
         // One keyword
-        //        NameContainsKeywordsPredicate predicate2 = new NameContainsKeywordsPredicate(
-        //                Collections.singletonList("p/Alice"));
-        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
-        //
-        //        // Multiple keywords
-        //        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/Alice", "p/Bob"));
-        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
-        //
-        //        // Only one matching keyword
-        //        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/Bob", "p/Carol"));
-        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Carol").build()));
-        //
-        //        // Mixed-case keywords
-        //        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/aLIce", "p/bOB"));
-        //        assertTrue(predicate2.test(new PersonBuilder().withPhone("Alice Bob").build()));
-        //
-        //        // email
-        //        // One keyword
-        //        NameContainsKeywordsPredicate predicate3 = new NameContainsKeywordsPredicate(
-        //                Collections.singletonList("e/Alice"));
-        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
-        //
-        //        // Multiple keywords
-        //        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/Alice", "e/Bob"));
-        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
-        //
-        //        // Only one matching keyword
-        //        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/Bob", "e/Carol"));
-        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Carol").build()));
-        //
-        //        // Mixed-case keywords
-        //        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/aLIce", "e/bOB"));
-        //        assertTrue(predicate3.test(new PersonBuilder().withEmail("Alice Bob").build()));
+        NameContainsKeywordsPredicate predicate2 = new NameContainsKeywordsPredicate(
+                Collections.singletonList("p/85455255"));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455255").build()));
+
+        // Multiple keywords
+        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/85455255", "p/85455256"));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455255").build()));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455256").build()));
+
+        // Only one matching keyword
+        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/85455256", "p/85455257"));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455256").build()));
+
+        // email
+        // One keyword
+        NameContainsKeywordsPredicate predicate3 = new NameContainsKeywordsPredicate(
+                Collections.singletonList("e/aliceblah@gmail.com"));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
+
+        // Multiple keywords
+        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/aliceblah@gmail.com",
+                "e/bobblah@gmail.com"));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("bobblah@gmail.com").build()));
+
+        // Only one matching keyword
+        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/bobblah@gmail.com",
+                "e/carol@u.nus.edu"));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("bobblah@gmail.com").build()));
         //@@author
     }
 
@@ -102,14 +100,30 @@ public class NameContainsKeywordsPredicateTest {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("85455255").build()));
+        assertFalse(predicate.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
 
         // Non-matching keyword
         predicate = new NameContainsKeywordsPredicate(Collections.singletonList("n/Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+
+        //Wrong prefixes
+        //Payment
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("pa/PAID"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("85455255").build()));
+        assertFalse(predicate.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
+
+        //Attendance
+        predicate = new NameContainsKeywordsPredicate(Collections.singletonList("a/ABSENT"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("85455255").build()));
+        assertFalse(predicate.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
 
         // Keywords match phone, email and attendance, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@gmail.com", "PRESENT"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@gmail.com").withPayment("PENDING").withAttendance("PRESENT").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("85455255", "aliceblah@gmail.com",
+                "PAID", "ABSENT"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("85455255")
+                .withEmail("aliceblah@gmail.com").withPayment("PAID").withAttendance("ABSENT").build()));
     }
 }

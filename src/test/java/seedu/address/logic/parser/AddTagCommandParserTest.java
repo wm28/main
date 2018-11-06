@@ -13,7 +13,6 @@ import seedu.address.logic.commands.AddTagCommand;
  * any prefix, tags with only the prefix, and if no input is presented
  */
 public class AddTagCommandParserTest {
-
     private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test

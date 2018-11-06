@@ -29,8 +29,6 @@ public class CsvConverterTest {
     public static final String VALID_PAYMENT = "PAID";
     public static final String VALID_ATTENDANCE = "PRESENT";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_TAG_ADDED = "added"; //used to test whether a tag has been added to a person
-    public static final String VALID_TAG_UNUSED = "unused"; //do not use this tag when creating a person
     public static final String VALID_TAG_DIET = "NORMAL";
 
 

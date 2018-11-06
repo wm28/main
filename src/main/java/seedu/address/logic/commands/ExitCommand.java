@@ -14,6 +14,11 @@ public class ExitCommand extends Command {
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the application.\n"
+            + "Parameters: none\n"
+            + "Please ensure you don't enter any characters after the command word!\n"
+            + "Example: " + COMMAND_WORD;
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         EventsCenter.getInstance().post(new ExitAppRequestEvent());
