@@ -43,8 +43,8 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL
-        , ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL,
+                ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
     @Test
@@ -376,54 +376,79 @@ public class ContainsKeywordsPredicateTest {
         // payment
         // One keyword
         ContainsKeywordsPredicate predicate1 = new ContainsKeywordsPredicate(
-                Collections.singletonList(""));
-        assertTrue(predicate1.test(new PersonBuilder().withPayment("").build()));
+                Collections.singletonList("pa/PAID"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID").build()));
 
         // Multiple keywords
-        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/", "a/"));
-        assertTrue(predicate1.test(new PersonBuilder().withPayment("Alice").build()));
-        assertTrue(predicate1.test(new PersonBuilder().withAttendance("Bob").build()));
+        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/PAID", "a/ABSENT"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID")
+                .withAttendance("ABSENT").build()));
 
         // Only one matching keyword
-        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/", "a/"));
-        assertTrue(predicate1.test(new PersonBuilder().withName("").build()));
+        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/PAID", "p/842389749"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID").build()));
 
         // Mixed-case keywords
-        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/", "a/"));
-        assertTrue(predicate1.test(new PersonBuilder().withPayment("").build()));
-        assertTrue(predicate1.test(new PersonBuilder().withAttendance("").build()));
+        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/PaId", "a/AbSENt"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID")
+                .withAttendance("ABSENT").build()));
 
-        // phone
+        // attendance
         // One keyword
-        NameContainsKeywordsPredicate predicate2 = new NameContainsKeywordsPredicate(
-                Collections.singletonList("p/85455255"));
-        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455255").build()));
+        ContainsKeywordsPredicate predicate2 = new ContainsKeywordsPredicate(
+                Collections.singletonList("a/ABSENT"));
+        assertTrue(predicate2.test(new PersonBuilder().withAttendance("ABSENT").build()));
 
         // Multiple keywords
-        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/85455255", "p/85455256"));
-        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455255").build()));
-        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455256").build()));
+        predicate2 = new ContainsKeywordsPredicate(Arrays.asList("a/ABSENT", "pa/N.A."));
+        assertTrue(predicate2.test(new PersonBuilder().withAttendance("ABSENT")
+                .withPayment("N.A.").build()));
 
         // Only one matching keyword
-        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/85455256", "p/85455257"));
-        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455256").build()));
+        predicate2 = new ContainsKeywordsPredicate(Arrays.asList("a/ABSENT", "n/Alice"));
+        assertTrue(predicate2.test(new PersonBuilder().withAttendance("ABSENT").build()));
 
-        // email
+        // tags
         // One keyword
-        NameContainsKeywordsPredicate predicate3 = new NameContainsKeywordsPredicate(
-                Collections.singletonList("e/aliceblah@gmail.com"));
-        assertTrue(predicate3.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
+        ContainsKeywordsPredicate predicate3 = new ContainsKeywordsPredicate(
+                Collections.singletonList("t/GUEST"));
+        assertTrue(predicate3.test(new PersonBuilder().withTags("GUEST").build()));
 
         // Multiple keywords
-        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/aliceblah@gmail.com",
-                "e/bobblah@gmail.com"));
-        assertTrue(predicate3.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
-        assertTrue(predicate3.test(new PersonBuilder().withEmail("bobblah@gmail.com").build()));
+        predicate3 = new ContainsKeywordsPredicate(Arrays.asList("t/GUEST",
+                "t/NoSeafood"));
+        assertTrue(predicate3.test(new PersonBuilder().withTags("GUEST", "NoSeafood").build()));
 
         // Only one matching keyword
-        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/bobblah@gmail.com",
-                "e/carol@u.nus.edu"));
-        assertTrue(predicate3.test(new PersonBuilder().withEmail("bobblah@gmail.com").build()));
+        predicate3 = new ContainsKeywordsPredicate(Arrays.asList("t/GUEST",
+                "e/blahblahblah@gmail.com"));
+        assertTrue(predicate3.test(new PersonBuilder().withTags("GUEST").build()));
+    }
+
+    @Test
+    public void test_doesNotContainKeywords_returnsFalse() {
+        // Zero keywords
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(Collections.emptyList());
+        //assertFalse(predicate.test(new PersonBuilder().withPayment("PAID").build()));
+
+        // Non-matching keyword
+        predicate = new ContainsKeywordsPredicate(Collections.singletonList("a/N.A>"));
+        assertFalse(predicate.test(new PersonBuilder().withAttendance("N.A.").build()));
+
+        //Payment
+        predicate = new ContainsKeywordsPredicate(Collections.singletonList("pa/PAID!"));
+        assertFalse(predicate.test(new PersonBuilder().withPayment("PAID").build()));
+
+        //Attendance
+        predicate = new ContainsKeywordsPredicate(Collections.singletonList("a/NA"));
+        assertFalse(predicate.test(new PersonBuilder().withAttendance("ABSENT").build()));
+
+        // Keywords match payment, tags, but does not match attendance
+        predicate = new ContainsKeywordsPredicate(Arrays.asList("pa/PAID", "a/PRESENT"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("85455255")
+                .withEmail("aliceblah@gmail.com").withPayment("PAID").withAttendance("ABSENT").build()));
+    }
+}
 ```
 ###### \java\seedu\address\model\person\NameContainsKeywordsPredicateTest.java
 ``` java
