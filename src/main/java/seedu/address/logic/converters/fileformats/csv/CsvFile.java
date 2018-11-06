@@ -58,7 +58,7 @@ public class CsvFile implements SupportedFile {
      */
     public void writeAdaptedPersons(List<AdaptedPerson> adaptedPersons) throws IOException {
         if (FileUtil.isFileExists(fileName)) {
-            throw new FileAlreadyExistsException(String.format(MESSAGE_FILE_ALREADY_EXIST, fileName.toAbsolutePath()));
+            throw new FileAlreadyExistsException(String.format(MESSAGE_FILE_ALREADY_EXIST, fileName.getFileName()));
         }
         FileUtil.writeToFile(fileName, adaptedPersons.stream()
                 .map((adaptedPerson) -> adaptedPerson.getFormattedString())

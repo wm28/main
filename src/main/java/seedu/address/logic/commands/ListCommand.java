@@ -15,6 +15,10 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all the guests.\n"
+            + "Parameters: none\n"
+            + "Please ensure you don't enter any characters after the command word!\n"
+            + "Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

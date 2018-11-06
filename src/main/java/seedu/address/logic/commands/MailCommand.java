@@ -87,11 +87,11 @@ public class MailCommand extends Email {
             EmailPasswordAuthenticator authenticate = new EmailPasswordAuthenticator();
 
             // Create a new session using the authenticated credentials and the properties of
-            // the gmail host
+            // the Gmail host
             Session session = Session.getDefaultInstance(props, authenticate);
 
-            createAndSendEmail(username, emailSubject, emailMessage,
-                    personToMail.getEmail().toString(), session);
+            createAndSendEmailWithTicket(username, emailSubject, emailMessage,
+                    personToMail.getEmail().toString(), session, personToMail.getEmail().toString());
         } catch (NullPointerException ne) {
             logger.log(Level.SEVERE, "Error: retrieving information was unsuccessful!");
         }
@@ -121,9 +121,9 @@ public class MailCommand extends Email {
     }
 
     @Override
-    public void createAndSendEmail(String username, String emailSubject, String emailMessage,
-                                   String recipient, Session session) throws CommandException {
-        super.createAndSendEmail(username, emailSubject, emailMessage, recipient, session);
+    public void createAndSendEmailWithTicket(String username, String emailSubject, String emailMessage,
+                                   String recipient, Session session, String guestUniqueId) throws CommandException {
+        super.createAndSendEmailWithTicket(username, emailSubject, emailMessage, recipient, session, guestUniqueId);
     }
 
     @Override

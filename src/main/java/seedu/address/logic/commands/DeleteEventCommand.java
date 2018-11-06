@@ -17,6 +17,7 @@ public class DeleteEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the event in the addressbook currently.\n"
             + "Parameters: none\n"
+            + "Please ensure you don't enter any characters after the command word!\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted event details.";

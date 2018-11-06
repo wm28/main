@@ -3,10 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.converters.PersonConverter;
@@ -58,6 +60,9 @@ public class ExportCommand extends Command {
         try {
             List<AdaptedPerson> result = exportPersons(filteredList);
             supportedFile.writeAdaptedPersons(result);
+        } catch (NoSuchFileException nsfe) {
+            String errorMessage = String.format(Messages.MESSAGE_INVALID_FILE_PATH, nsfe.getMessage());
+            throw new CommandException(errorMessage, nsfe);
         } catch (IOException ioe) {
             throw new CommandException(ioe.getMessage(), ioe);
         }
@@ -80,6 +85,21 @@ public class ExportCommand extends Command {
             }
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ExportCommand)) {
+            return false;
+        }
+
+        ExportCommand otherEc = (ExportCommand) other;
+        return supportedFile.getFileName().equals(otherEc.supportedFile.getFileName())
+                && personConverter.getSupportedFileFormat().equals(otherEc.personConverter.getSupportedFileFormat());
     }
 }
 //@@author
