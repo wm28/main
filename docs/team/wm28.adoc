@@ -5,17 +5,17 @@
 
 == PROJECT: Invités
 
----
+image::Ui.png[]
 
 == Overview
 
-Invités is a desktop application that helps people to organize and plan events. It simplifies common event planning tasks such as managing a guest list, attendance taking, QR ticketing and email sending.
+Invités is a desktop application that helps people to organize and plan events. It simplifies and streamlines common event planning tasks such as managing a guest list, attendance taking, QR code ticketing and email sending.
 
-The application is designed to be primarily command-line based and it has a GUI created with JavaFX. The application is written in Java, and has about 10 kLoC.
+The application is designed to be primarily command-line based and it has a graphical user interface created with JavaFX. The application is written in Java, and has about 10 kLoC.
 
 This project is developed as part of CS2113T, Software Development, module in National University of Singapore.
 
-I am part of the team of 5 that jointly developed Invités. Here is a brief overview of the team and their roles
+I am part of the team of 5 that jointly developed Invités. Below is a brief overview of our respective roles.
 
 * http://github.com/aaryamNUS[Srivastava Aaryam]: Email communication
 * http://github.com/SandhyaGopakumar[Sandhya Gopakumar]: Events management
@@ -23,14 +23,17 @@ I am part of the team of 5 that jointly developed Invités. Here is a brief over
 * http://github.com/kronicler[Tan Tze Guang]: Attendance management
 * http://github.com/wm28[Tan Wei Ming]: Data sharing
 
-The following sections of this document summarizes my contributions to Invités.
+The following sections of this documents my contributions to Invités.
 
 == Summary of contributions
+|===
+|_This section summarizes my main contributions to the team. It showcases my ability to develop software features and work on software as a team._
+|===
 
 * *Major enhancement*: added *the ability share data by importing/exporting guests to Comma Separated Values(CSV) files*
-** What it does: Allows users to export/import guests to CSV files. For unsuccessful imports, an import report window will be generated to show the malformed data and its associated issues.
+** What it does: Allows event planners to export/import guests to CSV files. For unsuccessful imports, an import report window will be generated to show the malformed data and its associated errors.
 ** Justification: The import feature is critical to the application because it allows event planners to save time by adding guests in batches. The export feature also allows event planners to share guest data easily.
-** Highlights: This enhancement is designed to support future file formats easily. This required an in-depth analysis of design alternatives.
+** Highlights: This enhancement is designed to support future file formats easily and it required an in-depth analysis of several design alternatives.
 
 * *Minor enhancement*: added utility class to generate QR codes for ticketing
 ** Credits: https://mvnrepository.com/artifact/com.google.zxing/core[XZing Core]
