@@ -85,16 +85,16 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
             .withPayment(VALID_PAYMENT_DANNY).build();
 
-    public static final Event TYPICALEVENT = new EventBuilder()
+    public static final Event TYPICAL_EVENT = new EventBuilder()
             .withEventName("Graduation party").withEventDate("10/01/2019")
             .withEventVenue("Hilton").withEventStartTime("6:00 PM").build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "n/Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
 
     public static Event getTypicalEvent() {
-        return TYPICALEVENT;
+        return TYPICAL_EVENT;
     }
 
     /**
