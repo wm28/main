@@ -63,11 +63,7 @@ public class EmailAllCommand extends Email {
 
         // Retrieve the information through a method in the abstract super class Email
         information = retrieveInformation();
-
-        username = information[0];
-        password = information[1];
-        emailSubject = information[2];
-        emailMessage = information[3];
+        setInformation(information);
 
         // Check for duplicate emails to ensure each guest only receives one email, even if
         // multiple guests have registered under the same email
@@ -121,6 +117,16 @@ public class EmailAllCommand extends Email {
         logger.log(Level.INFO, "All emails sent successfully!");
         return new CommandResult(String.format(MESSAGE_MAIL_ALL_PERSON_SUCCESS, successfulEmails,
                 failedEmails, invalidEmails));
+    }
+
+    /**
+     * Sets the information retrieved from an EmailWindow
+     */
+    private static void setInformation(String[] information) {
+        username = information[0];
+        password = information[1];
+        emailSubject = information[2];
+        emailMessage = information[3];
     }
 
     /**
