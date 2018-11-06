@@ -70,7 +70,7 @@ public class ExportCommand extends Command {
             logger.log(Level.INFO, "File path provided is invalid");
             String errorMessage = String.format(Messages.MESSAGE_INVALID_FILE_PATH, nsfe.getMessage());
             throw new CommandException(errorMessage, nsfe);
-        } catch (FileAlreadyExistsException faee){
+        } catch (FileAlreadyExistsException faee) {
             logger.log(Level.INFO, "CSV File provided already exist", supportedFile.getFileName());
             throw new CommandException(faee.getMessage(), faee);
         } catch (IOException ioe) {
