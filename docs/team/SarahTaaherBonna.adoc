@@ -8,7 +8,9 @@
 ---
 == Overview
 
-The purpose of this portfolio is to document my role and contributions to the project.
+|===
+|_The purpose of this portfolio is to document my role and contributions to the project._
+|===
 
 Invités - An event management system. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
@@ -43,6 +45,10 @@ Team:
 5. Wei Ming - Data Importation feature
 
 == Summary of contributions
+
+|===
+|_The purpose of this section is to list the contributions I have made to Invités._
+|===
 
 * *Major enhancement*: added *the ability to filter data*
 ** What it does: allows the user to filter data based on keywords provided by user,
