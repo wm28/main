@@ -36,6 +36,8 @@ public class EmailAllCommand extends Email {
     private static Logger logger = Logger.getLogger("execute");
     private static String username;
     private static String password;
+    private static String emailSubject;
+    private static String emailMessage;
 
     public EmailAllCommand() {}
 
@@ -46,11 +48,8 @@ public class EmailAllCommand extends Email {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        String emailSubject;
-        String emailMessage;
         String recipients;
         StringBuilder recipientBuilder = new StringBuilder();
 
@@ -134,16 +133,6 @@ public class EmailAllCommand extends Email {
         return string.substring(0, string.length() - 1);
     }
 
-    @Override
-    public Properties createPropertiesConfiguration() {
-        return super.createPropertiesConfiguration();
-    }
-
-    @Override
-    public String[] retrieveInformation() throws CommandException {
-        return super.retrieveInformation();
-    }
-
     /**
      * Authenticates the user account based on the credentials provided
      */
@@ -152,6 +141,16 @@ public class EmailAllCommand extends Email {
         public PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(username, password);
         }
+    }
+
+    @Override
+    public Properties createPropertiesConfiguration() {
+        return super.createPropertiesConfiguration();
+    }
+
+    @Override
+    public String[] retrieveInformation() throws CommandException {
+        return super.retrieveInformation();
     }
 
     @Override
