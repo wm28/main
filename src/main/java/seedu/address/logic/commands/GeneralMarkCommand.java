@@ -1,26 +1,31 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 //@@author kronicler
+
 /**
  * Edits the details of an existing person in the address book.
  */
-public class MarkCommand extends GeneralMarkCommand {
+public abstract class GeneralMarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
@@ -33,24 +38,96 @@ public class MarkCommand extends GeneralMarkCommand {
             + " 91234567";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person as PRESENT: %1$s";
+    public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Marked Person as ABSENT: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
 
     private final Phone phone;
     private Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param phone of the person in the filtered person list to edit
      */
-    public MarkCommand(Phone phone) {
-        super(phone);
+    public GeneralMarkCommand(Phone phone) {
+        requireNonNull(phone);
         this.phone = phone;
-        this.editPersonDescriptor = new EditPersonDescriptor();
     }
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        return super.performAttendanceTaking(model, true);
+    /**
+     * Scans through the list and compares the phone numbers to the one that is being searched
+     * Assigns the index of the found person to the index of the command.
+     * @param lastShownList {@code CommandHistory} which the command should operate on.
+     * @throws CommandException if there are no matching persons in the list
+     */
+    public void retrieveIndex(List<Person> lastShownList) throws CommandException {
+        int x = 0;
+        boolean isNotFound = true;
+        for (Person p : lastShownList) {
+            Phone temp = p.getPhone();
+            if (phone.equals(temp)) {
+                isNotFound = false;
+                break;
+            }
+            x++;
+        }
+        if (isNotFound) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
+        index = Index.fromZeroBased(x);
+    }
+
+    /**
+     * Performs the task of attendance taking in the guest list.
+     * This method handles both marking the person as Present or Absent.
+     * @param model which the command should operate on to find the person's information
+     * @throws CommandException when there is no such person with the identifier in the list
+     */
+    public CommandResult performAttendanceTaking(Model model, boolean isMark)
+            throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        retrieveIndex(lastShownList);
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        if (isMark) {
+            editPersonDescriptor = new EditPersonDescriptor("PRESENT");
+        } else {
+            editPersonDescriptor = new EditPersonDescriptor("ABSENT");
+        }
+
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        model.updatePerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        if (isMark) {
+            return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, editedPerson));
+        }
+        return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS, editedPerson));
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    public Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = personToEdit.getName();
+        Phone updatedPhone = personToEdit.getPhone();
+        Email updatedEmail = personToEdit.getEmail();
+        //@@author
+        //@@author Sarah
+        Payment updatedPayment = personToEdit.getPayment();
+        //@@author
+        //@@author kronicler
+        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
+        Set<Tag> updatedTags = personToEdit.getTags();
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
+                updatedAttendance, updatedTags);
     }
 
     @Override
@@ -61,12 +138,12 @@ public class MarkCommand extends GeneralMarkCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof GeneralMarkCommand)) {
             return false;
         }
 
         // state check
-        MarkCommand e = (MarkCommand) other;
+        GeneralMarkCommand e = (GeneralMarkCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
@@ -87,12 +164,12 @@ public class MarkCommand extends GeneralMarkCommand {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor() {
+        public EditPersonDescriptor(String updateAttendance) {
             setName(null);
             setPhone(null);
             setEmail(null);
             setPayment(null);
-            setAttendance(new Attendance("PRESENT"));
+            setAttendance(new Attendance(updateAttendance));
             setTags(null);
         }
 
