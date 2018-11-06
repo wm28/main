@@ -50,18 +50,12 @@ public class EmailAllCommand extends Email {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        String recipients;
-        StringBuilder recipientBuilder = new StringBuilder();
-
-        // These variables are used in the command success message MESSAGE_MAIL_ALL_PERSON_SUCCESS
-        StringBuilder invalidEmails = new StringBuilder();
-        int successfulEmails = 0;
-        int failedEmails = 0;
-
         // Array of strings to store all the necessary information
         String[] information;
 
         // Retrieve the information through a method in the abstract super class Email
+        // and then set the information via the 4 variables username, password, emailSubject,
+        // and emailMessage
         information = retrieveInformation();
         setInformation(information);
 
@@ -72,6 +66,15 @@ public class EmailAllCommand extends Email {
         // Contains all the email addresses that aren't of a valid format
         HashSet<String> invalidEmailAddresses = new HashSet<>();
 
+        // These variables are used in the command success message MESSAGE_MAIL_ALL_PERSON_SUCCESS
+        StringBuilder invalidEmails = new StringBuilder();
+        int successfulEmails = 0;
+        int failedEmails = 0;
+
+        // Check for invalid or duplicate emails, and create the list of valid email addresses to send to
+        // NOTE: This part of the code was not abstracted out as it would involve the creation of a custom
+        // class object to return different type of objects, thereby increasing dependency and coupling
+        // within the code
         for (Person personToMail : lastShownList) {
             assert personToMail != null;
 
@@ -94,7 +97,7 @@ public class EmailAllCommand extends Email {
             }
         }
 
-        // Creates a new session with the user gmail account as the host
+        // Creates a new session with the user Gmail account as the host
         Properties props = createPropertiesConfiguration();
 
         // Authenticate the user credentials
@@ -104,13 +107,9 @@ public class EmailAllCommand extends Email {
         // the Gmail host
         Session session = Session.getDefaultInstance(props, authenticate);
 
-        // Create a string with all the recipients
-        for (String personToEmail : personsToSendEmail) {
-            String individualGuest = personToEmail + ",";
-            recipientBuilder.append(individualGuest);
-        }
+        // Strings to represent the recipients of the email (i.e. all the guests in the list)
+        String recipients = recipientCreator(personsToSendEmail);
 
-        recipients = removeLastChar(recipientBuilder.toString());
         createAndSendEmail(username, emailSubject, emailMessage,
                 recipients, session);
 
@@ -127,16 +126,6 @@ public class EmailAllCommand extends Email {
         password = information[1];
         emailSubject = information[2];
         emailMessage = information[3];
-    }
-
-    /**
-     * Removes the last character out of the recipients String as it contains
-     * an unwanted ',' character
-     * @param string is the original recipients string
-     * @return the substring
-     */
-    private static String removeLastChar(String string) {
-        return string.substring(0, string.length() - 1);
     }
 
     /**
@@ -157,6 +146,11 @@ public class EmailAllCommand extends Email {
     @Override
     public String[] retrieveInformation() throws CommandException {
         return super.retrieveInformation();
+    }
+
+    @Override
+    public String recipientCreator(HashSet<String> personsToSendEmail) {
+        return super.recipientCreator(personsToSendEmail);
     }
 
     @Override
