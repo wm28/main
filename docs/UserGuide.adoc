@@ -81,7 +81,7 @@ Attendance accepts "ABSENT", "PRESENT" or "N.A." +
 Payment and attendance are case-insensitive. +
 If any options other than the ones given are entered, the guest will be added if
 other fields are fine, but payment and/or attendance will be blank. +
-Format: `add_guest n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT [t/TAG]...`
+Format: `add_guest n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT pa/PAYMENT [t/TAG]...`
 
 [TIP]
 A guest can have any number of tags (including 0)
@@ -183,16 +183,15 @@ This will present you with an error in specifying the command, as all your tags 
 === Locating guests by name, phone number or email address: `find`
 
 Find guests whose names, phone numbers and/or email addresses
-contain any of the given keywords. Keywords should not have spaces or any
-special characters. +
+contain any of the given keywords. +
 Format: `find n/KEYWORD p/MORE_KEYWORDS e/MORE_KEYWORDS` +
 Example: find n/NAME p/PHONE e/EMAIL
 
 ****
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `n/hans` will match `n/Hans`
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will match `n/Bo n/Hans`
 * Only names, phone numbers and email addresses are searched, depending on prefixes given.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `n/Han` will not match `n/Hans`
 * Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
@@ -217,24 +216,24 @@ name `david` *but not* `edan`
 // tag::import[]
 === Import guests from CSV file : `import`
 
-Imports guests with data from a CSV formatted file. The structure for the values in the CSV file is predefined. +
+Imports guests with data from a specified CSV file. The structure for the guest fields in the CSV file is predefined and can be found at <<csvguestlistformat,CSV Guest List Format>>. +
+
 Format: `import FILE_PATH`
 
-[NOTE]
-====
-Guest fields, with the exception of tags, shall be enclosed in double quotation marks if it contains a comma. Tags shall not contain any commas.
-====
-
-The CSV guest entries which are badly formatted or those which corresponds to an already existing guest in the guest list, will trigger an import report window as shown in figure 1. The window will show the offending CSV guest entries with their associated error messages.
+****
+* No existing guest in the guest list will be deleted due to the import.
+* `FILE_PATH` shall only be a relative or an absolute file path.
+** Relative file path is relative to where the application Jar file is located.
+* There is no guaranteed ordering of guests after each import.
+* Importation of guests which already exist will be skipped.
+**  A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.
+* Importation of badly formatted guests will be skipped.
+* The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 1.
 
 |====
-| image:ImportReportWindow.png[] Figure 1 - ImportReportWindow
+| image:ImportReportWindow.png[] Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
 |====
-
-[NOTE]
-====
-A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.
-====
+****
 
 Examples:
 
@@ -245,13 +244,15 @@ You will populate the guest list with the data imported from the CSV file in the
 // tag::export[]
 === Exporting guests to CSV file : `export`
 
-Exports guests' data to a CSV formatted file. The structure for the values in the CSV file is predefined. +
+Exports guests' data to a specified CSV file. The structure for the guest fields in the CSV file is predefined and can be found at <<csvguestlistformat,CSV Guest List Format>>. +
+
 Format: `export FILE_PATH`
 
-[NOTE]
-====
-If no `FILE_PATH` is provided, guests will be exported using the default filename, `exportedGuestBook.csv`.
-====
+****
+* `FILE_PATH` shall only be a relative or an absolute file path.
+** Relative file path is relative to where the application Jar file is located.
+* If no `FILE_PATH` is provided, guests will be exported using the default filename, `exportedGuestBook.csv` to the current working directory (folder where the application Jar file is located).
+****
 
 Examples:
 
@@ -326,15 +327,27 @@ Format: `stop_marking`
 Filter guest list based on filter guest attributes. Only filters based on
 payment status, attendance status and tags. Keywords should not have spaces or any
 special character. +
+Values accepted for Payment Status: PAID, NOTPAID, PENDING or N.A. +
+Values accepted for Attendance Status: PRESENT, ABSENT, N.A. +
 Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
          [t/DIET] [t/GUEST_TYPE] [t/...]`
+
+****
+* The search is case-insensitive. e.g `pa/paid` will match `pa/PAID`
+* The order of the keywords does not matter. e.g. `pa/PAID a/ABSENT` will match `a/ABSENT pa/PAID`
+* Only payment staus, attendance status and tags are searched, depending on prefixes given.
+* Only full words will be matched e.g. `p/PAID` will not match `p/NOTPAID`
+* Guests matching all keywords will be returned (i.e. `AND` search). e.g. `pa/PAID t/GUEST` will return a list
+of people who have paid *and* who are guests
+****
+
 Examples:
 
 * `filter pa/NOTPAID a/PRESENT` +
 You will be shown a list with guests who have yet to pay and are present.
 
 * `filter a/Present t/Vegetarian` +
-You will be shown a list with guests who are present and have a vegetarian dietary req
+You will be shown a list with guests who are present and have a vegetarian dietary requirement.
 // end::filter[]
 
 // tag::email[]
@@ -587,6 +600,32 @@ susceptible to an increased number of spam emails from untrusted applications. H
 |===
 
 // end::settingupemail[]
+
+// tag::csvformat[]
+[[csvguestlistformat]]
+== CSV Guest List Format
+
+The `import` and `export` command will work with CSV files according to the predefined format below
+
+Format: `NAME,PHONE_NUMBER,EMAIL,PAYMENT,[TAG]`
+
+Example: sample CSV file
+****
+David Li,91031282,\lidavid@gmail.com,PENDING,ABSENT,gold,Veg,VIP +
+Irfan Ibrahim,92492021,\irfan@gmail.com,PAID,PRESENT,gold,Veg,VIP +
+Roy Balakrishnan,92624417,\royb@gmail.com,PENDING,ABSENT,gold,Veg,VIP +
+Hakeem Salgado,80000957,\80000957@gmail.com,PAID,ABSENT,gold,Veg,VIP +
+Hibah Lees,80000882,\80000882@gmail.com,PAID,ABSENT,gold,Veg,VIP +
+Jayda Hill,80000251,\80000251@gmail.com,PAID,ABSENT,gold,Veg,VIP +
+****
+
+[WARNING]
+====
+Individual guest fields shall not contain any commas.
+====
+
+// end::csvformat[]
+
 == Command Summary
 
 * `help` : ​Displays a help sheet containing useful commands.

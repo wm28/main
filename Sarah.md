@@ -1,387 +1,537 @@
 # Sarah
-###### \java\seedu\address\logic\commands\EditCommand.java
-``` java
-        public void setPayment(Payment payment) {
-            this.payment = payment;
-        }
-
-        public Optional<Payment> getPayment() {
-            return Optional.ofNullable(payment);
-        }
-
-        public void setAttendance(Attendance attendance) {
-            this.attendance = attendance;
-        }
-
-        public Optional<Attendance> getAttendance() {
-            return Optional.ofNullable(attendance);
-        }
-
-```
-###### \java\seedu\address\logic\commands\FilterCommand.java
+###### \java\seedu\address\logic\commands\FilterCommandTest.java
 ``` java
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-public class FilterCommand extends Command {
-    public static final String COMMAND_WORD = "filter";
+public class FilterCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private CommandHistory commandHistory = new CommandHistory();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags contain all of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD MORE_KEYWORDS...\n"
-            + "Example: " + COMMAND_WORD + " n/NAME p/PHONE NUMBER e/EMAIL "
-            + "pa/PAYMENT_STATUS a/ATTENDANCE_STATUS "
-            + "t/TAG...";
+    @Test
+    public void equals() {
+        ContainsKeywordsPredicate firstPredicate =
+                new ContainsKeywordsPredicate(Collections.singletonList("first"));
+        ContainsKeywordsPredicate secondPredicate =
+                new ContainsKeywordsPredicate(Collections.singletonList("second"));
 
-    private final ContainsKeywordsPredicate predicate;
+        FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
+        FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
 
-    public FilterCommand(ContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+        // same object -> returns true
+        assertTrue(filterFirstCommand.equals(filterFirstCommand));
+
+        // same values -> returns true
+        FilterCommand filterFirstCommandCopy = new FilterCommand(firstPredicate);
+        assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(filterFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(filterFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                model.getFilteredPersonList().size()));
+    @Test
+    public void execute_zeroKeywords_allPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        ContainsKeywordsPredicate predicate = preparePredicate("");
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL,
+                ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FilterCommand // instanceof handles nulls
-                && predicate.equals(((FilterCommand) other).predicate)); // state check
+    @Test
+    public void execute_multipleKeywords_oneOrMultiplePersonsFound() {
+        String expectedMessage1 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage2 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage3 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage4 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+
+        //using payment NOTPAID -> returns equal for 2 people
+        ContainsKeywordsPredicate predicate1 = preparePredicate("pa/NOTPAID");
+        FilterCommand command1 = new FilterCommand(predicate1);
+        expectedModel.updateFilteredPersonList(predicate1);
+        assertCommandSuccess(command1, model, commandHistory, expectedMessage2, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
+
+        //using payment PAID -> returns equal for 3 people
+        ContainsKeywordsPredicate predicate2 = preparePredicate("pa/PAID");
+        FilterCommand command2 = new FilterCommand(predicate2);
+        expectedModel.updateFilteredPersonList(predicate2);
+        assertCommandSuccess(command2, model, commandHistory, expectedMessage3, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL, FIONA), model.getFilteredPersonList());
+
+        //using attendance PRESENT -> returns equal for 4 people
+        ContainsKeywordsPredicate predicate3 = preparePredicate("a/PRESENT");
+        FilterCommand command3 = new FilterCommand(predicate3);
+        expectedModel.updateFilteredPersonList(predicate3);
+        assertCommandSuccess(command3, model, commandHistory, expectedMessage4, expectedModel);
+        assertEquals(Arrays.asList(ALICE, CARL, ELLE, GEORGE), model.getFilteredPersonList());
+
+        //using attendance ABSENT -> returns equal for 3 people
+        ContainsKeywordsPredicate predicate4 = preparePredicate("a/ABSENT");
+        FilterCommand command4 = new FilterCommand(predicate4);
+        expectedModel.updateFilteredPersonList(predicate4);
+        assertCommandSuccess(command4, model, commandHistory, expectedMessage3, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL, FIONA), model.getFilteredPersonList());
+
+        //using payment NOTPAID and attendance PRESENT -> returns equal for 2 people
+        ContainsKeywordsPredicate predicate5 = preparePredicate("pa/NOTPAID a/PRESENT");
+        FilterCommand command5 = new FilterCommand(predicate5);
+        expectedModel.updateFilteredPersonList(predicate5);
+        assertCommandSuccess(command5, model, commandHistory, expectedMessage2, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
+
+        //using payment PAID and attendance ABSENT -> returns equal for 3 peopel
+        ContainsKeywordsPredicate predicate6 = preparePredicate("pa/PAID a/ABSENT");
+        FilterCommand command6 = new FilterCommand(predicate6);
+        expectedModel.updateFilteredPersonList(predicate6);
+        assertCommandSuccess(command6, model, commandHistory, expectedMessage3, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL, FIONA), model.getFilteredPersonList());
+
+        //using tags NORMAL -> returns equal for 2 people
+        ContainsKeywordsPredicate predicate7 = preparePredicate("t/NORMAL");
+        FilterCommand command7 = new FilterCommand(predicate7);
+        expectedModel.updateFilteredPersonList(predicate7);
+        assertCommandSuccess(command7, model, commandHistory, expectedMessage2, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+
+        //using tags GUEST -> returns equal for 1 person
+        ContainsKeywordsPredicate predicate8 = preparePredicate("t/GUEST");
+        FilterCommand command8 = new FilterCommand(predicate8);
+        expectedModel.updateFilteredPersonList(predicate8);
+        assertCommandSuccess(command8, model, commandHistory, expectedMessage1, expectedModel);
+        assertEquals(Collections.singletonList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_noPersonsFound() {
+
+        //using payment PAID and payment NOTPAID-> returns not equal
+        ContainsKeywordsPredicate predicate1 = preparePredicate("pa/PAID pa/NOTPAID");
+        FilterCommand command1 = new FilterCommand(predicate1);
+        expectedModel.updateFilteredPersonList(predicate1);
+        assertNotEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using attendance PRESENT and attendance ABSENT-> returns not equal
+        ContainsKeywordsPredicate predicate2 = preparePredicate("a/PRESENT a/ABSENT");
+        FilterCommand command2 = new FilterCommand(predicate2);
+        expectedModel.updateFilteredPersonList(predicate2);
+        assertNotEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using tags GUEST and tags VIP-> returns not equal
+        ContainsKeywordsPredicate predicate4 = preparePredicate("t/GUEST t/VIP");
+        FilterCommand command4 = new FilterCommand(predicate4);
+        expectedModel.updateFilteredPersonList(predicate4);
+        assertNotEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+```
+###### \java\seedu\address\logic\commands\FindCommandTest.java
+``` java
+    @Test
+    public void execute_multipleKeywords_oneOrMultiplePersonsFound() {
+        String expectedMessage1 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage2 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage3 = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+
+        //using names -> returns equal
+        NameContainsKeywordsPredicate predicate1 = preparePredicate("n/Kurz n/Elle n/Kunz");
+        FindCommand command1 = new FindCommand(predicate1);
+        expectedModel.updateFilteredPersonList(predicate1);
+        assertCommandSuccess(command1, model, commandHistory, expectedMessage3, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using phone numbers -> returns equal
+        NameContainsKeywordsPredicate predicate2 = preparePredicate("p/95352563 "
+                + "p/9482224 p/9482427");
+        FindCommand command2 = new FindCommand(predicate2);
+        expectedModel.updateFilteredPersonList(predicate2);
+        assertCommandSuccess(command2, model, commandHistory, expectedMessage3, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using email addresses -> returns equal
+        NameContainsKeywordsPredicate predicate3 = preparePredicate("e/heinz@gmail.com "
+                + "e/werner@gmail.com e/lydia@gmail.com");
+        FindCommand command3 = new FindCommand(predicate3);
+        expectedModel.updateFilteredPersonList(predicate3);
+        assertCommandSuccess(command3, model, commandHistory, expectedMessage3, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using name, phone number and email address -> returns equal
+        NameContainsKeywordsPredicate predicate4 = preparePredicate("n/Kurz "
+                + "p/9482224 e/lydia@gmail.com");
+        FindCommand command4 = new FindCommand(predicate4);
+        expectedModel.updateFilteredPersonList(predicate4);
+        assertCommandSuccess(command4, model, commandHistory, expectedMessage3, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using name, phone number and attendance -> returns equal
+        NameContainsKeywordsPredicate predicate5 = preparePredicate("n/Kurz "
+                + "p/9482224 a/ABSENT");
+        FindCommand command5 = new FindCommand(predicate5);
+        expectedModel.updateFilteredPersonList(predicate5);
+        assertCommandSuccess(command5, model, commandHistory, expectedMessage2, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
+
+        //using name, phone number and payment -> returns equal
+        NameContainsKeywordsPredicate predicate6 = preparePredicate("n/Kurz "
+                + "p/9482224 pa/PAID");
+        FindCommand command6 = new FindCommand(predicate6);
+        expectedModel.updateFilteredPersonList(predicate6);
+        assertCommandSuccess(command6, model, commandHistory, expectedMessage2, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredPersonList());
+
+        //using name, payment and attendance -> returns equal
+        NameContainsKeywordsPredicate predicate7 = preparePredicate("n/Kurz "
+                + "pa/NOT PAID a/ABSENT");
+        FindCommand command7 = new FindCommand(predicate7);
+        expectedModel.updateFilteredPersonList(predicate7);
+        assertCommandSuccess(command7, model, commandHistory, expectedMessage1, expectedModel);
+        assertEquals(Collections.singletonList(CARL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_noPersonsFound() {
+
+        //using payment -> returns not equal
+        NameContainsKeywordsPredicate predicate1 = preparePredicate("pa/NOT PAID"
+                + "pa/NOT PAID pa/PAID");
+        FindCommand command1 = new FindCommand(predicate1);
+        expectedModel.updateFilteredPersonList(predicate1);
+        assertNotEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using attendance -> returns not equal
+        NameContainsKeywordsPredicate predicate2 = preparePredicate("a/PRESENT "
+                + "a/PRESENT a/ABSENT");
+        FindCommand command2 = new FindCommand(predicate2);
+        expectedModel.updateFilteredPersonList(predicate2);
+        assertNotEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        //using payment attendance status -> returns not equal
+        NameContainsKeywordsPredicate predicate4 = preparePredicate("pa/NOT PAID"
+                + "pa/NOT PAID a/ABSENT");
+        FindCommand command4 = new FindCommand(predicate4);
+        expectedModel.updateFilteredPersonList(predicate4);
+        assertNotEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+```
+###### \java\seedu\address\logic\parser\EditCommandParserTest.java
+``` java
+        // payment
+        userInput = targetIndex.getOneBased() + PAYMENT_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withPayment(VALID_PAYMENT_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // attendance
+        userInput = targetIndex.getOneBased() + ATTENDANCE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withAttendance(VALID_ATTENDANCE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+```
+###### \java\seedu\address\logic\parser\FilterCommandParserTest.java
+``` java
+public class FilterCommandParserTest {
+    private FilterCommandParser parser = new FilterCommandParser();
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgs_returnsFilterCommand() {
+        // no leading and trailing whitespaces
+        FilterCommand expectedFilterCommand =
+                new FilterCommand(new ContainsKeywordsPredicate(Arrays.asList("pa/PAID", "a/ABSENT")));
+        assertParseSuccess(parser, "pa/PAID a/ABSENT", expectedFilterCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n pa/PAID \n \t a/ABSENT  \t", expectedFilterCommand);
     }
 }
 ```
-###### \java\seedu\address\logic\commands\MarkCommand.java
+###### \java\seedu\address\logic\parser\ParserUtilTest.java
 ``` java
-        Payment updatedPayment = personToEdit.getPayment();
+    @Test
+    public void parseAttendance_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAttendance((String) null));
+    }
+
+    @Test
+    public void parseAttendance_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAttendance(INVALID_ATTENDANCE));
+    }
+
+    @Test
+    public void parseAttendance_validValueWithoutWhitespace_returnsAttendance() throws Exception {
+        Attendance expectedAttendance = new Attendance(VALID_ATTENDANCE);
+        assertEquals(expectedAttendance, ParserUtil.parseAttendance(VALID_ATTENDANCE));
+    }
+
+    @Test
+    public void parseAttendance_validValueWithWhitespace_returnsTrimmedAttendance() throws Exception {
+        String attendanceWithWhitespace = WHITESPACE + VALID_ATTENDANCE + WHITESPACE;
+        Attendance expectedAttendance = new Attendance(VALID_ATTENDANCE);
+        assertEquals(expectedAttendance, ParserUtil.parseAttendance(attendanceWithWhitespace));
+    }
 ```
-###### \java\seedu\address\logic\commands\MarkCommand.java
+###### \java\seedu\address\logic\parser\ParserUtilTest.java
 ``` java
-        public void setPayment(Payment payment) {
-            this.payment = payment;
-        }
+    @Test
+    public void parsePayment_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePayment((String) null));
+    }
 
-        public Optional<Payment> getPayment() {
-            return Optional.ofNullable(payment);
-        }
+    @Test
+    public void parsePayment_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parsePayment(INVALID_PAYMENT));
+    }
+
+    @Test
+    public void parsePayment_validValueWithoutWhitespace_returnsPayment() throws Exception {
+        Payment expectedPayment = new Payment(VALID_PAYMENT);
+        assertEquals(expectedPayment, ParserUtil.parsePayment(VALID_PAYMENT));
+    }
+
+    @Test
+    public void parsePayment_validValueWithWhitespace_returnsTrimmedPayment() throws Exception {
+        String paymentWithWhitespace = WHITESPACE + VALID_PAYMENT + WHITESPACE;
+        Payment expectedPayment = new Payment(VALID_PAYMENT);
+        assertEquals(expectedPayment, ParserUtil.parsePayment(paymentWithWhitespace));
+    }
 ```
-###### \java\seedu\address\logic\parser\AddressBookParser.java
+###### \java\seedu\address\model\person\AttendanceTest.java
 ``` java
-        case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
-```
-###### \java\seedu\address\logic\parser\CliSyntax.java
-``` java
-    public static final Prefix PREFIX_PAYMENT = new Prefix("pa/");
-    public static final Prefix PREFIX_ATTENDANCE = new Prefix("a/");
-```
-###### \java\seedu\address\logic\parser\EditCommandParser.java
-``` java
-        if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
-            editPersonDescriptor.setPayment(ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PAYMENT).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
-            editPersonDescriptor.setAttendance(ParserUtil.parseAttendance(
-                    argMultimap.getValue(PREFIX_ATTENDANCE).get()));
-        }
-```
-###### \java\seedu\address\logic\parser\FilterCommandParser.java
-``` java
-/**
- * Parses input arguments and creates a new FilterCommand object
- */
-public class FilterCommandParser implements Parser<FilterCommand> {
-    /**
-     * Parses the given {@code String} of arguments in the context of the FilterCommand
-     * and returns an FilterCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public FilterCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
+public class AttendanceTest {
 
-        String[] keywords = trimmedArgs.split("\\s+");
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Attendance(null));
+    }
 
-        ArrayList<String> checking = new ArrayList<>(Arrays.asList(keywords));
+    @Test
+    public void constructor_invalidAttendance_throwsIllegalArgumentException() {
+        String invalidAttendance = "";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Attendance(invalidAttendance));
+    }
 
-        for (int i = 0; i < checking.size(); i++) {
+    @Test
+    public void isValidAttendance() {
+        // null address
+        Assert.assertThrows(NullPointerException.class, () -> Attendance.isValidAttendance(null));
 
-            if ((checking.get(i).charAt(0) == 'n' || checking.get(i).charAt(0) == 'e'
-                    || (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == '/')
-                    || (checking.get(i).charAt(0) == 'p' && checking.get(i).charAt(1) == 'a')
-                    || checking.get(i).charAt(0) == 'a' || checking.get(i).charAt(0) == 't')
-                    && (checking.get(i).charAt(1) == '/' || checking.get(i).charAt(2) == '/')) {
+        // invalid Attendance
+        assertFalse(Attendance.isValidAttendance("")); // empty string
+        assertFalse(Attendance.isValidAttendance(" ")); // spaces only
 
-                return new FilterCommand(new ContainsKeywordsPredicate(Arrays.asList(keywords)));
-            } else {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-            }
-        }
-        return new FilterCommand(new ContainsKeywordsPredicate(Arrays.asList(keywords)));
+        // valid Attendance
+        assertTrue(Attendance.isValidAttendance("PRESENT"));
+        assertTrue(Attendance.isValidAttendance("ABSENT"));
+        assertTrue(Attendance.isValidAttendance("N.A."));
     }
 }
 ```
-###### \java\seedu\address\logic\parser\ParserUtil.java
+###### \java\seedu\address\model\person\ContainsKeywordsPredicateTest.java
 ``` java
-    /**
-     * Parses a {@code String attendance} into an {@code attendance}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Attendance parseAttendance(String attendance) throws ParseException {
-        requireNonNull(attendance);
-        String trimmedAttendance = attendance.trim();
-        if (!Attendance.isValidAttendance(trimmedAttendance)) {
-            throw new ParseException(Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
-        }
-        return new Attendance(trimmedAttendance);
+public class ContainsKeywordsPredicateTest {
+    @Test
+    public void equals() {
+        List<String> firstPredicateKeywordList = Collections.singletonList("first");
+        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+
+        ContainsKeywordsPredicate firstPredicate = new ContainsKeywordsPredicate(firstPredicateKeywordList);
+        ContainsKeywordsPredicate secondPredicate = new ContainsKeywordsPredicate(secondPredicateKeywordList);
+
+        // same object -> returns true
+        assertTrue(firstPredicate.equals(firstPredicate));
+
+        // same values -> returns true
+        ContainsKeywordsPredicate firstPredicateCopy = new ContainsKeywordsPredicate(firstPredicateKeywordList);
+        assertTrue(firstPredicate.equals(firstPredicateCopy));
+
+        // different types -> returns false
+        assertFalse(firstPredicate.equals(1));
+
+        // null -> returns false
+        assertFalse(firstPredicate.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstPredicate.equals(secondPredicate));
     }
 
-```
-###### \java\seedu\address\logic\parser\ParserUtil.java
-``` java
-    /**
-     * Parses a {@code String Payment} into an {@code Payment}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code payment} is invalid.
-     */
-    public static Payment parsePayment(String payment) throws ParseException {
-        requireNonNull(payment);
-        String trimmedPayment = payment.trim();
-        if (!Payment.isValidPayment(trimmedPayment)) {
-            throw new ParseException(Payment.MESSAGE_PAYMENT_CONSTRAINTS);
-        }
-        return new Payment(trimmedPayment);
+    @Test
+    public void test_containsKeywords_returnsTrue() {
+        // payment
+        // One keyword
+        ContainsKeywordsPredicate predicate1 = new ContainsKeywordsPredicate(
+                Collections.singletonList("pa/PAID"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID").build()));
+
+        // Multiple keywords
+        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/PAID", "a/ABSENT"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID")
+                .withAttendance("ABSENT").build()));
+
+        // Only one matching keyword
+        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/PAID", "p/842389749"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID").build()));
+
+        // Mixed-case keywords
+        predicate1 = new ContainsKeywordsPredicate(Arrays.asList("pa/PaId", "a/AbSENt"));
+        assertTrue(predicate1.test(new PersonBuilder().withPayment("PAID")
+                .withAttendance("ABSENT").build()));
+
+        // attendance
+        // One keyword
+        ContainsKeywordsPredicate predicate2 = new ContainsKeywordsPredicate(
+                Collections.singletonList("a/ABSENT"));
+        assertTrue(predicate2.test(new PersonBuilder().withAttendance("ABSENT").build()));
+
+        // Multiple keywords
+        predicate2 = new ContainsKeywordsPredicate(Arrays.asList("a/ABSENT", "pa/N.A."));
+        assertTrue(predicate2.test(new PersonBuilder().withAttendance("ABSENT")
+                .withPayment("N.A.").build()));
+
+        // Only one matching keyword
+        predicate2 = new ContainsKeywordsPredicate(Arrays.asList("a/ABSENT", "n/Alice"));
+        assertTrue(predicate2.test(new PersonBuilder().withAttendance("ABSENT").build()));
+
+        // tags
+        // One keyword
+        ContainsKeywordsPredicate predicate3 = new ContainsKeywordsPredicate(
+                Collections.singletonList("t/GUEST"));
+        assertTrue(predicate3.test(new PersonBuilder().withTags("GUEST").build()));
+
+        // Multiple keywords
+        predicate3 = new ContainsKeywordsPredicate(Arrays.asList("t/GUEST",
+                "t/NoSeafood"));
+        assertTrue(predicate3.test(new PersonBuilder().withTags("GUEST", "NoSeafood").build()));
+
+        // Only one matching keyword
+        predicate3 = new ContainsKeywordsPredicate(Arrays.asList("t/GUEST",
+                "e/blahblahblah@gmail.com"));
+        assertTrue(predicate3.test(new PersonBuilder().withTags("GUEST").build()));
     }
 
-```
-###### \java\seedu\address\model\person\ContainsKeywordsPredicate.java
-``` java
-/**
- * Tests that a {@code Person}'s {@code payment, attendance and tags etc.} matches all of the keywords given.
- */
-public class ContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
-    private final ArrayList<String> checkKeywords = new ArrayList<>();
+    @Test
+    public void test_doesNotContainKeywords_returnsFalse() {
+        // Zero keywords
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(Collections.emptyList());
+        //assertFalse(predicate.test(new PersonBuilder().withPayment("PAID").build()));
 
-    public ContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
-    }
+        // Non-matching keyword
+        predicate = new ContainsKeywordsPredicate(Collections.singletonList("a/N.A>"));
+        assertFalse(predicate.test(new PersonBuilder().withAttendance("N.A.").build()));
 
-    /**
-     *
-     * @param person containing details such as
-     *               payment status, attendance status and tags
-     * @return the details that match keywords in the person's details, as mentioned above
-     */
-    @Override
-    public boolean test(Person person) {
-        HashSet<seedu.address.model.tag.Tag> set = new HashSet<>(person.getTags());
-        String strTags = "";
+        //Payment
+        predicate = new ContainsKeywordsPredicate(Collections.singletonList("pa/PAID!"));
+        assertFalse(predicate.test(new PersonBuilder().withPayment("PAID").build()));
 
-        int j = 0;
+        //Attendance
+        predicate = new ContainsKeywordsPredicate(Collections.singletonList("a/NA"));
+        assertFalse(predicate.test(new PersonBuilder().withAttendance("ABSENT").build()));
 
-        checkKeywords.clear();
-
-        for (int i = 0; i < keywords.size(); i++) {
-            String str = keywords.get(i);
-            String[] arrStr = str.split("/");
-
-            if (arrStr[j].equals("pa")) {
-                checkKeywords.add(i, arrStr[j + 1]);
-
-                strTags += " ";
-                strTags += person.getPayment();
-            } else if (arrStr[j].equals("a")) {
-                checkKeywords.add(i, arrStr[j + 1]);
-
-                strTags += " ";
-                strTags += person.getAttendance();
-            } else if (arrStr[j].equals("t")) {
-                checkKeywords.add(i, arrStr[j + 1]);
-
-                strTags = "";
-
-                for (Tag tag : set) {
-                    strTags += " ";
-                    strTags += tag.tagName;
-                }
-            }
-
-        }
-
-        final String checkStr = strTags;
-
-        return checkKeywords.stream()
-                .allMatch(checkKeywords -> StringUtil.containsWordIgnoreCase(checkStr, checkKeywords));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((ContainsKeywordsPredicate) other).keywords)); // state check
+        // Keywords match payment, tags, but does not match attendance
+        predicate = new ContainsKeywordsPredicate(Arrays.asList("pa/PAID", "a/PRESENT"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("85455255")
+                .withEmail("aliceblah@gmail.com").withPayment("PAID").withAttendance("ABSENT").build()));
     }
 }
 ```
-###### \java\seedu\address\model\person\NameContainsKeywordsPredicate.java
+###### \java\seedu\address\model\person\NameContainsKeywordsPredicateTest.java
 ``` java
-/**
- * Tests that a {@code Person}'s {@code Name, Phone or Email} matches any of the keywords given.
- */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
-    private final ArrayList<String> checkKeywords = new ArrayList<>();
+        // phone
+        // One keyword
+        NameContainsKeywordsPredicate predicate2 = new NameContainsKeywordsPredicate(
+                Collections.singletonList("p/85455255"));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455255").build()));
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        // Multiple keywords
+        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/85455255", "p/85455256"));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455255").build()));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455256").build()));
+
+        // Only one matching keyword
+        predicate2 = new NameContainsKeywordsPredicate(Arrays.asList("p/85455256", "p/85455257"));
+        assertTrue(predicate2.test(new PersonBuilder().withPhone("85455256").build()));
+
+        // email
+        // One keyword
+        NameContainsKeywordsPredicate predicate3 = new NameContainsKeywordsPredicate(
+                Collections.singletonList("e/aliceblah@gmail.com"));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
+
+        // Multiple keywords
+        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/aliceblah@gmail.com",
+                "e/bobblah@gmail.com"));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("aliceblah@gmail.com").build()));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("bobblah@gmail.com").build()));
+
+        // Only one matching keyword
+        predicate3 = new NameContainsKeywordsPredicate(Arrays.asList("e/bobblah@gmail.com",
+                "e/carol@u.nus.edu"));
+        assertTrue(predicate3.test(new PersonBuilder().withEmail("bobblah@gmail.com").build()));
+```
+###### \java\seedu\address\model\person\PaymentTest.java
+``` java
+public class PaymentTest {
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Attendance(null));
     }
 
-    @Override
-    public boolean test(Person person) {
-        String strToCheck = "";
-
-        int j = 0;
-
-        checkKeywords.clear();
-
-        for (int i = 0; i < keywords.size(); i++) {
-            String str = keywords.get(i);
-            String[] arrStr = str.split("/");
-
-            if (arrStr[j].equals("n")) {
-                checkKeywords.add(i, arrStr[j + 1]);
-
-                strToCheck += " ";
-                strToCheck += person.getName();
-            } else if (arrStr[j].equals("p")) {
-                checkKeywords.add(i, arrStr[j + 1]);
-
-                strToCheck += " ";
-                strToCheck += person.getPhone();
-            } else if (arrStr[j].equals("e")) {
-                checkKeywords.add(i, arrStr[j + 1]);
-
-                strToCheck += " ";
-                strToCheck += person.getEmail();
-            }
-        }
-
-        final String checkStr = strToCheck;
-
-        return checkKeywords.stream()
-                .anyMatch(checkKeywords -> StringUtil.containsWordIgnoreCase(checkStr, checkKeywords));
+    @Test
+    public void constructor_invalidPayment_throwsIllegalArgumentException() {
+        String invalidPayment = "";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Payment(invalidPayment));
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
-    }
+    @Test
+    public void isValidPayment() {
+        // null address
+        Assert.assertThrows(NullPointerException.class, () -> Payment.isValidPayment(null));
 
+        // invalid Payment
+        assertFalse(Payment.isValidPayment("")); // empty string
+        assertFalse(Payment.isValidPayment(" ")); // spaces only
+        assertFalse(Payment.isValidPayment("NOT PAID")); // spaces between words
+
+        // valid Payment
+        assertTrue(Payment.isValidPayment("PAID"));
+        assertTrue(Payment.isValidPayment("NOTPAID"));
+        assertTrue(Payment.isValidPayment("PENDING"));
+        assertTrue(Payment.isValidPayment("N.A."));
+    }
 }
 ```
-###### \java\seedu\address\model\person\Payment.java
+###### \java\seedu\address\testutil\EditPersonDescriptorBuilder.java
 ``` java
-package seedu.address.model.person;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
-/**
- * Represents a Person's payment in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPayment(String)}
- */
-public class Payment {
-    public static final String MESSAGE_PAYMENT_CONSTRAINTS =
-            "Payment should only contain alphanumeric characters, spaces and . such as N.A. , "
-                    + "and it should not be blank";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String PAYMENT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s.-]*";
-
-    public final String paymentValue;
-
     /**
-     * Constructs a {@code Payment}.
-     *
-     * @param payment A valid payment.
+     * Sets the {@code Payment} of the {@code EditPersonDescriptor} that we are building.
      */
-    public Payment(String payment) {
-        requireNonNull(payment);
-        checkArgument(isValidPayment(payment), MESSAGE_PAYMENT_CONSTRAINTS);
-        paymentValue = payment;
+    public EditPersonDescriptorBuilder withPayment(String payment) {
+        descriptor.setPayment(new Payment(payment));
+        return this;
     }
 
     /**
-     * Returns true if a given string is a valid attendance.
+     * Sets the {@code Attendance} of the {@code EditPersonDescriptor} that we are building.
      */
-    public static boolean isValidPayment(String test) {
-        return test.matches(PAYMENT_VALIDATION_REGEX);
+    public EditPersonDescriptorBuilder withAttendance(String attendance) {
+        descriptor.setAttendance(new Attendance(attendance));
+        return this;
     }
-
-
-    @Override
-    public String toString() {
-        return paymentValue;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Payment // instanceof handles nulls
-                && paymentValue.equals(((Payment) other).paymentValue)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return paymentValue.hashCode();
-    }
-
-}
-```
-###### \java\seedu\address\model\person\Person.java
-``` java
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public Attendance getAttendance() {
-        return attendance;
-    }
-```
-###### \java\seedu\address\storage\XmlAdaptedPerson.java
-``` java
-        if (payment == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName()));
-        }
-        if (!Payment.isValidPayment(payment)) {
-            throw new IllegalValueException(Payment.MESSAGE_PAYMENT_CONSTRAINTS);
-        }
-        final Payment modelPayment = new Payment(payment);
-
-        if (attendance == null) {
-            throw new IllegalValueException(String
-                    .format(MISSING_FIELD_MESSAGE_FORMAT, Attendance.class.getSimpleName()));
-        }
-        if (!Attendance.isValidAttendance(attendance)) {
-            throw new IllegalValueException(Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
-        }
-        final Attendance modelAttendance = new Attendance(attendance);
 
 ```

@@ -1,19 +1,33 @@
 package seedu.address.logic.commands;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.imageio.ImageIO;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
-import seedu.address.commons.core.LogsCenter;
+import com.google.zxing.WriterException;
+
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.QrUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.ui.EmailWindow;
 
@@ -23,26 +37,7 @@ import seedu.address.ui.EmailWindow;
  * in order to reduce code duplicity.
  */
 public abstract class Email extends Command {
-    private static final Logger logger = LogsCenter.getLogger(Email.class);
-
-    /**
-     * Checks whether username, password, email subject and email message are
-     * provided by the user. If any of the parameters are either null or an
-     * empty string, the respective command exception is throw.
-     * @throws CommandException whenever a field in the email of credentials is missing
-     */
-    public void checkFields(String username, String password,
-                            String emailSubject, String emailMessage) throws CommandException {
-        if (username == null || username.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_USERNAME_NOT_PROVIDED);
-        } else if (password == null || password.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_PASSWORD_NOT_PROVIDED);
-        } else if (emailSubject == null || emailSubject.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_SUBJECT_NOT_PROVIDED);
-        } else if (emailMessage == null || emailMessage.replaceAll("\\s+", "").equals("")) {
-            throw new CommandException(Messages.MESSAGE_EMAIL_MESSAGE_NOT_PROVIDED);
-        }
-    }
+    private static Logger logger = Logger.getLogger("createAndSendEmailWithTicket");
 
     /**
      * Creates a new EmailWindow controller which subsequently launches a GUI Window to retrieve
@@ -52,13 +47,16 @@ public abstract class Email extends Command {
      * password, emailSubject, and emailMessage are set with the strings received from the EmailWindow
      */
     public String[] retrieveInformation() throws CommandException {
-        String[] information = new String[4];
+        String[] information;
         EmailWindow newEmailWindow = new EmailWindow();
 
         newEmailWindow.showAndWait();
 
         if (newEmailWindow.isSendButton()) {
             information = newEmailWindow.getInformation();
+            if (!isValidEmail(information[0])) {
+                throw new CommandException(Messages.MESSAGE_INVALID_EMAIL);
+            }
         } else if (newEmailWindow.isQuitButton()) {
             throw new CommandException(Messages.MESSAGE_NO_EMAIL_SENT_MESSAGE);
         } else {
@@ -87,10 +85,12 @@ public abstract class Email extends Command {
     /**
      * Creates the message of the email using the emailMessage and emailSubject parameters
      * provided, and sends the email using Transport.send(). Moreover, the 'to' and 'from'
-     * fields are provided by the child classes
+     * fields are provided by the child classes. Moreover, this method is only used for the EMAIL INDEX
+     * command as it attaches a QR code in the email message for the event manager to scan
      */
-    public void createAndSendEmail(String username, String emailSubject, String emailMessage,
-                                   String recipient, Session session) throws CommandException {
+    public void createAndSendEmailWithTicket(String username, String emailSubject, String emailMessage,
+                                   String recipients, Session session, String guestUniqueId)
+                                   throws CommandException {
         try {
             // Creates a default MimeMessage object
             Message message = new MimeMessage(session);
@@ -99,16 +99,82 @@ public abstract class Email extends Command {
             message.setFrom(new InternetAddress(username));
 
             // Set the email of the guest
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(recipient));
+            message.setRecipients(Message.RecipientType.BCC,
+                    InternetAddress.parse(recipients));
+
+            // Set email subject and message
+            message.setSubject(emailSubject);
+
+            // Create the message part of the Email and set the message
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(emailMessage);
+
+            // Create a multipart message to facilitate the attachment of images
+            Multipart multipart = new MimeMultipart();
+
+            // Set the message part
+            multipart.addBodyPart(messageBodyPart);
+
+            // The second body part is the QR Code
+            messageBodyPart = new MimeBodyPart();
+
+            // Generate a QR code, which represents the guest ticket
+            // QR code is generated using a guest's UID, hence it is ensured to be unique
+            QrUtil getGuestTicket = new QrUtil();
+            BufferedImage ticket = getGuestTicket.generateQr(guestUniqueId);
+
+            // Create a temporary image file to store the BufferedImage and for it to be
+            // read by DataSource()
+            File file = new File("temp.png");
+            ImageIO.write(ticket, "png", file);
+            DataSource source = new FileDataSource(file);
+
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName("Your Ticket");
+            multipart.addBodyPart(messageBodyPart);
+
+            message.setContent(multipart);
+
+            // Send the email
+            Transport.send(message);
+
+            // Delete the image file once the email has been sent
+            file.delete();
+        } catch (MessagingException e) {
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
+        } catch (WriterException e) {
+            logger.log(Level.SEVERE, "Error: exception when retrieving QRCode BufferedImage!");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Error: exception when writing the BufferedImage!");
+        }
+    }
+
+    /**
+     * Creates the message of the email using the emailMessage and emailSubject parameters
+     * provided, and sends the email using Transport.send(). Moreover, the 'to' and 'from'
+     * fields are provided by the child classes. This method is used by the EmailALL and
+     * EmailSpecific commands
+     */
+    public void createAndSendEmail(String username, String emailSubject, String emailMessage,
+                                             String recipients, Session session) throws CommandException {
+        try {
+            // Creates a default MimeMessage object
+            Message message = new MimeMessage(session);
+
+            // Set the email of the host
+            message.setFrom(new InternetAddress(username));
+
+            // Set the email of the guest
+            message.setRecipients(Message.RecipientType.BCC,
+                    InternetAddress.parse(recipients));
 
             // Set email subject and message
             message.setSubject(emailSubject);
             message.setText(emailMessage);
 
             Transport.send(message);
-        } catch (MessagingException mex) {
-            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION);
+        } catch (MessagingException e) {
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
         }
     }
 
