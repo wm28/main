@@ -18,6 +18,9 @@ import seedu.address.testutil.TypicalPersons;
 //@@author kronicler
 public class MarkCommandTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private CommandHistory commandHistory = new CommandHistory();
     public final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     public final Model modelNoPersons = new ModelManager();
@@ -25,9 +28,6 @@ public class MarkCommandTest {
     public final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
     public final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
     public final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() {
