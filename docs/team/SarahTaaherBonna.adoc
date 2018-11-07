@@ -57,17 +57,17 @@ status and tags*
 ** Justification: This feature improves the product significantly because a user can find people who have yet to pay or are absent on the day of the event.
                   This will help users to be able to find people that fit the conditions they are looking for, without having to traverse the list manually.
 
-* *Minor enhancement*: modified find command
-** What it does: allows the user to find guests with the name(s), phone number(s) and/or email address(es),
-depending on the prefix used.
-** Justification: This modified feature improves the product because a user can find a group of people, using their
- name(s), phone number(s) and/or email address(es) at one go, instead of doing it one-by-one. As such,
- the user is able to find the necessary guests using any available contact details, not just the name.
-
 * *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sarahtaaherbonna
 
-* *Other contributions*: Created Payment and Attendance attributes of a person.
+* *Other contributions*:  +
+1. Created Payment and Attendance attributes of a person.
 Ensured that these attributes can only accept certain values.
+
+2. Modified find command which allows the user to find guests with the name(s),
+phone number(s) and/or email address(es), depending on the prefix used.
+This modified feature improves the product because a user can find a group of people, using their
+name(s), phone number(s) and/or email address(es) at one go, instead of doing it one-by-one. As such,
+the user is able to find the necessary guests using any available contact details, not just the name.
 
 ** Enhancements to existing features:
 *** Wrote additional tests for existing and new features to increase coverage (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/273, https://github.com/CS2113-AY1819S1-F09-3/main/pull/266)
