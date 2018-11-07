@@ -28,7 +28,7 @@ public class MarkCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
+
     @Before
     public void setUp() {
         modelLimited.addPerson(TypicalPersons.ALICE);
