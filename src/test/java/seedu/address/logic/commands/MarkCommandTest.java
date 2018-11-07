@@ -18,10 +18,10 @@ import seedu.address.testutil.TypicalPersons;
 //@@author kronicler
 public class MarkCommandTest {
 
+    private CommandHistory commandHistory = new CommandHistory();
     public final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     public final Model modelNoPersons = new ModelManager();
     public final Model modelLimited = new ModelManager();
-    private CommandHistory commandHistory = new CommandHistory();
     public final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
     public final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
     public final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
