@@ -21,18 +21,18 @@ public class MarkCommandTest {
     public final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     public final Model modelNoPersons = new ModelManager();
     public final Model modelLimited = new ModelManager();
-    public CommandHistory commandHistory = new CommandHistory();
+    private CommandHistory commandHistory = new CommandHistory();
     public final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
     public final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
     public final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    
     @Before
     public void setUp() {
         modelLimited.addPerson(TypicalPersons.ALICE);
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -44,14 +44,14 @@ public class MarkCommandTest {
     public void execute_noPersonInGuestList_throwCommandException() throws CommandException {
         MarkCommand markCommand = new MarkCommand(alicePhoneNumber);
         thrown.expect(CommandException.class);
-        markCommand.execute(modelNoPersons,commandHistory);
+        markCommand.execute(modelNoPersons, commandHistory);
     }
 
     @Test
     public void execute_filteredGuestListWithoutThePhoneNumber_throwCommandException() throws CommandException {
         MarkCommand markCommand = new MarkCommand(bensonPhoneNumber);
         thrown.expect(CommandException.class);
-        markCommand.execute(modelLimited,commandHistory);
+        markCommand.execute(modelLimited, commandHistory);
     }
 
     @Test
@@ -65,14 +65,14 @@ public class MarkCommandTest {
     @Test
     public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
         MarkCommand markCommand = new MarkCommand(bensonPhoneNumber);
-        markCommand.execute(model,commandHistory);
+        markCommand.execute(model, commandHistory);
     }
 
     @Test
     public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         MarkCommand markCommand = new MarkCommand(invalidPhoneNumber);
-        markCommand.execute(model,commandHistory);
+        markCommand.execute(model, commandHistory);
     }
 
 }

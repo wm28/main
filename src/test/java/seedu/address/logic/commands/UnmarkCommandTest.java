@@ -21,7 +21,7 @@ public class UnmarkCommandTest {
     public final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     public final Model modelNoPersons = new ModelManager();
     public final Model modelLimited = new ModelManager();
-    public CommandHistory commandHistory = new CommandHistory();
+    private CommandHistory commandHistory = new CommandHistory();
     public final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
     public final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
     public final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
@@ -60,14 +60,14 @@ public class UnmarkCommandTest {
     @Test
     public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
         UnmarkCommand unmarkCommand = new UnmarkCommand(bensonPhoneNumber);
-        unmarkCommand.execute(model,commandHistory);
+        unmarkCommand.execute(model, commandHistory);
     }
 
     @Test
     public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         UnmarkCommand unmarkCommand = new UnmarkCommand(invalidPhoneNumber);
-        unmarkCommand.execute(model,commandHistory);
+        unmarkCommand.execute(model, commandHistory);
     }
 
 }
