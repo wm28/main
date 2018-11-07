@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.testutil.TypicalPersons;
 
 //@@author kronicler
@@ -25,9 +26,9 @@ public class UnmarkCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model modelNoPersons = new ModelManager();
     private final Model modelLimited = new ModelManager();
-    private final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
-    private final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
-    private final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
+    private final Uid aliceUid = TypicalPersons.ALICE_UID;
+    private final Uid bensonUid = TypicalPersons.BENSON_UID;
+    private final Uid invalidUid = TypicalPersons.INVALID_UID;
 
     @Before
     public void setUp() {
@@ -59,14 +60,14 @@ public class UnmarkCommandTest {
 
     @Test
     public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
-        UnmarkCommand unmarkCommand = new UnmarkCommand(bensonPhoneNumber);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(bensonUid);
         unmarkCommand.execute(model, commandHistory);
     }
 
     @Test
     public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
-        UnmarkCommand unmarkCommand = new UnmarkCommand(invalidPhoneNumber);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(invalidUid);
         unmarkCommand.execute(model, commandHistory);
     }
 

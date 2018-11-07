@@ -13,9 +13,9 @@ public class Uid {
             "Id should only contain numeric characters, it can be left blank";
 
     /*
-     * Ensures that only a string of numeric characters are accepted
+     * Ensures that only a string of numeric characters are accepted and they are 5 characters long
      */
-    public static final String UID_VALIDATION_REGEX = "[\\p{Digit}]*";
+    public static final String UID_VALIDATION_REGEX = "\\d{5,6}";
 
     public final String uidValue;
 

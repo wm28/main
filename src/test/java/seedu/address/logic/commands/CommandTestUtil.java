@@ -41,6 +41,9 @@ public class CommandTestUtil {
     public static final String VALID_ATTENDANCE_AMY = "PRESENT";
     public static final String VALID_ATTENDANCE_BOB = "ABSENT";
     public static final String VALID_ATTENDANCE_DANNY = "PRESENT";
+    public static final String VALID_UID_AMY = "00001";
+    public static final String VALID_UID_BOB = "00002";
+    public static final String VALID_UID_DANNY = "00003";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_ADDED = "added"; //used to test whether a tag has been added to a person

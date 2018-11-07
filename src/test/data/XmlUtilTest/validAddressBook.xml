@@ -6,6 +6,7 @@
         <email isPrivate="false">hans@gmail.com</email>
         <payment isPrivate="false">NOTPAID</payment>
         <attendance isPrivate="false">PRESENT</attendance>
+        <uid isPrivate="false">00001</uid>
     </persons>
     <persons>
         <name>Ruth Mueller</name>
@@ -13,6 +14,7 @@
         <email isPrivate="false">ruth@gmail.com</email>
         <payment isPrivate="false">PAID</payment>
         <attendance isPrivate="false">ABSENT</attendance>
+        <uid isPrivate="false">00002</uid>
     </persons>
     <persons>
         <name>Heinz Kurz</name>
@@ -20,6 +22,7 @@
         <email isPrivate="false">heinz@gmail.com</email>
         <payment isPrivate="false">PENDING</payment>
         <attendance isPrivate="false">PRESENT</attendance>
+        <uid isPrivate="false">00003</uid>
     </persons>
     <persons>
         <name>Cornelia Meier</name>
@@ -27,6 +30,7 @@
         <email isPrivate="false">cornelia@gmail.com</email>
         <payment isPrivate="false">PENDING</payment>
         <attendance isPrivate="false">ABSENT</attendance>
+        <uid isPrivate="false">00004</uid>
     </persons>
     <persons>
         <name>Werner Meyer</name>
@@ -34,6 +38,7 @@
         <email isPrivate="false">werner@gmail.com</email>
         <payment isPrivate="false">PAID</payment>
         <attendance isPrivate="false">PRESENT</attendance>
+        <uid isPrivate="false">00005</uid>
     </persons>
     <persons>
         <name>Lydia Kunz</name>
@@ -41,6 +46,7 @@
         <email isPrivate="false">lydia@gmail.com</email>
         <payment isPrivate="false">NOTPAID</payment>
         <attendance isPrivate="false">ABSENT</attendance>
+        <uid isPrivate="false">00006</uid>
     </persons>
     <persons>
         <name>Anna Best</name>
@@ -48,6 +54,7 @@
         <email isPrivate="false">anna@gmail.com</email>
         <payment isPrivate="false">NOTPAID</payment>
         <attendance isPrivate="false">PRESENT</attendance>
+        <uid isPrivate="false">00007</uid>
     </persons>
     <persons>
         <name>Stefan Meier</name>
@@ -55,6 +62,7 @@
         <email isPrivate="false">stefan@gmail.com</email>
         <payment isPrivate="false">PAID</payment>
         <attendance isPrivate="false">ABSENT</attendance>
+        <uid isPrivate="false">00008</uid>
     </persons>
     <persons>
         <name>Martin Mueller</name>
@@ -62,6 +70,7 @@
         <email isPrivate="false">hans@gmail.com</email>
         <payment isPrivate="false">PENDING</payment>
         <attendance isPrivate="false">PRESENT</attendance>
+        <uid isPrivate="false">00009</uid>
     </persons>
     <event>
         <name>Wedding</name>

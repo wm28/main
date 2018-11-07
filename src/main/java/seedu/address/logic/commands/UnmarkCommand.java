@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 //@@author kronicler
@@ -25,7 +26,7 @@ public class UnmarkCommand extends GeneralMarkCommand {
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as absent "
-            + "using their unique phone number. "
+            + "using their unique UID. "
             + "This will also change the attendance associated with the person to Absent.\n"
             + "Parameters: "
             + "[PHONE] "
@@ -33,18 +34,18 @@ public class UnmarkCommand extends GeneralMarkCommand {
             + " 91234567 ";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked person as ABSENT: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
+    public static final String MESSAGE_NOT_EDITED = "UID not found in the address book";
 
-    private final Phone phone;
+    private final Uid uid;
     private Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param phone of the person in the filtered person list to edit
+     * @param uid of the person in the filtered person list to edit
      */
-    public UnmarkCommand(Phone phone) {
-        super(phone);
-        this.phone = phone;
+    public UnmarkCommand(Uid uid) {
+        super(uid);
+        this.uid = uid;
         this.editPersonDescriptor = new EditPersonDescriptor();
     }
 
@@ -80,6 +81,7 @@ public class UnmarkCommand extends GeneralMarkCommand {
         private Email email;
         private Payment payment;
         private Attendance attendance;
+        private Uid uid;
         private Set<Tag> tags;
 
         /**
@@ -92,6 +94,7 @@ public class UnmarkCommand extends GeneralMarkCommand {
             setEmail(null);
             setPayment(null);
             setAttendance(new Attendance("ABSENT"));
+            setUid(null);
             setTags(null);
         }
 
@@ -135,6 +138,10 @@ public class UnmarkCommand extends GeneralMarkCommand {
             return Optional.ofNullable(attendance);
         }
 
+        public void setUid(Uid uid) { this.uid = uid; }
+
+        public Optional<Uid> getUid() { return Optional.ofNullable(uid); }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -172,6 +179,7 @@ public class UnmarkCommand extends GeneralMarkCommand {
                     && getEmail().equals(e.getEmail())
                     && getPayment().equals(e.getPayment())
                     && getAttendance().equals(e.getAttendance())
+                    && getUid().equals(e.getUid())
                     && getTags().equals(e.getTags());
         }
     }

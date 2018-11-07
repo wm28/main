@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -27,6 +28,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_PAYMENT + "PAYMENT] "
             + "[" + PREFIX_ATTENDANCE + "ATTENDANCE] "
+            + "[" + PREFIX_UID + "UID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -103,10 +106,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Payment updatedPayment = editPersonDescriptor.getPayment().orElse(personToEdit.getPayment());
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
+        Uid updatedUid = editPersonDescriptor.getUid().orElse(personToEdit.getUid());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
-                updatedAttendance, updatedTags);
+                updatedAttendance, updatedUid, updatedTags);
     }
 
     @Override
@@ -137,6 +141,7 @@ public class EditCommand extends Command {
         private Email email;
         private Payment payment;
         private Attendance attendance;
+        private Uid uid;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -151,6 +156,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setPayment(toCopy.payment);
             setAttendance(toCopy.attendance);
+            setUid(toCopy.uid);
             setTags(toCopy.tags);
         }
 
@@ -159,7 +165,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, payment,
-                    attendance, tags);
+                    attendance, uid, tags);
         }
 
         public void setName(Name name) {
@@ -204,6 +210,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setUid(Uid uid) {
+            this.uid = uid;
+        }
+
+        public Optional<Uid> getUid() {
+            return Optional.ofNullable(uid);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -242,6 +255,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getPayment().equals(e.getPayment())
                     && getAttendance().equals(e.getAttendance())
+                    && getUid().equals(e.getUid())
                     && getTags().equals(e.getTags());
         }
     }
