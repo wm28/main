@@ -22,12 +22,12 @@ public class MarkCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
-    public final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    public final Model modelNoPersons = new ModelManager();
-    public final Model modelLimited = new ModelManager();
-    public final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
-    public final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
-    public final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model modelNoPersons = new ModelManager();
+    private final Model modelLimited = new ModelManager();
+    private final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
+    private final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
+    private final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
 
     @Before
     public void setUp() {
