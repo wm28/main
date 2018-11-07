@@ -75,7 +75,8 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
                 && getEventDate().equals(event.getDate())
                 && getEventVenue().equals(event.getVenue())
                 && getEventStartTime().equals(event.getStartTime())
-                && ImmutableMultiset.copyOf(getEventTags()).equals(ImmutableMultiset.copyOf(event.getEventTags().stream()
+                && ImmutableMultiset.copyOf(getEventTags())
+                .equals(ImmutableMultiset.copyOf(event.getEventTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));
     }
