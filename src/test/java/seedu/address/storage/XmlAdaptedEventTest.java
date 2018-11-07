@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.XmlAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalPersons.typicalEvent;
+import static seedu.address.testutil.TypicalPersons.TYPICAL_EVENT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +24,18 @@ public class XmlAdaptedEventTest {
     private static final String INVALID_EVENT_STARTTIME = "00:00";
     private static final String INVALID_EVENT_TAG = "#Casual";
 
-    private static final String VALID_EVENT_NAME = typicalEvent.getName();
-    private static final String VALID_EVENT_DATE = typicalEvent.getDate();
-    private static final String VALID_EVENT_VENUE = typicalEvent.getVenue();
-    private static final String VALID_EVENT_STARTTIME = typicalEvent.getStartTime();
-    private static final List<XmlAdaptedTag> VALID_EVENT_TAGS = typicalEvent.getEventTags().stream()
+    private static final String VALID_EVENT_NAME = TYPICAL_EVENT.getName();
+    private static final String VALID_EVENT_DATE = TYPICAL_EVENT.getDate();
+    private static final String VALID_EVENT_VENUE = TYPICAL_EVENT.getVenue();
+    private static final String VALID_EVENT_STARTTIME = TYPICAL_EVENT.getStartTime();
+    private static final List<XmlAdaptedTag> VALID_EVENT_TAGS = TYPICAL_EVENT.getEventTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
-        XmlAdaptedEvent event = new XmlAdaptedEvent(typicalEvent);
-        assertEquals(typicalEvent, event.toModelType());
+        XmlAdaptedEvent event = new XmlAdaptedEvent(TYPICAL_EVENT);
+        assertEquals(TYPICAL_EVENT, event.toModelType());
     }
 
     @Test
