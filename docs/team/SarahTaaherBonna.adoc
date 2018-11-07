@@ -16,8 +16,8 @@ Invités - An event management system. The user interacts with it using a CLI, a
 
 Responsibility - My task was to handle data filtration. I split this task into two. First, I created a Filter command
 to handle data filtration for the payment status, attendance status and the tags, as these fields
-were not unique to any person. Next, I modified the existing Find command to handle names,
-phone numbers and email addresses, as these were unique fields, and the user may want to find a few
+are not unique to any person. Next, I modified the existing Find command to handle names,
+phone numbers and email addresses, as these are unique fields, and the user may want to find a few
 guests at one go. Rather than use the Filter command, which would yield results one-by-one,
 the Find command allows the user to find a few guests at the same time.
 
@@ -50,22 +50,24 @@ Team:
 |_The purpose of this section is to list the contributions I have made to Invités._
 |===
 
-* *Major enhancement*: added *the ability to filter data*
+* *Major enhancement*: added *the ability to filter data according to payment status, attendance
+status and tags*
 ** What it does: allows the user to filter data based on keywords provided by user,
-                 such as payment status, attendance status and/or tags.
+                 such as payment status, attendance status and/or tags, depending on the prefix used.
 ** Justification: This feature improves the product significantly because a user can find people who have yet to pay or are absent on the day of the event.
                   This will help users to be able to find people that fit the conditions they are looking for, without having to traverse the list manually.
 
-* *Minor enhancement*: modified find command that allows the user to find guests with the name(s), phone number(s) and/or email address(es).
-
-** Justification: This modified feature improves the product because a user can find a group of people, using their
- name(s), phone number(s) and/or email address(es) at one go, instead of doing it one-by-one. As such,
- the user is able to find the necessary guests using any available contact details, not just the name.
-
 * *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sarahtaaherbonna
 
-* *Other contributions*: Created Payment and Attendance attributes of a person.
+* *Other contributions*:  +
+1. Created Payment and Attendance attributes of a person.
 Ensured that these attributes can only accept certain values.
+
+2. Modified find command which allows the user to find guests with the name(s),
+phone number(s) and/or email address(es), depending on the prefix used.
+This modified feature improves the product because a user can find a group of people, using their
+name(s), phone number(s) and/or email address(es) at one go, instead of doing it one-by-one. As such,
+the user is able to find the necessary guests using any available contact details, not just the name.
 
 ** Enhancements to existing features:
 *** Wrote additional tests for existing and new features to increase coverage (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/273, https://github.com/CS2113-AY1819S1-F09-3/main/pull/266)
