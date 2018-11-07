@@ -105,7 +105,7 @@ public class RemoveTagCommandTest {
 
         // not same values -> returns false
         RemoveTagCommand removeTagFirstCommandCopy = new RemoveTagCommand(noCommonTags);
-        assertNotEquals(removeTagFirstCommand, removeTagFirstCommandCopy);
+        assertEquals(removeTagFirstCommand, removeTagFirstCommandCopy);
 
         // different types -> returns false
         assertNotEquals(removeTagFirstCommand, new Tag("Veg"));

@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_FILE_NOT_FOUND;
 
@@ -9,35 +8,29 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.function.Predicate;
 
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.converters.PersonConverter;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
-import seedu.address.logic.converters.exceptions.PersonEncodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
-import seedu.address.logic.converters.fileformats.SupportedFile;
-import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.logic.converters.fileformats.csv.CsvAdaptedPerson;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.stubs.CsvConverterStub;
+import seedu.address.testutil.stubs.CsvFileStub;
+import seedu.address.testutil.stubs.ModelStubAcceptingPersonAdded;
+import seedu.address.testutil.stubs.PersonConverterStub;
+import seedu.address.testutil.stubs.SupportedFileStub;
 
 public class ImportCommandTest {
 
     private static final String VALID_CSV_FILENAME = "valid.csv";
-    private static final String INVALID_CSV_FILENAME = "valid.csv";
+    private static final String INVALID_CSV_FILENAME = "invalid.csv";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -92,47 +85,6 @@ public class ImportCommandTest {
     }
 
     /**
-     * A default SupportedFile stub that have all of the methods failing.
-     */
-    private class SupportedFileStub implements SupportedFile {
-        @Override
-        public List<AdaptedPerson> readAdaptedPersons() throws IOException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void writeAdaptedPersons(List<AdaptedPerson> adaptedPersons) throws IOException {
-            throw new AssertionError("This method should not be called.");
-
-        }
-
-        @Override
-        public SupportedFileFormat getSupportedFileFormat() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public String getFileName() {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A CsvFile stub, an implementation of SupportedFile in the CSV format
-     */
-    private class CsvFileStub extends SupportedFileStub {
-        @Override
-        public SupportedFileFormat getSupportedFileFormat() {
-            return SupportedFileFormat.CSV;
-        }
-
-        @Override
-        public String getFileName() {
-            return VALID_CSV_FILENAME;
-        }
-    }
-
-    /**
      * A CsvFile stub that have an invalid/non-existent file
      */
     private class CsvFileWithInvalidFile extends CsvFileStub {
@@ -148,7 +100,7 @@ public class ImportCommandTest {
     }
 
     /**
-     * A CsvFile stub that replicates persons from TypicalPersons
+     * A CsvFile stub that replicates reading from a file containing persons from TypicalPersons
      */
     private class CsvFileStubWithTypicalPersons extends CsvFileStub {
         @Override
@@ -164,52 +116,20 @@ public class ImportCommandTest {
             return persons;
         }
 
-    }
-
-
-    /**
-     * A default PersonConverter stub that have all of the methods failing.
-     */
-    private class PersonConverterStub implements PersonConverter {
         @Override
-        public AdaptedPerson encodePerson(Person person) throws PersonEncodingException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Person decodePerson(AdaptedPerson person) throws PersonDecodingException {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public SupportedFileFormat getSupportedFileFormat() {
-            throw new AssertionError("This method should not be called.");
+        public String getFileName() {
+            return VALID_CSV_FILENAME;
         }
     }
 
-    /**
-     * A CsvConverter stub, an implementation of PersonConverter in the CSV format
-     */
-    private class CsvConverterStub extends PersonConverterStub {
-        @Override
-        public SupportedFileFormat getSupportedFileFormat() {
-            return SupportedFileFormat.CSV;
-        }
-
-    }
 
     /**
      * A CsvConverter stub that always fails to decode
      */
-    private class CsvConverterAlwaysFailingConversion extends PersonConverterStub {
+    private class CsvConverterAlwaysFailingConversion extends CsvConverterStub {
         @Override
         public Person decodePerson(AdaptedPerson person) throws PersonDecodingException {
             throw new PersonDecodingException("Person fails to decode");
-        }
-
-        @Override
-        public SupportedFileFormat getSupportedFileFormat() {
-            return SupportedFileFormat.CSV;
         }
     }
 
@@ -217,7 +137,7 @@ public class ImportCommandTest {
      * A CsvConverter stub that always successfully decodes. Persons are based on TypicalPersons list for
      * simplicity.
      */
-    private class CsvConverterAlwaysSuccessfulConversion extends PersonConverterStub {
+    private class CsvConverterAlwaysSuccessfulConversion extends CsvConverterStub {
         private Queue<Person> personList = new LinkedList<>(TypicalPersons.getTypicalPersons());
 
         @Override
@@ -229,146 +149,6 @@ public class ImportCommandTest {
             } else {
                 throw new PersonDecodingException("No one left");
             }
-        }
-
-        @Override
-        public SupportedFileFormat getSupportedFileFormat() {
-            return SupportedFileFormat.CSV;
-        }
-
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void resetData(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasEvent() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteEvent() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateEvent(Event editedEvent) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteTag(Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addTag(Tag tag) {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Event getEventDetails() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canUndoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canRedoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void undoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void redoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public void commitAddressBook() {
-            // called by {@code AddCommand#execute()}
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
         }
     }
 }

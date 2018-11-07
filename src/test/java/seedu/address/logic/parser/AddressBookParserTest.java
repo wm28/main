@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -74,15 +73,15 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_removeTag_failure() throws Exception {
+    public void parseCommand_removeTag_success() throws Exception {
         RemoveTagCommand command = (RemoveTagCommand) parser.parseCommand(
                 RemoveTagCommand.COMMAND_WORD + " " + PREFIX_TAG + "Gold " + PREFIX_TAG + "Halal");
-        assertNotEquals(new RemoveTagCommand(new HashSet<>(Arrays.asList(new Tag("Gold"),
+        assertEquals(new RemoveTagCommand(new HashSet<>(Arrays.asList(new Tag("Gold"),
                 new Tag("Halal")))), command);
     }
 
     @Test
-    public void parseCommand_addTag() throws Exception {
+    public void parseCommand_addTag_success() throws Exception {
         AddTagCommand command = (AddTagCommand) parser.parseCommand(
                 AddTagCommand.COMMAND_WORD + " " + PREFIX_TAG + "Veg " + PREFIX_TAG + "Silver");
         assertEquals(new AddTagCommand(new HashSet<>(Arrays.asList(new Tag("Veg"),

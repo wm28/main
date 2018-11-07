@@ -29,4 +29,7 @@ public class Messages {
                                                              + "email, either your "
                                                              + "internet connection is not strong or the "
                                                              + "credentials provided are invalid!";
+    public static final String MESSAGE_NO_PERSONS_WITH_TAGS = "Error: no guests in the current list have the "
+                                                             + "specified tags!";
+
 }

@@ -17,8 +17,8 @@ import javafx.scene.paint.Color;
  */
 public class QrUtil {
 
-    public static final int MAX_DATA_SIZE = 100;
-    public static final int QR_SIZE = 256;
+    private static final int MAX_DATA_SIZE = 100;
+    private static final int QR_SIZE = 256;
 
     /**
      * Generates a QR code based on the input string.
@@ -27,7 +27,7 @@ public class QrUtil {
      * @throws WriterException if length of {@code data} is greater than MAX_DATA_SIZE or when {@code data} fails to
      * encode
      */
-    public static BufferedImage generateQr(String data) throws WriterException {
+    public BufferedImage generateQr(String data) throws WriterException {
         if (data.length() > MAX_DATA_SIZE) {
             throw new WriterException("Data size too large");
         }

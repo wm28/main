@@ -1,17 +1,34 @@
 package seedu.address.logic.commands;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.imageio.ImageIO;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+import com.google.zxing.WriterException;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.QrUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.ui.EmailWindow;
 
@@ -21,6 +38,10 @@ import seedu.address.ui.EmailWindow;
  * in order to reduce code duplicity.
  */
 public abstract class Email extends Command {
+    private static Logger logger = Logger.getLogger("createAndSendEmailWithTicket");
+    private File qrImage;
+
+    public Email() {}
 
     /**
      * Creates a new EmailWindow controller which subsequently launches a GUI Window to retrieve
@@ -68,10 +89,12 @@ public abstract class Email extends Command {
     /**
      * Creates the message of the email using the emailMessage and emailSubject parameters
      * provided, and sends the email using Transport.send(). Moreover, the 'to' and 'from'
-     * fields are provided by the child classes
+     * fields are provided by the child classes. Moreover, this method is only used for the EMAIL INDEX
+     * command as it attaches a QR code in the email message for the event manager to scan
      */
-    public void createAndSendEmail(String username, String emailSubject, String emailMessage,
-                                   String recipient, Session session) throws CommandException {
+    public void createAndSendEmailWithTicket(String username, String emailSubject, String emailMessage,
+                                   String recipients, Session session, String guestUniqueId)
+                                   throws CommandException {
         try {
             // Creates a default MimeMessage object
             Message message = new MimeMessage(session);
@@ -80,8 +103,92 @@ public abstract class Email extends Command {
             message.setFrom(new InternetAddress(username));
 
             // Set the email of the guest
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(recipient));
+            message.setRecipients(Message.RecipientType.BCC,
+                    InternetAddress.parse(recipients));
+
+            // Set email subject and message
+            message.setSubject(emailSubject);
+
+            // Generate and set the overall email message content
+            Multipart multipart = createQrAndEmailMessage(emailMessage, guestUniqueId);
+            message.setContent(multipart);
+
+            // Send the email
+            Transport.send(message);
+
+            // Delete the image file once the email has been sent
+            qrImage.deleteOnExit();
+        } catch (MessagingException e) {
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
+        }
+    }
+
+    /**
+     * Generates the message of the email by generating a QR Code image and attaching it in the
+     * email. This command is used when the input command is email INDEX
+     * @param emailMessage text message written by the user
+     * @param guestUniqueId Unique ID of the guest to be encoded by the QR Code
+     * @return the multipart
+     */
+    private Multipart createQrAndEmailMessage(String emailMessage, String guestUniqueId) {
+        // Create a multipart message to facilitate the attachment of images
+        Multipart multipart = new MimeMultipart();
+
+        try {
+            // Create the message part of the Email and set the message
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(emailMessage);
+
+            // Set the message part
+            multipart.addBodyPart(messageBodyPart);
+
+            // The second body part is the QR Code
+            messageBodyPart = new MimeBodyPart();
+
+            // Generate a QR code, which represents the guest ticket
+            // QR code is generated using a guest's UID, hence it is ensured to be unique
+            QrUtil getGuestTicket = new QrUtil();
+            BufferedImage ticket = getGuestTicket.generateQr(guestUniqueId);
+
+            // Create a temporary image file to store the BufferedImage and for it to be
+            // read by DataSource()
+            qrImage = new File("temp.png");
+            ImageIO.write(ticket, "png", qrImage);
+            DataSource source = new FileDataSource(qrImage);
+
+            // Set the details of the image attachment
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName("Your Ticket");
+            multipart.addBodyPart(messageBodyPart);
+        } catch (WriterException e) {
+            logger.log(Level.SEVERE, "Error: exception when retrieving QRCode BufferedImage!");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Error: exception when writing the BufferedImage!");
+        } catch (MessagingException e) {
+            logger.log(Level.SEVERE, "Error in generating QR code!");
+        }
+
+        return multipart;
+    }
+
+    /**
+     * Creates the message of the email using the emailMessage and emailSubject parameters
+     * provided, and sends the email using Transport.send(). Moreover, the 'to' and 'from'
+     * fields are provided by the child classes. This method is used by the EmailALL and
+     * EmailSpecific commands
+     */
+    public void createAndSendEmail(String username, String emailSubject, String emailMessage,
+                                             String recipients, Session session) throws CommandException {
+        try {
+            // Creates a default MimeMessage object
+            Message message = new MimeMessage(session);
+
+            // Set the email of the host
+            message.setFrom(new InternetAddress(username));
+
+            // Set the email of the guest
+            message.setRecipients(Message.RecipientType.BCC,
+                    InternetAddress.parse(recipients));
 
             // Set email subject and message
             message.setSubject(emailSubject);
@@ -121,5 +228,35 @@ public abstract class Email extends Command {
         // Create the corresponding matcher object
         Matcher matcher = pattern.matcher(guestAddress);
         return matcher.matches();
+    }
+
+    /**
+     * Creates the recipient string based on all of the persons to send and email to
+     * @param personsToSendEmail is the original list of all guests in the list
+     * @return the recipients string
+     */
+    public String recipientCreator(HashSet<String> personsToSendEmail) {
+        String recipients;
+        StringBuilder recipientBuilder = new StringBuilder();
+
+        // Create a string with all the recipients
+        for (String personToEmail : personsToSendEmail) {
+            String individualGuest = personToEmail + ",";
+            recipientBuilder.append(individualGuest);
+        }
+
+        recipients = removeLastChar(recipientBuilder.toString());
+
+        return recipients;
+    }
+
+    /**
+     * Removes the last character out of the recipients String as it contains
+     * an unwanted ',' character
+     * @param string is the original recipients string
+     * @return the substring
+     */
+    private static String removeLastChar(String string) {
+        return string.substring(0, string.length() - 1);
     }
 }

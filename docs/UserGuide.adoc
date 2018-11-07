@@ -183,16 +183,15 @@ This will present you with an error in specifying the command, as all your tags 
 === Locating guests by name, phone number or email address: `find`
 
 Find guests whose names, phone numbers and/or email addresses
-contain any of the given keywords. Keywords should not have spaces or any
-special characters. +
+contain any of the given keywords. +
 Format: `find n/KEYWORD p/MORE_KEYWORDS e/MORE_KEYWORDS` +
 Example: find n/NAME p/PHONE e/EMAIL
 
 ****
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `n/hans` will match `n/Hans`
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will match `n/Bo n/Hans`
 * Only names, phone numbers and email addresses are searched, depending on prefixes given.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `n/Han` will not match `n/Hans`
 * Guests matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
@@ -328,15 +327,27 @@ Format: `stop_marking`
 Filter guest list based on filter guest attributes. Only filters based on
 payment status, attendance status and tags. Keywords should not have spaces or any
 special character. +
+Values accepted for Payment Status: PAID, NOTPAID, PENDING or N.A. +
+Values accepted for Attendance Status: PRESENT, ABSENT, N.A. +
 Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
          [t/DIET] [t/GUEST_TYPE] [t/...]`
+
+****
+* The search is case-insensitive. e.g `pa/paid` will match `pa/PAID`
+* The order of the keywords does not matter. e.g. `pa/PAID a/ABSENT` will match `a/ABSENT pa/PAID`
+* Only payment staus, attendance status and tags are searched, depending on prefixes given.
+* Only full words will be matched e.g. `p/PAID` will not match `p/NOTPAID`
+* Guests matching all keywords will be returned (i.e. `AND` search). e.g. `pa/PAID t/GUEST` will return a list
+of people who have paid *and* who are guests
+****
+
 Examples:
 
 * `filter pa/NOTPAID a/PRESENT` +
 You will be shown a list with guests who have yet to pay and are present.
 
 * `filter a/Present t/Vegetarian` +
-You will be shown a list with guests who are present and have a vegetarian dietary req
+You will be shown a list with guests who are present and have a vegetarian dietary requirement.
 // end::filter[]
 
 // tag::email[]
