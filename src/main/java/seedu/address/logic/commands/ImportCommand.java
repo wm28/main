@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ShowImportReportEvent;
@@ -33,7 +35,9 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_IMPORT_CSV_RESULT = "Successfully imported %1$d of %2$d guests from %3$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private SupportedFile supportedFile;
+    private static Logger logger = Logger.getLogger("execute");
+
+    private final SupportedFile supportedFile;
     private final PersonConverter personConverter;
     private List<ImportError> errors;
     private int successfulImports;
@@ -60,10 +64,12 @@ public class ImportCommand extends Command {
             totalImports = successfulImports;
             importPersons(persons, model);
         } catch (IOException ioe) {
+            logger.log(Level.INFO, "Failed to read from CSV file: " + supportedFile.getFileName());
             throw new CommandException(ioe.getMessage(), ioe);
         }
 
         if (!errors.isEmpty()) {
+            logger.log(Level.INFO, "Error exists in CSV file, triggering ImportReportWindow");
             EventsCenter.getInstance().post(new ShowImportReportEvent(errors));
         }
         model.commitAddressBook();

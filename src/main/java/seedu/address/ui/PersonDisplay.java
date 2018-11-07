@@ -72,6 +72,7 @@ public class PersonDisplay extends UiPart<Region> {
         payment.setText(person.getPayment().paymentValue);
         removeTags();
         createTags(person);
+        logger.info("Filled in PersonDisplay: " + person.toString());
     }
 
     /**
@@ -84,11 +85,13 @@ public class PersonDisplay extends UiPart<Region> {
         email.setText("");
         payment.setText("");
         removeTags();
+        logger.info("Cleared fields in PersonDisplay ");
     }
 
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Person selection changed, displaying newly selected guest details"));
         fillInPersonDetails(event.getNewSelection());
     }
 

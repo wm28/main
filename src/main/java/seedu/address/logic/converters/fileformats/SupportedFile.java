@@ -10,12 +10,12 @@ import java.util.List;
 public interface SupportedFile {
 
     /**
-     * Read {@code} AdaptedPerson of all types from file.
+     * Read {@code AdaptedPerson} AdaptedPerson of all types from file.
      */
     List<AdaptedPerson> readAdaptedPersons() throws IOException;
 
     /**
-     * Write {@code} AdaptedPerson of all types to file
+     * Write {@code AdaptedPerson} of all types to file
      */
     void writeAdaptedPersons(List<AdaptedPerson> adaptedPersons) throws IOException;
 
