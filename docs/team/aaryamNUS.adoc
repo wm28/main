@@ -30,9 +30,9 @@ as listed below:
 |_The purpose of this section is to list the contributions I have made to project Invités_
 |===
 
-* *Major enhancement*: added the ability to *send emails* to guests
-** What it does: allows you to either send emails to individual guests using `email`, `forceEmail`, or `emailSpecialised` or
-send mass emails to all your guests using `emailAll`
+* *Main Feature*: added the ability to *send emails* to guests
+** What it does: allows you to either send emails to individual guests using `email`, or
+send mass emails to all your guests or certain groups of guests using `emailAll` and `emailSpecific` respectively
 ** Justification: This feature will allow event managers to streamline their event notification process, as they can easily and quickly
 inform all of their guests at once, regarding details of the event or otherwise.
 
