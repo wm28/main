@@ -5,15 +5,36 @@
 
 == PROJECT: Invités
 
+== Overview
+
+The purpose of this portfolio is to document my role and contributions to the CS2113T project(Invités).
+
+*Project Scope*
 Invités is an application targeted at event managers and planners. The application that allows its users to efficiently *organise, cater, and manage* large events such
 as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments, and take note of attendance of the guests.
 To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
 This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
 
-== Overview
+*My responsibility*
+My task involved the creation of an event details component that lets our users input the confirmed event details. I completed this task by implementing the following steps:
+	1. Creating an event model with all the required classes and editing the existing models to incorporate this
+	2. Handling the storage component for event details
+	3. Creating a UI component for event details
+	4. Creating the 'add_event', 'delete_event' and 'edit_event' commands to add, delete or edit event details in our application
+
+*Teammates*
+The team that worked with me on this project and the major feature they implemented are as follows:
+
+	1. Sarah Taaher Bonna - Data Filteration
+	2. Aaryam Srivastava - Mass Email Functionality
+	3. Tan Tze Guang - Attendance Taking
+	4. Tan Wei Ming - Data Importation
 
 
 == Summary of contributions
+|===
+|_The purpose of this section is to list my contributions to Invités.
+|===
 
 * *Major enhancement*: Added *the event details component*
 ** What it does: Allows the user to enter the confirmed details for the event they are organising.

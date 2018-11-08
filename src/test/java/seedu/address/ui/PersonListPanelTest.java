@@ -103,6 +103,13 @@ public class PersonListPanelTest extends GuiUnitTest {
             builder.append("<attendance>ABSENT</attendance>\n");
             builder.append("</persons>\n");
         }
+        builder.append("<event>");
+        builder.append("<name>CFG Workshop</name>\n");
+        builder.append("<date>10/02/2019</date>\n");
+        builder.append("<venue>LT6</venue>\n");
+        builder.append("<startTime>10:00 AM</startTime>\n");
+        builder.append("</event>");
+
         builder.append("</addressbook>\n");
 
         Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");

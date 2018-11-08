@@ -24,12 +24,13 @@ public abstract class UiPart<T> {
      * Each colour represents a charecteristic of the guest, as summarised below:
      * Orange - Absent, Yellow - Present, Light Blue - VIP,
      * White - Guest Speaker, Black - Not Paid, Purple - Paid,
+     *  - Event tags
      * Default - a tag that is not supported by the application specifications
      */
     private static final String[] TAG_COLORS = {"orange", "yellow", "lightblue",
                                                 "white", "bronze", "silver",
                                                 "gold", "platinum", "veg",
-                                                "halal", "default"};
+                                                "halal", "cyan", "default"};
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -132,6 +133,7 @@ public abstract class UiPart<T> {
         case "vip":
             return TAG_COLORS[2];
         case "guestspeaker":
+        case "guest":
             return TAG_COLORS[3];
         case "bronze":
             return TAG_COLORS[4];
@@ -145,8 +147,10 @@ public abstract class UiPart<T> {
             return TAG_COLORS[8];
         case "halal":
             return TAG_COLORS[9];
-        default:
+        case "cyan":
             return TAG_COLORS[10];
+        default:
+            return TAG_COLORS[11];
         }
     }
 }
