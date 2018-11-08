@@ -447,6 +447,7 @@ If the user has not added in the details of an event, then there are no specific
 The `edit_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
 
 The following sequence diagram shows how the edit_event operation works:
+
 image::EditEventSequenceDiagram.png[width="800"]
 
 // end::event[]

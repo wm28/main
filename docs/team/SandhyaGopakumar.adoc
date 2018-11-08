@@ -36,22 +36,22 @@ The team that worked with me on this project and the major feature they implemen
 |_The purpose of this section is to list my contributions to Invités.
 |===
 
-* *Major enhancement*: Added *the event details component*
+* *Feature*: Added *the event details component*
 ** What it does: Allows the user to enter the confirmed details for the event they are organising.
-** Justification: This feature improves the product significantly because a user will want to view specific details that they need to prioritise/reiterate in the days leading up to the event.
-** Highlights: This enhancement affects the existing logic, model, ui and storage components as it involves the creation of a new model class, the add_event ,delete_event and edit_event commands.
+** Justification: This feature improves the product significantly because a user will want to view specific details that they need to prioritise/reiterate in the days leading up to the event. A count of the days left to the user's event is also displayed for the user's benefit.
+** Highlights: This enhancement affects the existing logic, model, ui and storage components as it involves the creation of a new model class, the add_event ,delete_event and edit_event commands, an additional storage class as well as a UI component.
 ** Credits: Reused some ideas from the SE-EDU AddressBook Level 4
 
-* *Minor enhancement*: Added a stackpane to the status bar footer to display a countdown to the user's event. This serves as a reminder of the user's deadline.
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sandhyagopakumar[Functional and test code]]
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-//TODO: edit these links
 * *Other contributions*:
 ** Morphed the add, delete, edit commands to add_guest, delete_guest and edit_guest.
-
+*** Contributed and edited multiple tests
+** Documentation:
+*** Edited README.adoc to include an update screenshot of our UI
+*** Tweaked use cases and existing diagrams in the Developer guide. Edited descriptions of our commands in the User Guide to reflect our enhancements: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/83[83]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/174[174]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/175[175]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/186[186]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/279[279]]
 ** Community:
-//*** PRs reviewed (with non-trivial review comments): https://github.com[TBC],
-//*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for another team in the cohort: [https://github.com/CS2113-AY1819S1-T12-1/main/issues/127[127]], [https://github.com/CS2113-AY1819S1-T12-1/main/issues/133[133]], [https://github.com/CS2113-AY1819S1-T12-1/main/issues/146[146]]
 
 == Contributions to the User Guide
 
