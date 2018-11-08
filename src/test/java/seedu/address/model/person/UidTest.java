@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class UidTest {
     @Test
     public void constructor_invalidPhone_throwsIllegalArgumentException() {
         String invalidUid = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Uid(""));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Uid(invalidUid));
     }
 
     @Test
