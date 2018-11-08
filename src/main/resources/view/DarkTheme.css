@@ -409,6 +409,11 @@
     -fx-background-color: #ADFF2F;
 }
 
+#tags .cyan {
+    -fx-text-fill: black;
+    -fx-background-color: #00FFFF;
+}
+
 #tags .default {
     -fx-text-fill: red;
     -fx-background-color: #ffffff;

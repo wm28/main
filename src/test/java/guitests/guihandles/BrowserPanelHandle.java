@@ -1,64 +1,83 @@
 package guitests.guihandles;
 
-import java.net.URL;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import guitests.GuiRobot;
-import javafx.concurrent.Worker;
+import com.google.common.collect.ImmutableMultiset;
+
 import javafx.scene.Node;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import seedu.address.model.event.Event;
 
 /**
  * A handler for the {@code BrowserPanel} of the UI.
  */
 public class BrowserPanelHandle extends NodeHandle<Node> {
 
-    public static final String BROWSER_ID = "#browser";
+    public static final String BROWSER_ID = "#browserPane";
+    private static final String EVENT_NAME_FIELD_ID = "#name";
+    private static final String EVENT_DATE_FIELD_ID = "#date";
+    private static final String EVENT_VENUE_FIELD_ID = "#venue";
+    private static final String EVENT_STARTTIME_FIELD_ID = "#startTime";
+    private static final String EVENT_TAGS_FIELD_ID = "#tags";
 
-    private boolean isWebViewLoaded = true;
+    private final Label nameLabel;
+    private final Label dateLabel;
+    private final Label venueLabel;
+    private final Label startTimeLabel;
+    private final List<Label> tagLabels;
 
-    private URL lastRememberedUrl;
+    public BrowserPanelHandle(Node panelNode) {
+        super(panelNode);
 
-    public BrowserPanelHandle(Node browserPanelNode) {
-        super(browserPanelNode);
+        nameLabel = getChildNode(EVENT_NAME_FIELD_ID);
+        dateLabel = getChildNode(EVENT_DATE_FIELD_ID);
+        venueLabel = getChildNode(EVENT_VENUE_FIELD_ID);
+        startTimeLabel = getChildNode(EVENT_STARTTIME_FIELD_ID);
 
-        WebView webView = getChildNode(BROWSER_ID);
-        WebEngine engine = webView.getEngine();
-        new GuiRobot().interact(() -> engine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
-            if (newState == Worker.State.RUNNING) {
-                isWebViewLoaded = false;
-            } else if (newState == Worker.State.SUCCEEDED) {
-                isWebViewLoaded = true;
-            }
-        }));
+        Region tagsContainer = getChildNode(EVENT_TAGS_FIELD_ID);
+        tagLabels = tagsContainer
+                .getChildrenUnmodifiable()
+                .stream()
+                .map(Label.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    public String getEventName() {
+        return nameLabel.getText();
+    }
+
+    public String getEventDate() {
+        return dateLabel.getText();
+    }
+
+    public String getEventVenue() {
+        return venueLabel.getText();
+    }
+
+    public String getEventStartTime() {
+        return startTimeLabel.getText();
+    }
+
+    public List<String> getEventTags() {
+        return tagLabels
+                .stream()
+                .map(Label::getText)
+                .collect(Collectors.toList());
     }
 
     /**
-     * Returns the {@code URL} of the currently loaded page.
+     * Returns true if this handle contains {@code event}.
      */
-    public URL getLoadedUrl() {
-        return WebViewUtil.getLoadedUrl(getChildNode(BROWSER_ID));
-    }
-
-    /**
-     * Remembers the {@code URL} of the currently loaded page.
-     */
-    public void rememberUrl() {
-        lastRememberedUrl = getLoadedUrl();
-    }
-
-    /**
-     * Returns true if the current {@code URL} is different from the value remembered by the most recent
-     * {@code rememberUrl()} call.
-     */
-    public boolean isUrlChanged() {
-        return !lastRememberedUrl.equals(getLoadedUrl());
-    }
-
-    /**
-     * Returns true if the browser is done loading a page, or if this browser has yet to load any page.
-     */
-    public boolean isLoaded() {
-        return isWebViewLoaded;
+    public boolean equals(Event event) {
+        return getEventName().equals(event.getName())
+                && getEventDate().equals(event.getDate())
+                && getEventVenue().equals(event.getVenue())
+                && getEventStartTime().equals(event.getStartTime())
+                && ImmutableMultiset.copyOf(getEventTags())
+                .equals(ImmutableMultiset.copyOf(event.getEventTags().stream()
+                .map(tag -> tag.tagName)
+                .collect(Collectors.toList())));
     }
 }

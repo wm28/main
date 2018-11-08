@@ -46,6 +46,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(new Event(), addressBook.getEventDetails());
     }
 
     @Test

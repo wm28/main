@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
@@ -32,8 +35,10 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EXPORT_CSV_RESULT = "Successfully exported %1$d/%2$d guests to %3$s";
     public static final String MESSAGE_NO_PERSONS = "There are no persons to export!";
 
-    private SupportedFile supportedFile;
-    private PersonConverter personConverter;
+    private static Logger logger = Logger.getLogger("execute");
+
+    private final SupportedFile supportedFile;
+    private final PersonConverter personConverter;
     private int totalPersons;
     private int successfulExports;
 
@@ -52,6 +57,7 @@ public class ExportCommand extends Command {
 
         ObservableList<Person> filteredList = model.getFilteredPersonList();
         if (filteredList.size() == 0) {
+            logger.log(Level.INFO, "No persons to export from the guest list");
             throw new CommandException(MESSAGE_NO_PERSONS);
         }
         totalPersons = filteredList.size();
@@ -61,9 +67,14 @@ public class ExportCommand extends Command {
             List<AdaptedPerson> result = exportPersons(filteredList);
             supportedFile.writeAdaptedPersons(result);
         } catch (NoSuchFileException nsfe) {
+            logger.log(Level.INFO, "File path provided is invalid");
             String errorMessage = String.format(Messages.MESSAGE_INVALID_FILE_PATH, nsfe.getMessage());
             throw new CommandException(errorMessage, nsfe);
+        } catch (FileAlreadyExistsException faee) {
+            logger.log(Level.INFO, "CSV File provided already exist", supportedFile.getFileName());
+            throw new CommandException(faee.getMessage(), faee);
         } catch (IOException ioe) {
+            logger.log(Level.INFO, "Failed to read from SupportedFile");
             throw new CommandException(ioe.getMessage(), ioe);
         }
 

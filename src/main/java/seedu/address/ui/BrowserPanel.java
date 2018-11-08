@@ -64,22 +64,20 @@ public class BrowserPanel extends UiPart<Region> {
         }
     }
 
-    //@@author aaryamNUS
     /**
-     * Method createTags initialises the tag labels for {@code person}
-     * Note: This code was adapted from the example implementation provide by @yamgent from SE-EDU
+     * Method createTags initialises the tag labels for {@code event}
+     * This code was adapted from @aaryamNUS's implementation
      */
     private void createTags(seedu.address.model.event.Event event) {
         event.getEventTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
-            tagLabel.getStyleClass().add(getTagColor(tag.tagName));
+            tagLabel.getStyleClass().add(getTagColor("cyan"));
             tags.getChildren().add(tagLabel);
         });
     }
 
-    //@@author wm28
     /**
-     * Removes all tags from the PersonDisplay Ui component
+     * Removes all tags from the Ui component
      */
     private void removeTags() {
         tags.getChildren().clear();
