@@ -15,7 +15,7 @@ import seedu.address.model.event.Event;
  */
 public class BrowserPanelHandle extends NodeHandle<Node> {
 
-    public static final String BROWSER_ID = "#browserPane";
+    public static final String BROWSER_PANEL_ID = "#browserPanel";
     private static final String EVENT_NAME_FIELD_ID = "#name";
     private static final String EVENT_DATE_FIELD_ID = "#date";
     private static final String EVENT_VENUE_FIELD_ID = "#venue";
