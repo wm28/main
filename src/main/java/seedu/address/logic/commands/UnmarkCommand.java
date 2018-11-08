@@ -138,9 +138,13 @@ public class UnmarkCommand extends GeneralMarkCommand {
             return Optional.ofNullable(attendance);
         }
 
-        public void setUid(Uid uid) { this.uid = uid; }
+        public void setUid(Uid uid) {
+            this.uid = uid;
+        }
 
-        public Optional<Uid> getUid() { return Optional.ofNullable(uid); }
+        public Optional<Uid> getUid() {
+            return Optional.ofNullable(uid);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
