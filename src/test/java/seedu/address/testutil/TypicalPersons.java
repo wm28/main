@@ -26,6 +26,7 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 
 /**
@@ -84,6 +85,13 @@ public class TypicalPersons {
     public static final Person DANNY = new PersonBuilder().withName(VALID_NAME_DANNY).withPhone(VALID_PHONE_DANNY)
             .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
             .withPayment(VALID_PAYMENT_DANNY).build();
+
+    //Manually added
+    public static final Phone ALICE_PHONE_NUMBER = new Phone("94351253");
+    public static final Phone BENSON_PHONE_NUMBER = new Phone("98765432");
+    public static final Phone CARL_PHONE_NUMBER = new Phone("95352563");
+    public static final Phone DANIEL_PHONE_NUMBER = new Phone("87652533");
+    public static final Phone INVALID_PHONE_NUMBER = new Phone("12345678");
 
     public static final Event TYPICAL_EVENT = new EventBuilder()
             .withEventName("Graduation party").withEventDate("10/01/2019")

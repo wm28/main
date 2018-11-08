@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +39,9 @@ import seedu.address.ui.EmailWindow;
  */
 public abstract class Email extends Command {
     private static Logger logger = Logger.getLogger("createAndSendEmailWithTicket");
+    private File qrImage;
+
+    public Email() {}
 
     /**
      * Creates a new EmailWindow controller which subsequently launches a GUI Window to retrieve
@@ -105,12 +109,35 @@ public abstract class Email extends Command {
             // Set email subject and message
             message.setSubject(emailSubject);
 
+            // Generate and set the overall email message content
+            Multipart multipart = createQrAndEmailMessage(emailMessage, guestUniqueId);
+            message.setContent(multipart);
+
+            // Send the email
+            Transport.send(message);
+
+            // Delete the image file once the email has been sent
+            qrImage.deleteOnExit();
+        } catch (MessagingException e) {
+            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
+        }
+    }
+
+    /**
+     * Generates the message of the email by generating a QR Code image and attaching it in the
+     * email. This command is used when the input command is email INDEX
+     * @param emailMessage text message written by the user
+     * @param guestUniqueId Unique ID of the guest to be encoded by the QR Code
+     * @return the multipart
+     */
+    private Multipart createQrAndEmailMessage(String emailMessage, String guestUniqueId) {
+        // Create a multipart message to facilitate the attachment of images
+        Multipart multipart = new MimeMultipart();
+
+        try {
             // Create the message part of the Email and set the message
             BodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setText(emailMessage);
-
-            // Create a multipart message to facilitate the attachment of images
-            Multipart multipart = new MimeMultipart();
 
             // Set the message part
             multipart.addBodyPart(messageBodyPart);
@@ -125,28 +152,23 @@ public abstract class Email extends Command {
 
             // Create a temporary image file to store the BufferedImage and for it to be
             // read by DataSource()
-            File file = new File("temp.png");
-            ImageIO.write(ticket, "png", file);
-            DataSource source = new FileDataSource(file);
+            qrImage = new File("temp.png");
+            ImageIO.write(ticket, "png", qrImage);
+            DataSource source = new FileDataSource(qrImage);
 
+            // Set the details of the image attachment
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName("Your Ticket");
             multipart.addBodyPart(messageBodyPart);
-
-            message.setContent(multipart);
-
-            // Send the email
-            Transport.send(message);
-
-            // Delete the image file once the email has been sent
-            file.delete();
-        } catch (MessagingException e) {
-            throw new CommandException(Messages.MESSAGE_NO_INTERNET_CONNECTION_OR_INVALID_CREDENTIALS);
         } catch (WriterException e) {
             logger.log(Level.SEVERE, "Error: exception when retrieving QRCode BufferedImage!");
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error: exception when writing the BufferedImage!");
+        } catch (MessagingException e) {
+            logger.log(Level.SEVERE, "Error in generating QR code!");
         }
+
+        return multipart;
     }
 
     /**
@@ -206,5 +228,35 @@ public abstract class Email extends Command {
         // Create the corresponding matcher object
         Matcher matcher = pattern.matcher(guestAddress);
         return matcher.matches();
+    }
+
+    /**
+     * Creates the recipient string based on all of the persons to send and email to
+     * @param personsToSendEmail is the original list of all guests in the list
+     * @return the recipients string
+     */
+    public String recipientCreator(HashSet<String> personsToSendEmail) {
+        String recipients;
+        StringBuilder recipientBuilder = new StringBuilder();
+
+        // Create a string with all the recipients
+        for (String personToEmail : personsToSendEmail) {
+            String individualGuest = personToEmail + ",";
+            recipientBuilder.append(individualGuest);
+        }
+
+        recipients = removeLastChar(recipientBuilder.toString());
+
+        return recipients;
+    }
+
+    /**
+     * Removes the last character out of the recipients String as it contains
+     * an unwanted ',' character
+     * @param string is the original recipients string
+     * @return the substring
+     */
+    private static String removeLastChar(String string) {
+        return string.substring(0, string.length() - 1);
     }
 }
