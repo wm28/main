@@ -336,6 +336,22 @@ The `filter` command calls `Model#getFilteredPersonList()`.
 The following sequence diagram shows how the filter operation works:
 
 image::FilterSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How filter executes
+
+* **Alternative 1 (current choice):** User has to include prefixes when using
+filter command.
+** Pros: Will use less memory (e.g. for `t/`, just search through the tags field directly).
+** Cons: We must ensure that the user includes the prefix of each
+individual keywords and check that the prefixes are correct.
+
+* **Alternative 2:** User just enters keywords without prefixes.
+** Pros: Easy to implement.
+** Cons: May have performance issues (e.g. to find guests with a particular tag,
+the application will have to go through the payment and attendance fields, before going
+through the tag field).
 // end::filter[]
 
 // tag::find[]
@@ -356,6 +372,21 @@ The `find` command calls `Model#getFilteredPersonList()`.
 The following sequence diagram shows how the find operation works:
 
 image::FindSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How find executes
+
+* **Alternative 1 (current choice):** User has to include prefixes when using
+find command.
+** Pros: Will use less memory (e.g. for `e/`, just search through the email field directly).
+** Cons: We must ensure that the user includes the prefix of each
+         individual keywords and check that the prefixes are correct.
+* **Alternative 2:** User just enters keywords without prefixes.
+** Pros: Easy to implement.
+** Cons: May have performance issues (e.g. to find a guest
+ with a particular email address, the application will have to
+ go through the name and phone number fields, before going through the email field).
 // end::find[]
 
 // tag::event[]

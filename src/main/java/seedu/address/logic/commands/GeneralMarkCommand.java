@@ -100,7 +100,6 @@ public abstract class GeneralMarkCommand extends Command {
 
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         if (isMark) {
             return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, editedPerson));
