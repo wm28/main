@@ -25,7 +25,7 @@ public class BrowserPanel extends UiPart<Region> {
     private seedu.address.model.event.Event event;
 
     @FXML
-    private HBox cardPane;
+    private HBox browserPanel;
     @FXML
     private Label name;
     @FXML
