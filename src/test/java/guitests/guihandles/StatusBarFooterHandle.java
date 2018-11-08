@@ -13,25 +13,25 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     private static final String SYNC_STATUS_ID = "#syncStatus";
     private static final String TOTAL_PERSONS_STATUS_ID = "#totalPersonsStatus";
     private static final String SAVE_LOCATION_STATUS_ID = "#saveLocationStatus";
-    private static final String DAYS_LEFT_STATUS_ID = "#daysLeftStatus";
+    private static final String DAYS_LEFT_STATUS_ID = "#daysLeft";
 
     private final StatusBar syncStatusNode;
     private final StatusBar totalPersonsStatusNode;
     private final StatusBar saveLocationNode;
-    private final StatusBar daysLeftStatusNode;
+    private final StatusBar daysLeftNode;
 
     private String lastRememberedSyncStatus;
     private String getLastRememberedTotalPersonsStatus;
     private String lastRememberedSaveLocation;
-    private String lastRememberedDaysLeftStatus;
+    private String lastRemembereddaysLeft;
 
     public StatusBarFooterHandle(Node statusBarFooterNode) {
         super(statusBarFooterNode);
 
-        daysLeftStatusNode = getChildNode(DAYS_LEFT_STATUS_ID);
         syncStatusNode = getChildNode(SYNC_STATUS_ID);
         totalPersonsStatusNode = getChildNode(TOTAL_PERSONS_STATUS_ID);
         saveLocationNode = getChildNode(SAVE_LOCATION_STATUS_ID);
+        daysLeftNode = getChildNode(DAYS_LEFT_STATUS_ID);
     }
 
     /**
@@ -56,8 +56,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
         return saveLocationNode.getText();
     }
 
-    public String getDaysLeftStatus() {
-        return daysLeftStatusNode.getText();
+    public String getdaysLeft() {
+        return daysLeftNode.getText();
     }
     /**
      * Remembers the content of the sync status portion of the status bar.
@@ -107,15 +107,15 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
         return !lastRememberedSaveLocation.equals(getSaveLocation());
     }
 
-    public void rememberDaysLeftStatus() {
-        lastRememberedDaysLeftStatus = getDaysLeftStatus();
+    public void rememberdaysLeft() {
+        lastRemembereddaysLeft = getdaysLeft();
     }
 
     /**
      * Returns true if the current content of the 'days left' is different from the value remembered by the most
-     * recent {@code rememberDaysLeftStatus()} call.
+     * recent {@code rememberdaysLeft()} call.
      */
-    public boolean isDaysLeftStatusChanged() {
-        return !lastRememberedDaysLeftStatus.equals(getDaysLeftStatus());
+    public boolean isdaysLeftChanged() {
+        return !lastRemembereddaysLeft.equals(getdaysLeft());
     }
 }

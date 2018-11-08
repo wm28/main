@@ -18,7 +18,6 @@ import java.util.Date;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
@@ -62,7 +61,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
 
         statusBarFooterHandle = new StatusBarFooterHandle(statusBarFooter.getRoot());
     }
-    @Ignore
+
     @Test
     public void display() {
         // initial state
@@ -81,15 +80,15 @@ public class StatusBarFooterTest extends GuiUnitTest {
     /**
      * Asserts that the save location matches that of {@code expectedSaveLocation}, and the
      * sync status matches that of {@code expectedSyncStatus},
-     * the days left status matched that of {@code expectedDaysLeftStatus}and the total persons matches that
+     * the days left status matched that of {@code expecteddaysLeft}and the total persons matches that
      * of {@code expectedTotalPersonsStatus}.
      */
-    private void assertStatusBarContent(String expectedDaysLeftStatus, String expectedSaveLocation,
+    private void assertStatusBarContent(String expecteddaysLeft, String expectedSaveLocation,
                                         String expectedSyncStatus, String expectedTotalPersonsStatus) {
+        assertEquals(expecteddaysLeft, statusBarFooterHandle.getdaysLeft());
         assertEquals(expectedSaveLocation, statusBarFooterHandle.getSaveLocation());
         assertEquals(expectedSyncStatus, statusBarFooterHandle.getSyncStatus());
         assertEquals(expectedTotalPersonsStatus, statusBarFooterHandle.getTotalPersonsStatus());
-        assertEquals(expectedDaysLeftStatus, statusBarFooterHandle.getDaysLeftStatus());
         guiRobot.pauseForHuman();
     }
 
