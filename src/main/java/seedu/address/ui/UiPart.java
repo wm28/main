@@ -133,6 +133,7 @@ public abstract class UiPart<T> {
         case "vip":
             return TAG_COLORS[2];
         case "guestspeaker":
+        case "guest":
             return TAG_COLORS[3];
         case "bronze":
             return TAG_COLORS[4];

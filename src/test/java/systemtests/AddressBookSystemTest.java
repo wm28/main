@@ -262,7 +262,7 @@ public abstract class AddressBookSystemTest {
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
         assertFalse(handle.isSaveLocationChanged());
-        assertFalse(handle.isTotalPersonsStatusChanged());
+        assertTrue(handle.isTotalPersonsStatusChanged());
     }
 
     /**
