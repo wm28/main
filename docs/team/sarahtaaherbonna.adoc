@@ -71,6 +71,9 @@ the user is able to find the necessary guests using any available contact detail
 
 ** Enhancements to existing features:
 *** Wrote additional tests for existing and new features to increase coverage (Pull requests [https://github.com/CS2113-AY1819S1-F09-3/main/pull/273[273]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[266]])
+*** Did cosmetic tweaks to existing mark command to show updated list
+(for example if filter a/absent, and then mark is performed, the person who has been
+marked will no longer be in the list): [https://github.com/CS2113-AY1819S1-F09-3/main/pull/283[283]]
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the Developer Guide
  and made important changes to the Use Cases: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/144[144]]
