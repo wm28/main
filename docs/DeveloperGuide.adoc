@@ -478,7 +478,7 @@ The sequence diagram uses the case of addTag() to highlight how the application 
 ==== Current Implementation
 
 ===== High level overview of the class hierarchy
-The import and export command enables batch importation and exportation of people into and out of the guest list. Additionally, the import command will create a popup window to show the errors during import if there are any. The commands currently only supports comma-separated value file format (CSV).
+The import and export command enables batch importation and exportation of people into and out of the guest list. Additionally, the import command will create a popup window to show the errors during import only if there are any. The commands currently only supports comma-separated value file format (CSV).
 
 The implementation of the import and export feature mainly resides under the logic component of the application. The import command involves an additional user interface (UI) component that shows import errors.
 
@@ -489,11 +489,18 @@ The Import/Export feature is facilitated by the `AdaptedPerson`,`PersonConverter
 * `SupportedFile` represents a supported file that is able to read and write `AdaptedPerson`s' to the actual file on the computer.  Here are some of its key methods
 ** `SupportedFile#readAdaptedPersons()`: Returns all person in the form of `AdaptedPerson`s from the file
 ** `SupportedFile#writeAdaptedPersons()`: Writes all `AdaptedPerson` to the file
-* `PersonConverter` represents a person converter that is able to convert between `Person`s and `AdaptedPerson`s. Here are some of its key methods.
+* `PersonConverter` represents a person converter that is able to convert between `Person` s and `AdaptedPerson` s. Here are some of its key methods.
 ** `PersonConverter#encodePerson()`: Encodes a `Person` object and returns the corresponding `AdaptedPerson` object
 ** `PersonConverter#decodePerson()`: Decodes an `AdaptedPerson`  object and returns corresponding `Person` object
 
-To support the import/export of CSV files, `CsvAdaptedPerson`,`CsvConverter` and `CsvFile` implements the above mentioned interfaces.  The following class diagram shows the relationship between the classes and interfaces involved.
+To support the import/export of CSV files, `CsvAdaptedPerson`,`CsvPersonConverter` and `CsvFile` implements the above mentioned interfaces.
+
+For the import command, the popup window to show errors encountered is facilitated by the `ImportError` and `ImportReportWindow` classes.
+
+* `ImportError` represents an error encountered during the import command. It stores the actual CSV formatted persona and its associated error message.
+* `ImportReportError` is the controller class of the popup window that will display all `ImportError` s encountered during the execution of an import command.
+
+The following class diagrams shows the relationship between the classes and interfaces mentioned above.
 
 image::ImportExportClassDiagram.PNG[width="800"]
 
@@ -507,7 +514,6 @@ The following sequence diagram shows how the Import operation works:
 |====
 | image:ImportCommandSequenceDiagram.PNG[] | image:ImportSequenceRefFrame.PNG[]
 |====
-
 
 The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
 |====
