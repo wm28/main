@@ -478,7 +478,7 @@ The sequence diagram uses the case of addTag() to highlight how the application 
 ==== Current Implementation
 
 ===== High level overview of the class hierarchy
-The import and export command enables batch importation and exportation of people into and out of the guest list. Additionally, the import command will create a popup window to show the errors during import only if there are any. The commands currently only supports comma-separated value file format (CSV).
+The import and export command enables batch importation and exportation of people into and out of the guest list. Additionally, the import command will create a popup window to show the errors during import only if there are any. The commands currently only support comma-separated value file format (CSV), however, it is designed to easily support other formats such as VCard in the future.
 
 The implementation of the import and export feature mainly resides under the logic component of the application. The import command involves an additional user interface (UI) component that shows import errors.
 
@@ -497,30 +497,33 @@ To support the import/export of CSV files, `CsvAdaptedPerson`,`CsvPersonConverte
 
 For the import command, the popup window to show errors encountered is facilitated by the `ImportError` and `ImportReportWindow` classes.
 
-* `ImportError` represents an error encountered during the import command. It stores the actual CSV formatted persona and its associated error message.
+* `ImportError` represents an error encountered during the import command. It stores the actual CSV formatted person and its associated error message.
 * `ImportReportError` is the controller class of the popup window that will display all `ImportError` s encountered during the execution of an import command.
 
 The following class diagrams shows the relationship between the classes and interfaces mentioned above.
 
-image::ImportExportClassDiagram.PNG[width="800"]
+image::ImportExportClassDiagram.PNG[]
 
 ===== Command mechanism
 
-The import command will first read the csv file and loop through all the guest data and add them into the model. When application encounters a particular guest in CSV file which is not able to be converted or is already an existing guest, an `ImportError` will be created. The object stores which stores the formatted string of the `AdaptedPerson` along with its associated error message. These object will be added in a list within the import command.
+The import command will first read the csv file and loop through all the guest data and add them into the model. When application encounters a particular guest in CSV file which fails to be converted or is already an existing guest, an `ImportError` will be created. These `ImportError` object will be added in a list within the import command.
 
 After the command completes the importation of all guests in the guest list, if there are unsuccessful imports, it will trigger a `ShowImportReportEvent` which will display the errors
 
 The following sequence diagram shows how the Import operation works:
-|====
-| image:ImportCommandSequenceDiagram.PNG[] | image:ImportSequenceRefFrame.PNG[]
-|====
 
-The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
-|====
-| image:ExportCommandSequenceDiagram.PNG[] | image:ExportSequenceRefFrame.PNG[]
-|====
+image:ImportCommandSequenceDiagram.PNG[]
+
+The `ShowImportReportEvent` will be handled by the `MainWindow` according to the following sequence diagram below.
+
+image:ImportReportWindowSequenceDiagram.PNG[width="800"]
 
 '''
+
+The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
+
+image::ExportCommandSequenceDiagram.PNG[]
+
 ==== Design Considerations
 
 ===== Aspect: Implementing decoding/encoding functionality in Import/Export command
@@ -529,7 +532,7 @@ The export command will only export the currently filtered list by calling `Mode
 ** Pros: Reduction in code duplication when supporting other file-formats in the future. Easier to mock and do unit tests.
 ** Cons: More complicated to implement.
 
-*** Alternative 2: Each format has its own command which knows how to do the required conversion
+*** Alternative 2: Each supported format has its own command which knows how to do the required conversion
 ** Pros: We do not need to check for the required import/export format required.
 ** Cons: Higher testing overhead for possible numerous types of export & import command. Duplicated boilerplate code.
 

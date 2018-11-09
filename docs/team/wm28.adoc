@@ -8,22 +8,21 @@
 image::Ui.png[]
 
 == Overview
+|===
+|_This portfolio documents my contributions to Invités._
+|===
 
-Invités is a desktop application that helps people to organize and plan events. It simplifies and streamlines common event planning tasks such as managing a guest list, attendance taking, QR code ticketing and email sending.
+Invités is a desktop application that helps people to organize and manage events. It simplifies and streamlines common event management tasks such as managing a guest list, attendance taking, QR code ticketing and mass email sending. With our application event planners are able save time and effort as it offers a much more beginner friendly and specialized workflow as compared to its competition such as Microsoft Excel or Google sheet. Furthermore, it is developed to be highly versatile and can be used to plan a wide range of events such as school camps and weddings.
 
-The application is designed to be primarily command-line based and it has a graphical user interface created with JavaFX. The application is written in Java, and has about 10 kLoC.
+The application is developed in Java and has a graphical user interface created with JavaFX. It is designed to be primarily command-line based to enable power users to execute tasks efficiently.
 
-This project is developed as part of CS2113T, Software Development, module in National University of Singapore.
-
-I am part of the team of 5 that jointly developed Invités. Below is a brief overview of our respective roles.
+Invités was developed as part of a team project for a Software Development module in National University of Singapore. I am part of the team of 5 that jointly developed Invités and I am tasked with the responsibility to implement a data sharing mechanism for the guest data within Invités. Below is a brief overview of our respective roles.
 
 * http://github.com/aaryamNUS[Srivastava Aaryam]: Email communication
 * http://github.com/SandhyaGopakumar[Sandhya Gopakumar]: Events management
 * http://github.com/SarahTaaherBonna[Sarah Taaher Bonna]: Guest list management
 * http://github.com/kronicler[Tan Tze Guang]: Attendance management
 * http://github.com/wm28[Tan Wei Ming]: Data sharing
-
-The following sections of this documents my contributions to Invités.
 
 == Summary of contributions
 |===
@@ -40,17 +39,17 @@ The following sections of this documents my contributions to Invités.
 
 * *Minor enhancement*: added a full preview of guests in the user interface
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-
+* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=wm28[RepoSense link]
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.2.9`, `v1.3.1` (2 releases) on GitHub
-*** Setup about us page
+*** Setup about us page (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/26[#26])
+*** Designed initial user interface mock up in Adobe XD (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/27[#27])
 ** Enhancements to existing features:
-*** Remodelled the guest list in the user interface (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/88[#88], https://github.com/CS2113-AY1819S1-F09-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-F09-3/main/pull/152[#152])
+*** Remodelled the guest list and added a guest preview panel in the user interface (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/88[#88], https://github.com/CS2113-AY1819S1-F09-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-F09-3/main/pull/152[#152])
 ** Community:
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-3/main/issues/153[1], https://github.com/CS2113-AY1819S1-W12-3/main/issues/148[2])
+*** Reported bugs for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-3/main/issues/153[1], https://github.com/CS2113-AY1819S1-W12-3/main/issues/148[2])
 
 == Contributions to the User Guide
 

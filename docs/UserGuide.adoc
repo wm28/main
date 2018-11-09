@@ -246,12 +246,12 @@ You will populate the guest list with the data imported from the CSV file in the
 // tag::export[]
 === Exporting guests to CSV file : `export`
 
-Exports guests' data in the current guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<csvguestlistformat, Section 6: "CSV Guest List Format">>. +
+Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<csvguestlistformat, Section 6: "CSV Guest List Format">>. +
 
 Format: `export FILE_PATH`
 
 ****
-* Command will only export the currently filtered guests in the guest list
+* Command will only export the guests that you see in the guest list panel of the user interface.
 ** To export selected guests, use the `filter` command before exporting.
 * `FILE_PATH` shall only be a relative or an absolute file path.
 ** Relative file path is relative to where the application Jar file is located.
