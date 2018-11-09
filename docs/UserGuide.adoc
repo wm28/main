@@ -214,18 +214,20 @@ name `david` *but not* `edan`
 // tag::import[]
 === Import guests from CSV file : `import`
 
-Imports guests with data from a specified CSV file. The structure for the guest fields in the CSV file is predefined and can be found at <<csvguestlistformat,CSV Guest List Format>>. +
+Imports multiple guests with data from a specified CSV file. To create your own CSV file for importing guests, please see <<csvguestlistformat, Section 6: "CSV Guest List Format">> for the accepted format. +
 
 Format: `import FILE_PATH`
 
 ****
-* No existing guest in the guest list will be deleted due to the import.
+* This command only adds guests into the current guest list.
+** No existing guest in the guest list will be deleted due to the import.
+* Adds all guests specified in the CSV file specified by `FILE_PATH`
 * `FILE_PATH` shall only be a relative or an absolute file path.
 ** Relative file path is relative to where the application Jar file is located.
 * There is no guaranteed ordering of guests after each import.
 * Importation of guests which already exist will be skipped.
-**  A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.
-* Importation of badly formatted guests will be skipped.
+** A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.
+* Importation of badly formatted guests in the CSV file will be skipped.
 * The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 1.
 
 |====
@@ -242,11 +244,13 @@ You will populate the guest list with the data imported from the CSV file in the
 // tag::export[]
 === Exporting guests to CSV file : `export`
 
-Exports guests' data to a specified CSV file. The structure for the guest fields in the CSV file is predefined and can be found at <<csvguestlistformat,CSV Guest List Format>>. +
+Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<csvguestlistformat, Section 6: "CSV Guest List Format">>. +
 
 Format: `export FILE_PATH`
 
 ****
+* Command will only export the guests that you see in the guest list panel of the user interface.
+** To export selected guests, use the `filter` command before exporting.
 * `FILE_PATH` shall only be a relative or an absolute file path.
 ** Relative file path is relative to where the application Jar file is located.
 * If no `FILE_PATH` is provided, guests will be exported using the default filename, `exportedGuestBook.csv` to the current working directory (folder where the application Jar file is located).
@@ -603,9 +607,14 @@ susceptible to an increased number of spam emails from untrusted applications. H
 [[csvguestlistformat]]
 == CSV Guest List Format
 
-The `import` and `export` command will work with CSV files according to the predefined format below
+The `import` and `export` command will only work with CSV files according to a predefined format. To create valid CSV files, guests fields must in the following format below and each guest must be entered on a new line.
 
 Format: `NAME,PHONE_NUMBER,EMAIL,PAYMENT,[TAG]`
+
+[WARNING]
+====
+Individual guest fields shall not contain any commas.
+====
 
 Example: sample CSV file
 ****
@@ -616,11 +625,6 @@ Hakeem Salgado,80000957,\80000957@gmail.com,PAID,ABSENT,gold,Veg,VIP +
 Hibah Lees,80000882,\80000882@gmail.com,PAID,ABSENT,gold,Veg,VIP +
 Jayda Hill,80000251,\80000251@gmail.com,PAID,ABSENT,gold,Veg,VIP +
 ****
-
-[WARNING]
-====
-Individual guest fields shall not contain any commas.
-====
 
 // end::csvformat[]
 
