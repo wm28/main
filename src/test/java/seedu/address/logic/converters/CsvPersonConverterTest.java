@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 
-public class CsvConverterTest {
+public class CsvPersonConverterTest {
 
     public static final String VALID_NAME = "Amy Bee";
     public static final String VALID_PHONE = "11111111";
@@ -97,56 +97,56 @@ public class CsvConverterTest {
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_DIET);
         Person validPerson = personBuilder.build();
 
-        CsvConverter csvConverter = new CsvConverter();
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
         AdaptedPerson validAdaptedPerson = new CsvAdaptedPerson(VALID_CSV);
-        Person decodedPerson = csvConverter.decodePerson(validAdaptedPerson);
+        Person decodedPerson = csvPersonConverter.decodePerson(validAdaptedPerson);
 
         assertTrue(decodedPerson.equals(validPerson));
     }
 
     @Test
     public void decodePerson_invalidPersonName_throwsPersonDecodingException() throws Exception {
-        CsvConverter csvConverter = new CsvConverter();
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
         AdaptedPerson invalidNameAdaptedPerson = new CsvAdaptedPerson(INVALID_NAME_CSV);
         thrown.expect(PersonDecodingException.class);
         thrown.expectMessage(Name.MESSAGE_NAME_CONSTRAINTS);
-        csvConverter.decodePerson(invalidNameAdaptedPerson);
+        csvPersonConverter.decodePerson(invalidNameAdaptedPerson);
     }
 
     @Test
     public void decodePerson_invalidPhoneNumber_throwsPersonDecodingException() throws Exception {
-        CsvConverter csvConverter = new CsvConverter();
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
         AdaptedPerson invalidPhoneAdaptedPerson = new CsvAdaptedPerson(INVALID_PHONE_CSV);
         thrown.expect(PersonDecodingException.class);
         thrown.expectMessage(Phone.MESSAGE_PHONE_CONSTRAINTS);
-        csvConverter.decodePerson(invalidPhoneAdaptedPerson);
+        csvPersonConverter.decodePerson(invalidPhoneAdaptedPerson);
     }
 
     @Test
     public void decodePerson_invalidEmail_throwsPersonDecodingException() throws Exception {
-        CsvConverter csvConverter = new CsvConverter();
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
         AdaptedPerson invalidEmailAdaptedPerson = new CsvAdaptedPerson(INVALID_EMAIL_CSV);
         thrown.expect(PersonDecodingException.class);
         thrown.expectMessage(Email.MESSAGE_EMAIL_CONSTRAINTS);
-        csvConverter.decodePerson(invalidEmailAdaptedPerson);
+        csvPersonConverter.decodePerson(invalidEmailAdaptedPerson);
     }
 
     @Test
     public void decodePerson_invalidTags_throwsPersonDecodingException() throws Exception {
-        CsvConverter csvConverter = new CsvConverter();
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
         AdaptedPerson invalidTagsAdaptedPerson = new CsvAdaptedPerson(INVALID_TAGS_CSV);
         thrown.expect(PersonDecodingException.class);
         thrown.expectMessage(Tag.MESSAGE_TAG_CONSTRAINTS);
-        csvConverter.decodePerson(invalidTagsAdaptedPerson);
+        csvPersonConverter.decodePerson(invalidTagsAdaptedPerson);
     }
 
     @Test
     public void decodePerson_insufficientCsvData_throwsPersonDecodingException() throws Exception {
-        CsvConverter csvConverter = new CsvConverter();
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
         AdaptedPerson insufficientFieldsAdaptedPerson = new CsvAdaptedPerson(INSUFFICIENT_FIELDS_CSV);
         thrown.expect(PersonDecodingException.class);
         thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        csvConverter.decodePerson(insufficientFieldsAdaptedPerson);
+        csvPersonConverter.decodePerson(insufficientFieldsAdaptedPerson);
     }
 
 
@@ -160,22 +160,22 @@ public class CsvConverterTest {
                 .withPayment(VALID_PAYMENT)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_DIET);
         Person validPerson = personBuilder.build();
-        CsvConverter csvConverter = new CsvConverter();
-        AdaptedPerson validAdaptedPerson = csvConverter.encodePerson(validPerson);
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
+        AdaptedPerson validAdaptedPerson = csvPersonConverter.encodePerson(validPerson);
 
         assertTrue(VALID_CSV.equals(validAdaptedPerson.getFormattedString()));
     }
 
     @Test
     public void encodePerson_nullPerson_throwsPersonEncodingException() throws Exception {
-        CsvConverter csvConverter = new CsvConverter();
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
         thrown.expect(PersonEncodingException.class);
-        csvConverter.encodePerson(null);
+        csvPersonConverter.encodePerson(null);
     }
 
     @Test
     public void getSupportedFileFormat_correctFileFormat_returnsFileFormat() throws Exception {
-        CsvConverter csvConverter = new CsvConverter();
-        assertTrue(csvConverter.getSupportedFileFormat().equals(SupportedFileFormat.CSV));
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
+        assertTrue(csvPersonConverter.getSupportedFileFormat().equals(SupportedFileFormat.CSV));
     }
 }

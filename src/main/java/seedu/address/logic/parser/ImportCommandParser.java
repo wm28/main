@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.ImportCommand;
-import seedu.address.logic.converters.CsvConverter;
+import seedu.address.logic.converters.CsvPersonConverter;
 import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.logic.converters.fileformats.csv.CsvFile;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -42,7 +42,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         if (fileFormat.isPresent()) {
             switch (fileFormat.get()) {
             case CSV:
-                return new ImportCommand(new CsvFile(trimmedArg), new CsvConverter());
+                return new ImportCommand(new CsvFile(trimmedArg), new CsvPersonConverter());
             default:
                 throw new ParseException(String.format(MESSAGE_UNSUPPORTED_FILE_EXTENSION,
                         ImportCommand.MESSAGE_USAGE));

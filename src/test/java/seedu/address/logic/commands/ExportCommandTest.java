@@ -145,7 +145,7 @@ public class ExportCommandTest {
 
 
     /**
-     * A CsvConverter stub that always fails to encode
+     * A CsvPersonConverter stub that always fails to encode
      */
     private class CsvConverterAlwaysFailingConversion extends CsvConverterStub {
         @Override
@@ -155,7 +155,7 @@ public class ExportCommandTest {
     }
 
     /**
-     * A CsvConverter stub that always successfully encodes.
+     * A CsvPersonConverter stub that always successfully encodes.
      */
     private class CsvConverterAlwaysSuccessfulConversion extends CsvConverterStub {
         @Override

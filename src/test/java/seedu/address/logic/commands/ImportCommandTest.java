@@ -67,7 +67,7 @@ public class ImportCommandTest {
     @Test
     public void execute_csvConverterFailure_correctFeedback() throws Exception {
         ImportCommand importCommand = new ImportCommand(new CsvFileStubWithTypicalPersons(),
-                new CsvConverterAlwaysFailingConversion());
+                new CsvPersonConverterAlwaysFailingConversion());
         CommandResult commandResult = importCommand.execute(new ModelStubAcceptingPersonAdded(), commandHistory);
         assertEquals(String.format(ImportCommand.MESSAGE_IMPORT_CSV_RESULT, 0, TypicalPersons.NUM_PERSONS,
                 VALID_CSV_FILENAME), commandResult.feedbackToUser);
@@ -77,7 +77,7 @@ public class ImportCommandTest {
     @Test
     public void execute_successfulImportOfAllEntriesInCsvFile_success() throws Exception {
         ImportCommand importCommand = new ImportCommand(new CsvFileStubWithTypicalPersons(),
-                new CsvConverterAlwaysSuccessfulConversion());
+                new CsvPersonConverterAlwaysSuccessfulConversion());
 
         CommandResult commandResult = importCommand.execute(new ModelStubAcceptingPersonAdded(), commandHistory);
         assertEquals(String.format(ImportCommand.MESSAGE_IMPORT_CSV_RESULT, TypicalPersons.NUM_PERSONS,
@@ -124,9 +124,9 @@ public class ImportCommandTest {
 
 
     /**
-     * A CsvConverter stub that always fails to decode
+     * A CsvPersonConverter stub that always fails to decode
      */
-    private class CsvConverterAlwaysFailingConversion extends CsvConverterStub {
+    private class CsvPersonConverterAlwaysFailingConversion extends CsvConverterStub {
         @Override
         public Person decodePerson(AdaptedPerson person) throws PersonDecodingException {
             throw new PersonDecodingException("Person fails to decode");
@@ -134,10 +134,10 @@ public class ImportCommandTest {
     }
 
     /**
-     * A CsvConverter stub that always successfully decodes. Persons are based on TypicalPersons list for
+     * A CsvPersonConverter stub that always successfully decodes. Persons are based on TypicalPersons list for
      * simplicity.
      */
-    private class CsvConverterAlwaysSuccessfulConversion extends CsvConverterStub {
+    private class CsvPersonConverterAlwaysSuccessfulConversion extends CsvConverterStub {
         private Queue<Person> personList = new LinkedList<>(TypicalPersons.getTypicalPersons());
 
         @Override
