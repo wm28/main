@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PAYMENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_UID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PAYMENT_DESC_AMY;
@@ -20,6 +21,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_DIET_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.UID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.UID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -52,30 +55,34 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-               + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
+               + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + UID_DESC_BOB
+                + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-               + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
+               + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + UID_DESC_BOB
+                + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
+                + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + UID_DESC_BOB
+                + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
+                + PAYMENT_DESC_BOB + ATTENDANCE_DESC_BOB + UID_DESC_BOB
+                + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
 
         // multiple attendance - last attendance accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ATTENDANCE_DESC_AMY
-                + ATTENDANCE_DESC_BOB + PAYMENT_DESC_BOB
+                + ATTENDANCE_DESC_BOB + PAYMENT_DESC_BOB + UID_DESC_BOB
                 + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_DIET_BOB)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
-                + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPersonMultipleTags));
+                + ATTENDANCE_DESC_BOB + UID_DESC_BOB + TAG_DESC_DIET_BOB, new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -83,7 +90,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + PAYMENT_DESC_AMY + ATTENDANCE_DESC_AMY, new AddCommand(expectedPerson));
+                        + PAYMENT_DESC_AMY + ATTENDANCE_DESC_AMY + UID_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -125,41 +132,46 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
-                + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB, Name.MESSAGE_NAME_CONSTRAINTS);
+                + ATTENDANCE_DESC_BOB + UID_DESC_BOB + TAG_DESC_DIET_BOB, Name.MESSAGE_NAME_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
-                + ATTENDANCE_DESC_BOB
+                + ATTENDANCE_DESC_BOB + UID_DESC_BOB
                 + TAG_DESC_DIET_BOB, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + PAYMENT_DESC_BOB
-                + ATTENDANCE_DESC_BOB
+                + ATTENDANCE_DESC_BOB + UID_DESC_BOB
                 + TAG_DESC_DIET_BOB, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         // invalid payment
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_PAYMENT_DESC
-                + ATTENDANCE_DESC_BOB
+                + ATTENDANCE_DESC_BOB + UID_DESC_BOB
                 + TAG_DESC_DIET_BOB, Payment.MESSAGE_PAYMENT_CONSTRAINTS);
 
         // invalid attendance
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
-                + INVALID_ATTENDANCE_DESC
+                + INVALID_ATTENDANCE_DESC + INVALID_UID_DESC
                 + TAG_DESC_DIET_BOB, Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
-                + ATTENDANCE_DESC_BOB
+                + ATTENDANCE_DESC_BOB + UID_DESC_BOB
                 + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        // invalid uid
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
+                + ATTENDANCE_DESC_BOB + UID_DESC_BOB
+                + TAG_DESC_DIET_BOB, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + PAYMENT_DESC_BOB
-                + INVALID_ATTENDANCE_DESC,
+                + INVALID_ATTENDANCE_DESC + UID_DESC_BOB,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB,
+                + ATTENDANCE_DESC_BOB + TAG_DESC_DIET_BOB + UID_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

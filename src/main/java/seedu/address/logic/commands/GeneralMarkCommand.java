@@ -17,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 //@@author kronicler
@@ -25,31 +26,20 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing person in the address book.
  */
 public abstract class GeneralMarkCommand extends Command {
-
-    public static final String COMMAND_WORD = "mark";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as present "
-            + "using their unique phone number. "
-            + "This will also change the a/ tag associated with the person to Present.\n"
-            + "Parameters: "
-            + "[PHONE] "
-            + "Example: " + COMMAND_WORD
-            + " 91234567";
-
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person as PRESENT: %1$s";
     public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Marked Person as ABSENT: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
+    public static final String MESSAGE_UID_NOT_FOUND = "UID not found in the address book";
 
-    private final Phone phone;
+    private final Uid uid;
     private Index index;
     private EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param phone of the person in the filtered person list to edit
+     * @param uid of the person in the filtered person list to edit
      */
-    public GeneralMarkCommand(Phone phone) {
-        requireNonNull(phone);
-        this.phone = phone;
+    public GeneralMarkCommand(Uid uid) {
+        requireNonNull(uid);
+        this.uid = uid;
     }
 
     /**
@@ -62,15 +52,15 @@ public abstract class GeneralMarkCommand extends Command {
         int x = 0;
         boolean isNotFound = true;
         for (Person p : lastShownList) {
-            Phone temp = p.getPhone();
-            if (phone.equals(temp)) {
+            Uid temp = p.getUid();
+            if (uid.equals(temp)) {
                 isNotFound = false;
                 break;
             }
             x++;
         }
         if (isNotFound) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
+            throw new CommandException(MESSAGE_UID_NOT_FOUND);
         }
 
         index = Index.fromZeroBased(x);
@@ -122,10 +112,11 @@ public abstract class GeneralMarkCommand extends Command {
         //@@author
         //@@author kronicler
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
+        Uid updatedUid = editPersonDescriptor.getUid().orElse(personToEdit.getUid());
         Set<Tag> updatedTags = personToEdit.getTags();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
-                updatedAttendance, updatedTags);
+                updatedAttendance, updatedUid, updatedTags);
     }
 
     @Override
@@ -156,6 +147,7 @@ public abstract class GeneralMarkCommand extends Command {
         private Email email;
         private Payment payment;
         private Attendance attendance;
+        private Uid uid;
         private Set<Tag> tags;
 
         /**
@@ -168,6 +160,7 @@ public abstract class GeneralMarkCommand extends Command {
             setEmail(null);
             setPayment(null);
             setAttendance(new Attendance(updateAttendance));
+            setUid(null);
             setTags(null);
         }
 
@@ -213,6 +206,14 @@ public abstract class GeneralMarkCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
+        public void setUid(Uid uid) {
+            this.uid = uid;
+        }
+
+        public Optional<Uid> getUid() {
+            return Optional.ofNullable(uid);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -250,6 +251,7 @@ public abstract class GeneralMarkCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getPayment().equals(e.getPayment())
                     && getAttendance().equals(e.getAttendance())
+                    && getUid().equals(e.getUid())
                     && getTags().equals(e.getTags());
         }
     }

@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 //@@author kronicler
@@ -25,26 +26,23 @@ public class MarkCommand extends GeneralMarkCommand {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as present "
-            + "using their unique phone number. "
+            + "using their unique UID. "
             + "This will also change the a/ tag associated with the person to Present.\n"
             + "Parameters: "
             + "[PHONE] "
             + "Example: " + COMMAND_WORD
             + " 91234567";
 
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person as PRESENT: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Phone number not found in the address book";
-
-    private final Phone phone;
+    private final Uid uid;
     private Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param phone of the person in the filtered person list to edit
+     * @param uid of the person in the filtered person list to edit
      */
-    public MarkCommand(Phone phone) {
-        super(phone);
-        this.phone = phone;
+    public MarkCommand(Uid uid) {
+        super(uid);
+        this.uid = uid;
         this.editPersonDescriptor = new EditPersonDescriptor();
     }
 
@@ -81,6 +79,7 @@ public class MarkCommand extends GeneralMarkCommand {
         private Email email;
         private Payment payment;
         private Attendance attendance;
+        private Uid uid;
         private Set<Tag> tags;
 
         /**
@@ -93,6 +92,7 @@ public class MarkCommand extends GeneralMarkCommand {
             setEmail(null);
             setPayment(null);
             setAttendance(new Attendance("PRESENT"));
+            setUid(null);
             setTags(null);
         }
 
@@ -138,6 +138,14 @@ public class MarkCommand extends GeneralMarkCommand {
             return Optional.ofNullable(attendance);
         }
 
+        public void setUid(Uid uid) {
+            this.uid = uid;
+        }
+
+        public Optional<Uid> getUid() {
+            return Optional.ofNullable(uid);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -175,6 +183,7 @@ public class MarkCommand extends GeneralMarkCommand {
                     && getEmail().equals(e.getEmail())
                     && getPayment().equals(e.getPayment())
                     && getAttendance().equals(e.getAttendance())
+                    && getUid().equals(e.getUid())
                     && getTags().equals(e.getTags());
         }
     }

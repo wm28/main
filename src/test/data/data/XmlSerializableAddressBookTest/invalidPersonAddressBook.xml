@@ -7,5 +7,6 @@
         <email isPrivate="false">hans@exam!32ple</email>
         <payment isPrivate="false">NOTPAID</payment>
         <attendance isPrivate="false">ABSENT</attendance>
+        <uid>00001</uid>
     </persons>
 </addressbook>

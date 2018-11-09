@@ -10,12 +10,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Uid {
     public static final String MESSAGE_UID_CONSTRAINTS =
-            "Id should only contain numeric characters, it can be left blank";
+            "UID should only contain alpha numeric characters, it can be left blank";
 
     /*
-     * Ensures that only a string of numeric characters are accepted
+     * Ensures that only a string of alpha numeric characters are accepted and they are 5 characters long
      */
-    public static final String UID_VALIDATION_REGEX = "[\\p{Digit}]*";
+    public static final String UID_VALIDATION_REGEX = "\\p{Alnum}{5,}";
 
     public final String uidValue;
 
