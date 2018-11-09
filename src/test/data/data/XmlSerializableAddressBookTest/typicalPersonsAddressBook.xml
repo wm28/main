@@ -7,6 +7,7 @@
         <email>alice@gmail.com</email>
         <payment>PENDING</payment>
         <attendance>PRESENT</attendance>
+        <uid>00001</uid>
         <tagged>VEGETARIAN</tagged>
         <tagged>NoNuts</tagged>
     </persons>
@@ -16,6 +17,7 @@
         <email>johnd@gmail.com</email>
         <payment>PAID</payment>
         <attendance>ABSENT</attendance>
+        <uid>00002</uid>
         <tagged>NORMAL</tagged>
         <tagged>NoSeafood</tagged>
         <tagged>GUEST</tagged>
@@ -26,6 +28,7 @@
         <email>heinz@gmail.com</email>
         <payment>NOTPAID</payment>
         <attendance>PRESENT</attendance>
+        <uid>00003</uid>
     </persons>
     <persons>
         <name>Daniel Meier</name>
@@ -33,6 +36,7 @@
         <email>cornelia@gmail.com</email>
         <payment>PAID</payment>
         <attendance>ABSENT</attendance>
+        <uid>00004</uid>
         <tagged>NORMAL</tagged>
         <tagged>VIP</tagged>
     </persons>
@@ -42,6 +46,7 @@
         <email>werner@gmail.com</email>
         <payment>NOTPAID</payment>
         <attendance>PRESENT</attendance>
+        <uid>00005</uid>
     </persons>
     <persons>
         <name>Fiona Kunz</name>
@@ -49,6 +54,7 @@
         <email>lydia@gmail.com</email>
         <payment>PAID</payment>
         <attendance>ABSENT</attendance>
+        <uid>00006</uid>
     </persons>
     <persons>
         <name>George Best</name>
@@ -56,6 +62,7 @@
         <email>anna@gmail.com</email>
         <payment>PENDING</payment>
         <attendance>PRESENT</attendance>
+        <uid>00007</uid>
     </persons>
     <event>
         <name>Conference</name>

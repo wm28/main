@@ -31,6 +31,7 @@ public class UidTest {
         assertTrue(Uid.isValidUid("16817"));
         assertTrue(Uid.isValidUid("01110"));
         assertTrue(Uid.isValidUid("99911"));
+        assertTrue(Uid.isValidUid("A00001"));
 
         //Invalid
         assertFalse(Uid.isValidUid("1"));
@@ -38,7 +39,7 @@ public class UidTest {
         assertFalse(Uid.isValidUid("110"));
         assertFalse(Uid.isValidUid("1011"));
         assertFalse(Uid.isValidUid("dfs"));
-        assertFalse(Uid.isValidUid("$"));
+        assertFalse(Uid.isValidUid("$00001"));
         assertFalse(Uid.isValidUid("?./m,"));
         assertFalse(Uid.isValidUid("asdf"));
         assertFalse(Uid.isValidUid("!~"));

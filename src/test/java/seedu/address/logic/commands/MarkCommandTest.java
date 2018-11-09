@@ -27,7 +27,7 @@ public class MarkCommandTest {
     private final Model modelLimited = new ModelManager();
     private final Uid aliceUid = TypicalPersons.ALICE_UID;
     private final Uid bensonUid = TypicalPersons.BENSON_UID;
-    private final Uid invalidUid = TypicalPersons.INVALID_UID;
+    private final Uid unknownUid = new Uid("00011");
 
     @Before
     public void setUp() {
@@ -71,7 +71,7 @@ public class MarkCommandTest {
     @Test
     public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
-        MarkCommand markCommand = new MarkCommand(invalidUid);
+        MarkCommand markCommand = new MarkCommand(unknownUid);
         markCommand.execute(model, commandHistory);
     }
 

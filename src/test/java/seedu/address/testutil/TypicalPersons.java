@@ -109,7 +109,6 @@ public class TypicalPersons {
 
     public static final Uid ALICE_UID = new Uid("00001");
     public static final Uid BENSON_UID = new Uid("00002");
-    public static final Uid INVALID_UID = new Uid("1");
 
     public static final Event TYPICAL_EVENT = new EventBuilder()
             .withEventName("Graduation party").withEventDate("10/01/2019")

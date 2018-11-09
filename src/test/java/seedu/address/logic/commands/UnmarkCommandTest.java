@@ -27,7 +27,7 @@ public class UnmarkCommandTest {
     private final Model modelLimited = new ModelManager();
     private final Uid aliceUid = TypicalPersons.ALICE_UID;
     private final Uid bensonUid = TypicalPersons.BENSON_UID;
-    private final Uid invalidUid = TypicalPersons.INVALID_UID;
+    private final Uid unknownUid = new Uid("00011");
 
     @Before
     public void setUp() {
@@ -66,7 +66,7 @@ public class UnmarkCommandTest {
     @Test
     public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
-        UnmarkCommand unmarkCommand = new UnmarkCommand(invalidUid);
+        UnmarkCommand unmarkCommand = new UnmarkCommand(unknownUid);
         unmarkCommand.execute(model, commandHistory);
     }
 
