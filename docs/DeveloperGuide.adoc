@@ -1139,6 +1139,49 @@ These instructions only provide a starting point for testers to work on; testers
 //   _{give more}_
    Expected: Similar to previous.
 
+// tag::filterappendix[]
+=== Filtering a guest
+
+. Filtering a guest
+
+
+.. Test case: `filter a/absent` +
+   Expected: Details of guests who are absent (i.e. are labelled as "absent" in the
+   Attendance field) will be listed.
+   The number of guests listed will be shown in the status message.
+.. Test case: `filter a/absent pa/paid t/Vegetarian` +
+   Expected: Details of guests who are absent (i.e. are labelled as "absent" in the
+   Attendance field), have paid (i.e. are labelled as "paid" in the
+   Payment field) *and* have the "Vegetarian" tag will be listed.
+   The number of guests who are listed will be shown in the status message.
+.. Test case: `filter pa/paying` +
+   Expected: No guest is listed. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect filter commands to try: `filter`,
+    `filter prefix/` (where the prefix is any other character besides 'pa', 'a' and 't') ,
+    `filter prefix` (where prefix given does not have '/' or has any other special character), etc. +
+//   _{give more}_
+    Expected: Similar to previous.
+// end::filterappendix[]
+
+// tag::findappendix[]
+=== Finding a guest
+
+. Finding a guest
+
+
+.. Test case: `find n/john` +
+   Expected: Details of guests who have 'john' in their names.
+   The number of guests listed will be shown in the status message.
+.. Test case: `find e/(Non-matching keyword)` +
+   Expected: No guest is listed. Status bar remains the same.
+.. Other incorrect find commands to try: `find`,
+    `find prefix/` (where the prefix is any other character besides 'n', 'p' and 'e') ,
+    `find prefix` (where prefix given does not have '/' or has any other special character), etc. +
+//   _{give more}_
+    Expected: No guest is listed. Error details shown in the status message.
+    Status bar remains the same.
+// end::findappendix[]
+
 === Saving data
 
 . Dealing with missing/corrupted data files

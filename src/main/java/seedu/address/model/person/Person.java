@@ -23,18 +23,20 @@ public class Person {
     // Data fields
     private final Payment payment;
     private final Attendance attendance;
+    private final Uid uid;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Payment payment, Attendance attendance, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, payment, attendance, tags);
+    public Person(Name name, Phone phone, Email email, Payment payment, Attendance attendance, Uid uid, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, payment, attendance, uid, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.payment = payment;
         this.attendance = attendance;
+        this.uid = uid;
         this.tags.addAll(tags);
     }
 
@@ -57,6 +59,12 @@ public class Person {
 
     public Attendance getAttendance() {
         return attendance;
+    }
+    //@@author
+
+    //@@author kronicler
+    public Uid getUid() {
+        return uid;
     }
     //@@author
 
@@ -102,6 +110,7 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getPayment().equals(getPayment())
                 && otherPerson.getAttendance().equals(getAttendance())
+                && otherPerson.getUid().equals(getUid())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -123,6 +132,8 @@ public class Person {
                 .append(getPayment())
                 .append(" Attendance: ")
                 .append(getAttendance())
+                .append(" UID: ")
+                .append(getUid())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

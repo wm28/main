@@ -105,6 +105,10 @@ include::../DeveloperGuide.adoc[tag=filter]
 
 include::../DeveloperGuide.adoc[tag=find]
 
+include::../DeveloperGuide.adoc[tag=filterappendix]
+
+include::../DeveloperGuide.adoc[tag=findappendix]
+
 
 == PROJECT: Invités
 

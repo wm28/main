@@ -21,7 +21,7 @@ Responsibilities: Mass email sending functionality
 
 === Sandhya Gopakumar
 image::sandhyagopakumar.png[width="150", align="left"]
-{empty}[http://github.com/SandhyaGopakumar[github]] [<<SandhyaGopakumar#, portfolio>>]
+{empty}[http://github.com/SandhyaGopakumar[github]] [<<sandhyagopakumar#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Events functionality
@@ -39,7 +39,7 @@ Responsibilities: Data filtering
 
 === Tan Tze Guang
 image::kronicler.png[width="150", align="left"]
-{empty}[http://github.com/kronicler[github]] [<<TanTzeGuang#, portfolio>>]
+{empty}[http://github.com/kronicler[github]] [<<tantzeguang#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Attendance taking functionality

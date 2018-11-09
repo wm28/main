@@ -23,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 //@@author wm28
@@ -35,6 +36,7 @@ public class CsvConverter implements PersonConverter {
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<payment>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,?"
+            + "[\"|']?(?<uid>[^\"',]*)[\"|']?,?"
             + "(?<tags>.*)");
 
     private final SupportedFileFormat supportedFileFormat = SupportedFileFormat.CSV;
@@ -57,6 +59,7 @@ public class CsvConverter implements PersonConverter {
         result.append(person.getEmail() + ",");
         result.append(person.getPayment() + ",");
         result.append(person.getAttendance() + ",");
+        result.append(person.getUid() + ",");
         result.append(person.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.joining(",")));
@@ -83,8 +86,9 @@ public class CsvConverter implements PersonConverter {
             Email email = ParserUtil.parseEmail(matcher.group("email"));
             Payment payment = ParserUtil.parsePayment(matcher.group("payment"));
             Attendance attendance = ParserUtil.parseAttendance(matcher.group("attendance"));
+            Uid uid = ParserUtil.parseUid(matcher.group("uid"));
             Set<Tag> tagList = splitTags(matcher.group("tags"));
-            person = new Person(name, phone, email, payment, attendance, tagList);
+            person = new Person(name, phone, email, payment, attendance, uid, tagList);
         } catch (ParseException pe) {
             throw new PersonDecodingException(pe.getMessage(), pe);
         }
