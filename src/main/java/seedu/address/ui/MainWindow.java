@@ -92,6 +92,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -204,7 +205,7 @@ public class MainWindow extends UiPart<Stage> {
      * Creates and shows the ImportReportWindow
      */
     private void showImportReport(List<ImportError> errors) {
-        if (errors != null && !errors.isEmpty()){
+        if (errors != null && !errors.isEmpty()) {
             ImportReportWindow importReportWindow = new ImportReportWindow(errors);
             importReportWindow.show();
         }
