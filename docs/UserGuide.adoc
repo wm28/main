@@ -103,8 +103,6 @@ No spaces or special characters allowed in Payment and Attendance. +
 Payment accepts "PAID", "NOTPAID" , "PENDING" or "N.A.".
 Attendance accepts "ABSENT", "PRESENT" or "N.A." +
 Payment and attendance are case-insensitive. +
-If any options other than the ones given are entered, the guest will be edited,
-but payment and/or attendance will be blank. +
 Format: `edit_guest INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]  [pa/PAID]
          [t/GUEST_TYPE] [t/DIET]...`
 

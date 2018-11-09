@@ -16,7 +16,7 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the current Guestlist.\n"
             + "Parameters: none\n"
             + "Please ensure you don't enter any characters after the command word!\n"
-            + "Example: "
+            + "Example of usage: "
             + COMMAND_WORD;
 
     @Override

@@ -20,7 +20,7 @@ public class Attendance {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ATTENDANCE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\s.-]*";
+    public static final String ATTENDANCE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}.-]*";
 
     public final String attendanceValue;
 
@@ -32,21 +32,21 @@ public class Attendance {
     public Attendance(String attendance) {
         requireNonNull(attendance);
         checkArgument(isValidAttendance(attendance), MESSAGE_ATTENDANCE_CONSTRAINTS);
-        String attendanceChecker = null;
-        if (attendance.equalsIgnoreCase("ABSENT")
-                || attendance.equalsIgnoreCase("PRESENT")
-                || attendance.equalsIgnoreCase("N.A.")) {
-            attendanceChecker = attendance;
-        }
-
-        attendanceValue = attendanceChecker;
+        attendanceValue = attendance;
     }
 
     /**
      * Returns true if a given string is a valid attendance.
      */
     public static boolean isValidAttendance(String test) {
-        return test.matches(ATTENDANCE_VALIDATION_REGEX);
+        if ((test.equalsIgnoreCase("ABSENT")
+                || test.equalsIgnoreCase("PRESENT")
+                || test.equalsIgnoreCase("N.A."))
+                && test.matches(ATTENDANCE_VALIDATION_REGEX)) {
+            return true;
+        }
+
+        return false;
     }
 
 
