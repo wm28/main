@@ -212,6 +212,7 @@ name `david` *but not* `edan`
 // end::find[]
 
 // tag::import[]
+
 === Import guests from CSV file : `import`
 
 Imports multiple guests with data from a specified CSV file. To create your own CSV file for importing guests, please see <<csvguestlistformat, Section 6: "CSV Guest List Format">> for the accepted format. +
@@ -242,6 +243,7 @@ You will populate the guest list with the data imported from the CSV file in the
 // end::import[]
 
 // tag::export[]
+
 === Exporting guests to CSV file : `export`
 
 Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<csvguestlistformat, Section 6: "CSV Guest List Format">>. +
@@ -604,7 +606,6 @@ susceptible to an increased number of spam emails from untrusted applications. H
 // end::settingupemail[]
 
 // tag::csvformat[]
-[[csvguestlistformat]]
 == CSV Guest List Format
 
 The `import` and `export` command will only work with CSV files according to a predefined format. To create valid CSV files, guests fields must in the following format below and each guest must be entered on a new line.
