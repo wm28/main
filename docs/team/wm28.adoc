@@ -43,7 +43,7 @@ Invités is developed as part of a team project for a software development modul
 *** added utility class to generate QR codes for ticketing (Credits: https://mvnrepository.com/artifact/com.google.zxing/core[XZing Core])
 ** Community:
 *** Reported bugs for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-3/main/issues/153[1], https://github.com/CS2113-AY1819S1-W12-3/main/issues/148[2])
-*** Reviewed pull requests (https://github.com/CS2113-AY1819S1-F09-3/main/pull/272[#272], https://github.com/CS2113-AY1819S1-F09-3/main/pull/232[#232])
+*** Reviewed pull requests with comments (https://github.com/CS2113-AY1819S1-F09-3/main/pull/272[#272], https://github.com/CS2113-AY1819S1-F09-3/main/pull/232[#232])
 
 == Contributions to the User Guide
 
