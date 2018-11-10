@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.Test;
 
 import seedu.address.logic.commands.ExportCommand;
-import seedu.address.logic.converters.CsvConverter;
+import seedu.address.logic.converters.CsvPersonConverter;
 import seedu.address.logic.converters.fileformats.csv.CsvFile;
 
 public class ExportCommandParserTest {
@@ -24,7 +24,7 @@ public class ExportCommandParserTest {
     @Test
     public void parse_csvFileFormat_success() {
         String filename = "testing.csv";
-        ExportCommand expectedExportCommand = new ExportCommand(new CsvFile(filename), new CsvConverter());
+        ExportCommand expectedExportCommand = new ExportCommand(new CsvFile(filename), new CsvPersonConverter());
         assertParseSuccess(parser, filename, expectedExportCommand);
     }
 

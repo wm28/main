@@ -30,7 +30,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Converts a person between the {@code CsvAdaptedPerson} and the {@code Person}
  */
-public class CsvConverter implements PersonConverter {
+public class CsvPersonConverter implements PersonConverter {
     private static final Pattern PERSON_CSV_INPUT_FORMAT = Pattern.compile("[\"|']?(?<name>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
