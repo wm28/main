@@ -28,7 +28,7 @@ public class CsvConverterTest {
     public static final String VALID_EMAIL = "amy@gmail.com";
     public static final String VALID_PAYMENT = "PAID";
     public static final String VALID_ATTENDANCE = "PRESENT";
-    public static final String VALID_UID = "00001";
+    public static final String VALID_UID = "10000";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_DIET = "NORMAL";
 
@@ -165,6 +165,7 @@ public class CsvConverterTest {
                 .withEmail(VALID_EMAIL)
                 .withAttendance(VALID_ATTENDANCE)
                 .withPayment(VALID_PAYMENT)
+                .withUid(VALID_UID)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_DIET);
         Person validPerson = personBuilder.build();
         CsvConverter csvConverter = new CsvConverter();

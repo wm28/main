@@ -89,7 +89,18 @@ public class Person {
                 && otherPerson.getName().equals(getName())
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
     }
-
+    //@@author kronicler
+    /**
+     * Returns true if both persons have the same UID. This is a method to prevent UID from being non unique.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean hasSameUid(Person otherPerson) {
+        if (otherPerson.getUid().equals(this.getUid())) {
+            return true;
+        }
+        return false;
+    }
+    //@@author
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

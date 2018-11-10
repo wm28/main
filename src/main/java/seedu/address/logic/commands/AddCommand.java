@@ -42,6 +42,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the guest list.";
+    public static final String MESSAGE_DUPLICATE_UID
+            = "This UID is already used in the guest list. Please use another UID.";
+
 
     private final Person toAdd;
 
@@ -59,6 +62,9 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+        if (model.hasUid(toAdd)){
+            throw new CommandException(MESSAGE_DUPLICATE_UID);
         }
 
         model.addPerson(toAdd);

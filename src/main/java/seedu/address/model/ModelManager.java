@@ -115,6 +115,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //@@author kronicler
+    @Override
+    public boolean hasUid(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasUid(person);
+    }
+    //@@author
+
     @Override
     public void deleteTag(Tag tag) {
         versionedAddressBook.removeTag(tag);
