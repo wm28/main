@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.converters.CsvConverter;
+import seedu.address.logic.converters.CsvPersonConverter;
 import seedu.address.logic.converters.fileformats.csv.CsvFile;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -40,8 +40,8 @@ public class ImportCommandIntegrationTest {
         expectedModel.commitAddressBook();
 
         CsvFile csvFile = new CsvFile(TypicalPersons.TYPICAL_PERSONS_CSV);
-        CsvConverter csvConverter = new CsvConverter();
-        ImportCommand importCommand = new ImportCommand(csvFile, csvConverter);
+        CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
+        ImportCommand importCommand = new ImportCommand(csvFile, csvPersonConverter);
         Path path = Paths.get(TypicalPersons.TYPICAL_PERSONS_CSV);
         String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_CSV_RESULT,
                 TypicalPersons.NUM_PERSONS, TypicalPersons.NUM_PERSONS, path.getFileName());
