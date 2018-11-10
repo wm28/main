@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.testutil.Assert;
 
@@ -21,6 +23,20 @@ public class UidTest {
     }
 
     @Test
+    public void isEquals_success() {
+        Uid uid = new Uid("401345");
+        Uid otherUid = new Uid("401345");
+        assertTrue(uid.equals(otherUid));
+    }
+
+    @Test
+    public void isEquals_invalidUid_throwException() {
+        Uid uid = new Uid("401345");
+        Uid otherUid = new Uid("401335");
+        assertFalse(uid.equals(otherUid));
+    }
+
+    @Test
     public void isValidUid() {
         // null Uid
         Assert.assertThrows(NullPointerException.class, () -> Uid.isValidUid(null));
@@ -35,6 +51,8 @@ public class UidTest {
 
         //Invalid
         assertFalse(Uid.isValidUid("1"));
+        assertFalse(Uid.isValidUid(""));
+        assertFalse(Uid.isValidUid(" "));
         assertFalse(Uid.isValidUid("10"));
         assertFalse(Uid.isValidUid("110"));
         assertFalse(Uid.isValidUid("1011"));

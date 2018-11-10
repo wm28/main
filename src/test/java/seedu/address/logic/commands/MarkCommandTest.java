@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
@@ -7,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -55,17 +58,9 @@ public class MarkCommandTest {
     }
 
     @Test
-    public void retrieveIndex_filteredGuestListWithThePhoneNumber_success() {
-    }
-
-    @Test
-    public void retrieveIndex_unfilteredGuestListWithThePhoneNumber_success() {
-    }
-
-    @Test
     public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
         MarkCommand markCommand = new MarkCommand(bensonUid);
-        markCommand.execute(model, commandHistory);
+        CommandResult result = markCommand.execute(model, commandHistory);
     }
 
     @Test

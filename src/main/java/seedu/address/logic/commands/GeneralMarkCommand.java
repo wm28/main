@@ -50,16 +50,16 @@ public abstract class GeneralMarkCommand extends Command {
      * @throws CommandException if there are no matching persons in the list
      */
     public void retrieveIndex(List<Person> lastShownList) throws CommandException {
-        int x = 0;
+        int iterator = 0;
         int found = 0;
         int location = 0;
         for (Person p : lastShownList) {
             Uid temp = p.getUid();
             if (uid.equals(temp)) {
                 found++;
-                location = x;
+                location = iterator;
             }
-            x++;
+            iterator++;
         }
         if (found > 1) {
             throw new CommandException(MESSAGE_UID_DUPLICATE);
@@ -131,7 +131,7 @@ public abstract class GeneralMarkCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
+        // instance of handles nulls
         if (!(other instanceof GeneralMarkCommand)) {
             return false;
         }
