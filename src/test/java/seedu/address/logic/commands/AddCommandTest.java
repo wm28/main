@@ -99,7 +99,7 @@ public class AddCommandTest {
 
         AddCommand addCommand = new AddCommand(expectedPerson);
         CommandResult expectedResult = new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, expectedPerson));
-        assertFalse(expectedResult.equals(addCommand.execute(model,commandHistory)));
+        assertFalse(expectedResult.equals(addCommand.execute(model, commandHistory)));
     }
 
 

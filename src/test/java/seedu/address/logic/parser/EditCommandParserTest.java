@@ -32,7 +32,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -126,8 +125,8 @@ public class EditCommandParserTest {
         // Does not allow editing UID in parser
         assertParseFailure(parser, "1" + NAME_DESC_AMY + UID_DESC_AMY, Messages.MESSAGE_EDITING_UID);
         assertParseFailure(parser, "1" + UID_DESC_AMY, Messages.MESSAGE_EDITING_UID);
-        assertParseFailure(parser, "1" + EMAIL_DESC_AMY + NAME_DESC_AMY +
-                UID_DESC_AMY, Messages.MESSAGE_EDITING_UID);
+        assertParseFailure(parser, "1" + EMAIL_DESC_AMY + NAME_DESC_AMY
+                + UID_DESC_AMY, Messages.MESSAGE_EDITING_UID);
     }
 
     @Test
