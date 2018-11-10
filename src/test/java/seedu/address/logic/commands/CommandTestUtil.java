@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UID;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +42,9 @@ public class CommandTestUtil {
     public static final String VALID_ATTENDANCE_AMY = "PRESENT";
     public static final String VALID_ATTENDANCE_BOB = "ABSENT";
     public static final String VALID_ATTENDANCE_DANNY = "PRESENT";
+    public static final String VALID_UID_AMY = "00001";
+    public static final String VALID_UID_BOB = "00002";
+    public static final String VALID_UID_DANNY = "00003";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_ADDED = "added"; //used to test whether a tag has been added to a person
@@ -63,6 +67,9 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String EMAIL_DESC_DANNY = " " + PREFIX_EMAIL + VALID_EMAIL_DANNY;
+    public static final String UID_DESC_AMY = " " + PREFIX_UID + VALID_UID_AMY;
+    public static final String UID_DESC_BOB = " " + PREFIX_UID + VALID_UID_BOB;
+    public static final String UID_DESC_DANNY = " " + PREFIX_UID + VALID_UID_DANNY;
     public static final String ATTENDANCE_DESC_AMY = " "
             + PREFIX_ATTENDANCE + VALID_ATTENDANCE_AMY;
     public static final String ATTENDANCE_DESC_BOB = " "
@@ -89,6 +96,7 @@ public class CommandTestUtil {
     public static final String INVALID_ATTENDANCE_DESC = " "
             + PREFIX_ATTENDANCE; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_UID_DESC = " " + PREFIX_UID + "!0001"; // '!' not allowed in uid
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UID;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,6 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@gmail.com "
             + PREFIX_PAYMENT + "PAID "
             + PREFIX_ATTENDANCE + "PRESENT "
+            + PREFIX_UID + "00000 "
             + PREFIX_TAG + "NORMAL "
             + PREFIX_TAG + "NoShrimp "
             + PREFIX_TAG + "NORMAL ";

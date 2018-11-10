@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Srivastava Aaryam
 image::aaryamnus.png[width="150", align="left"]
-{empty}[http://github.com/aaryamNUS[github]] [<<aaryamNUS#, portfolio>>]
+{empty}[http://github.com/aaryamNUS[github]] [<<aaryamnus#, portfolio>>]
 
 Role: Team lead +
 Responsibilities: Mass email sending functionality
@@ -21,7 +21,7 @@ Responsibilities: Mass email sending functionality
 
 === Sandhya Gopakumar
 image::sandhyagopakumar.png[width="150", align="left"]
-{empty}[http://github.com/SandhyaGopakumar[github]] [<<SandhyaGopakumar#, portfolio>>]
+{empty}[http://github.com/SandhyaGopakumar[github]] [<<sandhyagopakumar#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Events functionality
@@ -30,7 +30,7 @@ Responsibilities: Events functionality
 
 === Sarah Taaher Bonna
 image::sarahtaaherbonna.png[width="150", align="left"]
-{empty}[http://github.com/SarahTaaherBonna[github]] [<<SarahTaaherBonna#, portfolio>>]
+{empty}[http://github.com/SarahTaaherBonna[github]] [<<sarahtaaherbonna#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data filtering
@@ -39,7 +39,7 @@ Responsibilities: Data filtering
 
 === Tan Tze Guang
 image::kronicler.png[width="150", align="left"]
-{empty}[http://github.com/kronicler[github]] [<<TanTzeGuang#, portfolio>>]
+{empty}[http://github.com/kronicler[github]] [<<tantzeguang#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Attendance taking functionality

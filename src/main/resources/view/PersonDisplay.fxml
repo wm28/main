@@ -26,19 +26,22 @@
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
       </rowConstraints>
       <Label styleClass="cell_small_label" text="Name: " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
       <Label styleClass="cell_small_label" text="Phone: " GridPane.rowIndex="1" GridPane.columnIndex="0"/>
       <Label styleClass="cell_small_label" text="Email: " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
       <Label styleClass="cell_small_label" text="Payment: " GridPane.rowIndex="3" GridPane.columnIndex="0"/>
       <Label styleClass="cell_small_label" text="Attendance: " GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-      <Label styleClass="cell_small_label" text="Tags: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+      <Label styleClass="cell_small_label" text="UID: " GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+      <Label styleClass="cell_small_label" text="Tags: " GridPane.rowIndex="6" GridPane.columnIndex="0"/>
       <Label fx:id="name" styleClass="cell_big_label" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
       <Label fx:id="phone" styleClass="cell_small_label" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
       <Label fx:id="email" styleClass="cell_small_label" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
       <Label fx:id="payment" styleClass="cell_small_label" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
       <Label fx:id="attendance" styleClass="cell_small_label" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-      <FlowPane fx:id="tags" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+      <Label fx:id="uid" styleClass="cell_small_label" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+      <FlowPane fx:id="tags" GridPane.rowIndex="6" GridPane.columnIndex="1" />
     </GridPane>
   </HBox>
 </StackPane>

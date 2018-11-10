@@ -28,6 +28,7 @@ public class CsvPersonConverterTest {
     public static final String VALID_EMAIL = "amy@gmail.com";
     public static final String VALID_PAYMENT = "PAID";
     public static final String VALID_ATTENDANCE = "PRESENT";
+    public static final String VALID_UID = "00001";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_DIET = "NORMAL";
 
@@ -35,6 +36,7 @@ public class CsvPersonConverterTest {
     public static final String INVALID_NAME = "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE = "911a"; // 'a' not allowed in phone numbers
     public static final String INVALID_EMAIL = "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_UID = "!0001"; // '!' is not allowed in uid
     public static final String INVALID_TAG_QUOTATIONS = "\"vegetarian"; // '"' not allowed
     public static final String INVALID_TAG_SPACES = "\"No shrimp"; // spaces are not allowed
 
@@ -43,6 +45,7 @@ public class CsvPersonConverterTest {
             + VALID_EMAIL + ","
             + VALID_PAYMENT + ","
             + VALID_ATTENDANCE + ","
+            + VALID_UID + ","
             + VALID_TAG_FRIEND + ","
             + VALID_TAG_DIET;
 
@@ -51,6 +54,7 @@ public class CsvPersonConverterTest {
             + VALID_EMAIL + ","
             + VALID_PAYMENT + ","
             + VALID_ATTENDANCE + ","
+            + VALID_UID + ","
             + VALID_TAG_FRIEND + ","
             + VALID_TAG_DIET;
 
@@ -59,6 +63,7 @@ public class CsvPersonConverterTest {
             + VALID_EMAIL + ","
             + VALID_PAYMENT + ","
             + VALID_ATTENDANCE + ","
+            + VALID_UID + ","
             + VALID_TAG_FRIEND + ","
             + VALID_TAG_DIET;
 
@@ -67,6 +72,7 @@ public class CsvPersonConverterTest {
             + INVALID_EMAIL + ","
             + VALID_PAYMENT + ","
             + VALID_ATTENDANCE + ","
+            + VALID_UID + ","
             + VALID_TAG_FRIEND + ","
             + VALID_TAG_DIET;
 
@@ -75,6 +81,7 @@ public class CsvPersonConverterTest {
             + VALID_EMAIL + ","
             + VALID_PAYMENT + ","
             + VALID_ATTENDANCE + ","
+            + VALID_UID + ","
             + VALID_TAG_FRIEND + ","
             + INVALID_TAG_SPACES + ","
             + INVALID_TAG_QUOTATIONS;

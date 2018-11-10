@@ -32,22 +32,21 @@ public class Payment {
     public Payment(String payment) {
         requireNonNull(payment);
         checkArgument(isValidPayment(payment), MESSAGE_PAYMENT_CONSTRAINTS);
-        String paymentChecker = null;
-        if (payment.equalsIgnoreCase("PAID")
-                || payment.equalsIgnoreCase("NOTPAID")
-                || payment.equalsIgnoreCase("N.A.")
-                || payment.equalsIgnoreCase("PENDING")) {
-            paymentChecker = payment;
-        }
-
-        paymentValue = paymentChecker;
+        paymentValue = payment;
     }
 
     /**
      * Returns true if a given string is a valid attendance.
      */
     public static boolean isValidPayment(String test) {
-        return test.matches(PAYMENT_VALIDATION_REGEX);
+        if ((test.equalsIgnoreCase("PAID")
+                || test.equalsIgnoreCase("NOTPAID")
+                || test.equalsIgnoreCase("N.A.")
+                || test.equalsIgnoreCase("PENDING"))
+                && test.matches(PAYMENT_VALIDATION_REGEX)) {
+            return true;
+        }
+        return false;
     }
 
 
