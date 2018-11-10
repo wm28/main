@@ -109,6 +109,11 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public boolean hasUid(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateEvent(Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }

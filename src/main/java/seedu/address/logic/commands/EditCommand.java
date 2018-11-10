@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -27,6 +28,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_PAYMENT + "PAYMENT] "
             + "[" + PREFIX_ATTENDANCE + "ATTENDANCE] "
+            + "[" + PREFIX_UID + "UID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -103,10 +106,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Payment updatedPayment = editPersonDescriptor.getPayment().orElse(personToEdit.getPayment());
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
+        Uid updatedUid = personToEdit.getUid();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
-                updatedAttendance, updatedTags);
+                updatedAttendance, updatedUid, updatedTags);
     }
 
     @Override
@@ -203,7 +207,6 @@ public class EditCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
-
 
         /**
          * Sets {@code tags} to this object's {@code tags}.

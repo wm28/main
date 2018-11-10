@@ -33,6 +33,8 @@ public class PersonDisplay extends UiPart<Region> {
     @FXML
     private Label payment;
     @FXML
+    private Label uid;
+    @FXML
     private FlowPane tags;
 
     public PersonDisplay() {
@@ -70,6 +72,7 @@ public class PersonDisplay extends UiPart<Region> {
         attendance.setText(person.getAttendance().attendanceValue);
         email.setText(person.getEmail().value);
         payment.setText(person.getPayment().paymentValue);
+        uid.setText(person.getUid().uidValue);
         removeTags();
         createTags(person);
         logger.info("Filled in PersonDisplay: " + person.toString());
@@ -84,6 +87,7 @@ public class PersonDisplay extends UiPart<Region> {
         attendance.setText("");
         email.setText("");
         payment.setText("");
+        uid.setText("");
         removeTags();
         logger.info("Cleared fields in PersonDisplay ");
     }

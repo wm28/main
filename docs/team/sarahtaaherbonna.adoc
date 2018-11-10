@@ -57,7 +57,7 @@ status and tags*
 ** Justification: This feature improves the product significantly because a user can find people who have yet to pay or are absent on the day of the event.
                   This will help users to be able to find people that fit the conditions they are looking for, without having to traverse the list manually.
 
-* *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sarahtaaherbonna
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sarahtaaherbonna[Sarah Taaher Bonna]]
 
 * *Other contributions*:  +
 1. Created Payment and Attendance attributes of a person.
@@ -70,14 +70,17 @@ name(s), phone number(s) and/or email address(es) at one go, instead of doing it
 the user is able to find the necessary guests using any available contact details, not just the name.
 
 ** Enhancements to existing features:
-*** Wrote additional tests for existing and new features to increase coverage (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/273, https://github.com/CS2113-AY1819S1-F09-3/main/pull/266)
+*** Wrote additional tests for existing and new features to increase coverage (Pull requests [https://github.com/CS2113-AY1819S1-F09-3/main/pull/273[273]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[266]])
+*** Did cosmetic tweaks to existing mark command to show updated list
+(for example if filter a/absent, and then mark is performed, the person who has been
+marked will no longer be in the list): [https://github.com/CS2113-AY1819S1-F09-3/main/pull/283[283]]
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the Developer Guide
- and made important changes to the Use Cases: https://github.com/CS2113-AY1819S1-F09-3/main/pull/144
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-F09-3/main/pull/218, https://github.com/CS2113-AY1819S1-F09-3/main/pull/266
-*** Added in the purpose of Invités in README.adoc: https://github.com/CS2113-AY1819S1-F09-3/main/pull/2
+ and made important changes to the Use Cases: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/144[144]]
+*** Did cosmetic tweaks to existing contents of the User Guide: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/218[218]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[266]]
+*** Added in the purpose of Invités in README.adoc: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/2[2]]
 ** Community:
-*** Reported bugs and suggestions for another team in the cohort (examples:  https://github.com/CS2113-AY1819S1-T09-4/main/issues/137, https://github.com/CS2113-AY1819S1-T09-4/main/issues/144)
+*** Reported bugs and suggestions for another team in the cohort (examples:  [https://github.com/CS2113-AY1819S1-T09-4/main/issues/137[137]], [https://github.com/CS2113-AY1819S1-T09-4/main/issues/144[144]])
 
 
 == Contributions to the User Guide
@@ -101,6 +104,10 @@ include::../UserGuide.adoc[tag=find]
 include::../DeveloperGuide.adoc[tag=filter]
 
 include::../DeveloperGuide.adoc[tag=find]
+
+include::../DeveloperGuide.adoc[tag=filterappendix]
+
+include::../DeveloperGuide.adoc[tag=findappendix]
 
 
 == PROJECT: Invités

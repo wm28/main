@@ -14,6 +14,8 @@ public class Messages {
     public static final String MESSAGE_FILE_NOT_FOUND = "%1$s does not exists!";
     public static final String MESSAGE_FILE_ALREADY_EXIST = "%1$s already exists!";
 
+    public static final String MESSAGE_EDITING_UID = "ERROR: A guest's UID cannot be edited";
+
     //@@author aaryamNUS
     public static final String MESSAGE_USERNAME_NOT_PROVIDED = "Error: you have not provided your username "
                                                                 + "for authentication!";

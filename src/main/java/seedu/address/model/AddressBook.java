@@ -128,6 +128,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //@@author kronicler
+    /**
+     * Returns true if a person with the same UID as {@code person} exists in the address book.
+     */
+    public boolean hasUid(Person person) {
+        requireNonNull(person);
+        return persons.checkUid(person);
+    }
+    //@@author
+
     //// util methods
 
     //@@author aaryamNUS
@@ -144,7 +154,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         Person newPerson =
                 new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(),
-                            person.getAttendance(), newTags);
+                            person.getAttendance(), person.getUid(), newTags);
 
         updatePerson(person, newPerson);
     }
@@ -169,7 +179,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         Person newPerson =
                 new Person (person.getName(), person.getPhone(), person.getEmail(), person.getPayment(),
-                            person.getAttendance(), newTags);
+                            person.getAttendance(), person.getUid(), newTags);
 
         updatePerson(person, newPerson);
     }

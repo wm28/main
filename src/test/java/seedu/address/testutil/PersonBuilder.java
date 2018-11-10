@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,12 +23,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "aliceblah@gmail.com";
     public static final String DEFAULT_PAYMENT = "PAID";
     public static final String DEFAULT_ATTENDANCE = "ABSENT";
+    public static final String DEFAULT_UID = "10000";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Payment payment;
     private Attendance attendance;
+    private Uid uid;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -36,6 +39,7 @@ public class PersonBuilder {
         payment = new Payment(DEFAULT_PAYMENT);
         email = new Email(DEFAULT_EMAIL);
         attendance = new Attendance(DEFAULT_ATTENDANCE);
+        uid = new Uid(DEFAULT_UID);
         tags = new HashSet<>();
     }
 
@@ -48,6 +52,7 @@ public class PersonBuilder {
         payment = personToCopy.getPayment();
         email = personToCopy.getEmail();
         attendance = personToCopy.getAttendance();
+        uid = personToCopy.getUid();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -92,6 +97,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Uid} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withUid(String uid) {
+        this.uid = new Uid(uid);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -100,7 +113,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, payment, attendance, tags);
+        return new Person(name, phone, email, payment, attendance, uid, tags);
     }
 
 

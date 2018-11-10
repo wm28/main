@@ -18,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -119,6 +120,21 @@ public class ParserUtil {
     }
 
     //@@author
+    /**
+     * Parses a {@code String Payment} into an {@code Payment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code payment} is invalid.
+     */
+    public static Uid parseUid(String uid) throws ParseException {
+        requireNonNull(uid);
+        String trimmedUid = uid.trim();
+        if (!Uid.isValidUid(trimmedUid)) {
+            throw new ParseException(Uid.MESSAGE_UID_CONSTRAINTS);
+        }
+        return new Uid(trimmedUid);
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

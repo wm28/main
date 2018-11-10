@@ -30,15 +30,15 @@ as listed below:
 |_The purpose of this section is to list the contributions I have made to project Invités_
 |===
 
-* *Major enhancement*: added the ability to *send emails* to guests
-** What it does: allows you to either send emails to individual guests using `email`, `forceEmail`, or `emailSpecialised` or
-send mass emails to all your guests using `emailAll`
+* *Main Feature*: added the ability to *send emails* to guests
+** What it does: allows you to either send emails to individual guests using `email`, or
+send mass emails to all your guests or certain groups of guests using `emailAll` and `emailSpecific` respectively
 ** Justification: This feature will allow event managers to streamline their event notification process, as they can easily and quickly
 inform all of their guests at once, regarding details of the event or otherwise.
 
-* *Minor enhancement*: added a `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=aaryamNUS[Contributed code]]
 * *Other contributions*:
+** Added an `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
 ** Project management:
 *** Managed releases v1.1 - v1.3 (3 releases) on GitHub
 *** Setup Travis and AppVeyor
@@ -47,9 +47,10 @@ inform all of their guests at once, regarding details of the event or otherwise.
 ** Enhancements to existing features
 *** Changed UI response for incorrect commands
 ** Community
-*** PRs reviewed for all milestones
+*** Pull Requests reviewed for all milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/131[#131]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/153[#153]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/157[#157]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/190[#190]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/203[#203]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/215[#215]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/217[#217]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[#266]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/273[#273]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]]
+*** Issues created to better structure the project workflow - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/6[#6]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/11[#11]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/15[#15]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/80[#89]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/114[#114]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/117[#117]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/237[#237]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/238[#238]]
 ** Tools
-*** Integrated a third party library (JavaMail API)
+*** Integrated a third party library https://javaee.github.io/javamail/docs/api/[JavaMail API]
 
 == Contributions to the User Guide
 

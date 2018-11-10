@@ -19,5 +19,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_START_TIME = new Prefix("st/");
     //@@author
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_UID = new Prefix("u/");
 
 }

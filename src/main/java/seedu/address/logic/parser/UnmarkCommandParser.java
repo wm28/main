@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 
 //@@author kronicler
 /**
@@ -22,14 +22,14 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
-        Phone phone;
+        Uid uid;
 
         try {
-            phone = ParserUtil.parsePhone(argMultimap.getPreamble());
+            uid = ParserUtil.parseUid(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE), pe);
         }
 
-        return new UnmarkCommand(phone);
+        return new UnmarkCommand(uid);
     }
 }
