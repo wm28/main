@@ -101,7 +101,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasUid(Person person){
+        public boolean hasUid(Person person) {
             requireNonNull(person);
             return this.person.hasSameUid(person);
         }
@@ -120,7 +120,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasUid(Person person){
+        public boolean hasUid(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::hasSameUid);
         }
