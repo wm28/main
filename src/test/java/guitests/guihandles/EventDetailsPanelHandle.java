@@ -11,11 +11,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
 
 /**
- * A handler for the {@code BrowserPanel} of the UI.
+ * A handler for the {@code EventDetailsPanel} of the UI.
  */
-public class BrowserPanelHandle extends NodeHandle<Node> {
+public class EventDetailsPanelHandle extends NodeHandle<Node> {
 
-    public static final String BROWSER_PANEL_ID = "#browserPanel";
+    public static final String EVENT_DETAILS_PANEL_ID = "#eventDetailsPanel";
     private static final String EVENT_NAME_FIELD_ID = "#name";
     private static final String EVENT_DATE_FIELD_ID = "#date";
     private static final String EVENT_VENUE_FIELD_ID = "#venue";
@@ -28,7 +28,7 @@ public class BrowserPanelHandle extends NodeHandle<Node> {
     private final Label startTimeLabel;
     private final List<Label> tagLabels;
 
-    public BrowserPanelHandle(Node panelNode) {
+    public EventDetailsPanelHandle(Node panelNode) {
         super(panelNode);
 
         nameLabel = getChildNode(EVENT_NAME_FIELD_ID);
