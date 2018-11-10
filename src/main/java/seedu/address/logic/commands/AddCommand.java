@@ -78,7 +78,7 @@ public class AddCommand extends Command {
         }
 
         //@@author kronicler
-        if (model.hasUid(toAdd)){
+        if (model.hasUid(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_UID);
         }
 
