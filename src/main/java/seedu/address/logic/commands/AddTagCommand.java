@@ -31,8 +31,8 @@ public class AddTagCommand extends Command {
     static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
 
     private static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
-    private static final String MESSAGE_NO_PERSON_TO_ADD_TAG = "All existing persons in the list " +
-                                                               "already have the specified tags!";
+    private static final String MESSAGE_NO_PERSON_TO_ADD_TAG = "All existing persons in the list "
+                                                               + "already have the specified tags!";
     private static Logger logger = Logger.getLogger("execute");
     private final Set<Tag> tagsToAdd;
     private int numberOfPeopleToAddTags = 0;
