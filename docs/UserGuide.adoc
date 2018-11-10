@@ -233,7 +233,7 @@ Format: `import FILE_PATH`
 * The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 1.
 
 |====
-| image:ImportReportWindow.png[] Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
+| image:ImportReportWindow.PNG[] Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
 |====
 ****
 
