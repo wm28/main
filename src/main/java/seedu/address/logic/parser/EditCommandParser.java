@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EDITING_UID;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -66,8 +67,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         //@@author
         //@@author kronicler
         if (argMultimap.getValue(PREFIX_UID).isPresent()) {
-            editPersonDescriptor.setUid(ParserUtil.parseUid(
-                    argMultimap.getValue(PREFIX_UID).get()));
+            throw new ParseException(MESSAGE_EDITING_UID);
         }
         //@@author
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);

@@ -29,6 +29,7 @@ public abstract class GeneralMarkCommand extends Command {
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person as PRESENT: %1$s";
     public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Marked Person as ABSENT: %1$s";
     public static final String MESSAGE_UID_NOT_FOUND = "UID not found in the address book";
+    public static final String MESSAGE_UID_DUPLICATE = "WARNING: There is more than one person with the same UID.";
 
     private final Uid uid;
     private Index index;
@@ -50,20 +51,24 @@ public abstract class GeneralMarkCommand extends Command {
      */
     public void retrieveIndex(List<Person> lastShownList) throws CommandException {
         int x = 0;
-        boolean isNotFound = true;
+        int found = 0;
+        int location = 0;
         for (Person p : lastShownList) {
             Uid temp = p.getUid();
             if (uid.equals(temp)) {
-                isNotFound = false;
-                break;
+                found++;
+                location = x;
             }
             x++;
         }
-        if (isNotFound) {
+        if (found > 1) {
+            throw new CommandException(MESSAGE_UID_DUPLICATE);
+        }
+        if (found == 0) {
             throw new CommandException(MESSAGE_UID_NOT_FOUND);
         }
 
-        index = Index.fromZeroBased(x);
+        index = Index.fromZeroBased(location);
     }
 
     /**
