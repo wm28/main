@@ -31,8 +31,11 @@ public class AddTagCommand extends Command {
     static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
 
     private static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
+    private static final String MESSAGE_NO_PERSON_TO_ADD_TAG = "All existing persons in the list " +
+                                                               "already have the specified tags!";
     private static Logger logger = Logger.getLogger("execute");
     private final Set<Tag> tagsToAdd;
+    private int numberOfPeopleToAddTags = 0;
 
     /**
      * @param tagsToAdd of the person in the filtered person list to edit
@@ -47,13 +50,18 @@ public class AddTagCommand extends Command {
         requireNonNull(model);
 
         ReadOnlyAddressBook currentAddressBookReadOnly = model.getAddressBook();
-        // Uses edited AddressBook API to make an editable AddressBook for addTag() to work
+
+        // Uses edited AddressBook Model to make an editable AddressBook for addTag() to work
         AddressBook currentAddressBook = new AddressBook(currentAddressBookReadOnly);
         List<Person> currentList = model.getFilteredPersonList();
 
         if (currentList.isEmpty()) {
             throw new CommandException(MESSAGE_NO_PERSON_IN_LIST);
         } else {
+            if (calculateNumberOfPeopleToAddTags(currentList) == 0) {
+                throw new CommandException(MESSAGE_NO_PERSON_TO_ADD_TAG);
+            }
+
             for (Tag tagToBeAdded: tagsToAdd) {
                 currentAddressBook.addTag(tagToBeAdded);
             }
@@ -61,8 +69,34 @@ public class AddTagCommand extends Command {
             model.resetData(currentAddressBook);
             model.commitAddressBook();
 
-            return new CommandResult(String.format(MESSAGE_ADDED_TAG_SUCCESS, currentList.size()));
+            return new CommandResult(String.format(MESSAGE_ADDED_TAG_SUCCESS, numberOfPeopleToAddTags));
         }
+    }
+
+    /**
+     * Calculates how many people in the list already have all of the tags specified
+     * @param currentList the current list of guests
+     */
+    private int calculateNumberOfPeopleToAddTags(List<Person> currentList) {
+        assert numberOfPeopleToAddTags == 0 : "Number of people to add tags to should be 0 initially!";
+
+        Set<Tag> currentTags;
+
+        for (Person personToBeEdited : currentList) {
+            currentTags = personToBeEdited.getTags();
+            for (Tag tagsToBeAdded: tagsToAdd) {
+                try {
+                    if (!currentTags.contains(tagsToBeAdded)) {
+                        numberOfPeopleToAddTags++;
+                        break;
+                    }
+                } catch (IllegalArgumentException ex) {
+                    logger.log(Level.WARNING, "Incorrect format for tags", ex);
+                }
+            }
+        }
+
+        return numberOfPeopleToAddTags;
     }
 
     @Override

@@ -69,6 +69,7 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+    //@@author aaryamNUS
     /**
      * Removes the given {@code tag} from all {@code Person}s
      */
@@ -78,6 +79,7 @@ public interface Model {
      * Adds the given {@code tag} to all {@code Person}s
      */
     void addTag(Tag tag);
+    //@@author
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

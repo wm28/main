@@ -6,17 +6,33 @@
 == PROJECT: Invités
 == Introduction
 |===
-|_The purpose of this portfolio is to document my contributions, both technical and documentation-wise, to the project Invités._
+|*_Preface:_*
+|The purpose of this portfolio is to document my contributions, both technical and documentation-wise, to my software engineering project Invités.
 |===
 
 Invités is a desktop application to help event managers and planners better organise and manage large events.
 Moreover, the application can mainly be controlled by a 3rd party using the Command Line Interface,
-as well as a User Interface.
+as well as a Graphical User Interface (GUI).
 
 Invités was developed as part of team my team's Software Engineering Project, and some of its main features the ability to
 send mass emails, keep track of payments, as well as the tab keeping of attendance of the guests. To add to this, by
 using a standardised format, the application is able to take in Comma Separated Values (CSV) files and import
-data for a particular event. The team that worked with me on this project, as well as the features they implemented,
+data for a particular event.
+
+|====
+| image:ProductWorkflow.png[] Diagram 1 - Product Workflow | Thanks to the complementary features our group implemented, we are able to
+                                                   create a streamlined workflow for event planners and managers
+                                                   in all facets, as depicted in *Diagram 1* on the left.
+|====
+
+*My Contribution*
+
+I was responsible for implementing the mass-emailing functionality in our product, which allows you to send emails to individual, or
+all of your guests. An added feature of ticket generation is also available, whereby you may send guests their tickets for the event,
+and hence streamline the attendance taking of your event simultaneously.
+
+
+Finally, the team that worked with me on this project, as well as the features they implemented,
 as listed below:
 
 1. Aaryam Srivastava - Mass Emailing
@@ -27,10 +43,11 @@ as listed below:
 
 == Summary of contributions
 |===
-|_The purpose of this section is to list the contributions I have made to project Invités_
+|*_Preface:_*
+|The purpose of this section is to list the contributions I have made to project Invités
 |===
 
-* *Main Feature*: added the ability to *send emails* to guests
+* *Main Feature*: added the ability to *send mass emails* to guests
 ** What it does: allows you to either send emails to individual guests using `email`, or
 send mass emails to all your guests or certain groups of guests using `emailAll` and `emailSpecific` respectively
 ** Justification: This feature will allow event managers to streamline their event notification process, as they can easily and quickly
@@ -40,22 +57,25 @@ inform all of their guests at once, regarding details of the event or otherwise.
 * *Other contributions*:
 ** Added an `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
 ** Project management:
-*** Managed releases v1.1 - v1.3 (3 releases) on GitHub
+*** Managed releases v1.1, v1.2, v1.2.1, v1.2.9, v1.3, v1.3.9 (6 releases) on GitHub
 *** Setup Travis and AppVeyor
 *** Setup auto-publishing of documentation
 *** Setup issue and milestone tracker
 ** Enhancements to existing features
 *** Changed UI response for incorrect commands
+*** Added a UI component to display number of guests in the current list in the footer of the application
 ** Community
-*** Pull Requests reviewed for all milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/131[#131]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/153[#153]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/157[#157]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/190[#190]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/203[#203]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/215[#215]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/217[#217]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[#266]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/273[#273]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]]
-*** Issues created to better structure the project workflow - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/6[#6]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/11[#11]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/15[#15]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/80[#89]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/114[#114]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/117[#117]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/237[#237]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/238[#238]]
+*** Reviewed Pull Requests (PRs) for all milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/131[#131]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/153[#153]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/157[#157]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/190[#190]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/203[#203]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/215[#215]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/217[#217]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[#266]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/273[#273]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]]
+*** Issues created to better structure the project workflow and ensure an iterative design process - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/6[#6]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/11[#11]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/15[#15]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/80[#89]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/114[#114]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/117[#117]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/237[#237]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/238[#238]]
+*** Bug reports created during the first Practical Exam to provide feedback to other teams - [https://github.com/CS2113-AY1819S1-W12-2/main/issues/107[#107]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/113[#113]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/124[#124]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/127[#127]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/128[#128]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/131[#131]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/133[#133]]
 ** Tools
-*** Integrated a third party library https://javaee.github.io/javamail/docs/api/[JavaMail API]
+*** Integrated a third party library to enable email communication https://javaee.github.io/javamail/docs/api/[JavaMail API]
 
 == Contributions to the User Guide
 
 |===
-|_This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users_
+|*_Preface:_*
+|This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users
 |===
 
 include::../UserGuide.adoc[tag=email]
@@ -64,7 +84,8 @@ include::../UserGuide.adoc[tag=settingupemail]
 == Contributions to the Developer Guide
 
 |===
-|_This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project_
+|*_Preface:_*
+|This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project
 |===
 
 include::../DeveloperGuide.adoc[tag=tags]

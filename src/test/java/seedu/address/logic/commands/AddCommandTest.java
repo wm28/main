@@ -82,7 +82,6 @@ public class AddCommandTest {
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
-
     /**
      * A Model stub that contains a single person.
      */
