@@ -21,7 +21,7 @@ import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.csv.CsvAdaptedPerson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.testutil.stubs.CsvConverterStub;
+import seedu.address.testutil.stubs.CsvPersonConverterStub;
 import seedu.address.testutil.stubs.CsvFileStub;
 import seedu.address.testutil.stubs.ModelStubAcceptingPersonAdded;
 import seedu.address.testutil.stubs.PersonConverterStub;
@@ -50,22 +50,22 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void constructor_personConverterCsvFileMatch_success() {
-        ImportCommand importCommand = new ImportCommand(new CsvFileStub(), new CsvConverterStub());
+    public void constructor_csvPersonConverterCsvFileMatch_success() {
+        ImportCommand importCommand = new ImportCommand(new CsvFileStub(), new CsvPersonConverterStub());
         Assert.assertNotNull(importCommand);
     }
 
     @Test
     public void execute_invalidFileInCsvFile_throwsCommandException() throws Exception {
         thrown.expect(CommandException.class);
-        ImportCommand importCommand = new ImportCommand(new CsvFileWithInvalidFile(), new CsvConverterStub());
+        ImportCommand importCommand = new ImportCommand(new CsvFileWithInvalidFile(), new CsvPersonConverterStub());
         CommandResult commandResult = importCommand.execute(new ModelStubAcceptingPersonAdded(), commandHistory);
         assertEquals(String.format(MESSAGE_FILE_NOT_FOUND, INVALID_CSV_FILENAME), commandResult.feedbackToUser);
     }
 
 
     @Test
-    public void execute_csvConverterFailure_correctFeedback() throws Exception {
+    public void execute_csvPersonConverterFailure_correctFeedback() throws Exception {
         ImportCommand importCommand = new ImportCommand(new CsvFileStubWithTypicalPersons(),
                 new CsvPersonConverterAlwaysFailingConversion());
         CommandResult commandResult = importCommand.execute(new ModelStubAcceptingPersonAdded(), commandHistory);
@@ -126,7 +126,7 @@ public class ImportCommandTest {
     /**
      * A CsvPersonConverter stub that always fails to decode
      */
-    private class CsvPersonConverterAlwaysFailingConversion extends CsvConverterStub {
+    private class CsvPersonConverterAlwaysFailingConversion extends CsvPersonConverterStub {
         @Override
         public Person decodePerson(AdaptedPerson person) throws PersonDecodingException {
             throw new PersonDecodingException("Person fails to decode");
@@ -137,7 +137,7 @@ public class ImportCommandTest {
      * A CsvPersonConverter stub that always successfully decodes. Persons are based on TypicalPersons list for
      * simplicity.
      */
-    private class CsvPersonConverterAlwaysSuccessfulConversion extends CsvConverterStub {
+    private class CsvPersonConverterAlwaysSuccessfulConversion extends CsvPersonConverterStub {
         private Queue<Person> personList = new LinkedList<>(TypicalPersons.getTypicalPersons());
 
         @Override

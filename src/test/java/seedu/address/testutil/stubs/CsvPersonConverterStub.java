@@ -5,7 +5,7 @@ import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 /**
  * A CsvPersonConverter stub, an implementation of PersonConverter in the CSV format
  */
-public class CsvConverterStub extends PersonConverterStub {
+public class CsvPersonConverterStub extends PersonConverterStub {
     @Override
     public SupportedFileFormat getSupportedFileFormat() {
         return SupportedFileFormat.CSV;
