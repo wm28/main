@@ -60,6 +60,9 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /**
+     * Generate a random UID
+     */
     public Uid generateUid() {
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
@@ -73,21 +76,24 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
+        //@@author kronicler
         if (model.hasUid(toAdd)){
             throw new CommandException(MESSAGE_DUPLICATE_UID);
         }
 
         if (toAdd.getUid().equals(DEFAULT_TO_GENERATE_UID)) {
-            boolean Unique = false;
-            while (!Unique) {
+            boolean unique = false;
+            while (!unique) {
                 Person temp = new Person(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(), toAdd.getPayment(),
                         toAdd.getAttendance(), generateUid(), toAdd.getTags());
                 if (model.hasUid(temp) == false) {
-                    Unique = true;
+                    unique = true;
                     toAdd = temp;
                 }
             }
         }
+        //@@author
 
         model.addPerson(toAdd);
         model.commitAddressBook();
