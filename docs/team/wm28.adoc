@@ -4,9 +4,6 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: Invités
-
-image::Ui.png[]
-
 == Overview
 |===
 |_This portfolio documents my contributions to Invités._
@@ -34,9 +31,6 @@ Invités is developed as part of a team project for a software development modul
 ** Justification: The import feature is critical to the application because it allows event planners to save time by adding guests in batches. The export feature also allows event planners to share guest data easily.
 ** Highlights: This enhancement is designed to support future file formats easily and it required an in-depth analysis of several design alternatives.
 
-* *Minor enhancement*: added utility class to generate QR codes for ticketing
-** Credits: https://mvnrepository.com/artifact/com.google.zxing/core[XZing Core]
-
 * *Code contributed*: https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=wm28[RepoSense link]
 * *Other contributions*:
 
@@ -46,12 +40,12 @@ Invités is developed as part of a team project for a software development modul
 *** Designed initial user interface mock up in Adobe XD (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/27[#27])
 ** Enhancements to existing features:
 *** Remodelled the guest list and added a guest preview panel in the user interface (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/88[#88], https://github.com/CS2113-AY1819S1-F09-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-F09-3/main/pull/152[#152])
+*** added utility class to generate QR codes for ticketing (Credits: https://mvnrepository.com/artifact/com.google.zxing/core[XZing Core])
 ** Community:
 *** Reported bugs for other teams in the class (examples:  https://github.com/CS2113-AY1819S1-W12-3/main/issues/153[1], https://github.com/CS2113-AY1819S1-W12-3/main/issues/148[2])
 *** Reviewed pull requests (https://github.com/CS2113-AY1819S1-F09-3/main/pull/272[#272], https://github.com/CS2113-AY1819S1-F09-3/main/pull/232[#232])
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
