@@ -549,7 +549,7 @@ image:ImportCommandSequenceDiagram.PNG[]
 
 The `ShowImportReportEvent` will be handled by the `MainWindow` according to the following sequence diagram below.
 
-image:ImportReportWindowSequenceDiagram.PNG[width="800"]
+image:ImportReportWindowSequenceDiagram.png[width="500"]
 
 '''
 
