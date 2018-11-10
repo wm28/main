@@ -70,6 +70,11 @@ public interface Model {
     void updatePerson(Person target, Person editedPerson);
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasUid(Person person);
+
+    /**
      * Removes the given {@code tag} from all {@code Person}s
      */
     void deleteTag(Tag tag);
