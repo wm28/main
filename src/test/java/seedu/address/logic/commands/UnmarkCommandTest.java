@@ -61,7 +61,7 @@ public class UnmarkCommandTest {
     public void execute_uidExistsInGuestList_success() throws CommandException {
         UnmarkCommand unmarkCommand = new UnmarkCommand(bensonUid);
         CommandResult result = unmarkCommand.execute(model, commandHistory);
-        CommandResult resultExpected = new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS,BENSON));
+        CommandResult resultExpected = new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS, BENSON));
         assertTrue(result.feedbackToUser.equals(resultExpected.feedbackToUser));
     }
 

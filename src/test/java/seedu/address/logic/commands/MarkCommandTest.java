@@ -61,7 +61,7 @@ public class MarkCommandTest {
     public void execute_uidExistsInGuestList_success() throws CommandException {
         MarkCommand markCommand = new MarkCommand(bensonUid);
         CommandResult result = markCommand.execute(model, commandHistory);
-        CommandResult resultExpected = new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,BENSON));
+        CommandResult resultExpected = new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, BENSON));
         assertFalse(result.equals(resultExpected));
     }
 
