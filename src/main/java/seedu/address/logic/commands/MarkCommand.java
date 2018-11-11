@@ -27,11 +27,11 @@ public class MarkCommand extends GeneralMarkCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a person as present "
             + "using their unique UID. "
-            + "This will also change the a/ tag associated with the person to Present.\n"
+            + "This will also change the attendance associated with the person to Present.\n"
             + "Parameters: "
-            + "[PHONE] "
+            + "[UID] "
             + "Example: " + COMMAND_WORD
-            + " 91234567";
+            + " 708944";
 
     private final Uid uid;
     private Index index;

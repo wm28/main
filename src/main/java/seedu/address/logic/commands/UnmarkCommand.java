@@ -29,9 +29,9 @@ public class UnmarkCommand extends GeneralMarkCommand {
             + "using their unique UID. "
             + "This will also change the attendance associated with the person to Absent.\n"
             + "Parameters: "
-            + "[PHONE] "
+            + "[UID] "
             + "Example: " + COMMAND_WORD
-            + " 91234567 ";
+            + " 708944 ";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked person as ABSENT: %1$s";
     public static final String MESSAGE_NOT_EDITED = "UID not found in the address book";
