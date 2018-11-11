@@ -15,7 +15,7 @@ image::aaryamnus.png[width="150", align="left"]
 {empty}[http://github.com/aaryamNUS[github]] [<<aaryamnus#, portfolio>>]
 
 Role: Team lead +
-Responsibilities: Email communication
+Responsibilities: Mass email communication
 
 '''
 

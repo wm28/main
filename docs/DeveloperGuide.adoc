@@ -535,7 +535,7 @@ For the import command, the popup window to show errors encountered is facilitat
 
 The following class diagrams shows the relationship between the classes and interfaces mentioned above.
 
-image::ImportExportClassDiagram.PNG[]
+image::ImportExportClassDiagram.PNG[width="800"]
 
 ===== Command mechanism
 
@@ -545,7 +545,7 @@ After the command completes the importation of all guests in the guest list, if 
 
 The following sequence diagram shows how the Import operation works:
 
-image:ImportCommandSequenceDiagram.PNG[]
+image:ImportCommandSequenceDiagram.PNG[width="800"]
 
 The `ShowImportReportEvent` will be handled by the `MainWindow` according to the following sequence diagram below.
 
@@ -555,7 +555,7 @@ image:ImportReportWindowSequenceDiagram.png[width="500"]
 
 The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
 
-image::ExportCommandSequenceDiagram.PNG[]
+image::ExportCommandSequenceDiagram.PNG[width="800"]
 
 ==== Design Considerations
 
