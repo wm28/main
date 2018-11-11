@@ -64,7 +64,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAttendance(ParserUtil.parseAttendance(
                     argMultimap.getValue(PREFIX_ATTENDANCE).get()));
         }
-        //@@author
         //@@author kronicler
         if (argMultimap.getValue(PREFIX_UID).isPresent()) {
             throw new ParseException(MESSAGE_EDITING_UID);

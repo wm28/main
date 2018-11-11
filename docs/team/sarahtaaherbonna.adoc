@@ -38,7 +38,7 @@ needs in a platform that is more user friendly, personalised, and efficient.
 
 Team:
 
-1. Aaryam - Email Communication
+1. Aaryam - Mass Email Communication
 2. Sandhya - Events Management
 3. Sarah - Guest List Management
 4. Tze Guang - Attendance Management
