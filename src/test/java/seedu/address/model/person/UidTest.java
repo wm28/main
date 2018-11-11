@@ -21,6 +21,20 @@ public class UidTest {
     }
 
     @Test
+    public void isEquals_success() {
+        Uid uid = new Uid("401345");
+        Uid otherUid = new Uid("401345");
+        assertTrue(uid.equals(otherUid));
+    }
+
+    @Test
+    public void isEquals_invalidUid_throwException() {
+        Uid uid = new Uid("401345");
+        Uid otherUid = new Uid("401335");
+        assertFalse(uid.equals(otherUid));
+    }
+
+    @Test
     public void isValidUid() {
         // null Uid
         Assert.assertThrows(NullPointerException.class, () -> Uid.isValidUid(null));
@@ -35,6 +49,8 @@ public class UidTest {
 
         //Invalid
         assertFalse(Uid.isValidUid("1"));
+        assertFalse(Uid.isValidUid(""));
+        assertFalse(Uid.isValidUid(" "));
         assertFalse(Uid.isValidUid("10"));
         assertFalse(Uid.isValidUid("110"));
         assertFalse(Uid.isValidUid("1011"));

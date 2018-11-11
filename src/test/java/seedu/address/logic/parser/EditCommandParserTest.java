@@ -19,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_DIET_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.UID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -40,6 +41,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -119,6 +121,12 @@ public class EditCommandParserTest {
                         + VALID_PAYMENT_AMY
                         + VALID_ATTENDANCE_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_NAME_CONSTRAINTS);
+
+        // Does not allow editing UID in parser
+        assertParseFailure(parser, "1" + NAME_DESC_AMY + UID_DESC_AMY, Messages.MESSAGE_EDITING_UID);
+        assertParseFailure(parser, "1" + UID_DESC_AMY, Messages.MESSAGE_EDITING_UID);
+        assertParseFailure(parser, "1" + EMAIL_DESC_AMY + NAME_DESC_AMY
+                + UID_DESC_AMY, Messages.MESSAGE_EDITING_UID);
     }
 
     @Test

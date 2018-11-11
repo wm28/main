@@ -55,17 +55,9 @@ public class MarkCommandTest {
     }
 
     @Test
-    public void retrieveIndex_filteredGuestListWithThePhoneNumber_success() {
-    }
-
-    @Test
-    public void retrieveIndex_unfilteredGuestListWithThePhoneNumber_success() {
-    }
-
-    @Test
     public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
         MarkCommand markCommand = new MarkCommand(bensonUid);
-        markCommand.execute(model, commandHistory);
+        CommandResult result = markCommand.execute(model, commandHistory);
     }
 
     @Test

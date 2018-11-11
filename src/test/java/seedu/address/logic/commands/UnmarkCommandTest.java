@@ -41,20 +41,17 @@ public class UnmarkCommandTest {
     }
 
     @Test
-    public void retrieveIndex_noPersonInGuestList_throwCommandException() {
-
+    public void execute_noPersonInGuestList_throwCommandException() throws CommandException {
+        UnmarkCommand unmarkCommand = new UnmarkCommand(aliceUid);
+        thrown.expect(CommandException.class);
+        unmarkCommand.execute(modelNoPersons, commandHistory);
     }
 
     @Test
-    public void retrieveIndex_filteredGuestListWithoutThePhoneNumber_throwCommandException() {
-    }
-
-    @Test
-    public void retrieveIndex_filteredGuestListWithThePhoneNumber_success() {
-    }
-
-    @Test
-    public void retrieveIndex_unfilteredGuestListWithThePhoneNumber_success() {
+    public void retrieveIndex_filteredGuestListWithoutThePhoneNumber_throwCommandException() throws CommandException {
+        UnmarkCommand unmarkCommand = new UnmarkCommand(bensonUid);
+        thrown.expect(CommandException.class);
+        unmarkCommand.execute(modelLimited, commandHistory);
     }
 
     @Test
