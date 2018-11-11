@@ -69,13 +69,13 @@ public class TypicalPersons {
 
     //Csv formatted person
     public static final String CSV_ALICE =
-            "Alice Pauline,94351253,alice@gmail.com,PENDING,PRESENT,00001,VEGETARIAN,NoNuts";
+            "Alice Pauline,94351253,alice@gmail.com,PENDING,PRESENT,00001,NoNuts,VEGETARIAN";
     public static final String CSV_BENSON =
-            "Benson Meier,98765432,johnd@gmail.com,PAID,ABSENT,00002,NORMAL,NoSeafood,GUEST";
+            "Benson Meier,98765432,johnd@gmail.com,PAID,ABSENT,00002,GUEST,NoSeafood,NORMAL";
     public static final String CSV_CARL =
             "Carl Kurz,95352563,heinz@gmail.com,NOTPAID,PRESENT,00003";
     public static final String CSV_DANIEL =
-            "Daniel Meier,87652533,cornelia@gmail.com,PAID,ABSENT,00004,NORMAL,VIP";
+            "Daniel Meier,87652533,cornelia@gmail.com,PAID,ABSENT,00004,VIP,NORMAL";
     public static final String CSV_ELLE =
             "Elle Meyer,9482224,werner@gmail.com,NOTPAID,PRESENT,00005";
     public static final String CSV_FIONA =
