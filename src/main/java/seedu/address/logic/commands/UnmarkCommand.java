@@ -31,7 +31,7 @@ public class UnmarkCommand extends GeneralMarkCommand {
             + "Parameters: "
             + "[UID]\n"
             + "Example: " + COMMAND_WORD
-            + " 00001";
+            + " 708944 ";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked person as ABSENT: %1$s";
     public static final String MESSAGE_NOT_EDITED = "UID not found in the address book";
