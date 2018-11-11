@@ -23,12 +23,12 @@ public class EmailSpecificCommandParserTest {
 
     @Test
     public void parse_validTags_success() {
-        assertParseSuccess(parser," " + PREFIX_TAG + "friend " + PREFIX_TAG + "added"
-                , new EmailSpecificCommand(TAGS_TO_ADD));
+        assertParseSuccess(parser, " " + PREFIX_TAG + "friend " + PREFIX_TAG + "added",
+                new EmailSpecificCommand(TAGS_TO_ADD));
 
         // With whitespace
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " " + PREFIX_TAG + "friend " + PREFIX_TAG + "added"
-                , new EmailSpecificCommand(TAGS_TO_ADD));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " " + PREFIX_TAG + "friend " + PREFIX_TAG + "added",
+                new EmailSpecificCommand(TAGS_TO_ADD));
     }
 
     @Test
