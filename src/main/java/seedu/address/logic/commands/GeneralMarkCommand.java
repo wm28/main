@@ -28,8 +28,9 @@ import seedu.address.model.tag.Tag;
 public abstract class GeneralMarkCommand extends Command {
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person as PRESENT: %1$s";
     public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Marked Person as ABSENT: %1$s";
-    public static final String MESSAGE_UID_NOT_FOUND = "UID not found in the address book";
-    public static final String MESSAGE_UID_DUPLICATE = "WARNING: There is more than one person with the same UID.";
+    public static final String MESSAGE_UID_NOT_FOUND = "UID not found in the guest list.\n";
+    public static final String MESSAGE_UID_DUPLICATE = "WARNING: There is more than one person with the same UID"
+            + " in the guest list.";
 
     private final Uid uid;
     private Index index;
@@ -50,16 +51,16 @@ public abstract class GeneralMarkCommand extends Command {
      * @throws CommandException if there are no matching persons in the list
      */
     public void retrieveIndex(List<Person> lastShownList) throws CommandException {
-        int x = 0;
+        int iterator = 0;
         int found = 0;
         int location = 0;
         for (Person p : lastShownList) {
             Uid temp = p.getUid();
             if (uid.equals(temp)) {
                 found++;
-                location = x;
+                location = iterator;
             }
-            x++;
+            iterator++;
         }
         if (found > 1) {
             throw new CommandException(MESSAGE_UID_DUPLICATE);
@@ -80,11 +81,12 @@ public abstract class GeneralMarkCommand extends Command {
     public CommandResult performAttendanceTaking(Model model, boolean isMark)
             throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        //List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> guestList = model.getAddressBook().getPersonList();
 
-        retrieveIndex(lastShownList);
+        retrieveIndex(guestList);
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = guestList.get(index.getZeroBased());
 
         if (isMark) {
             editPersonDescriptor = new EditPersonDescriptor("PRESENT");
@@ -131,7 +133,7 @@ public abstract class GeneralMarkCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
+        // instance of handles nulls
         if (!(other instanceof GeneralMarkCommand)) {
             return false;
         }

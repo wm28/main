@@ -40,6 +40,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasUid_personNotInGuestbook_returnsFalse() {
+        assertFalse(modelManager.hasUid(ALICE));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
@@ -48,6 +53,12 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasUid_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasUid(ALICE));
     }
 
     @Test

@@ -10,7 +10,7 @@
 
 <?import javafx.scene.layout.RowConstraints?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" styleClass="pane-with-border">
-  <HBox id="browserPanel" fx:id="browserPanel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <HBox id="eventDetailsPanel" fx:id="eventDetailsPanel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS" alignment="TOP_LEFT" >
       <padding>
         <Insets top="10" right="5" bottom="10" left="15"/>

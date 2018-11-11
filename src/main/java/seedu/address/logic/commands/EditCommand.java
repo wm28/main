@@ -199,7 +199,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
-        //@@author SE-EDU
+        //@@author
         public void setEmail(Email email) {
             this.email = email;
         }
