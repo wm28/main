@@ -29,7 +29,7 @@ public class UnmarkCommand extends GeneralMarkCommand {
             + "using their unique UID. "
             + "This will also change the attendance associated with the person to Absent.\n"
             + "Parameters: "
-            + "[UID] "
+            + "[UID]\n"
             + "Example: " + COMMAND_WORD
             + " 708944 ";
 

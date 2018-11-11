@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.address.logic.commands.GeneralMarkCommand.MESSAGE_MARK_PERSON_SUCCESS;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
@@ -48,20 +51,22 @@ public class MarkCommandTest {
     }
 
     @Test
-    public void execute_filteredGuestListWithoutThePhoneNumber_throwCommandException() throws CommandException {
+    public void execute_filteredGuestListWithoutTheUid_throwCommandException() throws CommandException {
         MarkCommand markCommand = new MarkCommand(bensonUid);
         thrown.expect(CommandException.class);
         markCommand.execute(modelLimited, commandHistory);
     }
 
     @Test
-    public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
+    public void execute_uidExistsInGuestList_success() throws CommandException {
         MarkCommand markCommand = new MarkCommand(bensonUid);
         CommandResult result = markCommand.execute(model, commandHistory);
+        CommandResult resultExpected = new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS, BENSON));
+        assertFalse(result.equals(resultExpected));
     }
 
     @Test
-    public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
+    public void execute_uidDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         MarkCommand markCommand = new MarkCommand(unknownUid);
         markCommand.execute(model, commandHistory);
