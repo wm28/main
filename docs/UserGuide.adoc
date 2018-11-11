@@ -215,7 +215,7 @@ name `david` *but not* `edan`
 
 === Import guests from CSV file : `import`
 
-Imports multiple guests with data from a specified CSV file. To create your own CSV file for importing guests, please see <<csvguestlistformat, Section 6: "CSV Guest List Format">> for the accepted format. +
+Imports multiple guests with data from a specified CSV file. To create your own CSV file for importing guests, please see <<CSV Guest List Format, Section 6: "CSV Guest List Format">> for the accepted format. +
 
 Format: `import FILE_PATH`
 
@@ -246,7 +246,7 @@ You will populate the guest list with the data imported from the CSV file in the
 
 === Exporting guests to CSV file : `export`
 
-Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<csvguestlistformat, Section 6: "CSV Guest List Format">>. +
+Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<CSV Guest List Format, Section 6: "CSV Guest List Format">>. +
 
 Format: `export FILE_PATH`
 
@@ -611,7 +611,7 @@ susceptible to an increased number of spam emails from untrusted applications. H
 
 The `import` and `export` command will only work with CSV files according to a predefined format. To create valid CSV files, guests fields must in the following format below and each guest must be entered on a new line.
 
-Format: `NAME,PHONE_NUMBER,EMAIL,PAYMENT,[TAG]`
+Format: `NAME,PHONE_NUMBER,EMAIL,PAYMENT,UID,[TAG]`
 
 [WARNING]
 ====
@@ -620,12 +620,9 @@ Individual guest fields shall not contain any commas.
 
 Example: sample CSV file
 ****
-David Li,91031282,\lidavid@gmail.com,PENDING,ABSENT,gold,Veg,VIP +
-Irfan Ibrahim,92492021,\irfan@gmail.com,PAID,PRESENT,gold,Veg,VIP +
-Roy Balakrishnan,92624417,\royb@gmail.com,PENDING,ABSENT,gold,Veg,VIP +
-Hakeem Salgado,80000957,\80000957@gmail.com,PAID,ABSENT,gold,Veg,VIP +
-Hibah Lees,80000882,\80000882@gmail.com,PAID,ABSENT,gold,Veg,VIP +
-Jayda Hill,80000251,\80000251@gmail.com,PAID,ABSENT,gold,Veg,VIP +
+David Li,91031282,\lidavid@gmail.com,PENDING,ABSENT,00000,gold,Veg,VIP +
+Irfan Ibrahim,92492021,\irfan@gmail.com,PAID,PRESENT,1234,gold,Veg,VIP +
+Roy Balakrishnan,92624417,\royb@gmail.com,PENDING,ABSENT,12,gold,Veg,VIP +
 ****
 
 // end::csvformat[]

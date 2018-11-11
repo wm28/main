@@ -15,7 +15,7 @@ image::aaryamnus.png[width="150", align="left"]
 {empty}[http://github.com/aaryamNUS[github]] [<<aaryamnus#, portfolio>>]
 
 Role: Team lead +
-Responsibilities: Mass email sending functionality
+Responsibilities: Mass email communication
 
 '''
 
@@ -24,7 +24,7 @@ image::sandhyagopakumar.png[width="150", align="left"]
 {empty}[http://github.com/SandhyaGopakumar[github]] [<<sandhyagopakumar#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Events functionality
+Responsibilities: Events management
 
 '''
 
@@ -33,7 +33,7 @@ image::sarahtaaherbonna.png[width="150", align="left"]
 {empty}[http://github.com/SarahTaaherBonna[github]] [<<sarahtaaherbonna#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data filtering
+Responsibilities: Guest list management
 
 '''
 
@@ -42,7 +42,7 @@ image::kronicler.png[width="150", align="left"]
 {empty}[http://github.com/kronicler[github]] [<<tantzeguang#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Attendance taking functionality
+Responsibilities: Attendance management
 
 '''
 
@@ -51,6 +51,6 @@ image::wm28.png[width="150", align="left"]
 {empty}[http://github.com/wm28[github]] [<<wm28#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data importation
+Responsibilities: Data sharing
 
 '''

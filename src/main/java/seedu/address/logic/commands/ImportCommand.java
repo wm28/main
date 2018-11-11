@@ -23,6 +23,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Uid;
 
 //@@author wm28
+
 /**
  * Imports multiple guests into the guest list of the current event via a CSV file
  */
@@ -78,7 +79,10 @@ public class ImportCommand extends Command {
             logger.log(Level.INFO, "Error exists in CSV file, triggering ImportReportWindow");
             EventsCenter.getInstance().post(new ShowImportReportEvent(errors));
         }
-        model.commitAddressBook();
+
+        if (successfulImports > 0) {
+            model.commitAddressBook();
+        }
         return new CommandResult(String.format(MESSAGE_IMPORT_CSV_RESULT,
                 successfulImports, totalImports, supportedFile.getFileName()));
     }
