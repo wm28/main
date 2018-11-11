@@ -78,8 +78,12 @@ public class MailCommand extends Email {
             // the Gmail host
             Session session = Session.getDefaultInstance(props, authenticate);
 
+
+            // Create a QR code which resembles the ticket of the guest, using their unique ID field
+            assert (personToMail.getUid() == null) : "Every guest must have a unique ID";
+
             createAndSendEmailWithTicket(username, emailSubject, emailMessage,
-                    personToMail.getEmail().toString(), session, personToMail.getEmail().toString());
+                    personToMail.getEmail().toString(), session, "mark " + personToMail.getUid().toString());
         } catch (NullPointerException ne) {
             logger.log(Level.SEVERE, "Error: retrieving information was unsuccessful!");
         }
