@@ -74,7 +74,7 @@ public class ImportCommand extends Command {
             EventsCenter.getInstance().post(new ShowImportReportEvent(errors));
         }
 
-        if (successfulImports > 0){
+        if (successfulImports > 0) {
             model.commitAddressBook();
         }
         return new CommandResult(String.format(MESSAGE_IMPORT_CSV_RESULT,
