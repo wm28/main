@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_DANNY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
@@ -132,7 +133,7 @@ public class AddressBookTest {
 
     @Test
     public void addTag_noNewTagsToAdd_addressBookUnchanged() {
-        addressBookWithDanny.addTag(new Tag(VALID_TAG_FRIEND));
+        addressBookWithDanny.addTag(new Tag(VALID_TAG_DIET_DANNY));
 
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(DANNY).build();
 
