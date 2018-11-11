@@ -31,6 +31,7 @@ public class ImportCommandIntegrationTest {
         model = new ModelManager();
     }
 
+    //This integration test is based on guests in TypicalPersons class
     @Test
     public void execute_importPersonsFromCsvFile_success() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

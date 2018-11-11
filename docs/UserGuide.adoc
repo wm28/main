@@ -220,8 +220,7 @@ Imports multiple guests with data from a specified CSV file. To create your own 
 Format: `import FILE_PATH`
 
 ****
-* This command only adds guests into the current guest list.
-** No existing guest in the guest list will be deleted due to the import.
+* This command only adds guests into the current guest list. No existing guest in the guest list will be deleted due to the import.
 * Adds all guests specified in the CSV file specified by `FILE_PATH`
 * `FILE_PATH` shall only be a relative or an absolute file path.
 ** Relative file path is relative to where the application Jar file is located.
@@ -232,7 +231,9 @@ Format: `import FILE_PATH`
 * The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 1.
 
 |====
-| image:ImportReportWindow.PNG[] Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
+| image:ImportReportWindow.PNG[width="790"]
+ +
+  Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
 |====
 ****
 

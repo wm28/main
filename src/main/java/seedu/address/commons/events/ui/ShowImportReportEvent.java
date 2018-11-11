@@ -3,7 +3,7 @@ package seedu.address.commons.events.ui;
 import java.util.List;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.error.ImportError;
+import seedu.address.logic.converters.error.ImportError;
 
 /**
  * An event requesting to show the import report

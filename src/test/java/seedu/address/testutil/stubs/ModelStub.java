@@ -9,11 +9,11 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
+//@@author wm28-reused
+// Abstracted ModelStub out from AddCommandTest which was from the original AB4
 /**
  * A default model stub that have all of the methods failing.
  */
-//@@author wm28-reused
-// Abstracted out ModelStub from AddCommandTest
 public class ModelStub implements Model {
     @Override
     public void addPerson(Person person) {

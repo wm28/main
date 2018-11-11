@@ -1,24 +1,36 @@
 package seedu.address.logic.commands;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_FILE_ALREADY_EXIST;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_FILE_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.converters.CsvPersonConverter;
 import seedu.address.logic.converters.exceptions.PersonEncodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.csv.CsvAdaptedPerson;
+import seedu.address.logic.converters.fileformats.csv.CsvFile;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.testutil.stubs.CsvFileStub;
@@ -27,16 +39,27 @@ import seedu.address.testutil.stubs.ModelStubContainingTypicalPersons;
 import seedu.address.testutil.stubs.PersonConverterStub;
 import seedu.address.testutil.stubs.SupportedFileStub;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code ExportCommand}.
+ */
 public class ExportCommandTest {
 
     private static final String ALREADY_EXISTING_CSV_FILENAME = "existing.csv";
     private static final String VALID_CSV_FILENAME = "valid.csv";
     private static final String INVALID_CSV_FILE_PATH = "invalidPath/NoSuchPath/test.csv";
+    private static final String INTEGRATION_TEST_CSV_FILE_PATH = "src/test/data/data/CsvTest/exported.csv";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
+
+    private Model model;
+
+    @Before
+    public void setUp() {
+        model = new ModelManager();
+    }
 
     @Test
     public void constructor_nullSupportedFile_throwsAssertionError() {
@@ -85,14 +108,36 @@ public class ExportCommandTest {
                 VALID_CSV_FILENAME), commandResult.feedbackToUser);
     }
 
+    //This integration test is based on guests in TypicalPersons class
     @Test
     public void execute_successfulExportOfAllPersons_success() throws Exception {
-        ExportCommand exportCommand = new ExportCommand(new CsvFileAlwaysSuccessfulWrite(),
-                new CsvPersonConverterAlwaysSuccessfulConversion());
+        try {
+            Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+            for (Person person : TypicalPersons.getTypicalPersons()) {
+                expectedModel.addPerson(person);
+            }
+            expectedModel.commitAddressBook();
 
-        CommandResult commandResult = exportCommand.execute(new ModelStubContainingTypicalPersons(), commandHistory);
-        assertEquals(String.format(ExportCommand.MESSAGE_EXPORT_CSV_RESULT, TypicalPersons.NUM_PERSONS,
-                TypicalPersons.NUM_PERSONS, VALID_CSV_FILENAME), commandResult.feedbackToUser);
+            for (Person person : TypicalPersons.getTypicalPersons()) {
+                model.addPerson(person);
+            }
+            model.commitAddressBook();
+
+            CsvFile csvFile = new CsvFile(INTEGRATION_TEST_CSV_FILE_PATH);
+            CsvPersonConverter csvPersonConverter = new CsvPersonConverter();
+            ExportCommand exportCommand = new ExportCommand(csvFile, csvPersonConverter);
+            Path path = Paths.get(INTEGRATION_TEST_CSV_FILE_PATH);
+            String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_CSV_RESULT, TypicalPersons.NUM_PERSONS,
+                    TypicalPersons.NUM_PERSONS, path.getFileName());
+            assertCommandSuccess(exportCommand, model, commandHistory, expectedMessage, expectedModel);
+
+            File actualOutputFile = new File(INTEGRATION_TEST_CSV_FILE_PATH);
+            File expectedOutputFile = new File(TypicalPersons.TYPICAL_PERSONS_CSV);
+            assertTrue(FileUtils.contentEqualsIgnoreEOL(actualOutputFile, expectedOutputFile, "UTF-8"));
+        } finally {
+            File file = new File(INTEGRATION_TEST_CSV_FILE_PATH);
+            file.delete();
+        }
     }
 
 
