@@ -10,13 +10,23 @@
 == Overview
 
 Invités is a desktop application used by people who manage and plan events to streamline their processes and better manage the events that they are handling.
-The user interacts with it mainly using a CLI, and it has a GUI created with JavaFX.
+]The user interacts with it mainly using a CLI, and it has a GUI created with JavaFX.
+
+My Responsibilities
 
 Project scope - Invités is an event management system that provides an intuitive platform for event planners to better organise and manage
 the reception during small or large events such as school orientation camps, committee events or more formal occasions such as weddings.
 The main features that streamline the processes of the event planner is the ability to send mass emails to attendees,
 keep track of payments, as well as attendance tracking during the event itself. If the event planner used other applications
 to store his data, they can easily import their data over from CSV files that can be generated from Microsoft Excel.
+
+*Team*
+
+1. Aaryam Srivastava - Mass Emailing
+2. Sandhya Gopakumar - Events Creation
+3. Sarah Taaher Bonna - Data Filtering
+4. Tan Tze Guang - Attendance Taking
+5. Tan Wei Ming - Data Importation
 
 == Summary of contributions
 
@@ -25,7 +35,7 @@ to store his data, they can easily import their data over from CSV files that ca
 ** Justification: This feature is necessary in the implementation of our guest list as it is a core feature that gives the event planner peace of mind as it is a tool for them to ensure that the event is run smoothly.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 
-* *Code contributed*: [https://github.com/kronicler/main/blob/master/kronicler.md[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kronicler&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Functional code]]
 
 * *Other contributions*:
 

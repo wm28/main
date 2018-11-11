@@ -15,6 +15,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -82,6 +83,25 @@ public class AddCommandTest {
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
+    /**
+     * This test works by expecting the a different output due to the UID being different
+     */
+    @Test
+    public void generateUid_addPersonWithGenerateUid_success() throws CommandException {
+        Model model = new ModelStubAcceptingPersonAdded();
+
+        Person expectedPerson = new PersonBuilder().withName("Alice Pauline")
+                .withAttendance("PRESENT").withEmail("alice@gmail.com")
+                .withPhone("94351253")
+                .withPayment("PENDING")
+                .withUid("00000")
+                .withTags("VEGETARIAN", "NoNuts").build();
+
+        AddCommand addCommand = new AddCommand(expectedPerson);
+        CommandResult expectedResult = new CommandResult(String.format(AddCommand.MESSAGE_SUCCESS, expectedPerson));
+        assertFalse(expectedResult.equals(addCommand.execute(model, commandHistory)));
+    }
+
 
     /**
      * A Model stub that contains a single person.
@@ -99,6 +119,12 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasUid(Person person) {
+            requireNonNull(person);
+            return this.person.hasSameUid(person);
+        }
     }
 
     /**
@@ -111,6 +137,12 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasUid(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::hasSameUid);
         }
 
         @Override

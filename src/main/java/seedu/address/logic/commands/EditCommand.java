@@ -106,7 +106,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Payment updatedPayment = editPersonDescriptor.getPayment().orElse(personToEdit.getPayment());
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(personToEdit.getAttendance());
-        Uid updatedUid = editPersonDescriptor.getUid().orElse(personToEdit.getUid());
+        Uid updatedUid = personToEdit.getUid();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedPayment,
@@ -141,7 +141,6 @@ public class EditCommand extends Command {
         private Email email;
         private Payment payment;
         private Attendance attendance;
-        private Uid uid;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -156,7 +155,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setPayment(toCopy.payment);
             setAttendance(toCopy.attendance);
-            setUid(toCopy.uid);
             setTags(toCopy.tags);
         }
 
@@ -165,7 +163,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, payment,
-                    attendance, uid, tags);
+                    attendance, tags);
         }
 
         public void setName(Name name) {
@@ -201,21 +199,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
-        //@@author SE-EDU
+        //@@author
         public void setEmail(Email email) {
             this.email = email;
         }
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setUid(Uid uid) {
-            this.uid = uid;
-        }
-
-        public Optional<Uid> getUid() {
-            return Optional.ofNullable(uid);
         }
 
         /**
@@ -255,7 +245,6 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getPayment().equals(e.getPayment())
                     && getAttendance().equals(e.getAttendance())
-                    && getUid().equals(e.getUid())
                     && getTags().equals(e.getTags());
         }
     }

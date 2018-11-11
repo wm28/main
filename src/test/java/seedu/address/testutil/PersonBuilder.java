@@ -23,7 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "aliceblah@gmail.com";
     public static final String DEFAULT_PAYMENT = "PAID";
     public static final String DEFAULT_ATTENDANCE = "ABSENT";
-    public static final String DEFAULT_UID = "00001";
+    public static final String DEFAULT_UID = "10000";
 
     private Name name;
     private Phone phone;
