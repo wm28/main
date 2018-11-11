@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.GeneralMarkCommand.MESSAGE_UNMARK_PERSON_SUCCESS;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
@@ -48,20 +51,22 @@ public class UnmarkCommandTest {
     }
 
     @Test
-    public void retrieveIndex_filteredGuestListWithoutThePhoneNumber_throwCommandException() throws CommandException {
+    public void retrieveIndex_filteredGuestListWithoutUid_throwCommandException() throws CommandException {
         UnmarkCommand unmarkCommand = new UnmarkCommand(bensonUid);
         thrown.expect(CommandException.class);
         unmarkCommand.execute(modelLimited, commandHistory);
     }
 
     @Test
-    public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
+    public void execute_uidExistsInGuestList_success() throws CommandException {
         UnmarkCommand unmarkCommand = new UnmarkCommand(bensonUid);
-        unmarkCommand.execute(model, commandHistory);
+        CommandResult result = unmarkCommand.execute(model, commandHistory);
+        CommandResult resultExpected = new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS,BENSON));
+        assertTrue(result.feedbackToUser.equals(resultExpected.feedbackToUser));
     }
 
     @Test
-    public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
+    public void execute_uidDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         UnmarkCommand unmarkCommand = new UnmarkCommand(unknownUid);
         unmarkCommand.execute(model, commandHistory);

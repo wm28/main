@@ -29,9 +29,9 @@ public class MarkCommand extends GeneralMarkCommand {
             + "using their unique UID. "
             + "This will also change the a/ tag associated with the person to Present.\n"
             + "Parameters: "
-            + "[PHONE] "
+            + "[UID]\n"
             + "Example: " + COMMAND_WORD
-            + " 91234567";
+            + " 00001";
 
     private final Uid uid;
     private Index index;
