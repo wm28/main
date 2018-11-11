@@ -38,11 +38,11 @@ needs in a platform that is more user friendly, personalised, and efficient.
 
 Team:
 
-1. Aaryam - Mail feature
-2. Sandhya - Events feature
-3. Sarah - Data Filtration feature
-4. Tze Guang - Attendance-taking feature
-5. Wei Ming - Data Importation feature
+1. Aaryam - Email Communication
+2. Sandhya - Events Management
+3. Sarah - Guest List Management
+4. Tze Guang - Attendance Management
+5. Wei Ming - Data Sharing
 
 == Summary of contributions
 
