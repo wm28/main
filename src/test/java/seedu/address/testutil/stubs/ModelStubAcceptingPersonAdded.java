@@ -21,6 +21,12 @@ public class ModelStubAcceptingPersonAdded extends ModelStub {
     }
 
     @Override
+    public boolean hasUid(Person person) {
+        requireNonNull(person);
+        return personsAdded.stream().anyMatch(person::hasSameUid);
+    }
+
+    @Override
     public void addPerson(Person person) {
         requireNonNull(person);
         personsAdded.add(person);
