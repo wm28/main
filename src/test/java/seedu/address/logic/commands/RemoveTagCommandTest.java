@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.NO_COMMON_TAGS;
+import static seedu.address.logic.commands.CommandTestUtil.TAGS_TO_REMOVE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.logic.commands.CommandTestUtil.tagsToRemove;
-import static seedu.address.logic.commands.CommandTestUtil.noCommonTags;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,12 +47,12 @@ public class RemoveTagCommandTest {
 
     @Test
     public void execute_validSetOfTags_success() {
-        RemoveTagCommand removeTagCommand = new RemoveTagCommand(tagsToRemove);
+        RemoveTagCommand removeTagCommand = new RemoveTagCommand(TAGS_TO_REMOVE);
         String expectedMessage = String.format(RemoveTagCommand.MESSAGE_REMOVED_TAG_SUCCESS, 2);
 
         ModelStubContainingTypicalPersons modelStub = new ModelStubContainingTypicalPersons();
         ModelManager expectedModel = new ModelManager(modelStub.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToDelete: tagsToRemove) {
+        for (Tag eachTagsToDelete: TAGS_TO_REMOVE) {
             expectedModel.deleteTag(eachTagsToDelete);
         }
         expectedModel.commitAddressBook();
@@ -62,7 +62,7 @@ public class RemoveTagCommandTest {
 
     @Test
     public void execute_noPersonWithTags_throwsCommandException() {
-        RemoveTagCommand removeTagCommand = new RemoveTagCommand(noCommonTags);
+        RemoveTagCommand removeTagCommand = new RemoveTagCommand(NO_COMMON_TAGS);
         String expectedMessage = RemoveTagCommand.MESSAGE_NO_PERSON_WITH_TAG;
 
         ModelStubContainingTypicalPersons modelStub = new ModelStubContainingTypicalPersons();
@@ -73,7 +73,7 @@ public class RemoveTagCommandTest {
 
     @Test
     public void execute_emptyAddressBook_throwsCommandException() {
-        RemoveTagCommand removeTagCommand = new RemoveTagCommand(noCommonTags);
+        RemoveTagCommand removeTagCommand = new RemoveTagCommand(NO_COMMON_TAGS);
         String expectedMessage = RemoveTagCommand.MESSAGE_NO_PERSON_WITH_TAG;
 
         ModelEmptyAddressBookStub modelStub = new ModelEmptyAddressBookStub();
@@ -91,10 +91,10 @@ public class RemoveTagCommandTest {
      */
     @Test
     public void executeUndoRedo_validSetOfTags_success() throws Exception {
-        RemoveTagCommand removeTagCommand = new RemoveTagCommand(tagsToRemove);
+        RemoveTagCommand removeTagCommand = new RemoveTagCommand(TAGS_TO_REMOVE);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToDelete: tagsToRemove) {
+        for (Tag eachTagsToDelete: TAGS_TO_REMOVE) {
             expectedModel.deleteTag(eachTagsToDelete);
         }
         expectedModel.commitAddressBook();
@@ -113,7 +113,7 @@ public class RemoveTagCommandTest {
 
     @Test
     public void executeUndoRedo_noPersonsWithTags_failure() {
-        RemoveTagCommand removeTagCommand = new RemoveTagCommand(noCommonTags);
+        RemoveTagCommand removeTagCommand = new RemoveTagCommand(NO_COMMON_TAGS);
         String expectedMessage = RemoveTagCommand.MESSAGE_NO_PERSON_WITH_TAG;
 
         // execution failed -> address book state not added into model
@@ -126,14 +126,14 @@ public class RemoveTagCommandTest {
 
     @Test
     public void equals() {
-        RemoveTagCommand removeTagFirstCommand = new RemoveTagCommand(noCommonTags);
-        RemoveTagCommand removeTagSecondCommand = new RemoveTagCommand(tagsToRemove);
+        RemoveTagCommand removeTagFirstCommand = new RemoveTagCommand(NO_COMMON_TAGS);
+        RemoveTagCommand removeTagSecondCommand = new RemoveTagCommand(TAGS_TO_REMOVE);
 
         // same object -> returns true
         assertEquals(removeTagFirstCommand, removeTagFirstCommand);
 
         // not same values -> returns false
-        RemoveTagCommand removeTagFirstCommandCopy = new RemoveTagCommand(noCommonTags);
+        RemoveTagCommand removeTagFirstCommandCopy = new RemoveTagCommand(NO_COMMON_TAGS);
         assertEquals(removeTagFirstCommand, removeTagFirstCommandCopy);
 
         // different types -> returns false

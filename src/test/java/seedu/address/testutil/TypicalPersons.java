@@ -18,7 +18,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DANNY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_DANNY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_DANNY;

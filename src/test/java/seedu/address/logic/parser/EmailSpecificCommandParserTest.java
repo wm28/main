@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.tagsToAdd;
+import static seedu.address.logic.commands.CommandTestUtil.TAGS_TO_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -23,12 +23,12 @@ public class EmailSpecificCommandParserTest {
 
     @Test
     public void parse_validTags_success() {
-        assertParseSuccess(parser," " + PREFIX_TAG + "NORMAL " + PREFIX_TAG + "VIP",
-                new EmailSpecificCommand(tagsToAdd));
+        assertParseSuccess(parser," " + PREFIX_TAG + "friend " + PREFIX_TAG + "added"
+                , new EmailSpecificCommand(TAGS_TO_ADD));
 
         // With whitespace
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " " + PREFIX_TAG + "NORMAL " + PREFIX_TAG + "VIP",
-                new EmailSpecificCommand(tagsToAdd));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " " + PREFIX_TAG + "friend " + PREFIX_TAG + "added"
+                , new EmailSpecificCommand(TAGS_TO_ADD));
     }
 
     @Test

@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
-import static seedu.address.logic.commands.CommandTestUtil.allNewTags;
-import static seedu.address.logic.commands.CommandTestUtil.allSameTags;
+import static seedu.address.logic.commands.CommandTestUtil.ALL_NEW_TAGS;
+import static seedu.address.logic.commands.CommandTestUtil.ALL_SAME_TAGS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.duplicateTags;
-import static seedu.address.logic.commands.CommandTestUtil.tagsToAdd;
+import static seedu.address.logic.commands.CommandTestUtil.DUPLICATE_TAGS;
+import static seedu.address.logic.commands.CommandTestUtil.TAGS_TO_ADD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Rule;
@@ -36,11 +36,11 @@ import seedu.address.testutil.stubs.ModelStub;
  * {@code AddTagCommand} using model stubs.
  */
 public class AddTagCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void constructor_nullSetOfTags_throwsNullPointerException() {
@@ -50,12 +50,12 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_validSetOfTags_success() {
-        AddTagCommand addTagCommand = new AddTagCommand(tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(TAGS_TO_ADD);
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADDED_TAG_SUCCESS, 7);
 
         ModelStubContainingTypicalPersons modelStub = new ModelStubContainingTypicalPersons();
         ModelManager expectedModel = new ModelManager(modelStub.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToAdd: tagsToAdd) {
+        for (Tag eachTagsToAdd: TAGS_TO_ADD) {
             expectedModel.addTag(eachTagsToAdd);
         }
         expectedModel.commitAddressBook();
@@ -65,7 +65,7 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_duplicateSetOfValidTags_success() {
-        AddTagCommand addTagCommand = new AddTagCommand(duplicateTags);
+        AddTagCommand addTagCommand = new AddTagCommand(DUPLICATE_TAGS);
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADDED_TAG_SUCCESS, 7);
 
         ModelStubContainingTypicalPersons modelStub = new ModelStubContainingTypicalPersons();
@@ -78,7 +78,7 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_noNewTagAdded_throwsCommandException() {
-        AddTagCommand addTagCommand = new AddTagCommand(allSameTags);
+        AddTagCommand addTagCommand = new AddTagCommand(ALL_SAME_TAGS);
         String expectedMessage = AddTagCommand.MESSAGE_NO_PERSON_TO_ADD_TAG;
 
         ModelContainingSameTagsStub modelStub = new ModelContainingSameTagsStub();
@@ -89,7 +89,7 @@ public class AddTagCommandTest {
 
     @Test
     public void execute_emptyAddressBook_throwsCommandException() {
-        AddTagCommand addTagCommand = new AddTagCommand(tagsToAdd);
+        AddTagCommand addTagCommand = new AddTagCommand(TAGS_TO_ADD);
         String expectedMessage = AddTagCommand.MESSAGE_NO_PERSON_IN_LIST;
 
         ModelEmptyAddressBookStub modelStub = new ModelEmptyAddressBookStub();
@@ -107,10 +107,10 @@ public class AddTagCommandTest {
      */
     @Test
     public void executeUndoRedo_validSetOfTags_success() throws Exception {
-        AddTagCommand addTagCommand = new AddTagCommand(allNewTags);
+        AddTagCommand addTagCommand = new AddTagCommand(ALL_NEW_TAGS);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        for (Tag eachTagsToAdd: allNewTags) {
+        for (Tag eachTagsToAdd: ALL_NEW_TAGS) {
             expectedModel.addTag(eachTagsToAdd);
         }
         expectedModel.commitAddressBook();
@@ -129,14 +129,14 @@ public class AddTagCommandTest {
 
     @Test
     public void equals() {
-        AddTagCommand addTagFirstCommand = new AddTagCommand(tagsToAdd);
-        AddTagCommand addTagSecondCommand = new AddTagCommand(allNewTags);
+        AddTagCommand addTagFirstCommand = new AddTagCommand(TAGS_TO_ADD);
+        AddTagCommand addTagSecondCommand = new AddTagCommand(ALL_NEW_TAGS);
 
         // same object -> returns true
         assertEquals(addTagFirstCommand, addTagFirstCommand);
 
         // same values -> returns true
-        AddTagCommand addTagFirstCommandCopy = new AddTagCommand(tagsToAdd);
+        AddTagCommand addTagFirstCommandCopy = new AddTagCommand(TAGS_TO_ADD);
         assertEquals(addTagFirstCommand, addTagFirstCommandCopy);
 
         // different types -> returns false

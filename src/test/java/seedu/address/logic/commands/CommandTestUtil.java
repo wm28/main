@@ -106,12 +106,17 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final Set<Tag> tagsToAdd = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_FRIEND), new Tag(VALID_TAG_ADDED)));
-    public static final Set<Tag> allNewTags = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED), new Tag(VALID_TAG_HUSBAND)));
-    public static final Set<Tag> allSameTags = new HashSet<>(Collections.singletonList(new Tag(VALID_TAG_SAME)));
-    public static final Set<Tag> duplicateTags = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED), new Tag(VALID_TAG_UNUSED)));
-    public static final Set<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_SAME), new Tag("VIP")));
-    public static final Set<Tag> noCommonTags = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED), new Tag("Invalid")));
+    public static final Set<Tag> TAGS_TO_ADD = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_FRIEND),
+                                             new Tag(VALID_TAG_ADDED)));
+    public static final Set<Tag> ALL_NEW_TAGS = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED),
+                                                new Tag(VALID_TAG_HUSBAND)));
+    public static final Set<Tag> ALL_SAME_TAGS = new HashSet<>(Collections.singletonList(new Tag(VALID_TAG_SAME)));
+    public static final Set<Tag> DUPLICATE_TAGS = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED),
+                                                  new Tag(VALID_TAG_UNUSED)));
+    public static final Set<Tag> TAGS_TO_REMOVE = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_SAME),
+                                                  new Tag("VIP")));
+    public static final Set<Tag> NO_COMMON_TAGS = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED),
+                                                  new Tag("Invalid")));
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
