@@ -16,16 +16,16 @@ import seedu.address.model.event.Event;
 /**
  * The Browser Panel of the App.
  */
-public class BrowserPanel extends UiPart<Region> {
+public class EventDetailsPanel extends UiPart<Region> {
 
-    private static final String FXML = "BrowserPanel.fxml";
+    private static final String FXML = "EventDetailsPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private seedu.address.model.event.Event event;
 
     @FXML
-    private HBox browserPanel;
+    private HBox eventDetailsPanel;
     @FXML
     private Label name;
     @FXML
@@ -38,7 +38,7 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public BrowserPanel(seedu.address.model.event.Event event) {
+    public EventDetailsPanel(seedu.address.model.event.Event event) {
         super(FXML);
         fillInEventDetails(event);
         registerAsAnEventHandler(this);

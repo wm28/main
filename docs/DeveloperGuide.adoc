@@ -16,6 +16,11 @@ endif::[]
 
 By: `Team F09-03`      Since: `Aug 2018`      Licence: `MIT`
 
+== Introduction
+
+Invités is an application targeted at event managers and planners. The application allows its users to efficiently organise, cater, and manage large events such as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments, and take note of attendance of the guests. To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event. This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
+This guide provides information that will help you get started as a contributor to this project. If you are already a contributor to the project, you will find it useful to refer to this guide.
+
 == Setting up
 
 === Prerequisites
@@ -167,7 +172,7 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `EventDetailsPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -398,7 +403,7 @@ Given below is an example usage scenario and how the add_event and delete_event 
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-Step 2. The user executes `add_event n/Wedding t/8thOct t/10AM` command to add in details about the event they are currently organising.
+Step 2. The user executes `add_event n/Wedding d/18/10/2019 t/10AM` command to add in details about the event they are currently organising.
 The `add_event` command calls `Model#addEvent()` to add in the event details.
 It calls'Model#commitAddressBook()' as well, causing the modified state of the address book after the `add_event n/Wedding t/8thOct t/10AM` command executes to be saved in the `addressBookStateList`.
 The `currentStatePointer` is shifted to the newly inserted address book state.
@@ -423,7 +428,18 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 
 The following sequence diagram shows how the add_event operation works:
 
+.Sequence diagram for add_event and delete_event commands
 image::AddDeleteEventSequenceDiagram.png[width="800" ]
+
+=== Design considerations
+==== Aspect: Creation of the Event component
+*** Alternative 1(current choice): Create an 'Event' with date, name, start time, venue and tag attributes and an aggregation association with 'AddressBook' wherein 'AddressBook' contains an 'Event' object.
+** Pros: It is easier to use and test.
+** Cons: The user can only organise 1 event at a time.
+
+*** Alternative 2: Create an 'Event' having an aggregation association with 'VersionableAddressBook'. Create an 'InvitesBook' having an aggregation association with 'Event'.
+** Pros: It allows the user to organise multiple events and manage multiple event-specific guest lists.
+** Cons: It is difficult to create functions and test the component. The 'undo' and 'redo' commands are also affected.
 
 === Edit Event feature
 ==== Current Implementation
@@ -448,6 +464,7 @@ The `edit_event` command uses `Model#hasEvent()` to check if this is the case. I
 
 The following sequence diagram shows how the edit_event operation works:
 
+.Sequence diagram for edit_event
 image::EditEventSequenceDiagram.png[width="800"]
 
 // end::event[]
