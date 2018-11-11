@@ -57,6 +57,8 @@ public class ModelManagerTest {
     }
 
     //@@author aaryamNUS
+    // Parts of the following tests were adapted thanks to PR #790 provided by @yamgent from SE-EDU
+    // Source: https://github.com/se-edu/addressbook-level4/pull/790
     @Test
     public void deleteTag_nonExistentTag_modelUnchanged() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();

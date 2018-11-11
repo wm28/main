@@ -106,6 +106,8 @@ public class AddressBookTest {
     }
 
     //@@author aaryamNUS
+    // Parts of the following tests were adapted thanks to PR #790 provided by @yamgent from SE-EDU
+    // Source: https://github.com/se-edu/addressbook-level4/pull/790
     @Test
     public void removeTag_nonExistentTag_addressBookUnchanged() {
         addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_UNUSED));
