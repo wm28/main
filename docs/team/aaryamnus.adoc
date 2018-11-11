@@ -53,7 +53,7 @@ send mass emails to all your guests or certain groups of guests using `emailAll`
 ** Justification: This feature will allow event managers to streamline their event notification process, as they can easily and quickly
 inform all of their guests at once, regarding details of the event or otherwise.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=aaryamNUS[Contributed code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=aaryamnus[Contributed code]]
 * *Other contributions*:
 ** Added an `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
 ** Project management:
