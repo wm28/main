@@ -22,6 +22,9 @@ import seedu.address.model.tag.Tag;
  */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "addTag";
+    public static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
+    public static final String MESSAGE_NO_PERSON_TO_ADD_TAG = "All existing persons in the list "
+            + "already have the specified tags!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the specified tags from all "
             + "persons in the list.\n"
             + "Parameters: "
@@ -29,10 +32,6 @@ public class AddTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "VIP " + PREFIX_TAG + "Paid";
     static final String MESSAGE_ADDED_TAG_SUCCESS = "Successfully added all tags to %1$d persons";
-
-    public static final String MESSAGE_NO_PERSON_IN_LIST = "No persons in the list!";
-    public static final String MESSAGE_NO_PERSON_TO_ADD_TAG = "All existing persons in the list "
-                                                               + "already have the specified tags!";
     private static Logger logger = Logger.getLogger("execute");
     private final Set<Tag> tagsToAdd;
     private int numberOfPeopleToAddTags = 0;
