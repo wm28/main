@@ -5,6 +5,7 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -21,7 +22,12 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
-        assertCommandSuccess("   " + ClearCommand.COMMAND_WORD + " ab12   ");
+        assertCommandFailure("   " + ClearCommand.COMMAND_WORD
+                + " ab12   ", String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                ClearCommand.MESSAGE_USAGE));
+        assertSelectedCardUnchanged();
+
+        assertCommandSuccess("   " + ClearCommand.COMMAND_WORD + "   ");
         assertSelectedCardUnchanged();
 
         /* Case: undo clearing address book -> original address book restored */
