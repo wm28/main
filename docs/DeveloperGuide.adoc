@@ -447,6 +447,7 @@ If the user has not added in the details of an event, then there are no specific
 The `edit_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
 
 The following sequence diagram shows how the edit_event operation works:
+
 image::EditEventSequenceDiagram.png[width="800"]
 
 // end::event[]
@@ -509,77 +510,74 @@ The sequence diagram uses the case of addTag() to highlight how the application 
 === Import/Export Command
 ==== Current Implementation
 
-The import and export command enables batch importation and exportation of people into and out of the guest list. Currently the commands only support comma-separated value file format (CSV), however, it is open for the addition of new formats.
+===== High level overview of the class hierarchy
+The import and export command enables batch importation and exportation of people into and out of the guest list. Additionally, the import command will create a popup window to show the errors during import only if there are any. The commands currently only support comma-separated value file format (CSV), however, it is designed to easily support other formats such as VCard in the future.
 
-The Import/Export features are mainly facilitated by objects of 2 classes. The `CsvFile` and `CsvConverter` objects. The following class diagram shows the relationship between the classes involved in the import/export.
+The implementation of the import and export feature mainly resides under the logic component of the application. The import command involves an additional user interface (UI) component that shows import errors.
 
-image::ImportExportClassDiagram.PNG[width="800"]
+The Import/Export feature is facilitated by the `AdaptedPerson`,`PersonConverter` and `SupportedFile` interfaces. They provide the behaviour specifications so that the Import/Export command will be able to operate without knowing the underlying implementations.
 
-The CsvConverter class enables us decode/encode between the Person class and the desired format (CSV). The CsvConverter class implements PersonConverter interface which requires the implementing class to be able to decode/encode Person objects to the desired format.
+* `AdaptedPerson` represents a person in the respective file format. It requires the following method.
+** `AdaptedPerson#getFormattedString()`: returns the string representation of the person according to the particular file format.
+* `SupportedFile` represents a supported file that is able to read and write `AdaptedPerson`s' to the actual file on the computer.  Here are some of its key methods
+** `SupportedFile#readAdaptedPersons()`: Returns all person in the form of `AdaptedPerson`s from the file
+** `SupportedFile#writeAdaptedPersons()`: Writes all `AdaptedPerson` to the file
+* `PersonConverter` represents a person converter that is able to convert between `Person` s and `AdaptedPerson` s. Here are some of its key methods.
+** `PersonConverter#encodePerson()`: Encodes a `Person` object and returns the corresponding `AdaptedPerson` object
+** `PersonConverter#decodePerson()`: Decodes an `AdaptedPerson`  object and returns corresponding `Person` object
 
-The 'CsvFile' class enables us to read and write 'AdaptedPerson' to a file. `CsvFile` Implements the `SupportedFile` class which requires it to read and write lists of `AdaptedPerson` objects.
+To support the import/export of CSV files, `CsvAdaptedPerson`,`CsvPersonConverter` and `CsvFile` implements the above mentioned interfaces.
 
-`CsvAdaptedPerson` extends `AdaptedPerson`, it represents a guest in the respective file formats, which our case is CSV.
+For the import command, the popup window to show errors encountered is facilitated by the `ImportError` and `ImportReportWindow` classes.
+
+* `ImportError` represents an error encountered during the import command. It stores the actual CSV formatted person and its associated error message.
+* `ImportReportError` is the controller class of the popup window that will display all `ImportError` s encountered during the execution of an import command.
+
+The following class diagrams shows the relationship between the classes and interfaces mentioned above.
+
+image::ImportExportClassDiagram.PNG[]
+
+===== Command mechanism
+
+The import command will first read the csv file and loop through all the guest data and add them into the model. When application encounters a particular guest in CSV file which fails to be converted or is already an existing guest, an `ImportError` will be created. These `ImportError` object will be added in a list within the import command.
+
+After the command completes the importation of all guests in the guest list, if there are unsuccessful imports, it will trigger a `ShowImportReportEvent` which will display the errors
+
+The following sequence diagram shows how the Import operation works:
+
+image:ImportCommandSequenceDiagram.PNG[]
+
+The `ShowImportReportEvent` will be handled by the `MainWindow` according to the following sequence diagram below.
+
+image:ImportReportWindowSequenceDiagram.png[width="500"]
 
 '''
 
-The import command will first read the csv file and loop through all the guest data and add them into the model. Badly formatted csv lines will be skipped and the user are given feedback on the number of successful imports in the CommandResult Ui component. The following sequence diagram shows how the Import operation works:
+The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
 
-|====
-| image:ImportCommandSequenceDiagram.PNG[] | image:ImportSequenceRefFrame.PNG[]
-|====
-
-The export command will only export the currently filtered list so as to allow users to select specific groups of people. The following sequence diagram shows how the Export operation works:
-
-|====
-| image:ExportCommandSequenceDiagram.PNG[] | image:ExportSequenceRefFrame.PNG[]
-|====
-
-'''
-
-Given below is an example usage scenario and how to support new file formats (Eg. VCard).
-
-Step 1. Create new class to extend `AdaptedPerson` abstract class.
-
-		Eg. VcardAdaptedPerson
-		This will represent the a guest in the VCard file format.
-
-
-Step 2. Create new class to implement `PersonConverter` interface. Implement the `encodePerson` and `decodePerson` method.
-
-		Eg. VcardConverter
-		The methods in this class, contains the logic to convert between the `Person` and `AdaptedPerson` objects.
-
-
-Step 3. Create new class to implement `CsvFile` interface. Implement `readAdaptedPersons` and `writeAdaptedPersons`.
-
-		Eg. VcardFile
-		The above mentioned methods will allow you to interface with the underlying files.
-
-
-Step 4. Add checks in the `ImportCommandParser` and `ExportCommandParser` to allow the application to call the classes that you have created.
+image::ExportCommandSequenceDiagram.PNG[]
 
 ==== Design Considerations
 
-===== Aspect: How to implement decoding/encoding functionality in Import/Export command
+===== Aspect: Implementing decoding/encoding functionality in Import/Export command
 
-*** Alternative 1 (current choice): import & export command be able to do accept a general PersonConverter
+*** Alternative 1 (current choice): import & export command be able to do accept a general `PersonConverter`
 ** Pros: Reduction in code duplication when supporting other file-formats in the future. Easier to mock and do unit tests.
 ** Cons: More complicated to implement.
 
-*** Alternative 2: Each format has its own command which knows how to do the required conversion
+*** Alternative 2: Each supported format has its own command which knows how to do the required conversion
 ** Pros: We do not need to check for the required import/export format required.
 ** Cons: Higher testing overhead for possible numerous types of export & import command. Duplicated boilerplate code.
 
-=====  Aspect: How to implement the reading/writing of file functionality in Import/Export command
+=====  Aspect: Implementing the reading/writing of file functionality in Import/Export command
 
 *** Alternative 1: Abstract the writing/reading of files into separate classes, `SupportedFile` interface and `CsvFile` class (current choice)
-** Pros: Able to add support for other file formats with changing exisiting code.
+** Pros: Able to add support for other file formats with changing existing code.
 ** Cons: Increased code complexity.
 
 *** Alternative 2: Use a utility class with static methods
 ** Pros: Simple to implement.
-** Cons: Violates open-close principle. Code will only work for CSV files. Tightly coupled.
+** Cons: Violates open-close principle. Code will only work for CSV files. High coupling with the import/export command. Impossible to mock, decreases the testability of the import/export commands.
 
 // end::importexport[]
 
@@ -1008,14 +1006,15 @@ Use case resumes from step 7.
 
 === Use case:  Importing large number of guests into the guest list of an event
 Actor: Application User - Event Planner
+Guarantees: Import will not result in the overwriting or deletion of an existing guest.
 
 *MSS*
 
 1. User opens application.
 2. System asks user to enter a command.
 3. User keys in import command along with the file path of the csv file.
-4. System parses the csv file line by line.
-5. System adds all guests into the guest list.
+4. System parses the csv file and add guests into the guest list one at a time.
+6. System shows CSV entries of guests which failed to be imported along with their associated error messages
 
 Use case ends.
 
@@ -1026,15 +1025,13 @@ Use case ends.
 
 Use case resumes at step 2
 
-* 4a. User provided malformed CSV file or inappropriate guest fields (eg. email with no @gmail.com).
-** 4a1. System skips the addition of the guest into the guest list.
-** 4a2. System displays offending guest entry.
+* 4a. User provided malformed CSV file or inappropriate guest fields (eg. email with no @ character).
+** 4a1. System skips the addition of the guest into the guest list and saves it.
 
 Use case resumes at step 4
 
 * 5a. User provided CSV file with a guest that already exists in the current guest list.
-** 5a1. System skips the addition of the guest into the guest list.
-** 5a2. System displays both current and the new offending guest entry.
+** 5a1. System skips the addition of the guest into the guest list and saves it.
 
 Use case resumes at step 4
 

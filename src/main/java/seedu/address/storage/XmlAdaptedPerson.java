@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +36,8 @@ public class XmlAdaptedPerson {
     private String payment;
     @XmlElement(required = true)
     private String attendance;
+    @XmlElement(required = true)
+    private String uid;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -49,12 +52,13 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String email, String payment,
-                            String attendance, List<XmlAdaptedTag> tagged) {
+                            String attendance, String uid, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.payment = payment;
         this.attendance = attendance;
+        this.uid = uid;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -71,6 +75,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         payment = source.getPayment().paymentValue;
         attendance = source.getAttendance().attendanceValue;
+        uid = source.getUid().uidValue;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -130,8 +135,17 @@ public class XmlAdaptedPerson {
         final Attendance modelAttendance = new Attendance(attendance);
 
         //@@author
+        if (uid == null) {
+            throw new IllegalValueException(String
+                    .format(MISSING_FIELD_MESSAGE_FORMAT, Uid.class.getSimpleName()));
+        }
+        if (!Uid.isValidUid(uid)) {
+            throw new IllegalValueException(Uid.MESSAGE_UID_CONSTRAINTS);
+        }
+        final Uid modelUid = new Uid(uid);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelPayment, modelAttendance, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelPayment, modelAttendance, modelUid, modelTags);
     }
 
     @Override

@@ -21,8 +21,8 @@ import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.csv.CsvAdaptedPerson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.testutil.stubs.CsvConverterStub;
 import seedu.address.testutil.stubs.CsvFileStub;
+import seedu.address.testutil.stubs.CsvPersonConverterStub;
 import seedu.address.testutil.stubs.ModelStubContainingTypicalPersons;
 import seedu.address.testutil.stubs.PersonConverterStub;
 import seedu.address.testutil.stubs.SupportedFileStub;
@@ -51,8 +51,8 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void constructor_personConverterCsvFileMatch_success() {
-        ExportCommand exportCommand = new ExportCommand(new CsvFileStub(), new CsvConverterStub());
+    public void constructor_csvPersonConverterCsvFileMatch_success() {
+        ExportCommand exportCommand = new ExportCommand(new CsvFileStub(), new CsvPersonConverterStub());
         Assert.assertNotNull(exportCommand);
     }
 
@@ -60,7 +60,7 @@ public class ExportCommandTest {
     public void execute_exportToAlreadyExistingFile_throwsCommandException() throws Exception {
         thrown.expect(CommandException.class);
         ExportCommand exportCommand = new ExportCommand(new CsvFileWithAlreadyExistingFile(),
-                new CsvConverterAlwaysSuccessfulConversion());
+                new CsvPersonConverterAlwaysSuccessfulConversion());
         CommandResult commandResult = exportCommand.execute(new ModelStubContainingTypicalPersons(), commandHistory);
         assertEquals(String.format(MESSAGE_FILE_ALREADY_EXIST, ALREADY_EXISTING_CSV_FILENAME),
                 commandResult.feedbackToUser);
@@ -70,16 +70,16 @@ public class ExportCommandTest {
     public void execute_exportToInvalidFilePath_throwsCommandException() throws Exception {
         thrown.expect(CommandException.class);
         ExportCommand exportCommand = new ExportCommand(new CsvFileWithInvalidFilePath(),
-                new CsvConverterAlwaysSuccessfulConversion());
+                new CsvPersonConverterAlwaysSuccessfulConversion());
         CommandResult commandResult = exportCommand.execute(new ModelStubContainingTypicalPersons(), commandHistory);
         assertEquals(String.format(MESSAGE_INVALID_FILE_PATH, INVALID_CSV_FILE_PATH),
                 commandResult.feedbackToUser);
     }
 
     @Test
-    public void execute_csvConverterFailure_correctFeedback() throws Exception {
+    public void execute_csvPersonConverterFailure_correctFeedback() throws Exception {
         ExportCommand exportCommand = new ExportCommand(new CsvFileAlwaysSuccessfulWrite(),
-                new CsvConverterAlwaysFailingConversion());
+                new CsvPersonConverterAlwaysFailingConversion());
         CommandResult commandResult = exportCommand.execute(new ModelStubContainingTypicalPersons(), commandHistory);
         assertEquals(String.format(ExportCommand.MESSAGE_EXPORT_CSV_RESULT, 0, TypicalPersons.NUM_PERSONS,
                 VALID_CSV_FILENAME), commandResult.feedbackToUser);
@@ -88,7 +88,7 @@ public class ExportCommandTest {
     @Test
     public void execute_successfulExportOfAllPersons_success() throws Exception {
         ExportCommand exportCommand = new ExportCommand(new CsvFileAlwaysSuccessfulWrite(),
-                new CsvConverterAlwaysSuccessfulConversion());
+                new CsvPersonConverterAlwaysSuccessfulConversion());
 
         CommandResult commandResult = exportCommand.execute(new ModelStubContainingTypicalPersons(), commandHistory);
         assertEquals(String.format(ExportCommand.MESSAGE_EXPORT_CSV_RESULT, TypicalPersons.NUM_PERSONS,
@@ -145,9 +145,9 @@ public class ExportCommandTest {
 
 
     /**
-     * A CsvConverter stub that always fails to encode
+     * A CsvPersonConverter stub that always fails to encode
      */
-    private class CsvConverterAlwaysFailingConversion extends CsvConverterStub {
+    private class CsvPersonConverterAlwaysFailingConversion extends CsvPersonConverterStub {
         @Override
         public AdaptedPerson encodePerson(Person person) throws PersonEncodingException {
             throw new PersonEncodingException("Person fails to encode");
@@ -155,9 +155,9 @@ public class ExportCommandTest {
     }
 
     /**
-     * A CsvConverter stub that always successfully encodes.
+     * A CsvPersonConverter stub that always successfully encodes.
      */
-    private class CsvConverterAlwaysSuccessfulConversion extends CsvConverterStub {
+    private class CsvPersonConverterAlwaysSuccessfulConversion extends CsvPersonConverterStub {
         @Override
         public AdaptedPerson encodePerson(Person person) throws PersonEncodingException {
             return new CsvAdaptedPerson("Encoded person");

@@ -23,18 +23,20 @@ public class Person {
     // Data fields
     private final Payment payment;
     private final Attendance attendance;
+    private final Uid uid;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Payment payment, Attendance attendance, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, payment, attendance, tags);
+    public Person(Name name, Phone phone, Email email, Payment payment, Attendance attendance, Uid uid, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, payment, attendance, uid, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.payment = payment;
         this.attendance = attendance;
+        this.uid = uid;
         this.tags.addAll(tags);
     }
 
@@ -60,6 +62,12 @@ public class Person {
     }
     //@@author
 
+    //@@author kronicler
+    public Uid getUid() {
+        return uid;
+    }
+    //@@author
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -81,7 +89,18 @@ public class Person {
                 && otherPerson.getName().equals(getName())
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
     }
-
+    //@@author kronicler
+    /**
+     * Returns true if both persons have the same UID. This is a method to prevent UID from being non unique.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean hasSameUid(Person otherPerson) {
+        if (otherPerson.getUid().equals(this.getUid())) {
+            return true;
+        }
+        return false;
+    }
+    //@@author
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -102,6 +121,7 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getPayment().equals(getPayment())
                 && otherPerson.getAttendance().equals(getAttendance())
+                && otherPerson.getUid().equals(getUid())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -123,6 +143,8 @@ public class Person {
                 .append(getPayment())
                 .append(" Attendance: ")
                 .append(getAttendance())
+                .append(" UID: ")
+                .append(getUid())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

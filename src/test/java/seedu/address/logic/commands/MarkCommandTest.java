@@ -12,7 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Uid;
 import seedu.address.testutil.TypicalPersons;
 
 //@@author kronicler
@@ -25,9 +25,9 @@ public class MarkCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model modelNoPersons = new ModelManager();
     private final Model modelLimited = new ModelManager();
-    private final Phone alicePhoneNumber = TypicalPersons.ALICE_PHONE_NUMBER;
-    private final Phone bensonPhoneNumber = TypicalPersons.BENSON_PHONE_NUMBER;
-    private final Phone invalidPhoneNumber = TypicalPersons.INVALID_PHONE_NUMBER;
+    private final Uid aliceUid = TypicalPersons.ALICE_UID;
+    private final Uid bensonUid = TypicalPersons.BENSON_UID;
+    private final Uid unknownUid = new Uid("00011");
 
     @Before
     public void setUp() {
@@ -42,14 +42,14 @@ public class MarkCommandTest {
 
     @Test
     public void execute_noPersonInGuestList_throwCommandException() throws CommandException {
-        MarkCommand markCommand = new MarkCommand(alicePhoneNumber);
+        MarkCommand markCommand = new MarkCommand(aliceUid);
         thrown.expect(CommandException.class);
         markCommand.execute(modelNoPersons, commandHistory);
     }
 
     @Test
     public void execute_filteredGuestListWithoutThePhoneNumber_throwCommandException() throws CommandException {
-        MarkCommand markCommand = new MarkCommand(bensonPhoneNumber);
+        MarkCommand markCommand = new MarkCommand(bensonUid);
         thrown.expect(CommandException.class);
         markCommand.execute(modelLimited, commandHistory);
     }
@@ -64,14 +64,14 @@ public class MarkCommandTest {
 
     @Test
     public void execute_phoneNumberExistsInGuestList_success() throws CommandException {
-        MarkCommand markCommand = new MarkCommand(bensonPhoneNumber);
+        MarkCommand markCommand = new MarkCommand(bensonUid);
         markCommand.execute(model, commandHistory);
     }
 
     @Test
     public void execute_phoneNumberDoesNotExistInGuestList_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
-        MarkCommand markCommand = new MarkCommand(invalidPhoneNumber);
+        MarkCommand markCommand = new MarkCommand(unknownUid);
         markCommand.execute(model, commandHistory);
     }
 
