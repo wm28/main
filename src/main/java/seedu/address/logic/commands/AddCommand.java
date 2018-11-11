@@ -25,13 +25,15 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add_guest";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a guest to the address book. \n"
-            + "UID is either auto-assigned [if you enter u/00000] or user defined."
+            + "Note: UID is either auto-assigned [if you enter u/00000] "
+            + "or user defined [anything other than u/00000].\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_PAYMENT + "PAYMENT "
             + PREFIX_ATTENDANCE + "ATTENDANCE "
+            + PREFIX_UID + "UID "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -42,7 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_UID + "00000 "
             + PREFIX_TAG + "NORMAL "
             + PREFIX_TAG + "NoShrimp "
-            + PREFIX_TAG + "NORMAL ";
+            + PREFIX_TAG + "NORMAL";
+
 
     public static final String MESSAGE_SUCCESS = "New guest added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This guest already exists in the guest list.";

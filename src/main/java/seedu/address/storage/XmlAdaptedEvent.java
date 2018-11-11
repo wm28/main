@@ -130,18 +130,16 @@ public class XmlAdaptedEvent {
         }
         final EventStartTime modelStartTime = new EventStartTime(startTime);
 
-        //@@author SE-EDU
         final Set<Tag> modelTags = new HashSet<>(eventTags);
-        //@@author
 
-        boolean modelisNotInitialisedByUser;
+        boolean modelIsNotInitialisedByUser;
         if (isNotInitialisedByUser == "true") {
-            modelisNotInitialisedByUser = true;
+            modelIsNotInitialisedByUser = true;
         } else {
-            modelisNotInitialisedByUser = false;
+            modelIsNotInitialisedByUser = false;
         }
 
-        return new Event(modelName, modelDate, modelVenue, modelStartTime, modelTags, modelisNotInitialisedByUser);
+        return new Event(modelName, modelDate, modelVenue, modelStartTime, modelTags, modelIsNotInitialisedByUser);
     }
 
     @Override

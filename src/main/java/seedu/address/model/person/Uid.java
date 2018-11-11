@@ -10,12 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Uid {
     public static final String MESSAGE_UID_CONSTRAINTS =
-            "UID should only contain alpha numeric characters, it can be left blank";
+            "UID should only contain alphanumeric characters, and should be between 5 to 20 characters long.\n"
+            + "Auto-generate UID: u/00000 , e.g u/00000 -> UID: 415670 (randomly-generated)\n"
+            + "User defined UID: u/ + NOT 00000, e.g u/00001 -> UID: 00001";
 
     /*
-     * Ensures that only a string of alpha numeric characters are accepted and they are 5 characters long
+     * Ensures that only a string of alpha numeric characters are accepted and they are between 5 to 20 characters long
      */
-    public static final String UID_VALIDATION_REGEX = "\\p{Alnum}{5,}";
+    public static final String UID_VALIDATION_REGEX = "\\p{Alnum}{5,20}";
 
     public final String uidValue;
 
