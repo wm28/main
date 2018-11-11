@@ -1,4 +1,4 @@
-= Aaryam Srivastava - Project Portfolio
+= Srivastava Aaryam - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -19,27 +19,27 @@ send mass emails, keep track of payments, as well as the tab keeping of attendan
 using a standardised format, the application is able to take in Comma Separated Values (CSV) files and import
 data for a particular event.
 
+[cols="2*"]
 |====
-| image:ProductWorkflow.png[] Diagram 1 - Product Workflow | Thanks to the complementary features our group implemented, we are able to
+    ^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow | Thanks to the complementary features our group implemented, we are able to
                                                    create a streamlined workflow for event planners and managers
                                                    in all facets, as depicted in *Diagram 1* on the left.
 |====
 
-*My Contribution*
-
-I was responsible for implementing the mass-emailing functionality in our product, which allows you to send emails to individual, or
+*My contribution* involved implementing the mass-emailing functionality in our product, which allows you to send emails to individual, or
 all of your guests. An added feature of ticket generation is also available, whereby you may send guests their tickets for the event,
-and hence streamline the attendance taking of your event simultaneously.
-
+and hence streamline the attendance taking of your event simultaneously. This feature is extremely crucial as it allows event managers to
+quickly inform all of their guests in a swift and efficient manner, and eliminates the need of individually sending emails, a process that
+can become tedious and ineffective. Moreover, the ticket generation will not only ease the process of attending taking, but also provide an
+environmentally-friendly alternative to printing tickets, posters, flyers, and banners for an event.
 
 Finally, the team that worked with me on this project, as well as the features they implemented,
 as listed below:
 
-1. Aaryam Srivastava - Mass Emailing
-2. Sandhya Gopakumar - Events Creation
-3. Sarah Taaher Bonna - Data Filtering
-4. Tan Tze Guang - Attendance Taking
-5. Tan Wei Ming - Data Importation
+1. Sandhya Gopakumar - Events management
+2. Sarah Taaher Bonna - Guest list management
+3. Tan Tze Guang - Attendance management
+4. Tan Wei Ming - Data sharing
 
 == Summary of contributions
 |===
@@ -48,10 +48,11 @@ as listed below:
 |===
 
 * *Main Feature*: added the ability to *send mass emails* to guests
-** What it does: allows you to either send emails to individual guests using `email`, or
-send mass emails to all your guests or certain groups of guests using `emailAll` and `emailSpecific` respectively
+** What it does: allows you to either send emails to individual guests using the command `email`, or
+send mass emails to all your guests or certain groups of guests using the `emailAll` and `emailSpecific` commands respectively
 ** Justification: This feature will allow event managers to streamline their event notification process, as they can easily and quickly
-inform all of their guests at once, regarding details of the event or otherwise.
+inform all of their guests at once, regarding details of the event or otherwise. To add to this, ticket generation will provide users a
+digitised and economical solution for attendance taking once the event goes live.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=aaryamnus[Contributed code]]
 * *Other contributions*:
@@ -78,7 +79,10 @@ inform all of their guests at once, regarding details of the event or otherwise.
 |This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users
 |===
 
+include::../UserGuide.adoc[tag=addremovetag]
+
 include::../UserGuide.adoc[tag=email]
+
 include::../UserGuide.adoc[tag=settingupemail]
 
 == Contributions to the Developer Guide
