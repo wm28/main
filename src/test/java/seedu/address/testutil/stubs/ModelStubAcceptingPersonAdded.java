@@ -8,6 +8,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
+//@@author wm28-reused
+// Abstracted ModelStub out from AddCommandTest which was from the original AB4
 /**
  * A Model stub that always accept the person being added.
  */
@@ -42,3 +44,4 @@ public class ModelStubAcceptingPersonAdded extends ModelStub {
         return new AddressBook();
     }
 }
+//@@author

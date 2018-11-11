@@ -1,4 +1,4 @@
-package seedu.address.model.error;
+package seedu.address.logic.converters.error;
 
 import javafx.beans.property.SimpleStringProperty;
 

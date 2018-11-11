@@ -21,7 +21,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.error.ImportError;
+import seedu.address.logic.converters.error.ImportError;
 
 /**
  * The Main Window. Provides the basic application layout containing

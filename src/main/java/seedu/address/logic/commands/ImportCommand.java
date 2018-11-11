@@ -18,7 +18,7 @@ import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.SupportedFile;
 import seedu.address.model.Model;
-import seedu.address.model.error.ImportError;
+import seedu.address.logic.converters.error.ImportError;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Uid;
 

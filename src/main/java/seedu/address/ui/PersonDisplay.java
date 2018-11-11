@@ -14,6 +14,7 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionClearedEvent;
 import seedu.address.model.person.Person;
 
+//@@author wm28
 /**
  * An UI component that displays information of a selected {@code Person} on the MainWindow.
  */
@@ -41,7 +42,7 @@ public class PersonDisplay extends UiPart<Region> {
         super(FXML);
         registerAsAnEventHandler(this);
     }
-
+    //@@author
     //@@author aaryamNUS
     /**
      * Method createTags initialises the tag labels for {@code person}

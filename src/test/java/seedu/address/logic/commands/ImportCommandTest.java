@@ -27,6 +27,9 @@ import seedu.address.testutil.stubs.ModelStubAcceptingPersonAdded;
 import seedu.address.testutil.stubs.PersonConverterStub;
 import seedu.address.testutil.stubs.SupportedFileStub;
 
+/**
+ * Contains unit tests for ImportCommand.
+ */
 public class ImportCommandTest {
 
     private static final String VALID_CSV_FILENAME = "valid.csv";
