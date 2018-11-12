@@ -21,7 +21,7 @@ data for a particular event.
 
 [cols="2*"]
 |====
-    ^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow | Thanks to the complementary features our group implemented, we are able to
+    ^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Thanks to the complementary features our group implemented, we are able to
                                                    create a streamlined workflow for event planners and managers
                                                    in all facets, as depicted in *Diagram 1* on the left.
 |====
@@ -92,6 +92,6 @@ include::../UserGuide.adoc[tag=settingupemail]
 |This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project
 |===
 
-include::../DeveloperGuide.adoc[tag=tags]
-
 include::../DeveloperGuide.adoc[tag=emailimplementation]
+
+include::../DeveloperGuide.adoc[tag=tags]

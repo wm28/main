@@ -624,8 +624,7 @@ You will see the guest list populate itself with the data from the specified CSV
 == Enabling Email Services
 
 In order for you to use the commands `email`, `emailAll`, and `emailSpecific` you must allow Invités to access your email account and
-send emails. Currently, our application only supports Gmail accounts, but we do plan on supporting
-other email domains.
+send emails. Currently, our application only supports Gmail accounts, but we do plan on supporting other email domains.
 
 If you do have a *Gmail* account, please follow these steps to enable email services:
 
@@ -640,17 +639,17 @@ Currently there is no other way to enable mailing services than to let your Gmai
 susceptible to an increased number of spam emails from untrusted applications. However, our team is working quickly to find a more secure replacement.
 
 [IMPORTANT]
-If your operating system is *macOS Mojave*, please make a *important* note of the following:
+If your operating system is *macOS Mojave*, please make an *important* note of the following:
 |====
-| image:EmailWindow.png[] Figure 9 - EmailWindow | 1. If you use any of the email-related commands (i.e. _email_, _emailAll_ or _emailSpecific_), you will be presented with an EmailWindow similar to
+^.^| image:EmailWindow.png[] Figure 9 - EmailWindow | 1. If you use any of the email-related commands (i.e. _email_, _emailAll_ or _emailSpecific_), you will be presented with an EmailWindow similar to
 the one in *Figure 9*.
 
-2. If you use the *command-tab* keys when the EmailWindow is open to switch windows, this will cause the program to crash. This is due to
+2. If you use the *command-tab* keys *when the EmailWindow is open* to switch windows, the program to crash. This is due to
 Apple's latest macOS release, in which some of the bindings are not compatible with key JavaFX functions.
 
-3. We sincerely apologise for the inconvenience caused, and our team is quickly trying to fix this issue.
+3. This issue does not occur on Windows, Linux, and older macOS systems, however it _may still exist_ in other operating systems we have not tested on.
 
-4. This issue is not occur on Windows, Linux, and older macOS systems, however this issue _may still exist_ in other operating systems we have not tested on.
+4. We sincerely apologise for the inconvenience caused, and our team is quickly trying to fix this issue.
 |====
 
 |===
@@ -696,8 +695,6 @@ Roy Balakrishnan,92624417,\royb@gmail.com,PENDING,ABSENT,12,gold,Veg,VIP +
 * `export` : Exports guest list to a CSV file.
 * `mark` : ​Tags a guest to note that they are currently at the event.
 * `unmark` : ​Removes the tag of a guest attending the event based on name.
-* `start_marking` : ​Begins continuous marking of the people entering the event.
-* `stop_marking` : ​Stops the continuous marking of people.
 * `filter` : ​Filters the guest list based on keywords given.
 * `email` : ​Sends individual emails to an entry of a specified guest based on index.
 * `emailAll` : Sends an email to all of the guests in the current list.
