@@ -536,8 +536,8 @@ The Import/Export feature is facilitated by the `AdaptedPerson`,`PersonConverter
 
 * `AdaptedPerson` represents a person in the respective file format. It requires the following method.
 ** `AdaptedPerson#getFormattedString()`: returns the string representation of the person according to the particular file format.
-* `SupportedFile` represents a supported file that is able to read and write `AdaptedPerson`s' to the actual file on the computer.  Here are some of its key methods
-** `SupportedFile#readAdaptedPersons()`: Returns all person in the form of `AdaptedPerson`s from the file
+* `SupportedFile` represents a supported file that is able to read and write `AdaptedPerson` s' to the actual file on the computer.  Here are some of its key methods
+** `SupportedFile#readAdaptedPersons()`: Returns all person in the form of `AdaptedPerson` s from the file
 ** `SupportedFile#writeAdaptedPersons()`: Writes all `AdaptedPerson` to the file
 * `PersonConverter` represents a person converter that is able to convert between `Person` s and `AdaptedPerson` s. Here are some of its key methods.
 ** `PersonConverter#encodePerson()`: Encodes a `Person` object and returns the corresponding `AdaptedPerson` object
@@ -570,7 +570,7 @@ image:ImportReportWindowSequenceDiagram.png[width="500"]
 
 '''
 
-The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
+The export command will only export the currently filtered guest list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
 
 image::ExportCommandSequenceDiagram.PNG[width="800"]
 
