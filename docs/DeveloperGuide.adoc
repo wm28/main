@@ -264,11 +264,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete_guest 5` command to delete the 5th guest in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_guest 5` command to delete the 5th guest in the address book. The `delete_guest` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_guest 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add_guest n/David ...` to add a new guest. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_guest n/David ...` to add a new guest. The `add_guest` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -311,7 +311,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the guest being deleted).
+** Pros: Will use less memory (e.g. for `delete_guest`, just save the guest being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -608,24 +608,91 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 Step 2. The user executes the command `import guestlist.csv` to import a list of guest and add them to the current state of the `AddressBook`.
 
 [NOTE]
-Alternatively, the user can execute the command `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT t/NORMAL` to create an instance of one guest and add them to the current state of `AddressBook`.
+Alternatively, the user can execute the command `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT u/00001 t/NORMAL` to create an instance of one guest and add them to the current state of `AddressBook`.
 
-Step 3. The user will execute the command `mark 98765432` to mark the attendance of the `Person`.
+Step 3. The user will execute the command `mark 00001` to set the attendance of the `Person` to `PRESENT`.
 
-Step 4. An instance of `filteredPersonList` is retrieved from the `model` using `MODEL#getFliteredPersonList`. A linear search is then executed on the `filteredPersonList` to find a `Person` with the same phone number as `98765432`.
+Step 4. An instance of `getPersonList` is retrieved from the `model` using `MODEL#getAddressBook#getPersonList`. A linear search is then executed on the `getPersonList` to find a `Person` with the same Unique ID (UID) as `00001`.
 
 [NOTE]
-If there is no matching phone number found, a `COMMANDEXCEPTION` will be thrown to indicate nobody in the list has the phone number.
+If there is no matching UID found, a `COMMANDEXCEPTION` will be thrown to indicate nobody in the list has the phone number.
+If there is more than one instance of the same UID, a `COMMANDEXCEPTION` will be thrown to indicate that there are more than one instance of the same UID. In this case, `edit_guest` will not work. The user has to delete the entry and `add_guest` for the deleted entry.
 
 Step 5. After retrieving the information from the discovered `Person`, another `Person` is created with the same fields with the exception of the attendance field being changed from `ABSENT` to `PRESENT`.
 
-Step 6. Finally, the entry is updated using `MODEL#updatePerson` to transfer the new information into the `filteredPersonList` before `commitAddressBook` is executed to save the state of the `AddressBook`.
+Step 6. Finally, the entry is updated using `MODEL#updatePerson` to transfer the new information into the `Model` before `commitAddressBook` is executed to save the state of the `AddressBook`.
 
-The following sequence diagram shows how the add_event operation works:
+The following sequence diagram shows how the `mark` operation works:
 
-image::MarkUnmarkEventSequenceDiagram.png[width="800"]
+image::MarkCommandSequenceDiagram.png[width="900"]
+
+The following sequence diagram shows how the `ummark` operation works:
+
+image::UnmarkCommandSequenceDiagram.png[width="900"]
+
+==== Design Considerations
+
+===== Aspect: How mark/unmark executes
+
+*** Alternative 1 (current choice): access the `PersonList` model to execute marking of attendance.
+** Pros: Able to mark the attendance of anybody within the list even when it is filtered. Prevents the bug of a person filtering the list to only show a single instance of the multiple similar UID to mark their attendance.
+** Cons: Some changes might be hard to detect when displaying a filtered list.
+
+*** Alternative 2: access the `filteredPersonList` model to execute the marking of attendance.
+** Pros: Able to work with a smaller set of people in the list. Changes made are immediately observable.
+** Cons: Introduces bugs such as avoiding the similar UID check within the current instance of the guest list. If the filtered list does not immediately have the UID that needs to be used, the user has to call `list` command first. Increasing the chance of human error in the system.
 
 // end::markunmark[]
+
+// tag::generateuid[]
+
+=== Extension made to add_guest: Generate Unique ID (UID) on creation of an entry into the list
+This feature is facilitated by the usage of the `Model`. +
+Given below is an example of the execution of the added functionality of the `add_guest` command.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state and the currentStatePointer pointing to that single address book state.
+
+Step 2. The user executes the `add_guest` command with the following non-null fields: `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT u/00001 t/NORMAL`.
+
+Step 3. The `addCommandParser` extracts the relevant information from the command and returns a `Person` model that was built with the given arguments.
+
+Step 4. The `add_guest.execute` function receives the generated `Person` model and checks for duplicates of the same `Person` as well as duplicates of the same `UID` in the `VersionedAddressBook`.
+
+[NOTE]
+If the checks fail, `COMMANDEXCEPTION` will be thrown to indicate the existence of more than one of the same `UID` or `Person`
+
+Step 5. The function will test the equality between the `UID` given in the generated `Person` and the `DEFAULT_TO_GENERATE_UID` which is `00000`. From here the program will do one of 2 different things.
+
+Step 6a. If the `UID` given is not the same as `DEFAULT_TO_GENERATE_UID`: +
+         The program will treat this as a user defined UID and add the `Person` into the `Model` without changing anything.
+
+Step 6b. If the `UID` given is the same as `DEFAULT_TO_GENERATE_UID`: +
+         The program will create a new `Person` model with the same arguments with the exception of `UID`. The `UID` is then generated randomly in the `generateUid()` function. +
+         Another check is done to ensure that the `UID` does not already exist in the `VersionedAddressBook`. +
+         This is done in a loop to ensure the `UID` is unique before adding the `Person` into the `Model` by executing `addPerson()`.
+
+Step 7. After adding the `Person` into the `Model`, the program commits the changes by executing `commitAddressBook` to save the state of the `AddressBook`..
+
+The following sequence diagram shows how the `add_guest` command works:
+
+image::AddCommandSequenceDiagram.png[width="900"]
+
+==== Design Considerations
+===== Aspect: Whether to only generate UID or to allow the user to define UID
+
+*** Alternative 1 (current choice): give the user the freedom to choose between defining their own `UID` or letting the program generate one itself.
+** Pros: Able to write tests for the command that will not fail. A company or event may already be using some sort of unique identification, this can be used by the event planner to uniquely identify attendees. If there is none, the user can just let the program generate one for them.
+** Cons: Increased code complexity
+
+*** Alternative 2: only let the user define the `UID` for all attendees of the event.
+** Pros: Decreased code complexity
+** Cons: User will face great difficulty in creating UID for a large group of people if there is no unique identifier available for the attendees already.
+
+*** Alternative 3: only generate the `UID` for all the attendees in the list, user input for the UID is not allowed.
+** Pros: Decreased code complexity
+** Cons: Unable to write meaningful tests if the the actual output is going to be random. Users may already have a way to uniquely identify the attendees to the event but the event planner cannot make use of that method.
+
+// end::generateuid[]
 
 // tag::emailimplementation[]
 === Email Functionality - _Coming in v2.0_
@@ -1001,16 +1068,14 @@ Actor: Application User - Event Planner
 1. User opens application and imports csv file(if they were not using the application while planning) or
    continues with the list on the application.
 2. System asks user to enter a command.
-3. User keys in command to start marking attendance.
-4. User (manning the reception/registration desk) manually keys in the guest’s index number found on the ticket.
-5. System runs a search to match the index number with those in the file.
-6. If index number is found, attendance of that guest is marked.
+3. User keys in command to filter the list for attendees whom are absent from the event.
+4. User (manning the reception/registration desk) manually keys in the guest’s unique ID found on the ticket.
+5. System runs a search to match the unique ID with those in the file.
+6. If unique ID is found, attendance of that guest is marked.
 7. System removes all ‘marked’ guests from display and displays only those who have yet to arrive/register.
 8. User can enter a command to send an email to all in the currently displayed list (comprising of guests
    who have not arrived or registered yet).
 9. System sends an email to each of those guests.
-10. User enters command to stop marking.
-11. System stops marking process.
 
 Use case ends.
 
