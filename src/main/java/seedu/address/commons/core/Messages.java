@@ -13,7 +13,6 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_FILE_NOT_FOUND = "%1$s does not exists!";
     public static final String MESSAGE_FILE_ALREADY_EXIST = "%1$s already exists!";
-
     public static final String MESSAGE_EDITING_UID = "ERROR: A guest's UID cannot be edited";
 
     //@@author aaryamNUS

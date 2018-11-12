@@ -65,6 +65,9 @@ The team that worked with me on this project and the major feature they implemen
 |===
 |_Given below are the sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
+
+=== *_Sections 3.4, 3.5 and 3.6 of the User Guide_*
+
 include::../UserGuide.adoc[tag=event]
 
 == Contributions to the Developer Guide
@@ -72,11 +75,10 @@ include::../UserGuide.adoc[tag=event]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-=== *_Sections 4.4, 4.5 of the Developer Guide_*
+=== *_Sections 4.4 and 4.5 of the Developer Guide_*
 
 include::../DeveloperGuide.adoc[tag=event]
 
-=== *_Appendix F.4, F.5, F.6_*
+=== *_Appendix F.4, F.5 and F.6 of the Developer Guide_*
 
 include::../DeveloperGuide.adoc[tag=eventappendix]
-

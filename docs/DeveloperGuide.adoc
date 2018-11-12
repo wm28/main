@@ -245,94 +245,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-.Undo Redo Starting State List Diagram
-image::UndoRedoStartingStateListDiagram.png[width="800"]
-
-Step 2. The user executes `delete_guest 5` command to delete the 5th guest in the address book. The `delete_guest` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_guest 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-.Undo Redo New Command 1 State List Diagram
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add_guest n/David ...` to add a new guest. The `add_guest` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-.Undo Redo New Command 2 State List Diagram
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-Step 4. The user now decides that adding the guest was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-.Undo Redo Execute Undo State List Diagram
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-.Undo Redo Sequence Diagram
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-.Undo Redo New Command 3 State List Diagram
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
-
-.Undo Redo New Command 4 State List Diagram
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-.Undo Redo Activity Diagram
-image::UndoRedoActivityDiagram.png[width="650"]
-
-==== Design Considerations
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete_guest`, just save the guest being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
-
 // tag::filter[]
 === Filter feature
 ==== Current Implementation
@@ -480,57 +392,102 @@ image::EditEventSequenceDiagram.png[width="800"]
 
 // end::event[]
 
+// tag::emailimplementation[]
+=== Email Functionality
+
+==== High Level Algorithm Design
+The email functionality, comprising of the commands `email`, `emailAll`, and `emailSpecific` allows the user to send individual and mass emails to the guests
+in their list. Moreover, all three commands will open a popup window to prompt the user to enter the relevant details, namely their email address and password,
+as well as the email subject and message. Currently `Gmail` is the only supported domain for the user's email address, however the implementation of this function
+easily allows for more domains to be supported.
+
+Additionally, the main design of the email functionality resides within the *Logic* component, coupled with a *UI* component to allow the user to input their details.
+
+|====
+    ^.^| image:EmailAllClassDiagram.png[] Figure 12 - EmailAll Class Diagram
+|====
+
+As you can see above, *Figure 12* captures the main interactions between all classes when the user executes an `emailAll` command.
+
+    * The command depends on the class `EmailPasswordAuthenticator` for verification of the user's email credentials and the abstract class `Email` which creates the email object to be sent as well as establishes a connection with Gmail's SMTP server via `Properties`
+    * Moreover, the creation of the UI window is facilitated by the class `EmailWindow`, which also returns the email data once you input your details.
+    * Furthermore, the email object is created thanks to `MimeMultiPart` class, and comprises of two main parts
+    ** The first part is the text input you provided in the UI window, which is used by `MimeMessage` and `MimeBodyPart`, both of which implement the interface `MimePart`
+    ** The second part is the QR Code which acts as the guest's ticket and is generated by `QrUtil`. Note that currently only the `email` command supports ticket generation.
+    * Finally, the email, with all its contents, is sent via the abstract class `Transport`
+
+==== Command Mechanism
+
+[cols="70%,30%"]
+|====
+    ^.^| image:MailCommandActivityDiagram.png[] Figure 13 - MailCommand Activity Diagram .^| *Figure 13* represents an activity diagram when the _email_ command is executed.
+
+    As you can see, the command involves *error checking*, followed by *creating an email object*, and finally *sending* this email to an individual guest.
+|====
+
+==== Design Considerations
+===== Aspect: Creating an EmailWindow for user input
+*** Current choice: Instantiating the UI component directly from the abstract class Email
+** Pros: Reduces dependencies and coupling because other UI components and increases cohesion
+** Cons: Does not fit within the Façade Class of `EventsCentre`
+
+*** Alternative: Create a controller from `EventsCentre` for showing `EmailWindow`
+** Pros: Will fit within the Façade Class of `EventsCentre` and hence with the software architecture
+** Cons: Functionality will be affected, as current model makes it difficult to feed back user input
+
+===== Aspect: Implementing email verification of guest email addresses
+*** Current choice: Email addresses are only checked for validity, not whether they exist
+** Pros: Efficient way to send mass emails without slowing down the program for verification
+** Cons: User will be unaware if the guest email address does not exist, which may affect communication
+
+*** Alternative: Implement email validation for any possible email domain
+** Pros: User is able to check which guest email addresses do not exist
+** Cons: Would make the codebase bulkier and require multiple email domain configurations
+
+// end::emailimplementation[]
+
 // tag::tags[]
 === Add/Remove Tag generation feature
 ==== Current Implementation
 
-The addTag/removeTag mechanism is facilitated by `AddressBook` as it provides an editable form of a `ReadOnlyAddressBook` provided by the `Model` interface.
-Additionally, it implements the following operations:
-
-`Model#commitAddressBook()`, `Model#getFilteredPersonList()`, and `Model#resetData()` respectively.
+The addTag/removeTag mechanism is facilitated by `AddressBook` as it provides a `ReadOnlyAddressBook` using the `Model` interface.
+Additionally, it implements `Model#commitAddressBook()`, `Model#getFilteredPersonList()`, and `Model#resetData()`.
 
 Given below is an example usage scenario and how the addTag/removeTag mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `AddressBook` will be initialized with the initial address book state.
+Step 1. The user launches the application for the first time and executes the command `import guestlist.csv` to import a list of guests and add them to the current state of `AddressBook`.
 
-Step 2. The user executes the command `import guestlist.csv` to import a list of guests and add them to the current state of `AddressBook`.
+Step 2. The user now decides to add a set of tags to all guests in the list and executes the command `addTag t/VIP t/Platinum` to add the tags `VIP` and `Platinum`.
 
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved.
+Step 3. A `ReadOnlyAddressBook` is created and an editable address book is created using `AddressBook`. To add to this, the current filtered list is accessed using `Model#getFilteredPersonList()`
 
-Step 3. The user now decides to add a set of tags to all guests in the list and executes the command `addTag t/VIP t/Platinum` to add the tags `VIP` and `Platinum`.
+Step 4. The set of tags are added to all guests in the editable address book via `AddressBook#addTag()` and `AddressBook#addTagFromPerson()`
 
-Step 4. A `ReadOnlyAddressBook` is created and an editable address book is created using `AddressBook`. To add to this, the current filtered list is accessed using `Model#getFilteredPersonList()`
-
-Step 5. The set of tags are added to all guests in the editable address book via `AddressBook#addTag()` and `AddressBook#addTagFromPerson()`
-
-Step 6. Finally, `Model#resetData()` and `Model#commitAddressBook()` are called to reset the current state of the list with the updated tags.
+Step 5. Finally, `Model#resetData()` and `Model#commitAddressBook()` are called to reset the current state of the list with the updated tags.
 
 The `removeTag` command does the opposite, and removes a set of tags from all guests in the guest list. However, the workflow is similar to `addTag`; a new `AddressBook` is created and edited accordingly as per the command.
 
 [NOTE]
 If there are no guests in the current list, or if the removeTag command tries to remove non-existent tags, the function will not execute and the current state of the list will be preserved.
 
-The following sequence diagram summarizes how the addTag() and removeTag() function work:
-The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
+*Figures 14 and 15* below are sequence diagrams that summarize the flow of actions when the system performs the addTag() or removeTag() command respectively:
 
-.AddTag and RemoveTag Sequence Diagram
-image::AddTagRemoveTagSequenceDiagram.png[width="800"]
-
-Figure above shows how the addTag() and removeTag() function work.
-The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
+[col="2*"]
+|====
+    ^| image:AddTagSequenceDiagram.png[] Figure 14 - AddTag Sequence Diagram ^| image:RemoveTagSequenceDiagram.png[] Figure 15 - RemoveTag Sequence Diagram
+|====
 
 ==== Design Considerations
 
-===== Aspect: How to create an EditableAddressBook for AddTag and RemoveTag?
+===== Aspect: Creating an EditableAddressBook for AddTag and RemoveTag
 
-*** Alternative 1 (current choice): edit the `AddressBook` model to allow an addTag and removeTag command to execute
+*** Current choice: edit the `AddressBook` model to allow an addTag and removeTag command to execute
 ** Pros: Easier to use by the functions and also to test
 ** Cons: Variability is difficult, as new editions to the model must be made
 
-*** Alternative 2: Make the AddressBook editable by default
+*** Alternative: Make the AddressBook editable by default
 ** Pros: Current AddressBook can easily be changed by any functions
-** Cons: Makes the content of the AddressBook less secure by giving all functions access to edit
+** Cons: Makes the content of the AddressBook accessible by all functions, which is undesirable
 // end::tags[]
 
 // tag::importexport[]
@@ -547,8 +504,8 @@ The Import/Export feature is facilitated by the `AdaptedPerson`,`PersonConverter
 
 * `AdaptedPerson` represents a person in the respective file format. It requires the following method.
 ** `AdaptedPerson#getFormattedString()`: returns the string representation of the person according to the particular file format.
-* `SupportedFile` represents a supported file that is able to read and write `AdaptedPerson`s' to the actual file on the computer.  Here are some of its key methods
-** `SupportedFile#readAdaptedPersons()`: Returns all person in the form of `AdaptedPerson`s from the file
+* `SupportedFile` represents a supported file that is able to read and write `AdaptedPerson` s' to the actual file on the computer.  Here are some of its key methods
+** `SupportedFile#readAdaptedPersons()`: Returns all person in the form of `AdaptedPerson` s from the file
 ** `SupportedFile#writeAdaptedPersons()`: Writes all `AdaptedPerson` to the file
 * `PersonConverter` represents a person converter that is able to convert between `Person` s and `AdaptedPerson` s. Here are some of its key methods.
 ** `PersonConverter#encodePerson()`: Encodes a `Person` object and returns the corresponding `AdaptedPerson` object
@@ -563,7 +520,7 @@ For the import command, the popup window to show errors encountered is facilitat
 
 The following class diagrams shows the relationship between the classes and interfaces mentioned above.
 
-.Import Export Class Diagram
+.Import/Export Command Class Diagram
 image::ImportExportClassDiagram.PNG[width="800"]
 
 ===== Command mechanism
@@ -575,16 +532,16 @@ After the command completes the importation of all guests in the guest list, if 
 The following sequence diagram shows how the Import operation works:
 
 .Import Command Sequence Diagram
-image:ImportCommandSequenceDiagram.PNG[width="800"]
+image::ImportCommandSequenceDiagram.PNG[width="800"]
 
 The `ShowImportReportEvent` will be handled by the `MainWindow` according to the following sequence diagram below.
 
 .Import Report Window Sequence Diagram
-image:ImportReportWindowSequenceDiagram.png[width="500"]
+image::ImportReportWindowSequenceDiagram.png[width="500"]
 
 '''
 
-The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
+The export command will only export the currently filtered guest list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
 
 .Export Command Sequence Diagram
 image::ExportCommandSequenceDiagram.PNG[width="800"]
@@ -640,12 +597,12 @@ Step 6. Finally, the entry is updated using `MODEL#updatePerson` to transfer the
 The following sequence diagram shows how the `mark` operation works:
 
 .Mark Command Sequence Diagram
-image::MarkCommandSequenceDiagram.png[width="900"]
+image::MarkCommandSequenceDiagram.png[width="800"]
 
 The following sequence diagram shows how the `ummark` operation works:
 
 .Unmark Command Sequence Diagram
-image::UnmarkCommandSequenceDiagram.png[width="900"]
+image::UnmarkCommandSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -693,7 +650,7 @@ Step 7. After adding the `Person` into the `Model`, the program commits the chan
 The following sequence diagram shows how the `add_guest` command works:
 
 .Add Command Sequence Diagram
-image::AddCommandSequenceDiagram.png[width="900"]
+image::AddCommandSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 ===== Aspect: Whether to only generate UID or to allow the user to define UID
@@ -712,15 +669,16 @@ image::AddCommandSequenceDiagram.png[width="900"]
 
 // end::generateuid[]
 
-// tag::emailimplementation[]
-=== Email Functionality - _Coming in v2.0_
-
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
 _{We plan on implementing a data encryption feature such that when the user chooses to, the data stored in the addressbook will be encrypted and display ceases to show all information.}_
 
 // end::dataencryption[]
+
+=== [Proposed] Guest Email Verification
+
+_{We plan on implementing a guest email verification system, that lets the user know which of their guest email addresses exist, for any email domain.}_
 
 === Logging
 
