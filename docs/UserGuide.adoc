@@ -313,9 +313,9 @@ other characters will trigger an invalid command format error.
 
 Examples:
 
-* `mark 543654` You will set the guest with UID `543654` as present.
-* `mark A345654M` You will set the guest with UID `A345654M` as present.
-* `mark ALPHA` You will set the guest with UID `ALPHA` as present.
+* `mark 543654` You will set the guest with UID `543654` as `PRESENT`.
+* `mark A345654M` You will set the guest with UID `A345654M` as `PRESENT`.
+* `mark ALPHA` You will set the guest with UID `ALPHA` as `PRESENT`.
 
 image::markCommandSuccess.PNG[width="790"]
 Figure 3 - User interface after Mark Command : Successful execution of `MarkCommand`
@@ -336,9 +336,9 @@ other characters will trigger an invalid command format error.
 
 Examples:
 
-* `unmark 543654` You will set the guest with UID `543654` as absent.
-* `mark A345654M` You will set the guest with UID `A345654M` as absent.
-* `mark ALPHA` You will set the guest with UID `ALPHA` as absent.
+* `unmark 543654` You will set the guest with UID `543654` as `ABSENT`.
+* `mark A345654M` You will set the guest with UID `A345654M` as `ABSENT`.
+* `mark ALPHA` You will set the guest with UID `ALPHA` as `ABSENT`.
 
 
 image::unmarkCommandSuccess.png[width="790"]
@@ -364,7 +364,7 @@ You will need to use the `stop_marking` command to deactivate this mode to use o
 Examples:
 
 * `start_marking` + `00001` + `708944` + `928372` + `00003...` +
-You will mark the guests with UID of 00001, 708944, 928372, 00003 as present
+You will mark the guests with UID of `00001`, `708944`, `928372`, `00003` as `PRESENT`.
 // end::start_marking[]
 
 // tag::stop_marking[]
@@ -373,7 +373,7 @@ You will mark the guests with UID of 00001, 708944, 928372, 00003 as present
 [NOTE]
 This feature has not been implemented yet. Our team plans to implement this feature in an upcoming version, v2.0.
 
-Stops the mass attendance marking mode. Deactivates the `start_marking` mode to enable usage of other commands in the program+
+Stops the mass attendance marking mode. Deactivates the `start_marking` mode to enable usage of other commands in the program +
 Format: `stop_marking`
 
 Examples:
