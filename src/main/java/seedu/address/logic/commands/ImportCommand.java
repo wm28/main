@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,14 +14,16 @@ import seedu.address.commons.events.ui.ShowImportReportEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.converters.PersonConverter;
+import seedu.address.logic.converters.error.ImportError;
 import seedu.address.logic.converters.exceptions.PersonDecodingException;
 import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.SupportedFile;
 import seedu.address.model.Model;
-import seedu.address.model.error.ImportError;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Uid;
 
 //@@author wm28
+
 /**
  * Imports multiple guests into the guest list of the current event via a CSV file
  */
@@ -34,6 +37,10 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_IMPORT_CSV_RESULT = "Successfully imported %1$d of %2$d guests from %3$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_UID =
+            "This UID is already used in the guest list. Please use another UID.";
+    public static final Uid DEFAULT_TO_GENERATE_UID = new Uid("00000");
+
 
     private static Logger logger = Logger.getLogger("execute");
 
@@ -72,7 +79,10 @@ public class ImportCommand extends Command {
             logger.log(Level.INFO, "Error exists in CSV file, triggering ImportReportWindow");
             EventsCenter.getInstance().post(new ShowImportReportEvent(errors));
         }
-        model.commitAddressBook();
+
+        if (successfulImports > 0) {
+            model.commitAddressBook();
+        }
         return new CommandResult(String.format(MESSAGE_IMPORT_CSV_RESULT,
                 successfulImports, totalImports, supportedFile.getFileName()));
     }
@@ -102,8 +112,40 @@ public class ImportCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+        //@@author
+        //@@author kronicler
+        if (model.hasUid(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_UID);
+        }
+
+        if (toAdd.getUid().equals(DEFAULT_TO_GENERATE_UID)) {
+            boolean unique = false;
+            while (!unique) {
+                Person temp = new Person(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(), toAdd.getPayment(),
+                        toAdd.getAttendance(), generateUid(), toAdd.getTags());
+                if (model.hasUid(temp) == false) {
+                    unique = true;
+                    toAdd = temp;
+                }
+            }
+        }
+        //@@author
+        //@@wm28
         model.addPerson(toAdd);
     }
+
+    //@@author
+    //@@author kronicler
+    /**
+     * Generate a random UID
+     */
+    public Uid generateUid() {
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        return new Uid(String.format("%06d", number));
+    }
+    //@@author
+    //@@author wm28
 
     @Override
     public boolean equals(Object other) {

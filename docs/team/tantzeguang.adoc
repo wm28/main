@@ -9,50 +9,77 @@
 
 == Overview
 
-Invités is a desktop application used by people who manage and plan events to streamline their processes and better manage the events that they are handling.
-]The user interacts with it mainly using a CLI, and it has a GUI created with JavaFX.
+|===
+|_INFO_
+|_This section features the role and contributions I had over the course of this project_
+|===
 
-My Responsibilities
+Invités is a desktop application used by people who manage and plan events to streamline their processes and better manage
+the events that they are handling. +
+The user interacts with it mainly using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with the JavaFX library.
 
-Project scope - Invités is an event management system that provides an intuitive platform for event planners to better organise and manage
+*Responsibility* - In this project, I was assigned the task of creating an easy to use system to manage the attendance within the application. +
+
+To implement a feature like that in this application, I would need a method to uniquely identify each guest in the guest list. This is necessary as having identifiers that can give more than one result
+will increase the burden of the event planner as they will have to choose which entry would be modified, when this application is supposed to be helping them.
+Identifying the right person quickly in an event is essential for running the event smoothly. Also considering the fact
+that names, phone numbers, emails cannot be considered unique in a setting such as a public event, creating a unique ID (UID) was needed.
+After creating the UID, the process of marking attendance is made easier as each UID represents one person in the guest list.
+
+*Project scope* - Invités is an event management system that provides an intuitive platform for event planners to better organise and manage
 the reception during small or large events such as school orientation camps, committee events or more formal occasions such as weddings.
 The main features that streamline the processes of the event planner is the ability to send mass emails to attendees,
 keep track of payments, as well as attendance tracking during the event itself. If the event planner used other applications
 to store his data, they can easily import their data over from CSV files that can be generated from Microsoft Excel.
 
-*Team*
+== Team
+The list below shows all our team members and what we have contributed to the application _Invités_:
 
-1. Aaryam Srivastava - Mass Emailing
-2. Sandhya Gopakumar - Events Creation
-3. Sarah Taaher Bonna - Data Filtering
-4. Tan Tze Guang - Attendance Taking
-5. Tan Wei Ming - Data Importation
-
+|===
+|*Names* | *Major Feature*
+|Aaryam Srivastava | Mass Email Communication
+|Sandhya Gopakumar | Events Management
+|Sarah Taaher Bonna | Guest List Management
+|Tan Tze Guang | Attendance Management
+|Tan Wei Ming | Data Sharing
+|===
 == Summary of contributions
 
-* *Major enhancement*: added the function to mark attendance of the attendees in the Guest list
+|===
+|_INFO_
+|_This section is a summary of my contributions to the project. It showcases my ability to work on a software project with a team of people_
+|===
+
+* *Major Feature*: added the function to mark attendance of the attendees in the Guest list
 ** What it does: This function allows the person planning an event to keep track of the number of attendees whom have arrived at the event by marking them as present or absent during the event itself.
 ** Justification: This feature is necessary in the implementation of our guest list as it is a core feature that gives the event planner peace of mind as it is a tool for them to ensure that the event is run smoothly.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Highlights: This feature is a core feature that required creating the Unique ID for each guest, else it would have to be more complex to handle identification mediums that could potentially identify more than one person at a time.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kronicler&sort=displayName&since=2018-09-12&until=2018-11-04&timeframe=day&reverse=false&repoSort=true[Functional code]]
+* *Sub feature*: added the function to generate Unique ID (UID) for attendees
+** What it does: This function allows the event planner to not have to think of a large number of UID for guests of the event.
+** Justification: This feature is necessary in the implementation of our guest list as it streamlines the identification of each guest especially for the receptionists for the event. It provides a unique identification to each guest which allows our program to pick out the right person without needing to handle people whom have the same name or same phone numbers.
+** Highlights: This enhancement affects existing commands and commands to be added in future. The implementation too was challenging as it required changes to existing commands.
+
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kronicler&sort=displayName&since=2018-09-12&until=2018-11-30&timeframe=day&reverse=false&repoSort=true[Functional code]]
 
 * *Other contributions*:
 
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S1-F09-3/main/pull/190[#190] https://github.com/CS2113-AY1819S1-F09-3/main/pull/139[#139] https://github.com/CS2113-AY1819S1-F09-3/main/pull/313[#313]
+*** Added more documentation in to the existing contents of the Developer Guide: https://github.com/CS2113-AY1819S1-F09-3/main/pull/190[#190] https://github.com/CS2113-AY1819S1-F09-3/main/pull/139[#139] https://github.com/CS2113-AY1819S1-F09-3/main/pull/313[#313]
+** Enhancements to existing features:
+*** Added generation of UID into the `add_guest` command
 ** Community:
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** Reported bugs and suggestions for another team in the cohort (examples: https://github.com/CS2113-AY1819S1-F10-3/main/issues/187[#187] https://github.com/CS2113-AY1819S1-F10-3/main/issues/205[#205])
+*** Reviewed Pull requests from team members to give timely feedback (examples: https://github.com/CS2113-AY1819S1-F09-3/main/pull/135[#135] https://github.com/CS2113-AY1819S1-F09-3/main/pull/138[#138] https://github.com/CS2113-AY1819S1-F09-3/main/pull/152[#152] https://github.com/CS2113-AY1819S1-F09-3/main/pull/157[#157] https://github.com/CS2113-AY1819S1-F09-3/main/pull/203[#203] https://github.com/CS2113-AY1819S1-F09-3/main/pull/232[#232] https://github.com/CS2113-AY1819S1-F09-3/main/pull/284[#284])
 ** Tools:
-*** Integrated a new Github plugin (CircleCI) to my personal forked repo to ensure that the my build succeeds before a pull request is done to
-main repo.
+*** Integrated a Github plugin (CircleCI) to my personal forked repository
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_INFO_
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation which targets end-users._
 |===
 
 include::../UserGuide.adoc[tag=mark]
@@ -66,8 +93,10 @@ include::../UserGuide.adoc[tag=stop_marking]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_INFO_
+|_Given below are sections that I have contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=markunmark]
 
+include::../DeveloperGuide.adoc[tag=generateuid]

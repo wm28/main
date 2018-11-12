@@ -27,6 +27,7 @@ import seedu.address.model.person.Uid;
 import seedu.address.model.tag.Tag;
 
 //@@author wm28
+
 /**
  * Converts a person between the {@code CsvAdaptedPerson} and the {@code Person}
  */
@@ -35,7 +36,7 @@ public class CsvPersonConverter implements PersonConverter {
             + "[\"|']?(?<phone>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<email>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<payment>[^\"',]*)[\"|']?,"
-            + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,?"
+            + "[\"|']?(?<attendance>[^\"',]*)[\"|']?,"
             + "[\"|']?(?<uid>[^\"',]*)[\"|']?,?"
             + "(?<tags>.*)");
 
@@ -59,10 +60,13 @@ public class CsvPersonConverter implements PersonConverter {
         result.append(person.getEmail() + ",");
         result.append(person.getPayment() + ",");
         result.append(person.getAttendance() + ",");
-        result.append(person.getUid() + ",");
-        result.append(person.getTags().stream()
-                .map(tag -> tag.tagName)
-                .collect(Collectors.joining(",")));
+        result.append(person.getUid());
+        if (!person.getTags().isEmpty()) {
+            result.append(",");
+            result.append(person.getTags().stream()
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(",")));
+        }
         return new CsvAdaptedPerson(result.toString());
     }
 

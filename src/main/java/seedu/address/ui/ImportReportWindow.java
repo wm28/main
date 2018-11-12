@@ -9,7 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.error.ImportError;
+import seedu.address.logic.converters.error.ImportError;
 
 /**
  * Controller for a import report window.

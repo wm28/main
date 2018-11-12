@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_DANNY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
@@ -106,6 +107,8 @@ public class AddressBookTest {
     }
 
     //@@author aaryamNUS
+    // Parts of the following tests were adapted thanks to PR #790 provided by @yamgent from SE-EDU
+    // Source: https://github.com/se-edu/addressbook-level4/pull/790
     @Test
     public void removeTag_nonExistentTag_addressBookUnchanged() {
         addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_UNUSED));
@@ -130,7 +133,7 @@ public class AddressBookTest {
 
     @Test
     public void addTag_noNewTagsToAdd_addressBookUnchanged() {
-        addressBookWithDanny.addTag(new Tag(VALID_TAG_FRIEND));
+        addressBookWithDanny.addTag(new Tag(VALID_TAG_DIET_DANNY));
 
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(DANNY).build();
 

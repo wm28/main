@@ -17,7 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DANNY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_DANNY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_DANNY;
@@ -31,7 +31,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Uid;
-
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -69,13 +68,13 @@ public class TypicalPersons {
 
     //Csv formatted person
     public static final String CSV_ALICE =
-            "Alice Pauline,94351253,alice@gmail.com,PENDING,PRESENT,00001,VEGETARIAN,NoNuts";
+            "Alice Pauline,94351253,alice@gmail.com,PENDING,PRESENT,00001,NoNuts,VEGETARIAN";
     public static final String CSV_BENSON =
-            "Benson Meier,98765432,johnd@gmail.com,PAID,ABSENT,00002,NORMAL,NoSeafood,GUEST";
+            "Benson Meier,98765432,johnd@gmail.com,PAID,ABSENT,00002,GUEST,NoSeafood,NORMAL";
     public static final String CSV_CARL =
             "Carl Kurz,95352563,heinz@gmail.com,NOTPAID,PRESENT,00003";
     public static final String CSV_DANIEL =
-            "Daniel Meier,87652533,cornelia@gmail.com,PAID,ABSENT,00004,NORMAL,VIP";
+            "Daniel Meier,87652533,cornelia@gmail.com,PAID,ABSENT,00004,VIP,NORMAL";
     public static final String CSV_ELLE =
             "Elle Meyer,9482224,werner@gmail.com,NOTPAID,PRESENT,00005";
     public static final String CSV_FIONA =
@@ -97,7 +96,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAttendance(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_DIET_BOB)
             .withPayment(VALID_PAYMENT_BOB).withUid(VALID_UID_BOB).build();
     public static final Person DANNY = new PersonBuilder().withName(VALID_NAME_DANNY).withPhone(VALID_PHONE_DANNY)
-            .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_DIET_DANNY)
             .withPayment(VALID_PAYMENT_DANNY).withUid(VALID_UID_DANNY).build();
 
     //Manually added
