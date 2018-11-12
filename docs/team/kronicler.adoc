@@ -100,3 +100,7 @@ include::../UserGuide.adoc[tag=stop_marking]
 include::../DeveloperGuide.adoc[tag=markunmark]
 
 include::../DeveloperGuide.adoc[tag=generateuid]
+
+include::../DeveloperGuide.adoc[tag=generateuidappendix]
+
+include::../DeveloperGuide.adoc[tag=attendanceappendix]

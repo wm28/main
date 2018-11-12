@@ -17,12 +17,12 @@ endif::[]
 By: `Team F09-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-Invités is a desktop application targeted at event managers and planners. The application allows its users to efficiently *organise, cater, and manage* large events such
-as weddings, school gatherings, orientation camps, etc. The application works on a command line interface, where users key in the commands specified in our User Guide into a command box to perform a task.
+Invités is a desktop application targeted at event managers and planners. The application allows you to efficiently *organise, cater, and manage* large events such
+as weddings, school gatherings, orientation camps, etc. The application works on a command line interface, where you can key in the commands specified in our User Guide into a command box to perform a task.
 Some of the main distinguishing features of the application include the ability to send mass emails to guests, keep track of payments, and take note of guest attendance.
-The application also allows the user to input the proposed or confirmed details of their event and provides a countdown to the event date.
+The application also allows you to input the proposed or confirmed details of your event and provides a countdown to the event date.
 To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
-This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
+This eliminates the need to key in the guest details manually and gives you an alternative if you decide to organise another event using the same guest list.
 
 You will have an easier time managing the reception of your event as you will be equipped with tools that will minimise errors in catering,
 organisation, and orders. Moreover, our application aims to reduce your frustration while planning events by packaging your needs in a platform that is more user friendly, personalised, and efficient.
@@ -146,8 +146,8 @@ Examples:
 
 * `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOTPAID u/00001 t/VIP t/Vegetarian`
 * `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID u/00002 t/Groom t/NonVegetarian`
-* `add_guest n/Carl Sagan p/85174321 e/carlsagan@gmail.com a/Absent pa/PAID u/00000 t/VIP` (Program generated UID)
-* `add_guest n/David Li p/83186624 e/davidli@gmail.com pa/PENDING a/ABSENT u/00003` (User defined UID)
+* `add_guest n/Carl Sagan p/85174321 e/carlsagan@gmail.com a/Absent pa/PAID u/00000 t/VIP` (will trigger randomly generated UID)
+* `add_guest n/David Li p/83186624 e/davidli@gmail.com pa/PENDING a/ABSENT u/00003` (will be treated as a User defined UID)
 
 === Editing a guest's details: `edit_guest`
 
@@ -307,7 +307,7 @@ This will also update the attendance​ field associated with the guest to `PRES
 Format: `mark [UID]`
 
 [NOTE]
-`UID` does not use the p/ prefix. +
+`UID` does not use the u/ prefix. +
 `UID` only accepts a string of numbers alphanumeric characters between 5 to 20 characters inclusive,
 other characters will trigger an invalid command format error.
 
@@ -353,7 +353,7 @@ Figure 4 - User interface after Mark Command : Successful execution of `MarkComm
 This feature has not been implemented yet. Our team plans to implement this feature in an upcoming version, v2.0.
 
 Start the mass attendance marking mode. Allows you to mark attendance without using
-the mark prefix. This command will allow you to continuously mark the attendance of the attendees by only keying in their Unique ID (UID)
+the mark prefix. This command will allow you to continuously mark the attendance of the attendees by keying in their Unique ID (UID)
 into the command line interface
 Format: `start_marking` + `[UID]...`
 

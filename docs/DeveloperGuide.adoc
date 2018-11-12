@@ -626,7 +626,7 @@ Given below is an example of the execution of the added functionality of the `ad
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state and the currentStatePointer pointing to that single address book state.
 
-Step 2. The user executes the `add_guest` command with the following non-null fields: `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT u/00001 t/NORMAL`.
+Step 2. The user executes the `add_guest` command with the following non-null fields: `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT u/00000 t/NORMAL`.
 
 Step 3. The `addCommandParser` extracts the relevant information from the command and returns a `Person` model that was built with the given arguments.
 
@@ -635,14 +635,14 @@ Step 4. The `add_guest.execute` function receives the generated `Person` model a
 [NOTE]
 If the checks fail, `COMMANDEXCEPTION` will be thrown to indicate the existence of more than one of the same `UID` or `Person`
 
-Step 5. The function will test the equality between the `UID` given in the generated `Person` and the `DEFAULT_TO_GENERATE_UID` which is `00000`. From here the program will do one of 2 different things.
+Step 5. The function will test the equality between the `UID` given in the generated `Person` and the `DEFAULT_TO_GENERATE_UID` which is `u/00000`. From here the program will do one of 2 different things.
 
 Step 6a. If the `UID` given is not the same as `DEFAULT_TO_GENERATE_UID`: +
-         The program will treat this as a user defined UID and add the `Person` into the `Model` without changing anything.
+         The program will treat this as a user defined UID and add the `Person` into the `Model` without generating a new UID.
 
-Step 6b. If the `UID` given is the same as `DEFAULT_TO_GENERATE_UID`: +
-         The program will create a new `Person` model with the same arguments with the exception of `UID`. The `UID` is then generated randomly in the `generateUid()` function. +
-         Another check is done to ensure that the `UID` does not already exist in the `VersionedAddressBook`. +
+Step 6b. Alternatively, If the `UID` input in step 2 is the same as `DEFAULT_TO_GENERATE_UID`: +
+         The program will create a new `Person` model with the same arguments with the exception of `UID`. The `UID` is then generated randomly in the `generateUid()` function.
+         Another check is done to ensure that the `UID` does not already exist in the `VersionedAddressBook`.
          This is done in a loop to ensure the `UID` is unique before adding the `Person` into the `Model` by executing `addPerson()`.
 
 Step 7. After adding the `Person` into the `Model`, the program commits the changes by executing `commitAddressBook` to save the state of the `AddressBook`..
@@ -1241,10 +1241,10 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Prerequisites: Event details initialised by the user must exist.
 
-.. Test case: 'edit_event d/10/02/2019'+
+.. Test case: 'edit_event d/10/02/2019' +
    Expected: Event details will be updated in the event details panel. The number of days left to the event will be updated in the status bar footer.
 
-.. Test case: 'edit_event e/Novotel Tour Eiffel'+
+.. Test case: 'edit_event e/Novotel Tour Eiffel' +
    Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
 
 .. Other incorrect commands to try: `edit_event`, `edit_event x`,
@@ -1318,3 +1318,51 @@ These instructions only provide a starting point for testers to work on; testers
    Note: `filter` and `find` is not considered to be modifying the guest list.
 
 // end::personpreviewappendix[]
+
+// tag::generateuidappendix[]
+=== Generation of UID details in add_guest command
+
+. Setting the UID for each guest in the guest list.
+
+.. Test case: `add_guest n/John p/98765432 e/f@gmail.com pa/PAID a/ABSENT u/00000 t/NORMAL t/NoShrimp t/NORMAL` +
+   Expected: As the field for the UID is set to `00000`, the program will generate a random 6 digit UID for the user.
+
+.. Test case: `add_guest n/Doe p/98725432 e/g@gmail.com pa/PAID a/ABSENT u/00001 t/NORMAL t/NoShrimp t/NORMAL` +
+   Expected: As the field for the UID is set to `00001`, the program will treat this is a User defined UID and add the person with the UID set to `00001`.
+
+.. Test case: `add_guest n/Jon p/98765422 e/d@gmail.com pa/PAID a/PRESENT u/0000 t/NORMAL t/NoShrimp t/NORMAL` +
+   Expected: As the field for the UID is set to `0000` which is an invalid input as the UID has to be at least 5 characters, the program will display an error message.
+
+.. Test case: `add_guest n/Do p/98765232 e/g@gmail.com pa/PAID a/PRESENT u/000000000000000000001 t/NORMAL t/NoShrimp t/NORMAL` +
+   ExpectedL As the field for the UID is set to `000000000000000000001` which has 21 characters which is an invalid input as the UID cannot be more than 20 characters, the program will display an error message.
+// end::generateuidappendix[]
+
+// tag::attendanceappendix[]
+=== Marking Attendance details
+
+. Marking attendance using the Unique ID (UID) to set the attendance to `PRESENT` with the `mark` command.
+
+.. Prerequisites: The guest list must be populated with guests. At least one guest has the UID `00001`.
+
+.. Test case: `mark 00001` +
+   Expected: The person whose UID is `00001` will have the attendance field marked as `PRESENT`.
+
+.. Test case: `mark [UID not in the guest list]` +
+   Expected: An error will show that there is no such person in the guest list.
+
+.. Test case: `mark 0001` +
+   Expected: The UID is in the wrong format and will show an error message.
+
+.. Test case: `mark 0101010101010101010101010101` +
+   Expected: the UID is in the wrong format and will show an error message.
+
+. Marking attendance using the Unique ID (UID) to set the attendance to `ABSENT` with the `unmark` command.
+
+.. Prerequisites: The guest list must be populated with guests. At least one guest has the UID `00001`.
+
+.. Test case: `unmark 00001` +
+   Expected: The person whose UID is `00001` will have the attendance field marked as `ABSENT`.
+
+.. Other test cases: similar to `mark` command as shown above
+
+// end::attendanceappendix[]
