@@ -60,7 +60,7 @@ The list below shows all our team members and what we have contributed to the ap
 ** Justification: This feature is necessary in the implementation of our guest list as it streamlines the identification of each guest especially for the receptionists for the event. It provides a unique identification to each guest which allows our program to pick out the right person without needing to handle people whom have the same name or same phone numbers.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. The implementation too was challenging as it required changes to existing commands.
 
-* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kronicler&sort=displayName&since=2018-09-12&until=2018-11-30&timeframe=day&reverse=false&repoSort=true[Functional code]]
+* *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=kronicler[Functional code]]
 
 * *Other contributions*:
 
