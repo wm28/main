@@ -90,7 +90,7 @@ marked will no longer be in the list): [https://github.com/CS2113-AY1819S1-F09-3
 |_Given below are the sections that I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-=== *_Sections 3.8 and 3.15 of the User Guide_*
+=== *_Sections 3.3 and 3.15 of the User Guide_*
 
 include::../UserGuide.adoc[tag=filter]
 
