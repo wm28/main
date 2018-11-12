@@ -220,6 +220,7 @@ The `Model`,
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
+.Structure of the Model Component following OOP
 image:ModelComponentClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
@@ -262,14 +263,17 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
+.Undo Redo Starting State List Diagram
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
 Step 2. The user executes `delete_guest 5` command to delete the 5th guest in the address book. The `delete_guest` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_guest 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
+.Undo Redo New Command 1 State List Diagram
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
 Step 3. The user executes `add_guest n/David ...` to add a new guest. The `add_guest` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
+.Undo Redo New Command 2 State List Diagram
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
@@ -277,6 +281,7 @@ If a command fails its execution, it will not call `Model#commitAddressBook()`, 
 
 Step 4. The user now decides that adding the guest was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
+.Undo Redo Execute Undo State List Diagram
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
@@ -284,6 +289,7 @@ If the `currentStatePointer` is at index 0, pointing to the initial address book
 
 The following sequence diagram shows how the undo operation works:
 
+.Undo Redo Sequence Diagram
 image::UndoRedoSequenceDiagram.png[width="800"]
 
 The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
@@ -293,14 +299,17 @@ If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, poin
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
+.Undo Redo New Command 3 State List Diagram
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
+.Undo Redo New Command 4 State List Diagram
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+.Undo Redo Activity Diagram
 image::UndoRedoActivityDiagram.png[width="650"]
 
 ==== Design Considerations
@@ -340,6 +349,7 @@ The `filter` command calls `Model#getFilteredPersonList()`.
 
 The following sequence diagram shows how the filter operation works:
 
+.Filter Sequence Diagram
 image::FilterSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
@@ -376,6 +386,7 @@ The `find` command calls `Model#getFilteredPersonList()`.
 
 The following sequence diagram shows how the find operation works:
 
+.Find Sequence Diagram
 image::FindSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
@@ -503,11 +514,11 @@ If there are no guests in the current list, or if the removeTag command tries to
 The following sequence diagram summarizes how the addTag() and removeTag() function work:
 The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
 
-|====
-| image:AddTagRemoveTagSequenceDiagram.png[] Figure 1 - AddTag and RemoveTag Sequence Diagram | *Figure 1* on the left shows how the addTag() and removeTag() function work.
+.AddTag and RemoveTag Sequence Diagram
+image::AddTagRemoveTagSequenceDiagram.png[width="800"]
 
-                                                                                                The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
-|====
+Figure above shows how the addTag() and removeTag() function work.
+The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
 
 ==== Design Considerations
 
@@ -552,6 +563,7 @@ For the import command, the popup window to show errors encountered is facilitat
 
 The following class diagrams shows the relationship between the classes and interfaces mentioned above.
 
+.Import Export Class Diagram
 image::ImportExportClassDiagram.PNG[width="800"]
 
 ===== Command mechanism
@@ -562,16 +574,19 @@ After the command completes the importation of all guests in the guest list, if 
 
 The following sequence diagram shows how the Import operation works:
 
+.Import Command Sequence Diagram
 image:ImportCommandSequenceDiagram.PNG[width="800"]
 
 The `ShowImportReportEvent` will be handled by the `MainWindow` according to the following sequence diagram below.
 
+.Import Report Window Sequence Diagram
 image:ImportReportWindowSequenceDiagram.png[width="500"]
 
 '''
 
 The export command will only export the currently filtered list by calling `Model#getFilteredPersonList`. This enables greater flexibility as it provides a way for users to select specific groups of people to export. The following sequence diagram shows how the export operation works:
 
+.Export Command Sequence Diagram
 image::ExportCommandSequenceDiagram.PNG[width="800"]
 
 ==== Design Considerations
@@ -624,10 +639,12 @@ Step 6. Finally, the entry is updated using `MODEL#updatePerson` to transfer the
 
 The following sequence diagram shows how the `mark` operation works:
 
+.Mark Command Sequence Diagram
 image::MarkCommandSequenceDiagram.png[width="900"]
 
 The following sequence diagram shows how the `ummark` operation works:
 
+.Unmark Command Sequence Diagram
 image::UnmarkCommandSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
@@ -675,6 +692,7 @@ Step 7. After adding the `Person` into the `Model`, the program commits the chan
 
 The following sequence diagram shows how the `add_guest` command works:
 
+.Add Command Sequence Diagram
 image::AddCommandSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
