@@ -529,7 +529,7 @@ This will present you with an error, as all your tags must be alphanumeric
 // @@author SandhyaGopakumar
 // tag::event[]
 ===   Adding details about your event: `add_event`
-Adds details such as the name, date, venue and start time of your event. Any additional details may be entered as tags.+
+Adds details such as the name, date, venue and start time of your event. Any additional details may be entered as tags. +
 Format: `add_event n/EVENT_NAME d/DATE v/VENUE st/START_TIME [t/OTHER_TAGS]`
 
 ****
@@ -547,7 +547,7 @@ The event details panel will show you an event called `CFG career talk` that wil
 
 ===   Editing your event's details : `edit_event`
 
-Edits the details of your event +
+Edits the details of your event. +
 Format: `edit_event [n/EVENT_NAME] [d/DATE] [v/VENUE] [st/START_TIME] [t/...]`
 
 ****
@@ -565,7 +565,7 @@ You will change the name of your event to 'CFG Career Workshop and replace the e
 
 ===   Deleting your event's details : `delete_event`
 
-Deletes the event details currently present in the application
+Deletes the event details currently present in the application. +
 Format: `delete_event`
 
 ****

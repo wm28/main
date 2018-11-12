@@ -24,7 +24,7 @@ image::sandhyagopakumar.png[width="150", align="left"]
 {empty}[http://github.com/SandhyaGopakumar[github]] [<<sandhyagopakumar#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Events management
+Responsibilities: Event details management
 
 '''
 
