@@ -9,28 +9,27 @@
 |*_Preface:_* The purpose of this portfolio is to document my contributions, both technical and documentation-wise, to my software engineering project Invités.
 |===
 
-Invités is a desktop application to help event managers and planners better organise and manage large events.
+=== Project scope and my contribution
+Invités is a desktop application to help *event managers and planners* better organise and manage large events.
 Moreover, the application can mainly be controlled by a 3rd party using the Command Line Interface,
 as well as a Graphical User Interface (GUI).
 
 [cols="30%,70%"]
 |====
-    ^.^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Invités was developed as part of my team’s Software Engineering Project, and some of its *main features* include the ability to *send mass emails*, *keep track of payments*, as well as *attendance tracking*. To add to this, by using a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
+    ^.^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Invités was developed as part of my team’s Software Engineering Project, and some of its *main features* include the ability to *send mass emails*, *keep track of payments*, as well as *keep track of attendance*. To add to this, by using a standardised format, the application is able to take in Comma Separated Values (CSV) files and *import* data for a particular event.
 
-    Thanks to the complementary features my group implemented, we are able to
+    Thanks to the complementary features my group implemented, we were able to
                                                    create a streamlined workflow for event planners and managers
-                                                   in all facets, as depicted in *Diagram 1* on the left.
+                                                   , as depicted in *Diagram 1* on the left.
 |====
 
-*My contribution* involved implementing the mass-emailing functionality in our product, which allows you to send emails to individual, or
-all of your guests. An added feature of ticket generation is also available, whereby you may send guests their tickets for the event,
-and hence streamline the attendance taking of your event simultaneously. This feature is extremely crucial as it allows event managers to
-quickly inform all of their guests in a swift and efficient manner, and eliminates the need of individually sending emails, a process that
-can become tedious and ineffective. Moreover, the ticket generation will not only ease the process of attending taking, but also provide an
-environmentally-friendly alternative to printing tickets, posters, flyers, and banners for an event.
+*My contribution* involved implementing the *mass-emailing functionality* in our product, which allows you to send emails to individual, or
+all of your guests. Furthermore, an added *ticket generation feature* is also available, whereby you may send guests their tickets for the event. This feature is extremely crucial as it allows event managers to
+quickly inform all of their guests regarding details of the event in a swift and efficient manner, and eliminates the need of sending individual emails. Moreover, the ticket generation will also provide an
+environmentally-friendly alternative to printing tickets and banners for an event.
 
-Finally, the team that worked with me on this project, as well as the features they implemented,
-are listed below:
+=== Team Invités
+The team that worked with me on this project, as well as the features they implemented, are listed below:
 
 1. Sandhya Gopakumar - Events management
 2. Sarah Taaher Bonna - Guest list management
@@ -43,9 +42,9 @@ are listed below:
 |===
 
 * *Main Feature*: added the ability to *send mass emails* to guests
-** What it does: allows you to either send emails to individual guests using the command `email`, or
+** *What it does*: allows you to either send emails to individual guests using the command `email`, or
 send mass emails using the `emailAll` and `emailSpecific` commands.
-** Justification: This feature will allow event managers to streamline their event notification process and
+** *Justification*: This feature will allow *event managers* to streamline their event notification process and
 inform all of their guests at once, regarding details of the event or otherwise. Furthermore, ticket generation provides users a
 digitised and economical solution for attendance taking once the event goes live.
 
@@ -59,8 +58,8 @@ digitised and economical solution for attendance taking once the event goes live
 *** Changed UI response for incorrect commands
 *** Added a UI component to display number of guests in the current list in the footer of the application
 ** Community
-*** Reviewed Pull Requests (PRs) for all milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]]
-*** Issues created to better structure the project workflow and ensure an iterative design process - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]]
+*** Reviewed Pull Requests (PRs) for several milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [[https://github.com/CS2113-AY1819S1-F09-3/main/pull/153[#153]] https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/312[#312]]
+*** Issues created to better structure the project workflow and ensure an iterative design process - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/239[#239]]
 ** Tools
 *** Integrated a third party library to enable email communication https://javaee.github.io/javamail/docs/api/[JavaMail API]
 

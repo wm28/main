@@ -204,19 +204,19 @@ This command allows you to add a set of tags to all guests in the current filter
 Format: `addTag [t/TAG]...`
 
 ****
-* The addTag command will add any number of tags provided by you to all guests
-* You must provide tags that are alphanumeric, otherwise the system will give you an error
-* Moreover, if you provide empty tags, or tags that all your guests already have, the system will throw an error
+* The addTag command will add any number of tags provided by you to all guests.
+* You must provide tags that are alphanumeric, otherwise the system will give you an error.
+* Moreover, if you provide empty tags, or tags that all your guests already have, the system will throw an error.
 ****
 
 Examples:
 
 * `addTag t/Veg t/VIP` +
-You will add the tags `Veg` and `VIP` to all guests in the current filtered list
+You will add the tags `Veg` and `VIP` to all guests in the current filtered list.
 * `addTag t/@` +
-This will present you with an error as all your tags must be alphanumeric
-* `addTag t/` +
-You will receive an error message as you have provided empty tags
+This will present you with an error as all your tags must be alphanumeric.
+* `addTag` +
+You will receive an error message as you have provided empty tags.
 
 === Removing a set of tags from all guests : `removeTag`
 
@@ -224,20 +224,20 @@ This command allows you to remove a set of tags from all guests in the current f
 Format: `removeTag [t/TAG]...`
 
 ****
-* The removeTag command will remove any number of tags provided by you from all guests
-* If the tags you provided are not shared by any of the guests in the current list, the system with throw an error
-* You must provide *non-empty* tags, an input of _removeTag_ will not do anything
-* You must provide tags that are alphanumeric, otherwise the system will throw an error
+* The removeTag command will remove any number of tags provided by you from all guests.
+* If the tags you provided are not shared by any of the guests in the current list, the system with throw an error.
+* You must provide *non-empty* tags, e.g. an input of _removeTag_ will not do anything.
+* You must provide tags that are alphanumeric, otherwise the system will throw an error.
 ****
 
 Examples:
 
 * `removeTag t/Veg t/VIP` +
-You will remove the tags `Veg` and `VIP` from all guests in the current filtered list
+You will remove the tags `Veg` and `VIP` from all guests in the current filtered list.
 * `removeTag` +
-This will present you with an error, as you have not provided any tags to delete
+This will present you with an error, as you have not provided any tags to delete.
 * `removeTag t/@!*` +
-This will present you with an error, as all your tags must be alphanumeric
+This will present you with an error, as all your tags must be alphanumeric.
 
 // end::addremovetag[]
 // @@author
@@ -421,7 +421,7 @@ You will be shown a list with guests who are present and have a vegetarian dieta
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-Sends an email to the guest at a specific Index +
+With this command you can send an email to the guest at a specific Index +
 Format: `email INDEX`
 
 ****
@@ -436,8 +436,8 @@ the command `email 5` will give you an error as a guest does not exist at `INDEX
 * `email 2` +
 1. First, you will be presented with an EmailWindow similar to *Figure 4* below.
 2. This window is for you to input your email address, password, email subject and message.
-3. You will then need to fill in all the required fields. If you miss any of the fields and try to click the `Send` button, an error message will pop up as the one in *Figure 5*.
-4. Once all fields are filled, you can click the `Send` button to send your email to the *2nd guest* in the list. You can also click the `Quit` button if you don't want to send your email.
+3. You will then need to fill in all the required fields. If you miss any of the fields and try to click the `Send` button, an error message will pop up like the one in *Figure 5*.
+4. Once all fields are filled, you can click the `Send` button to send your email to the *2nd guest* in the list. You can also click the `Quit` button if you do not want to send your email.
 5. If you are successful, you will see a message that says `Successfully sent email!`.
 
 [cols="2*"]
@@ -451,7 +451,7 @@ the command `email 5` will give you an error as a guest does not exist at `INDEX
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-Sends an email to all of the guests in the current filtered list +
+With this command you can an email to *all of the guests* in the current filtered list +
 Format: `emailAll`
 
 [NOTE]
@@ -461,11 +461,11 @@ Examples:
 
 * `list` +
 * `emailAll` +
-1. The command `list` will list all your guests to ensure you send an email to all of them.
+1. The command `list` will list all your guests to ensure you send an email to all guests.
 2. First, you will be presented with an EmailWindow similar to *Figure 4* above.
 3. This window is for you to input your email address, password, email subject and message.
 4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 5* above.
-5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
+5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you do not want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
 
 === Sending emails to specific groups of guests : `emailSpecific`
@@ -473,7 +473,7 @@ Examples:
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-Sends an email to all the guests with at least one of the tags specified+
+With this command you can send an email to all the guests with *at least one of the tags specified*+
 Format: `emailSpecific [t/TAG]...`
 
 ****
@@ -486,14 +486,14 @@ Examples:
 
 * `emailSpecific` +
 This will present you with an error, as you have not provided any tags to delete
-* `removeTag t/@!*` +
+* `emailSpecific t/@!*` +
 This will present you with an error, as all your tags must be alphanumeric
-* `emailSpecific t/VIP` +
-1. This command will send an email to all the guests with a `VIP` tag
+* `emailSpecific t/VIP t/Garbage` +
+1. This command will send an email to all the guests with a `VIP` tag, assuming no guest has the tag `Garbage`! (You can provide such `Garbage` tags!)
 2. First, you will be presented with an EmailWindow similar to *Figure 4* above.
 3. This window is for you to input your email address, password, email subject and message.
 4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 5* above.
-5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
+5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you do not want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
 
 // end::email[]
