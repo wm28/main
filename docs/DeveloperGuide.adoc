@@ -428,11 +428,11 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 
 The following sequence diagram shows how the add_event operation works:
 
-.Sequence diagram for add_event and delete_event commands
+.Sequence diagram for add_event and delete_event commands that add or delete event details respectively.
 image::AddDeleteEventSequenceDiagram.png[width="800" ]
 
-=== Design considerations
-==== Aspect: Creation of the Event component
+==== Design considerations
+===== Aspect: Creation of the Event component
 *** Alternative 1(current choice): Create an 'Event' with date, name, start time, venue and tag attributes and an aggregation association with 'AddressBook' wherein 'AddressBook' contains an 'Event' object.
 ** Pros: It is easier to use and test.
 ** Cons: The user can only organise 1 event at a time.
@@ -464,7 +464,7 @@ The `edit_event` command uses `Model#hasEvent()` to check if this is the case. I
 
 The following sequence diagram shows how the edit_event operation works:
 
-.Sequence diagram for edit_event
+.Sequence diagram for edit_event command that edits the event details
 image::EditEventSequenceDiagram.png[width="800"]
 
 // end::event[]
