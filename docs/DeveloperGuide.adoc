@@ -1260,9 +1260,9 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Exporting all guests
 
-   .. Prerequisites: List all guests using `list`. The list must not be empty. No `test.csv` file should be found in same directory of application Jar file.
+   .. Prerequisites: List all guests using `list`. There must be at least 1 guest in guest list panel after the `list` command. No `test.csv` file should be found in same directory of application Jar file.
 
-   .. Test case: 'export test.csv' +
+   .. Test case: `export test.csv` +
       Expected: All guests are exported into `test.csv`. `test.csv` can be found in the same directory of the application Jar file.
 
    .. Other incorrect commands to try: `export`, `export test`, etc
@@ -1303,7 +1303,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Prerequisites: Have guests in guest list.
 
 .. Test case: Click on any guest in guest list panel. +
-   Expected: Guest details should show up in guest preview. Any command that successfully modifies the underlying guest list will clear the person preview.
+   Expected: Guest details should show up in guest preview. Any command that successfully modifies the underlying guest list (use `list` to see underlying guest list) will clear the person preview.
    Note: `filter` and `find` is not considered to be modifying the guest list.
 
 // end::personpreviewappendix[]
