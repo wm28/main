@@ -25,7 +25,7 @@ To add to these features, by employing a standardised format, the application is
 This eliminates the need to key in the guest details manually and gives you an alternative if you decide to organise another event using the same guest list.
 
 You will have an easier time managing the reception of your event as you will be equipped with tools that will minimise errors in catering,
-organisation, and orders. Moreover, our application aims to reduce your frustration while planning events by packaging your needs in a platform that is more user friendly, personalised, and efficient.
+organising, and ordering. Moreover, our application aims to reduce your frustration while planning events by packaging your needs in a platform that is more user-friendly, personalised, and efficient.
 
 The main purpose of this User Guide is to give you a detailed overview of all the features in our application and how to use them.
 
@@ -89,7 +89,9 @@ Format: `list`
 
 [NOTE]
 You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `list extra_characters` or `list 182$*` will be incorrect, but `list {nbsp}` (i.e. with spaces) will be correct.
+
 // @@author Sarah
+
 // tag::find[]
 === Locating guests by name, phone number or email address: `find`
 
