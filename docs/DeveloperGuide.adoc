@@ -563,7 +563,7 @@ For the import command, the popup window to show errors encountered is facilitat
 
 The following class diagrams shows the relationship between the classes and interfaces mentioned above.
 
-.Import Export Class Diagram
+.Import/Export Command Class Diagram
 image::ImportExportClassDiagram.PNG[width="800"]
 
 ===== Command mechanism
@@ -575,12 +575,12 @@ After the command completes the importation of all guests in the guest list, if 
 The following sequence diagram shows how the Import operation works:
 
 .Import Command Sequence Diagram
-image:ImportCommandSequenceDiagram.PNG[width="800"]
+image::ImportCommandSequenceDiagram.PNG[width="800"]
 
 The `ShowImportReportEvent` will be handled by the `MainWindow` according to the following sequence diagram below.
 
 .Import Report Window Sequence Diagram
-image:ImportReportWindowSequenceDiagram.png[width="500"]
+image::ImportReportWindowSequenceDiagram.png[width="500"]
 
 '''
 
