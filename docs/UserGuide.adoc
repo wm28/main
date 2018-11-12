@@ -344,6 +344,7 @@ Examples:
 
 image::unmarkCommandSuccess.png[width="790"]
 Figure 4 - User interface after Unmark Command : Successful execution of `UnmarkCommand`
+
 // end::unmark[]
 // @@author
 
