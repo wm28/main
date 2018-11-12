@@ -10,7 +10,7 @@
 == Overview
 
 |===
-|_INFO_
+|_PREFACE_
 |_This section features the role and contributions I had over the course of this project_
 |===
 
@@ -46,7 +46,7 @@ The list below shows all our team members and what we have contributed to the ap
 == Summary of contributions
 
 |===
-|_INFO_
+|_PREFACE_
 |_This section is a summary of my contributions to the project. It showcases my ability to work on a software project with a team of people_
 |===
 
@@ -78,7 +78,7 @@ The list below shows all our team members and what we have contributed to the ap
 == Contributions to the User Guide
 
 |===
-|_INFO_
+|_PREFACE_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation which targets end-users._
 |===
 
@@ -93,7 +93,7 @@ include::../UserGuide.adoc[tag=stop_marking]
 == Contributions to the Developer Guide
 
 |===
-|_INFO_
+|_PREFACE_
 |_Given below are sections that I have contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 

@@ -39,7 +39,7 @@ Responsibilities: Guest list management
 
 === Tan Tze Guang
 image::kronicler.png[width="150", align="left"]
-{empty}[http://github.com/kronicler[github]] [<<tantzeguang#, portfolio>>]
+{empty}[http://github.com/kronicler[github]] [<<kronicler#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Attendance management
