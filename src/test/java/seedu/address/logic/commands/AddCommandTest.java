@@ -102,7 +102,6 @@ public class AddCommandTest {
         assertFalse(expectedResult.equals(addCommand.execute(model, commandHistory)));
     }
 
-
     /**
      * A Model stub that contains a single person.
      */

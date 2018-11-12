@@ -22,7 +22,7 @@ public class AddTagCommandParserTest {
     }
 
     @Test
-    public void parse_onlyPrefixSpecified_throwsParseException() {
+    public void parse_onlyPrefixSpecified_success() {
         assertParseFailure(parser, "t", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddTagCommand.MESSAGE_USAGE));
     }

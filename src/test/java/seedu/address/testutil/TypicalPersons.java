@@ -17,7 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DANNY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIET_DANNY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UID_DANNY;
@@ -31,7 +31,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Uid;
-
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -97,7 +96,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAttendance(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_DIET_BOB)
             .withPayment(VALID_PAYMENT_BOB).withUid(VALID_UID_BOB).build();
     public static final Person DANNY = new PersonBuilder().withName(VALID_NAME_DANNY).withPhone(VALID_PHONE_DANNY)
-            .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY).withTags(VALID_TAG_DIET_DANNY)
             .withPayment(VALID_PAYMENT_DANNY).withUid(VALID_UID_DANNY).build();
 
     //Manually added
