@@ -143,8 +143,8 @@ Examples:
 
 * `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOTPAID u/00001 t/VIP t/Vegetarian`
 * `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID u/00002 t/Groom t/NonVegetarian`
-* `add_guest n/Carl Sagan p/85174321 e/carlsagan@gmail.com a/Absent pa/PAID u/00000 t/VIP` (Program generated UID)
-* `add_guest n/David Li p/83186624 e/davidli@gmail.com pa/PENDING a/ABSENT u/00003` (User defined UID)
+* `add_guest n/Carl Sagan p/85174321 e/carlsagan@gmail.com a/Absent pa/PAID u/00000 t/VIP` (will trigger randomly generated UID)
+* `add_guest n/David Li p/83186624 e/davidli@gmail.com pa/PENDING a/ABSENT u/00003` (will be treated as a User defined UID)
 
 === Editing a guest : `edit_guest`
 
@@ -299,7 +299,7 @@ This will also update the attendance​ field associated with the guest to `PRES
 Format: `mark [UID]`
 
 [NOTE]
-`UID` does not use the p/ prefix. +
+`UID` does not use the u/ prefix. +
 `UID` only accepts a string of numbers alphanumeric characters between 5 to 20 characters inclusive,
 other characters will trigger an invalid command format error.
 
