@@ -168,7 +168,7 @@ The sections below give more details of each component.
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiComponentClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
@@ -403,9 +403,9 @@ Given below is an example usage scenario and how the add_event and delete_event 
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-Step 2. The user executes `add_event n/Wedding d/18/10/2019 t/10AM` command to add in details about the event they are currently organising.
+Step 2. The user executes `add_event n/Wedding d/18/10/2019 v/Mandarin Hotel st/10:00 AM t/ClassicTheme` command to add in details about the event they are currently organising.
 The `add_event` command calls `Model#addEvent()` to add in the event details.
-It calls'Model#commitAddressBook()' as well, causing the modified state of the address book after the `add_event n/Wedding t/8thOct t/10AM` command executes to be saved in the `addressBookStateList`.
+It calls'Model#commitAddressBook()' as well, causing the modified state of the address book after the `add_event n/Wedding d/18/10/2019 v/Mandarin Hotel st/10:00 AM t/ClassicTheme` command executes to be saved in the `addressBookStateList`.
 The `currentStatePointer` is shifted to the newly inserted address book state.
 
 [NOTE]
@@ -415,7 +415,7 @@ If a command fails its execution, it will not call `Model#commitAddressBook()`, 
 If the user has added in the details of the event they are organising, then another set of event details should not be stored.
 The `add_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
 
-Step 3. After the event has taken place, the user decides to organise another event with the same guest list and decides to delete the event details using the 'delete_event' command.
+Step 3. After the event has taken place, the user decides to organise another event with the same guest list and deletes the event details using the 'delete_event' command.
 The `delete_event` command calls `Model#deleteEvent to delete the event's details.
 The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
@@ -428,11 +428,11 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 
 The following sequence diagram shows how the add_event operation works:
 
-.Sequence diagram for add_event and delete_event commands
+.Sequence diagram for add_event and delete_event commands that add or delete event details respectively.
 image::AddDeleteEventSequenceDiagram.png[width="800" ]
 
-=== Design considerations
-==== Aspect: Creation of the Event component
+==== Design considerations
+===== Aspect: Creation of the Event component
 *** Alternative 1(current choice): Create an 'Event' with date, name, start time, venue and tag attributes and an aggregation association with 'AddressBook' wherein 'AddressBook' contains an 'Event' object.
 ** Pros: It is easier to use and test.
 ** Cons: The user can only organise 1 event at a time.
@@ -464,7 +464,7 @@ The `edit_event` command uses `Model#hasEvent()` to check if this is the case. I
 
 The following sequence diagram shows how the edit_event operation works:
 
-.Sequence diagram for edit_event
+.Sequence diagram for edit_event command that edits the event details
 image::EditEventSequenceDiagram.png[width="800"]
 
 // end::event[]
@@ -1162,23 +1162,6 @@ Windows, Linux, Unix, OS-X
 A contact detail that is not meant to be shared with others
 
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1201,21 +1184,6 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The most recent window size and location is retained.
 
 //_{ more test cases ... }_
-
-=== Deleting a guest
-
-. Deleting a guest while all guests are listed
-
-.. Prerequisites: List all guests using the `list` command. There may be multiple guests in the list.
-.. Test case: `delete_guest 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-   Timestamp in the status bar is updated.
-.. Test case: `delete_guest 0` +
-   Expected: No guest is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete_guest`, `delete_guest x` (where x is larger than the list size),
-   `delete_guest y` (where y is smaller than 0), etc. +
-//   _{give more}_
-   Expected: Similar to previous.
 
 // tag::filterappendix[]
 === Filtering a guest
@@ -1260,10 +1228,50 @@ These instructions only provide a starting point for testers to work on; testers
     Status bar remains the same.
 // end::findappendix[]
 
-=== Saving data
+// tag::eventappendix[]
+=== Adding event details
 
-. Dealing with missing/corrupted data files
+. Adding event details
 
-//.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
-//_{ more test cases ... }_
+.. Test case: 'add_event n/Wedding d/10/01/2019 v/XYZ Hotel st/10:00 AM'+
+   Expected: Event details will be displayed in the event details panel. The number of days left to the event will be displayed in the status bar footer.
+
+.. Test case: 'add_event n/CFG Career Talk d/31/02/2019 v/LT 5 st/10:00 AM'+
+   Expected: No event details are added. Error details shown in the status message. Event details display remains intact.
+
+.. Other incorrect commands to try: `add_event`, `add_event x`,
+   `add_event n/CFG Career Talk d/10/11/2019 v/LT 9 st/10' , etc. +
+   Expected: No event details are added. Error details shown in the status message. Event details display remains intact.
+
+=== Deleting event details
+
+. Deleting the existing event details
+
+.. Prerequisites: Event details initialised by the user must exist.
+
+.. Test case: `delete_event` +
+   Expected: Details of the event are deleted and are not displayed in the event details panel. Timestamp in the status bar is updated.
+
+.. Test case: `delete_event 0` +
+   Expected: Event details are not deleted. Error details shown in the status message. Status bar remains the same.
+
+.. Other incorrect delete_event commands to try: `delete_event n`(where n is some parameter), etc. +
+   Expected: Event details are not deleted. Error details shown in the status message. Status bar remains the same.
+
+=== Editing event details
+
+. Editing the existing event details
+
+.. Prerequisites: Event details initialised by the user must exist.
+
+.. Test case: 'edit_event d/10/02/2019'+
+   Expected: Event details will be updated in the event details panel. The number of days left to the event will be updated in the status bar footer.
+
+.. Test case: 'edit_event e/Novotel Tour Eiffel'+
+   Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
+
+.. Other incorrect commands to try: `edit_event`, `edit_event x`,
+   `edit_event d/31/02/2019' , etc. +
+   Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
+// end::eventappendix[]
