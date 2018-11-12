@@ -62,3 +62,5 @@ include::../UserGuide.adoc[tag=csvformat]
 |===
 
 include::../DeveloperGuide.adoc[tag=importexport]
+include::../DeveloperGuide.adoc[tag=importexportappendix]
+include::../DeveloperGuide.adoc[tag=personpreviewappendix]

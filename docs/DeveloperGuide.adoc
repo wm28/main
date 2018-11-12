@@ -328,7 +328,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 Step 2. The user executes `add_event n/Wedding d/18/10/2019 v/Mandarin Hotel st/10:00 AM t/ClassicTheme` command to add in details about the event they are currently organising.
 The `add_event` command calls `Model#addEvent()` to add in the event details.
-It calls'Model#commitAddressBook()' as well, causing the modified state of the address book after the `add_event n/Wedding d/18/10/2019 v/Mandarin Hotel st/10:00 AM t/ClassicTheme` command executes to be saved in the `addressBookStateList`.
+It calls 'Model#commitAddressBook()' which saves the modified state of the address book after the command executes in the `addressBookStateList`.
 The `currentStatePointer` is shifted to the newly inserted address book state.
 
 [NOTE]
@@ -351,8 +351,10 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 
 The following sequence diagram shows how the add_event operation works:
 
-.Sequence diagram for add_event and delete_event commands that add or delete event details respectively.
-image::AddDeleteEventSequenceDiagram.png[width="800" ]
+.Sequence diagram for add_event command that adds event details.
+image::AddEventSequenceDiagram.png[width="800" ]
+.Sequence diagram for delete_event command that deletes event details.
+image::DeleteEventSequenceDiagram.png[width="800" ]
 
 ==== Design considerations
 ===== Aspect: Creation of the Event component
@@ -362,7 +364,7 @@ image::AddDeleteEventSequenceDiagram.png[width="800" ]
 
 *** Alternative 2: Create an 'Event' having an aggregation association with 'VersionableAddressBook'. Create an 'InvitesBook' having an aggregation association with 'Event'.
 ** Pros: It allows the user to organise multiple events and manage multiple event-specific guest lists.
-** Cons: It is difficult to create functions and test the component. The 'undo' and 'redo' commands are also affected.
+** Cons: The 'undo' and 'redo' commands are affected.
 
 === Edit Event feature
 ==== Current Implementation
@@ -376,7 +378,7 @@ Step 2. The user executes `add_event n/Wedding d/8/12/2019 v/Hilton st/10:00 AM`
 
 Step 3. Due to a sudden change of plans, the user wishes to change the event's date and venue.
 The user executes 'edit_event d/10/12/2019 v/Novotel' command. The 'edit_event' command calls `Model#updateEvent' to update the event's details.
-The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The command also calls Model#commitAddressBook()` which saves the modified address book state into the `addressBookStateList`.
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
@@ -862,6 +864,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |event planner |be able to mark attendance of guests easily |minimise holdup as much as possible
 
+|`* * *` |event planner |be able to view event details and countdown to event date|take note of important details closer to the event date.
+
+|`* * *` |event planner |be able to delete event details easily |organise another event with the same guest list but different event details.
+
 |`* * *` |event planner |be able to send mass emails to guests |remind them about the event
 
 |`* * *` |event planner |be able to tag guests with specific labels |take note of any extra details if necessary
@@ -896,7 +902,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is `Invités` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
 === Use case: Import guest data and update payment status
 Actor: Application User - Event Planner
 
@@ -906,6 +911,20 @@ Actor: Application User - Event Planner
 2. System asks user to enter a command.
 3. User enters a command to mark those who have paid.
 4. System updates the file accordingly.
+
+Use case ends.
+
+=== Use case: Input event details and edit venue details
+Actor: Application User - Event Planner
+
+*MSS*
+
+1. User opens application.
+2. System asks user to enter a command.
+3. User enters a command to enter event details.
+4. System shows the specified event name, date, venue, start time and tags.
+5. User enters a command to edit venue field.
+6. System shows the event name, date , start time, tags and updated venue.
 
 Use case ends.
 
@@ -942,7 +961,7 @@ Actor: Application User - Event Planner
 
 Use case ends.
 
-=== Use case: Review details while organising the event
+=== Use case: Review guest details while organising the event
 Actor: Application User - Event Planner
 
 *MSS*
@@ -1146,11 +1165,11 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Event details will be displayed in the event details panel. The number of days left to the event will be displayed in the status bar footer.
 
 .. Test case: 'add_event n/CFG Career Talk d/31/02/2019 v/LT 5 st/10:00 AM'+
-   Expected: No event details are added. Error details shown in the status message. Event details display remains intact.
+   Expected: No event details are added. Error details are shown in the status message. Event details display remains intact.
 
 .. Other incorrect commands to try: `add_event`, `add_event x`,
    `add_event n/CFG Career Talk d/10/11/2019 v/LT 9 st/10' , etc. +
-   Expected: No event details are added. Error details shown in the status message. Event details display remains intact.
+   Expected: No event details are added. Error details are shown in the status message. Event details display remains intact.
 
 === Deleting event details
 
@@ -1159,13 +1178,13 @@ These instructions only provide a starting point for testers to work on; testers
 .. Prerequisites: Event details initialised by the user must exist.
 
 .. Test case: `delete_event` +
-   Expected: Details of the event are deleted and are not displayed in the event details panel. Timestamp in the status bar is updated.
+   Expected: Details of the event are deleted and details are not displayed in the event details panel. Status bar is updated.
 
 .. Test case: `delete_event 0` +
-   Expected: Event details are not deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: Event details are not deleted. Error details are shown in the status message. Status bar remains the same.
 
 .. Other incorrect delete_event commands to try: `delete_event n`(where n is some parameter), etc. +
-   Expected: Event details are not deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: Event details are not deleted. Error details are shown in the status message. Status bar remains the same.
 
 === Editing event details
 
@@ -1173,15 +1192,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Prerequisites: Event details initialised by the user must exist.
 
-.. Test case: 'edit_event d/10/02/2019'+
+.. Test case: 'edit_event d/10/02/2019' +
    Expected: Event details will be updated in the event details panel. The number of days left to the event will be updated in the status bar footer.
 
 .. Test case: 'edit_event e/Novotel Tour Eiffel'+
-   Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
+   Expected: No event details are edited. Error details are shown in the status message. Event details display remains intact.
 
 .. Other incorrect commands to try: `edit_event`, `edit_event x`,
    `edit_event d/31/02/2019' , etc. +
-   Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
+   Expected: No event details are edited. Error details are shown in the status message. Event details display remains intact.
 // end::eventappendix[]
 
 // tag::emailappendix[]
@@ -1217,4 +1236,119 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. *Incorrect commands to try:* `emailSpecific Puppies`, `emailSpecific t/@&@` etc.
 ...   Expected: No email sent due to incorrect parameters.
+
 // end::emailappendix[]
+
+// tag::importexportappendix[]
+=== Importing and exporting guests
+
+. Importing guests from CSV file
+
+.. Prerequisites: Delete all guests before each test case. Execute `list` followed by `clear`.
+
+.. Test case: Download link:{repoURL}/guestbook.csv[sample.csv] into directory where application Jar file is located and execute `import sample.csv` +
+   Expected: All guests are imported from `test.csv`. No errors are found.
+
+.. Test case: Download link:{repoURL}/errorguestbook.csv[errorsample.csv] into directory where application Jar file is located and execute `import errorsample.csv` +
+    Expected: No guests are imported from `test.csv`. Popup window shows all import errors.
+
+.. Other incorrect commands to try: `import`, `import test`, etc +
+   Expected: No guests are imported. Error details shown in the status message.
+
+. Exporting all guests
+
+   .. Prerequisites: List all guests using `list`. The list must not be empty. No `test.csv` file should be found in same directory of application Jar file.
+
+   .. Test case: 'export test.csv' +
+      Expected: All guests are exported into `test.csv`. `test.csv` can be found in the same directory of the application Jar file.
+
+   .. Other incorrect commands to try: `export`, `export test`, etc
+      Expected: No guests are exported. Error details shown in the status message.
+
+
+. Exporting filtered guest to CSV file
+
+.. Prerequisites: There must be guests that are absent. Filter all absent guests using `filter a/ABSENT`.
+
+
+.. Test case: 'export test.csv' +
+   Expected: Only guests that are absent are exported into `test.csv`. `test.csv`  can be found in the same directory of the application Jar file.
+
+
+. Exporting to file that already exists
+
+.. Prerequisites: There must be guests in the guest list panel. Export guests using `export test.csv`.
+
+.. Test case: `export test.csv` +
+   Expected: No guests are exported. Error details shown in the status message.
+
+
+. Exporting empty guest list
+
+   .. Prerequisites: guest list panel in user interface must be empty.
+
+   .. Test case: `export test.csv` +
+      Expected: No guests are exported. Error details shown in the status message.
+
+// end::importexportappendix[]
+
+// tag::personpreviewappendix[]
+=== Guest preview
+
+. Displaying guest in guest preview
+
+.. Prerequisites: Have guests in guest list.
+
+.. Test case: Click on any guest in guest list panel. +
+   Expected: Guest details should show up in guest preview. Any command that successfully modifies the underlying guest list will clear the person preview.
+   Note: `filter` and `find` is not considered to be modifying the guest list.
+
+// end::personpreviewappendix[]
+
+// tag::generateuidappendix[]
+=== Generation of UID details in add_guest command
+
+. Setting the UID for each guest in the guest list.
+
+.. Test case: `add_guest n/John p/98765432 e/f@gmail.com pa/PAID a/ABSENT u/00000 t/NORMAL t/NoShrimp t/NORMAL` +
+   Expected: As the field for the UID is set to `00000`, the program will generate a random 6 digit UID for the user.
+
+.. Test case: `add_guest n/Doe p/98725432 e/g@gmail.com pa/PAID a/ABSENT u/00001 t/NORMAL t/NoShrimp t/NORMAL` +
+   Expected: As the field for the UID is set to `00001`, the program will treat this is a User defined UID and add the person with the UID set to `00001`.
+
+.. Test case: `add_guest n/Jon p/98765422 e/d@gmail.com pa/PAID a/PRESENT u/0000 t/NORMAL t/NoShrimp t/NORMAL` +
+   Expected: As the field for the UID is set to `0000` which is an invalid input as the UID has to be at least 5 characters, the program will display an error message.
+
+.. Test case: `add_guest n/Do p/98765232 e/g@gmail.com pa/PAID a/PRESENT u/000000000000000000001 t/NORMAL t/NoShrimp t/NORMAL` +
+   ExpectedL As the field for the UID is set to `000000000000000000001` which has 21 characters which is an invalid input as the UID cannot be more than 20 characters, the program will display an error message.
+// end::generateuidappendix[]
+
+// tag::attendanceappendix[]
+=== Marking Attendance details
+
+. Marking attendance using the Unique ID (UID) to set the attendance to `PRESENT` with the `mark` command.
+
+.. Prerequisites: The guest list must be populated with guests. At least one guest has the UID `00001`.
+
+.. Test case: `mark 00001` +
+   Expected: The person whose UID is `00001` will have the attendance field marked as `PRESENT`.
+
+.. Test case: `mark [UID not in the guest list]` +
+   Expected: An error will show that there is no such person in the guest list.
+
+.. Test case: `mark 0001` +
+   Expected: The UID is in the wrong format and will show an error message.
+
+.. Test case: `mark 0101010101010101010101010101` +
+   Expected: the UID is in the wrong format and will show an error message.
+
+. Marking attendance using the Unique ID (UID) to set the attendance to `ABSENT` with the `unmark` command.
+
+.. Prerequisites: The guest list must be populated with guests. At least one guest has the UID `00001`.
+
+.. Test case: `unmark 00001` +
+   Expected: The person whose UID is `00001` will have the attendance field marked as `ABSENT`.
+
+.. Other test cases: similar to `mark` command as shown above
+
+// end::attendanceappendix[]
