@@ -7,34 +7,38 @@
 
 == Overview
 
-The purpose of this portfolio is to document my role and contributions to team F09-3's project,Invités,
-for the module: Software Engineering and Object Oriented Programming(CS2113T).
+The purpose of this portfolio is to document my role and contributions to my team's project, Invités,
+for the module: Software Engineering and Object-Oriented Programming(CS2113T) at the National University of Singapore.
 
 ==== _Project Scope_
 
-Invités is a desktop application targeted at event managers and planners. The application allows its users to efficiently *organise, cater, and manage* large events such
-as weddings, school gatherings, orientation camps, etc. The application works on a command line interface, where users key in the commands specified in our User Guide into a command box to perform a task.
-Some of the main distinguishing features of the application include the ability to send mass emails to guests, keep track of payments, and take note of guest attendance.
-The application also allows the user to input the proposed or confirmed details of their event and provides a countdown to the event date.
-To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
-This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
+Invités is a desktop application that caters to event managers and planners.
+The application strives to aid our target users through features such as mass-email communication, guest list filtration, attendance marking by unique ID, import or export of CSVs containing guest lists and event details management.
+The application works on a Command Line Interface(CLI), where users key in the commands specified in our User Guide into a command box to perform a task.
+We have also provided a Graphical User Interface(GUI).
+The application was programmed using Java and has approximately 10k lines of code.
 
-==== _My responsibility_
+==== _My responsibility - Event details Management_
 
 My task involved the creation of an event details component that lets our users input the confirmed event details. I completed this task by implementing the following steps:
-	1. Creating an event model with all the required classes and editing the existing models to incorporate this
-	2. Handling the storage component for event details
-	3. Creating a UI component for event details
-	4. Creating the 'add_event', 'delete_event' and 'edit_event' commands to add, delete or edit event details in our application
+
+* Creating an event model with all the required classes and editing the existing model
+
+* Handling the storage component for event details
+
+* Creating a user interface component for event details
+
+* Creating the 'add_event', 'delete_event' and 'edit_event' commands to add, delete and edit event details in our application
 
 ==== _Teammates_
 
 The team that worked with me on this project and the major feature they implemented are as follows:
 
-	1. Sarah Taaher Bonna - Data Filtration
-	2. Aaryam Srivastava - Mass Email Functionality
-	3. Tan Tze Guang - Attendance Taking
-	4. Tan Wei Ming - Data Importation
+	1. Sarah Taaher Bonna - Guest List Management
+	2. Aaryam Srivastava - Mass Email Communication
+	3. Tan Tze Guang - Attendance Management
+	4. Tan Wei Ming - Data Sharing
+
 
 
 == Summary of contributions
@@ -45,25 +49,24 @@ The team that worked with me on this project and the major feature they implemen
 * *Feature*: Added *the event details component*
 ** _What it does_: Allows the user to enter the confirmed details for the event they are organising.
 ** _Justification_: This feature improves the product significantly because a user will want to view specific details that they need to prioritise/reiterate in the days leading up to the event. A count of the days left to the user's event is also displayed for the user's benefit.
-** _Highlights_: This enhancement affects the existing logic, model, ui and storage components as it involves the creation of a new model, the add_event ,delete_event and edit_event commands, an additional storage class as well as a UI component.
+** _Highlights_: This enhancement affects the existing logic, model, user interface and storage components as it involves the creation of a new model, the add_event ,delete_event and edit_event commands, an additional storage class as well as a user interface component.
 ** _Credits_: Reused some ideas from the SE-EDU AddressBook Level 4
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sandhyagopakumar[Functional and test code]]
 
 * *Other contributions*:
-** Morphed the add, delete, edit commands to add_guest, delete_guest and edit_guest.
-** Contributed and edited multiple tests
+** Morphed the add, delete, edit commands to implement the add_guest, delete_guest and edit_guest commands.
+** Contributed and edited multiple automated tests
 ** _Documentation_:
-*** Edited README.adoc to include an updated screenshot of our UI
+*** Edited README.adoc to include a screenshot of our user interface: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/317[317]]
 *** Tweaked use cases and existing diagrams in the Developer guide. Edited descriptions of our commands in the User Guide to reflect our enhancements: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/83[83]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/174[174]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/175[175]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/186[186]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/279[279]]
 ** _Community_:
 *** Reported bugs and suggestions for another team in the cohort: [https://github.com/CS2113-AY1819S1-T12-1/main/issues/127[127]], [https://github.com/CS2113-AY1819S1-T12-1/main/issues/133[133]], [https://github.com/CS2113-AY1819S1-T12-1/main/issues/146[146]]
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are the sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are the sections that I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 === *_Sections 3.4, 3.5 and 3.6 of the User Guide_*
@@ -73,12 +76,14 @@ include::../UserGuide.adoc[tag=event]
 == Contributions to the Developer Guide
 //TODO:
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections that I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
-=== *_Sections 4.4 and 4.5 of the Developer Guide_*
+
+=== *_1. Sections 4.4 and 4.5 of the Developer Guide_*
 
 include::../DeveloperGuide.adoc[tag=event]
 
-=== *_Appendix F.4, F.5 and F.6 of the Developer Guide_*
+
+=== *_2. Appendix F.4, F.5 and F.6 of the Developer Guide_*
 
 include::../DeveloperGuide.adoc[tag=eventappendix]
