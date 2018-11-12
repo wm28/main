@@ -640,12 +640,12 @@ Step 6. Finally, the entry is updated using `MODEL#updatePerson` to transfer the
 The following sequence diagram shows how the `mark` operation works:
 
 .Mark Command Sequence Diagram
-image::MarkCommandSequenceDiagram.png[width="900"]
+image::MarkCommandSequenceDiagram.png[width="800"]
 
 The following sequence diagram shows how the `ummark` operation works:
 
 .Unmark Command Sequence Diagram
-image::UnmarkCommandSequenceDiagram.png[width="900"]
+image::UnmarkCommandSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -693,7 +693,7 @@ Step 7. After adding the `Person` into the `Model`, the program commits the chan
 The following sequence diagram shows how the `add_guest` command works:
 
 .Add Command Sequence Diagram
-image::AddCommandSequenceDiagram.png[width="900"]
+image::AddCommandSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 ===== Aspect: Whether to only generate UID or to allow the user to define UID
