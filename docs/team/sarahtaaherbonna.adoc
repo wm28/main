@@ -12,16 +12,16 @@
 |_The purpose of this portfolio is to document my role and contributions to the project._
 |===
 
-Invités - An event management system. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+*Invités* - An event management system. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-Responsibility - My task was to handle data filtration. I split this task into two. First, I created a Filter command
+*Responsibility* - My task was to handle data filtration. I split this task into two. First, I created a Filter command
 to handle data filtration for the payment status, attendance status and the tags, as these fields
 are not unique to any person. Next, I modified the existing Find command to handle names,
 phone numbers and email addresses, as these are unique fields, and the user may want to find a few
 guests at one go. Rather than use the Filter command, which would yield results one-by-one,
 the Find command allows the user to find a few guests at the same time.
 
-Project Scope - Invités is an application targeted at event managers and planners,
+*Project Scope* - Invités is an application targeted at event managers and planners,
 that allows you to better organise, cater, and manage the reception for large events
 such as weddings, school gatherings, orientation camps, etc. Some of the main features
 include the ability to send mass emails, keep track of payments, as well as the tab
@@ -34,9 +34,9 @@ using the same guest list.
 This will give you an easier time to manage the reception as you will be equipped with
 tools that will minimise errors in catering, organisation, and orders. Moreover, this
 application aims to reduce the frustrations for you when planning events and address your
-needs in a platform that is more user friendly, personalised, and efficient.
+needs in a platform that is more user-friendly, personalised, and efficient.
 
-Team:
+*Team:*
 
 1. Aaryam - Mass Email Communication
 2. Sandhya - Events Management
@@ -77,7 +77,7 @@ marked will no longer be in the list): [https://github.com/CS2113-AY1819S1-F09-3
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the Developer Guide
  and made important changes to the Use Cases: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/144[144]]
-*** Did cosmetic tweaks to existing contents of the User Guide: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/218[218]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[266]]
+*** Did cosmetic tweaks to existing contents of the User Guide: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/218[218]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[266]], [https://github.com/CS2113-AY1819S1-F09-3/main/commit/09652199e0a7f2985c93fb907e345f357150449d[Commit 0965219]]
 *** Added in the purpose of Invités in README.adoc: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/2[2]]
 ** Community:
 *** Reported bugs and suggestions for another team in the cohort (examples:  [https://github.com/CS2113-AY1819S1-T09-4/main/issues/137[137]], [https://github.com/CS2113-AY1819S1-T09-4/main/issues/144[144]])
@@ -90,6 +90,8 @@ marked will no longer be in the list): [https://github.com/CS2113-AY1819S1-F09-3
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+=== *_Sections 3.8 and 3.15 of the User Guide_*
+
 include::../UserGuide.adoc[tag=filter]
 
 include::../UserGuide.adoc[tag=find]
@@ -101,9 +103,13 @@ include::../UserGuide.adoc[tag=find]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+=== *_Sections 4.2 and 4.3 of the Developer Guide_*
+
 include::../DeveloperGuide.adoc[tag=filter]
 
 include::../DeveloperGuide.adoc[tag=find]
+
+=== *_Appendix F.2 and F.3 of the Developer Guide_*
 
 include::../DeveloperGuide.adoc[tag=filterappendix]
 

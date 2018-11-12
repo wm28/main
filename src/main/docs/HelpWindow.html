@@ -1,0 +1,1389 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Invités - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="header"><h1>Invités - User Guide</h1></div><div id="content"><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>By: <code>Team F09-3</code>      Since: <code>Sep 2018</code>      Licence: <code>MIT</code></p>
+</div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#quick-start">2. Quick Start</a></li>
+<li><a href="#Features">3. Features</a>
+<ul class="sectlevel2">
+<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-a-guest-code-add_guest-code">3.2. Adding a guest: <code>add_guest</code></a></li>
+<li><a href="#listing-all-guests-code-list-code">3.3. Listing all guests : <code>list</code></a></li>
+<li><a href="#editing-a-guest-code-edit_guest-code">3.4. Editing a guest : <code>edit_guest</code></a></li>
+<li><a href="#deleting-a-guest-code-delete_guest-code">3.5. Deleting a guest : <code>delete_guest</code></a></li>
+<li><a href="#removing-a-set-of-tags-from-all-guests-code-removetag-code">3.6. Removing a set of tags from all guests : <code>removeTag</code></a></li>
+<li><a href="#adding-a-set-of-tags-to-all-guests-code-addtag-code">3.7. Adding a set of tags to all guests : <code>addTag</code></a></li>
+<li><a href="#locating-guests-by-name-phone-number-or-email-address-code-find-code">3.8. Locating guests by name, phone number or email address: <code>find</code></a></li>
+<li><a href="#import-guests-from-csv-file-code-import-code">3.9. Import guests from CSV file : <code>import</code></a></li>
+<li><a href="#exporting-guests-to-csv-file-code-export-code">3.10. Exporting guests to CSV file : <code>export</code></a></li>
+<li><a href="#marking-a-guest-as-present-code-mark-code">3.11. Marking a guest as present : <code>mark</code></a></li>
+<li><a href="#marking-a-guest-as-absent-code-unmark-code">3.12. Marking a guest as absent : <code>unmark</code></a></li>
+<li><a href="#start-mass-attendance-marking-code-start_marking-code-em-coming-in-v2-0-em">3.13. Start mass attendance marking : <code>start_marking</code> - <em>Coming in v2.0</em></a></li>
+<li><a href="#stop-mass-attendance-marking-code-stop_marking-code-em-coming-in-v2-0-em">3.14. Stop mass attendance marking : <code>stop_marking</code> - <em>Coming in v2.0</em></a></li>
+<li><a href="#filter-list-based-on-specified-parameters-code-filter-code">3.15. Filter list based on specified parameters : <code>filter</code></a></li>
+<li><a href="#sending-emails-to-individual-guests-code-email-code">3.16. Sending emails to individual guests : <code>email</code></a></li>
+<li><a href="#sending-an-email-to-all-guests-code-emailall-code">3.17. Sending an email to all guests : <code>emailAll</code></a></li>
+<li><a href="#sending-emails-to-specified-guests-ignoring-potential-spam-code-forceemail-code-em-coming-in-v2-0-em">3.18. Sending emails to specified guests, ignoring potential spam : <code>forceEmail</code> - <em>Coming in v2.0</em></a></li>
+<li><a href="#sending-emails-to-specific-groups-of-guests-code-emailspecialised-code-em-coming-in-v2-0-em">3.19. Sending emails to specific groups of guests : <code>emailSpecialised</code> - <em>Coming in v2.0</em></a></li>
+<li><a href="#adding-event-details-code-add_event-code">3.20. Adding event details : <code>add_event</code></a></li>
+<li><a href="#editing-the-event-s-details-code-edit_event-code">3.21. Editing the event&#8217;s details : <code>edit_event</code></a></li>
+<li><a href="#deleting-event-details-code-delete_event-code">3.22. Deleting event details : <code>delete_event</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.23. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.25. Saving the data</a></li>
+</ul>
+</li>
+<li><a href="#faq">4. FAQ</a></li>
+<li><a href="#enabling-email-services">5. Enabling Email Services</a></li>
+<li><a href="#csvguestlistformat">6. CSV Guest List Format</a></li>
+<li><a href="#command-summary">7. Command Summary</a></li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Invités is an application targeted at event managers and planners. The application allows you to efficiently <strong>organise, cater, and manage</strong> large events such
+as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments and take note of attendance of the guests.
+To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
+This eliminates the need to input all the information manually and subsequently, gives you an alternative if you decide to organise another event using the same guest list.</p>
+</div>
+<div class="paragraph">
+<p>This will give you an easier time while managing the reception at your event as you will be equipped with tools that will minimise errors in catering,
+organisation, and orders. Moreover, this application aims to reduce your frustration while planning events by addressing your needs in a platform that is more user friendly, personalised, and
+efficient.</p>
+</div>
+<div class="paragraph">
+<p>The main purpose of this User Guide is to give you a detailed overview of all the features in our application and how to use them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
+</li>
+<li>
+<p>Download the latest jar file from the GIT repository <a href="https://github.com/CS2113-AY1819S1-F09-3/main">here</a>.</p>
+</li>
+<li>
+<p>Place the jar file where your home directory resides</p>
+</li>
+<li>
+<p>Double click on the jar file and wait a couple of seconds as the application loads. If you&#8217;re successful, a main screen will load
+similar to the one shown below:</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui" width="790">
+</div>
+</div>
+</li>
+<li>
+<p>As the Command Line Input is your primary method of manipulation, here are some
+example commands that you can use:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>help</code> : Displays a summary of the list of commands that the application offers.</p>
+</li>
+<li>
+<p><code>add_guest</code> : Adds a guest to the guest list.</p>
+</li>
+<li>
+<p><code>delete_guest</code> : Deletes an entry from the guest list.</p>
+</li>
+<li>
+<p><code>mark</code> : Marks the attendance of a guest from <code>ABSENT</code> to <code>PRESENT</code>.</p>
+</li>
+<li>
+<p><code>exit</code> : exits the application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>You should type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
+</li>
+<li>
+<p>Please refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> subsection to see more detailed documentation of the functions that
+are included in this application</p>
+</li>
+<li>
+<p>If you would like to perform emailing services through our application, please complete the steps as shown
+in <a href="#enabling-email-services">Section 5, &#8220;Enabling Email Services&#8221;</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command Format</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by you e.g. in <code>add_guest n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add_guest n/Bob Lee</code>.</p>
+</li>
+<li>
+<p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/Bob Lee t/VIP</code> or as <code>n/Bob Lee</code>.</p>
+</li>
+<li>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/VIP</code>, <code>t/VIP t/Vegetarian</code> etc.</p>
+</li>
+<li>
+<p>You can specify parameters in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<div class="paragraph">
+<p>Displays a summary of the list of commands that the application offers<br>
+Format: <code>help</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-guest-code-add_guest-code"><a class="link" href="#adding-a-guest-code-add_guest-code">3.2. Adding a guest: <code>add_guest</code></a></h3>
+<div class="paragraph">
+<p>Adds a guest to the guest list.<br>
+No spaces or special characters allowed in Payment and Attendance.<br>
+Payment accepts "PAID", "NOTPAID" , "PENDING" or "N.A.".
+Attendance accepts "ABSENT", "PRESENT" or "N.A."<br>
+Payment and attendance are case-insensitive.<br>
+If any options other than the ones given are entered, the guest will be added if
+other fields are fine, but payment and/or attendance will be blank.<br>
+Format: <code>add_guest n/NAME p/PHONE_NUMBER e/EMAIL a/PRESENT pa/PAYMENT [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A guest can have any number of tags (including 0)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOTPAID t/VIP t/Vegetarian</code></p>
+</li>
+<li>
+<p><code>add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID t/Groom t/NonVegetarian</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-guests-code-list-code"><a class="link" href="#listing-all-guests-code-list-code">3.3. Listing all guests : <code>list</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all guests in the guest list.<br>
+Format: <code>list</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-a-guest-code-edit_guest-code"><a class="link" href="#editing-a-guest-code-edit_guest-code">3.4. Editing a guest : <code>edit_guest</code></a></h3>
+<div class="paragraph">
+<p>Edits an existing guest entry in the guest list.<br>
+No spaces or special characters allowed in Payment and Attendance.<br>
+Payment accepts "PAID", "NOTPAID" , "PENDING" or "N.A.".
+Attendance accepts "ABSENT", "PRESENT" or "N.A."<br>
+Payment and attendance are case-insensitive.<br>
+If any options other than the ones given are entered, the guest will be edited,
+but payment and/or attendance will be blank.<br>
+Format: <code>edit_guest INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/PRESENT]  [pa/PAID]
+         [t/GUEST_TYPE] [t/DIET]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the guest at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed guest list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the guest will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all the guest&#8217;s tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit_guest 2 n/Bob Chan</code><br>
+Edits the name of the 2nd guest to be <code>Bob Chan</code> respectively.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-guest-code-delete_guest-code"><a class="link" href="#deleting-a-guest-code-delete_guest-code">3.5. Deleting a guest : <code>delete_guest</code></a></h3>
+<div class="paragraph">
+<p>Deletes the specified guest from the guest list.<br>
+Format: <code>delete_guest INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the guest at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed guest list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete_guest 2</code><br>
+Deletes the 2nd guest in the guest list.</p>
+</li>
+<li>
+<p><code>find n/Betsy</code><br>
+<code>delete_guest 1</code><br>
+Deletes the 1st guest in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="removing-a-set-of-tags-from-all-guests-code-removetag-code"><a class="link" href="#removing-a-set-of-tags-from-all-guests-code-removetag-code">3.6. Removing a set of tags from all guests : <code>removeTag</code></a></h3>
+<div class="paragraph">
+<p>This command allows you to remove a set of tags from all guests in the guest list.<br>
+Format: <code>removeTag [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The removeTag command will remove any number of tags provided by you from all guests</p>
+</li>
+<li>
+<p>If the tags you provide are not shared by any of the guests in the current list, you will be informed of this</p>
+</li>
+<li>
+<p>You must provide the tags to be removed, an input of <code>removeTag t/</code> will not do anything</p>
+</li>
+<li>
+<p>You must provide tags that are alphanumeric, otherwise the system will inform you of the error</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>removeTag t/Veg t/VIP</code><br>
+You will remove the tags <code>Veg</code> and <code>VIP</code> from all guests in the current list</p>
+</li>
+<li>
+<p><code>removeTag t/</code><br>
+This will present you with an error in specifying the command, as you have not provided any tags to delete</p>
+</li>
+<li>
+<p><code>removeTag t/@!*</code><br>
+This will present you with an error in specifying the command, as all your tags must be alphanumeric</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-set-of-tags-to-all-guests-code-addtag-code"><a class="link" href="#adding-a-set-of-tags-to-all-guests-code-addtag-code">3.7. Adding a set of tags to all guests : <code>addTag</code></a></h3>
+<div class="paragraph">
+<p>This command allows you to add a set of tags to all guests in the guest list.<br>
+Format: <code>addTag [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The addTag command will add any number of tags provided by you to all guests</p>
+</li>
+<li>
+<p>You must provide tags that are alphanumeric, otherwise the system will inform you of the error in your input format</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addTag t/Veg t/VIP</code><br>
+You will add the tags <code>Veg</code> and <code>VIP</code> to all guests in the current list</p>
+</li>
+<li>
+<p><code>addTag t/@</code><br>
+This will present you with an error in specifying the command, as all your tags must be alphanumeric</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="locating-guests-by-name-phone-number-or-email-address-code-find-code"><a class="link" href="#locating-guests-by-name-phone-number-or-email-address-code-find-code">3.8. Locating guests by name, phone number or email address: <code>find</code></a></h3>
+<div class="paragraph">
+<p>Find guests whose names, phone numbers and/or email addresses
+contain any of the given keywords.<br>
+Format: <code>find n/KEYWORD p/MORE_KEYWORDS e/MORE_KEYWORDS</code><br>
+Example: find n/NAME p/PHONE e/EMAIL</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case-insensitive. e.g <code>n/hans</code> will match <code>n/Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>n/Hans n/Bo</code> will match <code>n/Bo n/Hans</code></p>
+</li>
+<li>
+<p>Only names, phone numbers and email addresses are searched, depending on prefixes given.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>n/Han</code> will not match <code>n/Hans</code></p>
+</li>
+<li>
+<p>Guests matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>n/Hans n/Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find n/John</code><br>
+You will be shown a list that contains the entries of <code>john</code> and <code>John Doe</code></p>
+</li>
+<li>
+<p><code>find n/Betsy n/Tim n/John</code><br>
+You will be show a list containing entries of any guest having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code></p>
+</li>
+<li>
+<p><code>find n/alex p/92746838 e/johndoe@gmail.com</code><br>
+You will be show a list containing entries of any guest having the name <code>Alex</code>,
+phone number <code>92746838</code>, or email address <code>johndoe@gmail.com</code></p>
+</li>
+<li>
+<p><code>find n/david n/edan</code><br>
+You will be shown a list that contains the entries of any guests having the
+name <code>david</code> and <code>edan</code><br></p>
+</li>
+<li>
+<p><code>find n/david edan</code><br>
+You will be shown a list that contains the entries of any guests having the
+name <code>david</code> <strong>but not</strong> <code>edan</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-guests-from-csv-file-code-import-code"><a class="link" href="#import-guests-from-csv-file-code-import-code">3.9. Import guests from CSV file : <code>import</code></a></h3>
+<div class="paragraph">
+<p>Imports guests with data from a specified CSV file. The structure for the guest fields in the CSV file is predefined and can be found at <a href="#csvguestlistformat">CSV Guest List Format</a>.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>import FILE_PATH</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>No existing guest in the guest list will be deleted due to the import.</p>
+</li>
+<li>
+<p><code>FILE_PATH</code> shall only be a relative or an absolute file path.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Relative file path is relative to where the application Jar file is located.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>There is no guaranteed ordering of guests after each import.</p>
+</li>
+<li>
+<p>Importation of guests which already exist will be skipped.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Importation of badly formatted guests will be skipped.</p>
+</li>
+<li>
+<p>The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 1.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/ImportReportWindow.png" alt="ImportReportWindow"></span> Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>import directory/subdirectory/guestlist.csv</code><br>
+You will populate the guest list with the data imported from the CSV file in the specified path.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exporting-guests-to-csv-file-code-export-code"><a class="link" href="#exporting-guests-to-csv-file-code-export-code">3.10. Exporting guests to CSV file : <code>export</code></a></h3>
+<div class="paragraph">
+<p>Exports guests' data to a specified CSV file. The structure for the guest fields in the CSV file is predefined and can be found at <a href="#csvguestlistformat">CSV Guest List Format</a>.<br></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>export FILE_PATH</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>FILE_PATH</code> shall only be a relative or an absolute file path.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Relative file path is relative to where the application Jar file is located.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>If no <code>FILE_PATH</code> is provided, guests will be exported using the default filename, <code>exportedGuestBook.csv</code> to the current working directory (folder where the application Jar file is located).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>export directory/subdirectory/guestlist.csv</code><br>
+You will export the currently filtered guest list entries into a CSV file in the specified path.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="marking-a-guest-as-present-code-mark-code"><a class="link" href="#marking-a-guest-as-present-code-mark-code">3.11. Marking a guest as present : <code>mark</code></a></h3>
+<div class="paragraph">
+<p>Marks a guest as present using a unique number assigned to them. This will also change the
+<code>a/PRESENT</code>​ tag associated with the guest to Present.<br>
+Format: <code>mark [PHONE_NUMBER]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>PHONE_NUMBER</code> does not use the p/ prefix.<br>
+<code>PHONE_NUMBER</code> only accepts a string of numbers, other characters will trigger an invalid command format error.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>mark 81927291</code><br>
+You will mark the guest with phone number <code>81927291</code> as present.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="marking-a-guest-as-absent-code-unmark-code"><a class="link" href="#marking-a-guest-as-absent-code-unmark-code">3.12. Marking a guest as absent : <code>unmark</code></a></h3>
+<div class="paragraph">
+<p>Marks a guest as absent using their unique number. This will also change the
+<code>a/PRESENT</code>​ tag associated with the guest to Absent.<br>
+Format: <code>unmark [PHONE_NUMBER]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>PHONE_NUMBER</code> does not use the p/ prefix.<br>
+<code>PHONE_NUMBER</code> only accepts a string of numbers, other characters will trigger an invalid command format error.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>unmark 81927291</code><br>
+You will mark the guest with phone number <code>81927291</code> as absent.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="start-mass-attendance-marking-code-start_marking-code-em-coming-in-v2-0-em"><a class="link" href="#start-mass-attendance-marking-code-start_marking-code-em-coming-in-v2-0-em">3.13. Start mass attendance marking : <code>start_marking</code> - <em>Coming in v2.0</em></a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This feature is not implemented yet
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Start the mass attendance marking mode. Allows you to mark attendance without using
+the mark prefix.<br>
+Format: <code>start_marking [TICKET_ID]&#8230;&#8203;</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>start_marking</code> + <code>87654321</code> + <code>87654322</code> + <code>87654323</code> + <code>87654324&#8230;&#8203;</code><br>
+You will mark the guests with unique numbers 87654321, 87654322, 87654323, 87654324 as present</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="stop-mass-attendance-marking-code-stop_marking-code-em-coming-in-v2-0-em"><a class="link" href="#stop-mass-attendance-marking-code-stop_marking-code-em-coming-in-v2-0-em">3.14. Stop mass attendance marking : <code>stop_marking</code> - <em>Coming in v2.0</em></a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This feature is not implemented yet
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Stop the mass attendance marking mode.<br>
+Format: <code>stop_marking</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="filter-list-based-on-specified-parameters-code-filter-code"><a class="link" href="#filter-list-based-on-specified-parameters-code-filter-code">3.15. Filter list based on specified parameters : <code>filter</code></a></h3>
+<div class="paragraph">
+<p>Filter guest list based on filter guest attributes. Only filters based on
+payment status, attendance status and tags. Keywords should not have spaces or any
+special character.<br>
+Values accepted for Payment Status: PAID, NOTPAID, PENDING or N.A.<br>
+Values accepted for Attendance Status: PRESENT, ABSENT, N.A.<br>
+Format: <code>filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
+         [t/DIET] [t/GUEST_TYPE] [t/&#8230;&#8203;]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case-insensitive. e.g <code>pa/paid</code> will match <code>pa/PAID</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>pa/PAID a/ABSENT</code> will match <code>a/ABSENT pa/PAID</code></p>
+</li>
+<li>
+<p>Only payment staus, attendance status and tags are searched, depending on prefixes given.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>p/PAID</code> will not match <code>p/NOTPAID</code></p>
+</li>
+<li>
+<p>Guests matching all keywords will be returned (i.e. <code>AND</code> search). e.g. <code>pa/PAID t/GUEST</code> will return a list
+of people who have paid <strong>and</strong> who are guests</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>filter pa/NOTPAID a/PRESENT</code><br>
+You will be shown a list with guests who have yet to pay and are present.</p>
+</li>
+<li>
+<p><code>filter a/Present t/Vegetarian</code><br>
+You will be shown a list with guests who are present and have a vegetarian dietary requirement.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sending-emails-to-individual-guests-code-email-code"><a class="link" href="#sending-emails-to-individual-guests-code-email-code">3.16. Sending emails to individual guests : <code>email</code></a></h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Please ensure you have gone through <a href="#enabling-email-services">Section 5, &#8220;Enabling Email Services&#8221;</a> in order for this feature to work!</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Sends an email to the guest at a specific Index<br>
+Format: <code>email INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Sends an email to the guest at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed guest list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>undo/redo</code> feature will <strong>not work</strong> with the <code>email</code> command as once you have sent an email, you cannot reverse this action.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Examples</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>email 2</code><br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>First, you will be presented with an EmailWindow similar to Figure 1 below. This window is for you to input your email address, password, email subject and message.</p>
+</li>
+<li>
+<p>You will then need to fill in all the required fields. If you miss any of the fields and try click the <code>Send</code> button, an error message will pop up as the one in Figure 2.</p>
+</li>
+<li>
+<p>Once all fields are filled, you can click the <code>Send</code> button to send your email to the <strong>2nd guest</strong> in the list. You can also click the <code>Quit</code> button if you don&#8217;t want to send your email.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/EmailWindow.png" alt="EmailWindow"></span> Figure 1 - EmailWindow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/EmailWindowError.png" alt="EmailWindowError"></span> Figure 2 - Field Errors</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="sending-an-email-to-all-guests-code-emailall-code"><a class="link" href="#sending-an-email-to-all-guests-code-emailall-code">3.17. Sending an email to all guests : <code>emailAll</code></a></h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Please ensure you have gone through <a href="#enabling-email-services">Section 5, &#8220;Enabling Email Services&#8221;</a> in order for this feature to work!</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Sends an email to all of the guests in the current list<br>
+Format: <code>emailAll</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>undo/redo</code> feature will <strong>not work</strong> with the <code>email</code> command as once you have sent an email, you cannot reverse this action.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>emailAll</code><br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>First, you will be presented with an EmailWindow similar to Figure 1 below. This window is for you to input your email address, password, email subject and message.</p>
+</li>
+<li>
+<p>You will then need to fill in all the required fields. If you miss any of the fields and try click the <code>Send</code> button, an error message will pop up as the one in Figure 2.</p>
+</li>
+<li>
+<p>Once all fields are filled, you can click the <code>Send</code> button to send your email to all guests in the list. You can also click the <code>Quit</code> button if you don&#8217;t want to send your email.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/EmailWindow.png" alt="EmailWindow"></span> Figure 1 - EmailWindow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/EmailWindowError.png" alt="EmailWindowError"></span> Figure 2 - Field Errors</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="sending-emails-to-specified-guests-ignoring-potential-spam-code-forceemail-code-em-coming-in-v2-0-em"><a class="link" href="#sending-emails-to-specified-guests-ignoring-potential-spam-code-forceemail-code-em-coming-in-v2-0-em">3.18. Sending emails to specified guests, ignoring potential spam : <code>forceEmail</code> - <em>Coming in v2.0</em></a></h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Please ensure you have gone through <a href="#enabling-email-services">Section 5, &#8220;Enabling Email Services&#8221;</a> in order for this feature to work!</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Sends an email to the guest specified by the index, regardless of how many emails have been sent to that guest<br>
+Format: <code>forceEmail INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Sends an email to the guest at the specified <code>INDEX</code>.</p>
+</li>
+<li>
+<p>The index refers to the index number shown in the displayed guest list.</p>
+</li>
+<li>
+<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>undo/redo</code> feature will <strong>not work</strong> with the <code>email</code> command as once you have sent an email, you cannot reverse this action.</p>
+</div>
+<div class="paragraph">
+<p>If you try to send multiple emails to the same guest, the system will inform you of this and not allow you to spam the guest.
+However, the <code>forceEmail</code> command will allow you to send another email, regardless of how many emails have been sent before.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>forceEmail</code><br>
+Forces an email to be sent to the guest specified by INDEX.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>First, you will be presented with an EmailWindow similar to Figure 1 below. This window is for you to input your email address, password, email subject and message.</p>
+</li>
+<li>
+<p>You will then need to fill in all the required fields. If you miss any of the fields and try click the <code>Send</code> button, an error message will pop up as the one in Figure 2.</p>
+</li>
+<li>
+<p>Once all fields are filled, you can click the <code>Send</code> button to send your email to all guests in the list. You can also click the <code>Quit</code> button if you don&#8217;t want to send your email.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/EmailWindow.png" alt="EmailWindow"></span> Figure 1 - EmailWindow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="images/EmailWindowError.png" alt="EmailWindowError"></span> Figure 2 - Field Errors</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="sending-emails-to-specific-groups-of-guests-code-emailspecialised-code-em-coming-in-v2-0-em"><a class="link" href="#sending-emails-to-specific-groups-of-guests-code-emailspecialised-code-em-coming-in-v2-0-em">3.19. Sending emails to specific groups of guests : <code>emailSpecialised</code> - <em>Coming in v2.0</em></a></h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Please ensure you have gone through <a href="#enabling-email-services">Section 5, &#8220;Enabling Email Services&#8221;</a> in order for this feature to work!</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>undo/redo</code> feature will <strong>not work</strong> with the <code>email</code> command as once you have sent an email, you cannot reverse this action.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-event-details-code-add_event-code"><a class="link" href="#adding-event-details-code-add_event-code">3.20. Adding event details : <code>add_event</code></a></h3>
+<div class="paragraph">
+<p>Add the details for an event<br>
+Format: <code>add_event n/EVENT_NAME d/DATE v/VENUE st/START_TIME [t/OTHER_TAGS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Adds the specified event details.</p>
+</li>
+<li>
+<p>All compulsory fields(name, date, venue and start time) must be specified. The optional field(tags) may be omitted.</p>
+</li>
+<li>
+<p>Event name and venue have to be alphanumeric and may contain spaces. Otherwise, the system will inform you about the correct format to be followed. Special characters like '#', ',' and '-' may be used for the venue field.</p>
+</li>
+<li>
+<p>Event date has to follow the 'dd/mm/yyyy' format and has to exist in the calendar. Ensure that the event date falls after the current system date. Otherwise, the system will inform you about the correct format to be followed.</p>
+</li>
+<li>
+<p>Event&#8217;s start time should follow the 'h:mm AM/PM' format with h between 1 to 12. Otherwise, the system will inform you about the correct format to be followed.</p>
+</li>
+<li>
+<p>Event tags must be alphanumeric. Spaces are not allowed</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add_event n/CFG career talk d/12/01/2019 v/YIH Paris Room st/9:00 AM t/SmartCasualAttire</code><br>
+You will create an event called <code>CFG career talk</code> that will take place on 12th January, 2019 at YIH Paris Room. The event will start at 9:00 AM and attendees are expected to dress in smart casual attire.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-the-event-s-details-code-edit_event-code"><a class="link" href="#editing-the-event-s-details-code-edit_event-code">3.21. Editing the event&#8217;s details : <code>edit_event</code></a></h3>
+<div class="paragraph">
+<p>Edit the details of the event<br>
+Format: <code>edit_event [n/EVENT_NAME] [d/DATE] [v/VENUE] [st/START_TIME] [t/&#8230;&#8203;]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Edits the event details(previously specified by the you using the add_event command).</p>
+</li>
+<li>
+<p>Ensure that you have specified some event details before using this command. Otherwise, the system will inform you about the lack of event details.</p>
+</li>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+<li>
+<p>When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.</p>
+</li>
+<li>
+<p>You can remove all event tags by typing <code>t/</code> without specifying any tags after it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit_event n/CFG Career Workshop t/CasualAttire</code><br>
+You will change the name of the event to 'CFG Career Workshop and replace the existing tags with the 'CasualAttire' tag.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-event-details-code-delete_event-code"><a class="link" href="#deleting-event-details-code-delete_event-code">3.22. Deleting event details : <code>delete_event</code></a></h3>
+<div class="paragraph">
+<p>Deletes the event details currently present in the application
+Format: <code>delete_event</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the event details(previously specified by you using the add_event command).</p>
+</li>
+<li>
+<p>Ensure that you have specified some details before using this command. Otherwise, the system will inform you about the lack of event details.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete_event</code><br>
+You will delete the event details.
+=== Undoing previous command : <code>undo</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Restores the guest list to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Undoable commands: those commands that modify the guest list&#8217;s content (<code>add_guest</code>, <code>delete_guest</code>, <code>edit_guest</code>, <code>removeTag</code>, <code>addTag</code>, and <code>clear</code>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete_guest 1</code><br>
+<code>list</code><br>
+<code>undo</code> (reverses the <code>delete_guest 1</code> command)<br></p>
+</li>
+<li>
+<p><code>select 1</code><br>
+<code>list</code><br>
+<code>undo</code><br>
+The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+</li>
+<li>
+<p><code>delete_guest 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete_guest 1</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.23. Redoing the previously undone command : <code>redo</code></a></h3>
+<div class="paragraph">
+<p>Reverses the most recent <code>undo</code> command.<br>
+Format: <code>redo</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete_guest 1</code><br>
+<code>undo</code> (reverses the <code>delete_guest 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete_guest 1</code> command)<br></p>
+</li>
+<li>
+<p><code>delete_guest 1</code><br>
+<code>redo</code><br>
+The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+</li>
+<li>
+<p><code>delete_guest 1</code><br>
+<code>clear</code><br>
+<code>undo</code> (reverses the <code>clear</code> command)<br>
+<code>undo</code> (reverses the <code>delete_guest 1</code> command)<br>
+<code>redo</code> (reapplies the <code>delete_guest 1</code> command)<br>
+<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.24. Exiting the program : <code>exit</code></a></h3>
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.25. Saving the data</a></h3>
+<div class="paragraph">
+<p>As the guest list data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need for you to save manually.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous guest list.<br>
+Alternatively, you could export the data from your current computer using the export command. Using this data you can launch the application on a different computer and import the data.</p>
+</div>
+<div class="paragraph">
+<p><strong>Q</strong>: ​How do I import my existing data on a CSV into the application?<br>
+<strong>A</strong>: Firstly, create a new event within the application. After this, use the import function and specify the path to the file.
+You will see the guest list populate itself with the data from the specified CSV file.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enabling-email-services"><a class="link" href="#enabling-email-services">5. Enabling Email Services</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order for you to use the commands <code>email</code>, <code>emailAll</code>, <code>forceEmail</code>, and <code>emailSpecialised</code> you must allow Invités to access your email account and
+send emails. Currently, our application only supports Gmail accounts, but we do plan on supporting
+other email domains.</p>
+</div>
+<div class="paragraph">
+<p>If you do have a <strong>Gmail</strong> account, please follow these steps to enable email services:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login to your Gmail account using your preferred online browser (e.g. Chrome, Firefox).</p>
+</li>
+<li>
+<p>Click on your profile picture on the top right, and click on <code>Google Account</code></p>
+</li>
+<li>
+<p>Once you are re-directed, under the <code>Sign-in and security</code> section, click on <code>Apps with account access</code></p>
+</li>
+<li>
+<p>Scroll down till you find the section <code>Allow less secure apps</code> on the right. Set this option to <code>ON</code>.</p>
+</li>
+<li>
+<p>You are now ready to send emails to your guests through Invités!</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Currently there is no other way to enable mailing services than to let your Gmail account allow less secure apps, and hence your account may be
+susceptible to an increased number of spam emails from untrusted applications. However, our team is working quickly to find a more secure replacement.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>For <strong>testing</strong> purposes, you may use a default Gmail account we have created to save you some time:</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Email Address: <em>invitestestpe1@gmail.com</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password: <em>practicalexam1</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="csvguestlistformat"><a class="link" href="#csvguestlistformat">6. CSV Guest List Format</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>import</code> and <code>export</code> command will work with CSV files according to the predefined format below</p>
+</div>
+<div class="paragraph">
+<p>Format: <code>NAME,PHONE_NUMBER,EMAIL,PAYMENT,[TAG]</code></p>
+</div>
+<div class="paragraph">
+<p>Example: sample CSV file</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>David Li,91031282,lidavid@gmail.com,PENDING,ABSENT,gold,Veg,VIP<br>
+Irfan Ibrahim,92492021,irfan@gmail.com,PAID,PRESENT,gold,Veg,VIP<br>
+Roy Balakrishnan,92624417,royb@gmail.com,PENDING,ABSENT,gold,Veg,VIP<br>
+Hakeem Salgado,80000957,80000957@gmail.com,PAID,ABSENT,gold,Veg,VIP<br>
+Hibah Lees,80000882,80000882@gmail.com,PAID,ABSENT,gold,Veg,VIP<br>
+Jayda Hill,80000251,80000251@gmail.com,PAID,ABSENT,gold,Veg,VIP<br></p>
+</div>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Individual guest fields shall not contain any commas.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">7. Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>help</code> : ​Displays a help sheet containing useful commands.</p>
+</li>
+<li>
+<p><code>add_guest</code> : ​Creates an entry for a guest to attend the event.</p>
+</li>
+<li>
+<p><code>edit_guest</code> :​ Modifies the entry of a specified guest based on name.</p>
+</li>
+<li>
+<p><code>delete_guest</code> : ​Removes an entry of a specified guest based on name.</p>
+</li>
+<li>
+<p><code>removeTag</code> : Removes a set of tags from all the guests in the current list.</p>
+</li>
+<li>
+<p><code>addtag</code> : Adds a set of tags to all the guests in the current list.</p>
+</li>
+<li>
+<p><code>find</code> : Finds guests whose names, phone numbers or email addresses contain any of the given keywords.</p>
+</li>
+<li>
+<p><code>list</code> : Lists the current guest list.</p>
+</li>
+<li>
+<p><code>import</code> : ​Automatically generates guest list from a given CSV file.</p>
+</li>
+<li>
+<p><code>export</code> : Exports guest list to a CSV file.</p>
+</li>
+<li>
+<p><code>mark</code> : ​Tags a guest to note that they are currently at the event.</p>
+</li>
+<li>
+<p><code>unmark</code> : ​Removes the tag of a guest attending the event based on name.</p>
+</li>
+<li>
+<p><code>start_marking</code> : ​Begins continuous marking of the people entering the event.</p>
+</li>
+<li>
+<p><code>stop_marking</code> : ​Stops the continuous marking of people.</p>
+</li>
+<li>
+<p><code>filter</code> : ​Filters the guest list based on keywords given.</p>
+</li>
+<li>
+<p><code>email</code> : ​Sends individual emails to an entry of a specified guest based on index.</p>
+</li>
+<li>
+<p><code>emailAll</code> : Sends an email to all of the guests in the current list.</p>
+</li>
+<li>
+<p><code>forceEmail</code> : Sends an email to the guest specified by the index, regardless of how many emails have been sent to that guest.</p>
+</li>
+<li>
+<p><code>emailSpecialised</code> : Sends an email to the guests with the specified tags.</p>
+</li>
+<li>
+<p><code>add_event</code> :​ Adds the details of your event.</p>
+</li>
+<li>
+<p><code>edit_event</code> : Edits the details of the event.</p>
+</li>
+<li>
+<p><code>delete_event</code> : ​Removes the specified event details.</p>
+</li>
+<li>
+<p><code>undo</code> : Restores the guest list to the state before the previous undoable command was executed.</p>
+</li>
+<li>
+<p><code>redo</code> : Reverses the most recent undo command.</p>
+</li>
+<li>
+<p><code>exit</code> : ​Exits the application.</p>
+</li>
+</ul>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 18:01:41 SGT</div></div></div></body></html>
