@@ -223,13 +223,12 @@ name `david` *but not* `edan`
 
 === Import guests from CSV file : `import`
 
-Imports multiple guests with data from a specified CSV file. To create your own CSV file for importing guests, please see <<csvguestlistformat, Section 6: "CSV Guest List Format">> for the accepted format. +
+Imports multiple guests with data from a specified CSV file. To create your own CSV file for importing guests, please see <<CSV Guest List Format, Section 6: "CSV Guest List Format">> for the accepted format. +
 
 Format: `import FILE_PATH`
 
 ****
-* This command only adds guests into the current guest list.
-** No existing guest in the guest list will be deleted due to the import.
+* This command only adds guests into the current guest list. No existing guest in the guest list will be deleted due to the import.
 * Adds all guests specified in the CSV file specified by `FILE_PATH`
 * `FILE_PATH` shall only be a relative or an absolute file path.
 ** Relative file path is relative to where the application Jar file is located.
@@ -240,7 +239,9 @@ Format: `import FILE_PATH`
 * The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 1.
 
 |====
-| image:ImportReportWindow.PNG[] Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
+| image:ImportReportWindow.PNG[width="790"]
+ +
+  Figure 1 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
 |====
 ****
 
@@ -254,7 +255,7 @@ You will populate the guest list with the data imported from the CSV file in the
 
 === Exporting guests to CSV file : `export`
 
-Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<csvguestlistformat, Section 6: "CSV Guest List Format">>. +
+Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found at <<CSV Guest List Format, Section 6: "CSV Guest List Format">>. +
 
 Format: `export FILE_PATH`
 

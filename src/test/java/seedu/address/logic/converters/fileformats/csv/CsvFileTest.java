@@ -16,6 +16,9 @@ import seedu.address.logic.converters.fileformats.AdaptedPerson;
 import seedu.address.logic.converters.fileformats.SupportedFileFormat;
 import seedu.address.testutil.TypicalPersons;
 
+/**
+ * Contains unit tests for CsvFile.
+ */
 public class CsvFileTest {
     public static final String NON_EXISTENT_CSV_FILE = "src/test/data/data/CsvTest/nonExistentGuestList.csv";
     public static final String EXPORTED_CSV_FILE =
