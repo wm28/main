@@ -402,7 +402,7 @@ The `undo/redo` feature will *not work* with the `email` command as once you hav
 3. Once all fields are filled, you can click the `Send` button to send your email to the *2nd guest* in the list. You can also click the `Quit` button if you don't want to send your email.
 
 |====
-| image:EmailWindow.png[] Figure 1 - EmailWindow | image:EmailWindowError.png[] Figure 2 - Field Errors
+| image:EmailWindow.png[] Figure 3 - EmailWindow | image:EmailWindowError.png[] Figure 4 - Field Errors
 |====
 
 === Sending an email to all guests : `emailAll`
@@ -426,7 +426,7 @@ Examples:
 3. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
 
 |====
-| image:EmailWindow.png[] Figure 3 - EmailWindow | image:EmailWindowError.png[] Figure 4 - Field Errors
+| image:EmailWindow.png[] Figure 5 - EmailWindow | image:EmailWindowError.png[] Figure 6 - Field Errors
 |====
 
 === Sending emails to specified guests, ignoring potential spam : `forceEmail` - _Coming in v2.0_
