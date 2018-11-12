@@ -116,6 +116,5 @@ include::../DeveloperGuide.adoc[tag=filterappendix]
 include::../DeveloperGuide.adoc[tag=findappendix]
 
 
-== PROJECT: Invités
 
 ---
