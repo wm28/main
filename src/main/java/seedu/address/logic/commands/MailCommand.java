@@ -78,7 +78,6 @@ public class MailCommand extends Email {
             // the Gmail host
             Session session = Session.getDefaultInstance(props, authenticate);
 
-
             // Create a QR code which resembles the ticket of the guest, using their unique ID field
             assert (personToMail.getUid() == null) : "Every guest must have a unique ID";
 

@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EmailAllCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -203,5 +204,18 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE));
         parser.parseCommand(ExitCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_extraCharacters_emailAllCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailAllCommand.MESSAGE_USAGE));
+        parser.parseCommand(EmailAllCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_emailAll() throws Exception {
+        assertTrue(parser.parseCommand(EmailAllCommand.COMMAND_WORD) instanceof EmailAllCommand);
+        assertTrue(parser.parseCommand(EmailAllCommand.COMMAND_WORD + "   ") instanceof EmailAllCommand);
     }
 }
