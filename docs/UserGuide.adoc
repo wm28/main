@@ -420,7 +420,7 @@ You will be shown a list with guests who are present and have a vegetarian dieta
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-With this command you can send an email to the guest at a specific Index +
+With this command you can send an email, *with a QR code attachment*, to the guest at a specific Index +
 Format: `email INDEX`
 
 ****
@@ -450,7 +450,7 @@ the command `email 5` will give you an error as a guest does not exist at `INDEX
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-With this command you can an email to *all of the guests* in the current filtered list +
+With this command you can an email *(no QR code attachments for this command)* to *all of the guests* in the current filtered list +
 Format: `emailAll`
 
 [NOTE]
@@ -472,7 +472,7 @@ Examples:
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-With this command you can send an email to all the guests with *at least one of the tags specified*+
+With this command you can send an email *(no QR code attachments for this command)* to all the guests with *at least one of the tags specified*+
 Format: `emailSpecific [t/TAG]...`
 
 ****
@@ -650,8 +650,7 @@ If you do have a *Gmail* account, please follow these steps to enable email serv
 5. You are now ready to send emails to your guests through Invités!
 
 [WARNING]
-Currently there is no other way to enable mailing services than to let your Gmail account allow less secure apps, and hence your account may be
-susceptible to an increased number of spam emails from untrusted applications. However, our team is working quickly to find a more secure replacement.
+Currently there is no other way to enable mailing services than to let your Gmail account allow less secure apps. However, our team is working quickly to find a more secure replacement.
 
 [IMPORTANT]
 If your operating system is *macOS Mojave*, please make an *important* note of the following:

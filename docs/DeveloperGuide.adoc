@@ -1209,7 +1209,7 @@ These instructions only provide a starting point for testers to work on; testers
 // tag::emailappendix[]
 === Sending individual emails
 
-. Send individual guests an email
+. Send individual guests an email *with a QR code attachment*
 
 .. *Test case:* `email 1`
 ...   Expected: Assuming there is at least one guest, UI Window opens to allow user input. If all inputs are valid, email is sent to the guest at `INDEX` 1.
@@ -1219,20 +1219,17 @@ These instructions only provide a starting point for testers to work on; testers
 
 === Sending all guests an email
 
-. Send all guests an email
+. Send all guests an email *(no QR code attachments for this command)*
 
 .. *Test case:* `emailAll`
 ...   Expected: Assuming there is at least one guest, UI Window opens to allow user input. If all inputs are valid, email is sent to all guests.
-
-.. *Test case:* `emailAll`
-...   Expected: If current filtered list is empty, no email will be sent and an error message displayed.
 
 .. *Incorrect commands to try:* `emailAll Celebrities`, `emailAllLL`, etc.
 ...   Expected: No email sent due to incorrect parameters.
 
 === Sending a group of guests an email
 
-. Send an email to a group of guests
+. Send an email to a group of guests *(no QR code attachments for this command)*
 
 .. *Test case:* `emailSpecific t/Veg`
 ...   Expected: Assuming there is at least one guest with tag `Veg` in the filtered list, UI Window opens to allow user input. If all inputs are valid, email is sent all guests with tag `Veg`
