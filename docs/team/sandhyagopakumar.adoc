@@ -7,25 +7,31 @@
 
 == Overview
 
-The purpose of this portfolio is to document my role and contributions to the CS2113T project(Invités).
+The purpose of this portfolio is to document my role and contributions to team F09-3's project,Invités,
+for the module: Software Engineering and Object Oriented Programming(CS2113T).
 
-*Project Scope*
-Invités is an application targeted at event managers and planners. The application that allows its users to efficiently *organise, cater, and manage* large events such
-as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments, and take note of attendance of the guests.
+==== _Project Scope_
+
+Invités is a desktop application targeted at event managers and planners. The application allows its users to efficiently *organise, cater, and manage* large events such
+as weddings, school gatherings, orientation camps, etc. The application works on a command line interface, where users key in the commands specified in our User Guide into a command box to perform a task.
+Some of the main distinguishing features of the application include the ability to send mass emails to guests, keep track of payments, and take note of guest attendance.
+The application also allows the user to input the proposed or confirmed details of their event and provides a countdown to the event date.
 To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
 This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
 
-*My responsibility*
+==== _My responsibility_
+
 My task involved the creation of an event details component that lets our users input the confirmed event details. I completed this task by implementing the following steps:
 	1. Creating an event model with all the required classes and editing the existing models to incorporate this
 	2. Handling the storage component for event details
 	3. Creating a UI component for event details
 	4. Creating the 'add_event', 'delete_event' and 'edit_event' commands to add, delete or edit event details in our application
 
-*Teammates*
+==== _Teammates_
+
 The team that worked with me on this project and the major feature they implemented are as follows:
 
-	1. Sarah Taaher Bonna - Data Filteration
+	1. Sarah Taaher Bonna - Data Filtration
 	2. Aaryam Srivastava - Mass Email Functionality
 	3. Tan Tze Guang - Attendance Taking
 	4. Tan Wei Ming - Data Importation
@@ -33,33 +39,32 @@ The team that worked with me on this project and the major feature they implemen
 
 == Summary of contributions
 |===
-|_The purpose of this section is to list my contributions to Invités.
+|_The purpose of this section is to list my contributions to Invités._
 |===
 
 * *Feature*: Added *the event details component*
-** What it does: Allows the user to enter the confirmed details for the event they are organising.
-** Justification: This feature improves the product significantly because a user will want to view specific details that they need to prioritise/reiterate in the days leading up to the event. A count of the days left to the user's event is also displayed for the user's benefit.
-** Highlights: This enhancement affects the existing logic, model, ui and storage components as it involves the creation of a new model class, the add_event ,delete_event and edit_event commands, an additional storage class as well as a UI component.
-** Credits: Reused some ideas from the SE-EDU AddressBook Level 4
+** _What it does_: Allows the user to enter the confirmed details for the event they are organising.
+** _Justification_: This feature improves the product significantly because a user will want to view specific details that they need to prioritise/reiterate in the days leading up to the event. A count of the days left to the user's event is also displayed for the user's benefit.
+** _Highlights_: This enhancement affects the existing logic, model, ui and storage components as it involves the creation of a new model, the add_event ,delete_event and edit_event commands, an additional storage class as well as a UI component.
+** _Credits_: Reused some ideas from the SE-EDU AddressBook Level 4
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sandhyagopakumar[Functional and test code]]
 
 * *Other contributions*:
 ** Morphed the add, delete, edit commands to add_guest, delete_guest and edit_guest.
-*** Contributed and edited multiple tests
-** Documentation:
-*** Edited README.adoc to include an update screenshot of our UI
+** Contributed and edited multiple tests
+** _Documentation_:
+*** Edited README.adoc to include an updated screenshot of our UI
 *** Tweaked use cases and existing diagrams in the Developer guide. Edited descriptions of our commands in the User Guide to reflect our enhancements: [https://github.com/CS2113-AY1819S1-F09-3/main/pull/83[83]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/174[174]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/175[175]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/186[186]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/279[279]]
-** Community:
+** _Community_:
 *** Reported bugs and suggestions for another team in the cohort: [https://github.com/CS2113-AY1819S1-T12-1/main/issues/127[127]], [https://github.com/CS2113-AY1819S1-T12-1/main/issues/133[133]], [https://github.com/CS2113-AY1819S1-T12-1/main/issues/146[146]]
 
 == Contributions to the User Guide
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are the sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-//TODO:
 include::../UserGuide.adoc[tag=event]
 
 == Contributions to the Developer Guide
@@ -67,8 +72,10 @@ include::../UserGuide.adoc[tag=event]
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
+=== *_Sections 4.4, 4.5 of the Developer Guide_*
 
 include::../DeveloperGuide.adoc[tag=event]
 
-//include::../DeveloperGuide.adoc[tag=Edit Event feature]
+=== *_Appendix F.4, F.5, F.6_*
 
+include::../DeveloperGuide.adoc[tag=eventappendix]
