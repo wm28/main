@@ -20,7 +20,10 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
-
+//@@author wm28
+/**
+ * Contains unit tests for CsvPersonConverter.
+ */
 public class CsvPersonConverterTest {
 
     public static final String VALID_NAME = "Amy Bee";
@@ -187,3 +190,4 @@ public class CsvPersonConverterTest {
         assertTrue(csvPersonConverter.getSupportedFileFormat().equals(SupportedFileFormat.CSV));
     }
 }
+//@@author

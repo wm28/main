@@ -12,6 +12,9 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.converters.CsvPersonConverter;
 import seedu.address.logic.converters.fileformats.csv.CsvFile;
 
+/**
+ * Contains tests to test whether ImportCommandParser can handle all user input scenarios.
+ */
 public class ImportCommandParserTest {
     private ImportCommandParser parser = new ImportCommandParser();
 
