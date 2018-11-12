@@ -82,6 +82,9 @@ The list below shows all our team members and what we have contributed to the ap
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation which targets end-users._
 |===
 
+[NOTE]
+The implementation of the `mark` and `unmark` commands are found in the Logic component of the application.
+
 include::../UserGuide.adoc[tag=mark]
 
 include::../UserGuide.adoc[tag=unmark]
@@ -97,7 +100,13 @@ include::../UserGuide.adoc[tag=stop_marking]
 |_Given below are sections that I have contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+[NOTE]
+The implementation of the `mark` and `unmark` commands are found in the Logic component of the application.
+
 include::../DeveloperGuide.adoc[tag=markunmark]
+
+[NOTE]
+The implementation of the generate Unique ID (UID) function is found in the Logic component of the application within the `add_guest` command.
 
 include::../DeveloperGuide.adoc[tag=generateuid]
 
