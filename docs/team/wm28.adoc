@@ -2,6 +2,7 @@
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
+:repoURL: https://github.com/CS2113-AY1819S1-F09-3/main/blob/master
 
 == PROJECT: Invités
 |===
@@ -61,6 +62,11 @@ include::../UserGuide.adoc[tag=csvformat]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+=== *_Implementation section of the Developer Guide_*
+
 include::../DeveloperGuide.adoc[tag=importexport]
+
+=== *_Appendix section of the Developer Guide_*
+
 include::../DeveloperGuide.adoc[tag=importexportappendix]
 include::../DeveloperGuide.adoc[tag=personpreviewappendix]
