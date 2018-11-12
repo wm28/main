@@ -593,7 +593,7 @@ You should not enter any characters after the command word, only extra spaces ar
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the guest list's content (`add_guest`, `delete_guest`, `edit_guest`, `removeTag`, `addTag`, and `clear`) and the event details display's content('add_event', 'edit_event' and 'delete_event').
+Undoable commands: those commands that modify the guest list's content (`add_guest`, `delete_guest`, `edit_guest`, `removeTag`, `addTag`, `clear` and `import`) and the event details display's content('add_event', 'edit_event' and 'delete_event').
 ====
 
 Examples:
