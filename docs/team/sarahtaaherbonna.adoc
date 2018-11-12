@@ -34,7 +34,7 @@ using the same guest list.
 This will give you an easier time to manage the reception as you will be equipped with
 tools that will minimise errors in catering, organisation, and orders. Moreover, this
 application aims to reduce the frustrations for you when planning events and address your
-needs in a platform that is more user friendly, personalised, and efficient.
+needs in a platform that is more user-friendly, personalised, and efficient.
 
 *Team:*
 
