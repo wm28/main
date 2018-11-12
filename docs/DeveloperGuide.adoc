@@ -429,11 +429,11 @@ The figure above represents an activity diagram when the user executes the _emai
 ==== Design Considerations
 ===== Aspect: Creating an EmailWindow for user input
 *** Current choice: Creating the UI component directly from the abstract class Email.
-** Pros: Reduces dependencies and coupling with other UI components and increases cohesion.
-** Cons: Does not fit within the Façade Class of `EventsCentre`.
+** Pros: Reduces dependencies with other UI components and increases cohesion with Email class.
+** Cons: Does not fit within the Façade Class of `EventsCentre`, is called directly by a Logic component.
 
-*** Alternative: Create a controller from `EventsCentre` for showing `EmailWindow`.
-** Pros: Will fit within the Façade Class of `EventsCentre` and hence with the software architecture.
+*** Alternative: Create a controller for showing `EmailWindow`.
+** Pros: Will fit with the software architecture of the codebase.
 ** Cons: Functionality will be affected, as current model makes it difficult to feed back user input.
 
 ===== Aspect: Implementing email verification of guest email addresses
