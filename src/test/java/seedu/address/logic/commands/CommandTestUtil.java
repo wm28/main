@@ -12,7 +12,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_UID;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -21,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -58,6 +62,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_DIET_AMY = "NORMAL";
     public static final String VALID_TAG_DIET_BOB = "NORMAL";
     public static final String VALID_TAG_DIET_DANNY = "NORMAL";
+    public static final String VALID_TAG_SAME = "NORMAL";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_DANNY = " " + PREFIX_NAME + VALID_NAME_DANNY;
@@ -101,6 +106,18 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    public static final Set<Tag> TAGS_TO_ADD = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_FRIEND),
+                                             new Tag(VALID_TAG_ADDED)));
+    public static final Set<Tag> ALL_NEW_TAGS = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED),
+                                                new Tag(VALID_TAG_HUSBAND)));
+    public static final Set<Tag> ALL_SAME_TAGS = new HashSet<>(Collections.singletonList(new Tag(VALID_TAG_SAME)));
+    public static final Set<Tag> DUPLICATE_TAGS = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED),
+                                                  new Tag(VALID_TAG_UNUSED)));
+    public static final Set<Tag> TAGS_TO_REMOVE = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_SAME),
+                                                  new Tag("VIP")));
+    public static final Set<Tag> NO_COMMON_TAGS = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_UNUSED),
+                                                  new Tag("Invalid")));
+
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
     public static final EditCommand.EditPersonDescriptor DESC_DANNY;
@@ -114,7 +131,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_DIET_BOB).withPayment(VALID_PAYMENT_BOB).build();
         DESC_DANNY = new EditPersonDescriptorBuilder().withName(VALID_NAME_DANNY)
                 .withPhone(VALID_PHONE_DANNY).withEmail(VALID_EMAIL_DANNY).withAttendance(VALID_ATTENDANCE_DANNY)
-                .withTags(VALID_TAG_FRIEND).withPayment(VALID_PAYMENT_DANNY).build();
+                .withTags(VALID_TAG_DIET_DANNY).withPayment(VALID_PAYMENT_DANNY).build();
     }
 
     /**

@@ -132,10 +132,8 @@ public class EmailWindow extends UiPart<Stage> {
         isStillOpen = true;
         try {
             getRoot().showAndWait();
-        } catch (AssertionError ae) {
+        } catch (AssertionError | Exception e) {
             System.out.println("Unhandled NSEvent - usually caused by Mac OS");
-        } catch (Exception e) {
-            System.out.println("Unhandled NSException");
         }
     }
 

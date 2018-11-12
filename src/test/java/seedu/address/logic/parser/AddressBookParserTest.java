@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EmailAllCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -56,13 +57,6 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + "   ") instanceof ClearCommand);
-    }
-
-    @Test
-    public void parseCommand_extraCharacters_clearCommandFails() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
-        parser.parseCommand(ClearCommand.COMMAND_WORD + " Extra characters");
     }
 
     @Test
@@ -104,13 +98,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_extraCharacters_exitCommandFails() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE));
-        parser.parseCommand(ExitCommand.COMMAND_WORD + " Extra characters");
-    }
-
-    @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("n/foo", "n/bar", "n/baz");
         FindCommand command = (FindCommand) parser.parseCommand(
@@ -137,23 +124,9 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_extraCharacters_historyCommandFails() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HistoryCommand.MESSAGE_USAGE));
-        parser.parseCommand(HistoryCommand.COMMAND_WORD + " Extra characters");
-    }
-
-    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + "   ") instanceof ListCommand);
-    }
-
-    @Test
-    public void parseCommand_extraCharacters_listCommandFails() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        parser.parseCommand(ListCommand.COMMAND_WORD + " Extra characters");
     }
 
     @Test
@@ -170,23 +143,9 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_extraCharacters_redoCommandFails() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
-        parser.parseCommand(RedoCommand.COMMAND_WORD + " Extra characters");
-    }
-
-    @Test
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD + "   ") instanceof UndoCommand);
-    }
-
-    @Test
-    public void parseCommand_extraCharacters_undoCommandFails() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
-        parser.parseCommand(UndoCommand.COMMAND_WORD + " Extra characters");
     }
 
     @Test
@@ -201,5 +160,62 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+
+    //@@author aaryamNUS
+    // Testing new parsers for single word commands such as 'exit', 'clear', etc.
+    @Test
+    public void parseCommand_extraCharacters_clearCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        parser.parseCommand(ClearCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_extraCharacters_undoCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
+        parser.parseCommand(UndoCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_extraCharacters_redoCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE));
+        parser.parseCommand(RedoCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_extraCharacters_listCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        parser.parseCommand(ListCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_extraCharacters_historyCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HistoryCommand.MESSAGE_USAGE));
+        parser.parseCommand(HistoryCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_extraCharacters_exitCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExitCommand.MESSAGE_USAGE));
+        parser.parseCommand(ExitCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_extraCharacters_emailAllCommandFails() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailAllCommand.MESSAGE_USAGE));
+        parser.parseCommand(EmailAllCommand.COMMAND_WORD + " Extra characters");
+    }
+
+    @Test
+    public void parseCommand_emailAll() throws Exception {
+        assertTrue(parser.parseCommand(EmailAllCommand.COMMAND_WORD) instanceof EmailAllCommand);
+        assertTrue(parser.parseCommand(EmailAllCommand.COMMAND_WORD + "   ") instanceof EmailAllCommand);
     }
 }

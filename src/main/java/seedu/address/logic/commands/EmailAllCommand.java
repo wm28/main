@@ -73,8 +73,9 @@ public class EmailAllCommand extends Email {
 
         // Check for invalid or duplicate emails, and create the list of valid email addresses to send to
         // NOTE: This part of the code was not abstracted out as it would involve the creation of a custom
-        // class object to return different type of objects, thereby increasing dependency and coupling
-        // within the code
+        // class object to return different parameters (StringBuilder, int, int) that would need to be instantiated
+        // in MailCommand and EmailSpecificCommand classes, thereby increasing dependency
+        // and coupling within the code
         for (Person personToMail : lastShownList) {
             assert personToMail != null;
 
