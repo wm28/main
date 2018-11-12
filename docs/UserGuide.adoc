@@ -253,12 +253,12 @@ Format: `import FILE_PATH`
 * Importation of guests which already exist will be skipped.
 ** A guest will be classified as an existing guest if it has the same name and matching phone number or email address with an existing guest in the guest list.
 * Importation of badly formatted guests in the CSV file will be skipped.
-* The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 1.
+* The CSV guest entries which are badly formatted or those which corresponds to an existing guest in the guest list, will trigger an import report window as shown in figure 2.
 
 |====
 | image:ImportReportWindow.PNG[width="790"]
  +
-  Figure 2 - ImportReportWindow: Shows the offending CSV guest entries with their associated error messages.
+  Figure 2 - Import Report Window: Shows the offending CSV guest entries with their associated error messages.
 |====
 ****
 
@@ -270,6 +270,7 @@ You will populate the guest list with the data imported from the CSV file in the
 // end::import[]
 
 // tag::export[]
+
 === Exporting guests to CSV file : `export`
 
 Exports guests' data in the guest list to a specified CSV file. Allows you to share your guest list easily using the exported CSV file. The format of guest fields in the CSV file is the same format as the `import` command and can be found in <<CSV Guest List Format, Section 6: "CSV Guest List Format">>. +
@@ -281,7 +282,6 @@ Format: `export FILE_PATH`
 ** To export selected guests, use the `filter` command before exporting.
 * `FILE_PATH` shall only be a relative or an absolute file path.
 ** Relative file path is relative to where the application Jar file is located.
-* If no `FILE_PATH` is provided, guests will be exported using the default filename, `exportedGuestBook.csv` to the current working directory (folder where the application Jar file is located).
 ****
 
 Examples:
@@ -692,9 +692,6 @@ Example: sample CSV file
 David Li,91031282,\lidavid@gmail.com,PENDING,ABSENT,00001,gold,Veg,VIP +
 Irfan Ibrahim,92492021,\irfan@gmail.com,PAID,PRESENT,00002,gold,Veg,VIP +
 Roy Balakrishnan,92624417,\royb@gmail.com,PENDING,ABSENT,00003,gold,Veg,VIP +
-Hakeem Salgado,80000957,\80000957@gmail.com,PAID,ABSENT,00004,gold,Veg,VIP +
-Hibah Lees,80000882,\80000882@gmail.com,PAID,ABSENT,00005,gold,Veg,VIP +
-Jayda Hill,80000251,\80000251@gmail.com,PAID,ABSENT,00006,gold,Veg,VIP +
 ****
 
 // end::csvformat[]
