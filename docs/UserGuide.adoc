@@ -38,7 +38,7 @@ The main purpose of this User Guide is to give you a detailed overview of all th
 
 ****
 |====
-| image::Ui.png[width="790"]
+| image:Ui.png[width="790"]
  +
   Figure 1 - Invités: An event management system.
 |====
