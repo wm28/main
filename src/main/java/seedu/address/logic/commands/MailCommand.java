@@ -55,19 +55,19 @@ public class MailCommand extends Email {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        Person personToMail = lastShownList.get(index.getZeroBased());
-        errorChecking(personToMail, lastShownList);
-
-        // Array of strings to store all the necessary information
-        String[] information;
-        // Retrieve the information through a method in the super class Email
-        information = retrieveInformation();
-        setInformation(information);
-
         try {
+            requireNonNull(model);
+            List<Person> lastShownList = model.getFilteredPersonList();
+
+            Person personToMail = lastShownList.get(index.getZeroBased());
+            errorChecking(personToMail, lastShownList);
+
+            // Array of strings to store all the necessary information
+            String[] information;
+            // Retrieve the information through a method in the super class Email
+            information = retrieveInformation();
+            setInformation(information);
+
             // Creates a new session with the user gmail account as the host
             Properties props = createPropertiesConfiguration();
 
@@ -85,6 +85,8 @@ public class MailCommand extends Email {
                     personToMail.getEmail().toString(), session, "mark " + personToMail.getUid().toString());
         } catch (NullPointerException ne) {
             logger.log(Level.SEVERE, "Error: retrieving information was unsuccessful!");
+        } catch (IndexOutOfBoundsException ie) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         logger.log(Level.INFO, "Email sent successfully");
