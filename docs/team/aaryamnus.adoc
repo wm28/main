@@ -16,11 +16,9 @@ as well as a Graphical User Interface (GUI).
 
 [cols="30%,70%"]
 |====
-    ^.^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Invités was developed as part of my team’s Software Engineering Project, and some of its *main features* include the ability to *send mass emails*, *keep track of payments*, as well as *keep track of attendance*. To add to this, by using a standardised format, the application is able to take in Comma Separated Values (CSV) files and *import* data for a particular event.
+    ^.^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Invités was developed as part of my team’s Software Engineering Project, and some of its *main features* include the ability to *send mass emails*, *keep track of payments*, as well as *keep track of attendance*. To add to this, by using a standardised format, the application is able to take in Comma Separated Value (CSV) files and *import* data for a particular event.
 
-    Thanks to the complementary features my group implemented, we were able to
-                                                   create a streamlined workflow for event planners and managers
-                                                   , as depicted in *Diagram 1* on the left.
+    Thanks to the complementary features my group implemented, we were able to create a streamlined workflow for event planners and managers, as depicted in *Diagram 1* on the left.
 |====
 
 *My contribution* involved implementing the *mass-emailing functionality* in our product, which allows you to send emails to individual, or
@@ -29,7 +27,7 @@ quickly inform all of their guests regarding details of the event in a swift and
 environmentally-friendly alternative to printing tickets and banners for an event.
 
 === Team Invités
-The team that worked with me on this project, as well as the features they implemented, are listed below:
+The team that worked with me on this project, as well as the features they implemented, is listed below:
 
 1. Sandhya Gopakumar - Events management
 2. Sarah Taaher Bonna - Guest list management
@@ -49,7 +47,7 @@ inform all of their guests at once, regarding details of the event or otherwise.
 digitised and economical solution for attendance taking once the event goes live.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=aaryamnus[Contributed code]]
-* *Minor enhancement*: added an `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
+* *Minor enhancement*: added an `addTag` and `removeTag` command that adds or removes a set of tags to/from all guests in the list
 * *Other contributions*:
 ** Project management:
 *** Managed releases v1.1, v1.2, v1.2.1, v1.3, v1.3.9 (5 releases) on GitHub

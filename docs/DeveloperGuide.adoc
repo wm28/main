@@ -1209,7 +1209,7 @@ These instructions only provide a starting point for testers to work on; testers
 // tag::emailappendix[]
 === Sending individual emails
 
-. Send individual guests an email
+. Send individual guests an email *with a QR code attachment*
 
 .. *Test case:* `email 1`
 ...   Expected: Assuming there is at least one guest, UI Window opens to allow user input. If all inputs are valid, email is sent to the guest at `INDEX` 1.
@@ -1219,20 +1219,17 @@ These instructions only provide a starting point for testers to work on; testers
 
 === Sending all guests an email
 
-. Send all guests an email
+. Send all guests an email *(no QR code attachments for this command)*
 
 .. *Test case:* `emailAll`
 ...   Expected: Assuming there is at least one guest, UI Window opens to allow user input. If all inputs are valid, email is sent to all guests.
-
-.. *Test case:* `emailAll`
-...   Expected: If current filtered list is empty, no email will be sent and an error message displayed.
 
 .. *Incorrect commands to try:* `emailAll Celebrities`, `emailAllLL`, etc.
 ...   Expected: No email sent due to incorrect parameters.
 
 === Sending a group of guests an email
 
-. Send an email to a group of guests
+. Send an email to a group of guests *(no QR code attachments for this command)*
 
 .. *Test case:* `emailSpecific t/Veg`
 ...   Expected: Assuming there is at least one guest with tag `Veg` in the filtered list, UI Window opens to allow user input. If all inputs are valid, email is sent all guests with tag `Veg`
@@ -1355,3 +1352,33 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other test cases: similar to `mark` command as shown above
 
 // end::attendanceappendix[]
+
+=== Add tags to all guests in the list
+
+. Adds a set of tags to all the guests in the list
+
+.. *Test case:* `addTag t/Veg t/Platinum`
+...   Expected: Adds the tags `Veg` and `Platinum` to all guests in the current filtered list
+
+.. *Test case:* `addTag t/(*@#(*`
+...   Expected: No tags are added as the tags specified are not alphanumeric
+
+.. *Incorrect commands to try:* `addTag t/t/`, `addTag`, etc.
+...   Expected: No tags added due to incorrect parameters.
+
+=== Remove tags from all guests in the list
+
+. Removes a set of tags from all the guests in the list
+
+.. *Test case:* `removeTag t/Veg t/Platinum`
+...   Expected: Removes the tags `Veg` and `Platinum` from all guests who have these tags
+
+.. *Test case:* `removeTag t/Veg t/Platinum`
+...   Expected: If no guests in the current filtered list have tags `Veg` or `Platinum`, system throws an error
+
+.. *Test case:* `removeTag t/(*@#(*`
+...   Expected: No tags are removed as the tags specified are not alphanumeric
+
+.. *Incorrect commands to try:* `removeTag t/t/`, `removeTag`, etc.
+...   Expected: No tags removed due to incorrect parameters.
+

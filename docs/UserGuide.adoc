@@ -422,7 +422,7 @@ You will be shown a list with guests who are present and have a vegetarian dieta
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-With this command you can send an email to the guest at a specific Index +
+With this command you can send an email, *with a QR code attachment*, to the guest at a specific Index +
 Format: `email INDEX`
 
 ****
@@ -435,16 +435,16 @@ the command `email 5` will give you an error as a guest does not exist at `INDEX
 *Examples*:
 
 * `email 2` +
-1. First, you will be presented with an EmailWindow similar to *Figure 4* below.
+1. First, you will be presented with an EmailWindow similar to *Figure 5* below.
 2. This window is for you to input your email address, password, email subject and message.
-3. You will then need to fill in all the required fields. If you miss any of the fields and try to click the `Send` button, an error message will pop up like the one in *Figure 5*.
+3. You will then need to fill in all the required fields. If you miss any of the fields and try to click the `Send` button, an error message will pop up like the one in *Figure 6*.
 4. Once all fields are filled, you can click the `Send` button to send your email to the *2nd guest* in the list. You can also click the `Quit` button if you do not want to send your email.
 5. If you are successful, you will see a message that says `Successfully sent email!`.
 
 [cols="2*"]
 |====
-| image:EmailWindow.png[] Figure 4 - EmailWindow
-| image:EmailWindowMissingMessage.png[] Figure 5 - Missing email message
+| image:EmailWindow.png[] Figure 5 - EmailWindow
+| image:EmailWindowMissingMessage.png[] Figure 6 - Missing email message
 |====
 
 === Sending an email to all guests : `emailAll`
@@ -452,7 +452,7 @@ the command `email 5` will give you an error as a guest does not exist at `INDEX
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-With this command you can an email to *all of the guests* in the current filtered list +
+With this command you can an email *(no QR code attachments for this command)* to *all of the guests* in the current filtered list +
 Format: `emailAll`
 
 [NOTE]
@@ -463,9 +463,9 @@ Examples:
 * `list` +
 * `emailAll` +
 1. The command `list` will list all your guests to ensure you send an email to all guests.
-2. First, you will be presented with an EmailWindow similar to *Figure 4* above.
+2. First, you will be presented with an EmailWindow similar to *Figure 5* above.
 3. This window is for you to input your email address, password, email subject and message.
-4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 5* above.
+4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 6* above.
 5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you do not want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
 
@@ -474,7 +474,7 @@ Examples:
 |_Please ensure you have gone through <<Enabling Email Services>> first in order for this feature to work!_
 |===
 
-With this command you can send an email to all the guests with *at least one of the tags specified*+
+With this command you can send an email *(no QR code attachments for this command)* to all the guests with *at least one of the tags specified*+
 Format: `emailSpecific [t/TAG]...`
 
 ****
@@ -491,9 +491,9 @@ This will present you with an error, as you have not provided any tags to delete
 This will present you with an error, as all your tags must be alphanumeric
 * `emailSpecific t/VIP t/Garbage` +
 1. This command will send an email to all the guests with a `VIP` tag, assuming no guest has the tag `Garbage`! (You can provide such `Garbage` tags!)
-2. First, you will be presented with an EmailWindow similar to *Figure 4* above.
+2. First, you will be presented with an EmailWindow similar to *Figure 5* above.
 3. This window is for you to input your email address, password, email subject and message.
-4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 5* above.
+4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 6* above.
 5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you do not want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
 
@@ -652,8 +652,7 @@ If you do have a *Gmail* account, please follow these steps to enable email serv
 5. You are now ready to send emails to your guests through Invités!
 
 [WARNING]
-Currently there is no other way to enable mailing services than to let your Gmail account allow less secure apps, and hence your account may be
-susceptible to an increased number of spam emails from untrusted applications. However, our team is working quickly to find a more secure replacement.
+Currently there is no other way to enable mailing services than to let your Gmail account allow less secure apps. However, our team is working quickly to find a more secure replacement.
 
 [IMPORTANT]
 If your operating system is *macOS Mojave*, please make an *important* note of the following:
