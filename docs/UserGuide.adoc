@@ -17,12 +17,14 @@ endif::[]
 By: `Team F09-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-Invités is an application targeted at event managers and planners. The application allows you to efficiently *organise, cater, and manage* large events such
-as weddings, school gatherings, orientation camps, etc. Some of the main features include the ability to send mass emails, keep track of payments and take note of the attendance of your guests.
-To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
-This eliminates the need to input all the information manually and subsequently, gives you an alternative if you decide to organise another event using the same guest list.
+Invités is a desktop application targeted at event managers and planners. The application allows its users to efficiently *organise, cater, and manage* large events such
+as weddings, school gatherings, orientation camps, etc. The application works on a command line interface, where users key in the commands specified in our User Guide into a command box to perform a task.
+Some of the main distinguishing features of the application include the ability to send mass emails to guests, keep track of payments, and take note of guest attendance.
+The application also allows the user to input the proposed or confirmed details of their event and provides a countdown to the event date.
+To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
+This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
 
-Moreover, you will have an easier time managing the reception of your event as you will be equipped with tools that will minimise errors in catering,
+You will have an easier time managing the reception of your event as you will be equipped with tools that will minimise errors in catering,
 organisation, and orders. Moreover, our application aims to reduce your frustration while planning events by packaging your needs in a platform that is more user friendly, personalised, and efficient.
 
 The main purpose of this User Guide is to give you a detailed overview of all the features in our application and how to use them.
@@ -78,7 +80,7 @@ Displays a summary of the list of commands that the application offers +
 Format: `help`
 
 [NOTE]
-You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `help extra characters` or `help 182$*` will be incorrect, but `help {nbsp}` (i.e. with spaces) will be correct.
+You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `help extra_characters` or `help 182$*` will be incorrect, but `help {nbsp}` (i.e. with spaces) will be correct.
 
 === Listing all guests : `list`
 
@@ -86,8 +88,8 @@ Shows a list of all guests in the guest list. +
 Format: `list`
 
 [NOTE]
-You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `list extra characters` or `list 182$*` will be incorrect, but `list {nbsp}` (i.e. with spaces) will be correct.
-
+You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `list extra_characters` or `list 182$*` will be incorrect, but `list {nbsp}` (i.e. with spaces) will be correct.
+// @@author Sarah
 // tag::find[]
 === Locating guests by name, phone number or email address: `find`
 
@@ -121,8 +123,9 @@ You will be shown a list that contains the entries of any guests having the
 name `david` *but not* `edan`
 
 // end::find[]
+// @@author
 
-=== Adding a guest: `add_guest`
+=== Adding a guest's details: `add_guest`
 
 Adds a guest to the guest list. +
 No spaces or special characters allowed in Payment and Attendance. +
@@ -143,10 +146,10 @@ Examples:
 
 * `add_guest n/Bob Lee p/81720172 e/boblee@gmail.com a/Absent pa/NOTPAID u/00001 t/VIP t/Vegetarian`
 * `add_guest n/John Doe p/91028392 e/johndoe@gmail.com a/Present pa/PAID u/00002 t/Groom t/NonVegetarian`
-* `add_guest n/Carl Sagan p/85174321 e/carlsagan@gmail.com a/Absent pa/PAID u/00000 t/VIP` (Program generated UID)
-* `add_guest n/David Li p/83186624 e/davidli@gmail.com pa/PENDING a/ABSENT u/00003` (User defined UID)
+* `add_guest n/Carl Sagan p/85174321 e/carlsagan@gmail.com a/Absent pa/PAID u/00000 t/VIP` (will trigger randomly generated UID)
+* `add_guest n/David Li p/83186624 e/davidli@gmail.com pa/PENDING a/ABSENT u/00003` (will be treated as a User defined UID)
 
-=== Editing a guest : `edit_guest`
+=== Editing a guest's details: `edit_guest`
 
 Edits an existing guest entry in the guest list. +
 No spaces or special characters allowed in Payment and Attendance. +
@@ -172,7 +175,7 @@ Examples:
 * `edit_guest 2 n/Bob Chan` +
 Edits the name of the 2nd guest to be `Bob Chan`.
 
-=== Deleting a guest : `delete_guest`
+=== Deleting a guest's details: `delete_guest`
 
 Deletes the specified guest from the guest list. +
 Format: `delete_guest INDEX`
@@ -193,6 +196,7 @@ Deletes the 2nd guest in the guest list.
 `delete_guest 1` +
 Deletes the 1st guest in the results of the `find` command.
 
+// @@author aaryamNUS
 // tag::addremovetag[]
 === Adding a set of tags to all guests : `addTag`
 
@@ -236,9 +240,11 @@ This will present you with an error, as you have not provided any tags to delete
 This will present you with an error, as all your tags must be alphanumeric
 
 // end::addremovetag[]
+// @@author
 
+// @@author wm28
 // tag::import[]
-=== Import guests from CSV file : `import`
+=== Importing guests from CSV file : `import`
 
 Import multiple guests with data from a specified CSV file. To create your own CSV file for importing guests, please see <<CSV Guest List Format, Section 6: "CSV Guest List Format">> for the accepted format. +
 
@@ -290,7 +296,9 @@ Examples:
 You will export the currently filtered guest list entries into a CSV file in the specified path.
 
 // end::export[]
+// @@author
 
+// @@author kronicler
 // tag::mark[]
 === Marking a guest as present : `mark`
 
@@ -299,7 +307,7 @@ This will also update the attendance​ field associated with the guest to `PRES
 Format: `mark [UID]`
 
 [NOTE]
-`UID` does not use the p/ prefix. +
+`UID` does not use the u/ prefix. +
 `UID` only accepts a string of numbers alphanumeric characters between 5 to 20 characters inclusive,
 other characters will trigger an invalid command format error.
 
@@ -336,12 +344,13 @@ Examples:
 image::unmarkCommandSuccess.png[width="790"]
 Figure 4 - User interface after Mark Command : Successful execution of `MarkCommand`
 // end::unmark[]
+// @@author
 
 // tag::start_marking[]
-===  Start mass attendance marking : `start_marking` - _Coming in v2.0_
+===  Starting mass attendance marking : `start_marking` - _Coming in v2.0_
 
 [NOTE]
-This feature is not implemented yet
+This feature has not been implemented yet. Our team plans to implement this feature in an upcoming version, v2.0.
 
 Start the mass attendance marking mode. Allows you to mark attendance without using
 the mark prefix. This command will allow you to continuously mark the attendance of the attendees by only keying in their Unique ID (UID)
@@ -359,12 +368,12 @@ You will mark the guests with UID of 00001, 708944, 928372, 00003 as present
 // end::start_marking[]
 
 // tag::stop_marking[]
-===  Stop mass attendance marking : `stop_marking` - _Coming in v2.0_
+===  Stopping mass attendance marking : `stop_marking` - _Coming in v2.0_
 
 [NOTE]
-This feature is not implemented yet
+This feature has not been implemented yet. Our team plans to implement this feature in an upcoming version, v2.0.
 
-Stop the mass attendance marking mode. Deactivates the `start_marking` mode to enable usage of other commands in the program +
+Stops the mass attendance marking mode. Deactivates the `start_marking` mode to enable usage of other commands in the program+
 Format: `stop_marking`
 
 Examples:
@@ -373,35 +382,38 @@ Examples:
 Initiate `start_marking` mark the person with UID `00001` then exit the mode with `stop_marking`.
 // end::stop_marking[]
 
+// @@author Sarah
 // tag::filter[]
-===  Filter list based on specified parameters : `filter`
+===  Filtering the guest list based on specified parameters : `filter`
 
-Filter guest list based on filter guest attributes. Only filters based on
+Filters the current guest list based on the specified filter parameters. Only filters based on
 payment status, attendance status and tags. Keywords should not have spaces or any
-special character. +
+special characters. +
 Values accepted for Payment Status: PAID, NOTPAID, PENDING or N.A. +
-Values accepted for Attendance Status: PRESENT, ABSENT, N.A. +
+Values accepted for Attendance Status: PRESENT, ABSENT or N.A. +
 Format: `filter [pa/PAYMENT_STATUS] [a/ATTENDANCE_STATUS]
          [t/DIET] [t/GUEST_TYPE] [t/...]`
 
 ****
-* The search is case-insensitive. e.g `pa/paid` will match `pa/PAID`
-* The order of the keywords does not matter. e.g. `pa/PAID a/ABSENT` will match `a/ABSENT pa/PAID`
-* Only payment staus, attendance status and tags are searched, depending on prefixes given.
-* Only full words will be matched e.g. `p/PAID` will not match `p/NOTPAID`
+* The search is case-insensitive. e.g `pa/paid` will match `pa/PAID`.
+* The order of the keywords does not matter. e.g. `pa/PAID a/ABSENT` will match `a/ABSENT pa/PAID`.
+* Only payment status, attendance status and tags are searched, depending on prefixes given.
+* Only full words will be matched. e.g. `pa/PAID` will not match `pa/NOTPAID`.
 * Guests matching all keywords will be returned (i.e. `AND` search). e.g. `pa/PAID t/GUEST` will return a list
-of people who have paid *and* who are guests
+of people who have paid *and* are guests.
 ****
 
 Examples:
 
 * `filter pa/NOTPAID a/PRESENT` +
-You will be shown a list with guests who have yet to pay and are present.
+You will be shown a list with guests who have yet to pay and are present at your event.
 
 * `filter a/Present t/Vegetarian` +
 You will be shown a list with guests who are present and have a vegetarian dietary requirement.
 // end::filter[]
+// @@author
 
+// @@author aaryamNUS
 // tag::email[]
 ===   Sending emails to individual guests : `email`
 
@@ -414,9 +426,9 @@ Format: `email INDEX`
 
 ****
 * Sends an email to the guest at the specified `INDEX`.
-* The index refers to the index number shown in the displayed guest list.
+* The index refers to the index number of the guest as shown in the displayed guest list.
 * The index *must be a positive integer* 1, 2, 3, *and* cannot be out of bounds. For example, if there are 4 guests in your application,
-the command `email 5` will give you an error as there does not exist a guest at `INDEX` 5.
+the command `email 5` will give you an error as a guest does not exist at `INDEX` 5.
 ****
 
 *Examples*:
@@ -443,7 +455,7 @@ Sends an email to all of the guests in the current filtered list +
 Format: `emailAll`
 
 [NOTE]
-You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `emailAll extra characters` or `emailAll 182$*` will be incorrect, but `emailAll {nbsp}` (i.e. with spaces) will be correct.
+You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `emailAll extra_characters` or `emailAll 182$*` will be incorrect, but `emailAll {nbsp}` (i.e. with spaces) will be correct.
 
 Examples:
 
@@ -465,9 +477,9 @@ Sends an email to all the guests with at least one of the tags specified+
 Format: `emailSpecific [t/TAG]...`
 
 ****
-* If the tags you provided are not shared by any of the guests in the current list, the system with throw an error
-* You must provide *non-empty* tags, an input of _emailSpecific_ will not do anything
-* You must provide tags that are alphanumeric, otherwise the system will throw an error
+* If the tags you provided are not shared by any of the guests in the current list, the system will throw an error
+* You must provide *non-empty* tags; an input of _emailSpecific_ will not do anything.
+* You must provide tags that are alphanumeric, otherwise the system will throw an error.
 ****
 
 Examples:
@@ -485,33 +497,33 @@ This will present you with an error, as all your tags must be alphanumeric
 6. If you are successful, you will see a message that says `Successfully sent email!`.
 
 // end::email[]
+// @@author
 
+// @@author SandhyaGopakumar
 // tag::event[]
-===   Adding event details : `add_event`
-Add the details for an event +
+===   Adding details about your event: `add_event`
+Adds details such as the name, date, venue and start time of your event. Any additional details may be entered as tags.+
 Format: `add_event n/EVENT_NAME d/DATE v/VENUE st/START_TIME [t/OTHER_TAGS]`
 
 ****
-* Adds the specified event details.
-* All compulsory fields(name, date, venue and start time) must be specified. The optional field(tags) may be omitted.
+* All compulsory fields(name, date, venue and start time) must be specified. The optional field(ie, tags) may be omitted.
 * Event name and venue have to be alphanumeric and may contain spaces. Otherwise, the system will inform you about the correct format to be followed. Special characters like '#', ',' and '-' may be used for the venue field.
-* Event date has to follow the 'dd/mm/yyyy' format and has to exist in the calendar. Ensure that the event date falls after the current system date. Otherwise, the system will inform you about the correct format to be followed.
-* Event's start time should follow the 'h:mm AM/PM' format with h between 1 to 12. Otherwise, the system will inform you about the correct format to be followed.
+* Event date has to follow the 'dd/mm/yyyy' format and has to exist in the calendar. Ensure that the event date falls after the current system date. Otherwise, the system will inform you about the invalid date.
+* Event's start time should follow the 'h:mm AM/PM' format with h between 1 to 12 and mm between 00 to 59. Otherwise, the system will inform you about the correct format to be followed.
 * Event tags must be alphanumeric. Spaces are not allowed
 ****
 
 Examples:
 
 * `add_event n/CFG career talk d/12/01/2019 v/YIH Paris Room st/9:00 AM t/SmartCasualAttire` +
-You will create an event called `CFG career talk` that will take place on 12th January, 2019 at YIH Paris Room. The event will start at 9:00 AM and attendees are expected to dress in smart casual attire.
+The event details panel will show you an event called `CFG career talk` that will take place on 12th January, 2019 at YIH Paris Room. The event will start at 9:00 AM and attendees are expected to dress in smart casual attire.
 
-===   Editing the event's details : `edit_event`
+===   Editing your event's details : `edit_event`
 
-Edit the details of the event +
+Edits the details of your event +
 Format: `edit_event [n/EVENT_NAME] [d/DATE] [v/VENUE] [st/START_TIME] [t/...]`
 
 ****
-* Edits the event details(previously specified by the you using the add_event command).
 * Ensure that you have specified some event details before using this command. Otherwise, the system will inform you about the lack of event details.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -522,16 +534,17 @@ Format: `edit_event [n/EVENT_NAME] [d/DATE] [v/VENUE] [st/START_TIME] [t/...]`
 Examples:
 
 * `edit_event n/CFG Career Workshop t/CasualAttire` +
-You will change the name of the event to 'CFG Career Workshop and replace the existing tags with the 'CasualAttire' tag.
+You will change the name of your event to 'CFG Career Workshop and replace the existing tags with the 'CasualAttire' tag.
 
-===   Deleting event details : `delete_event`
+===   Deleting your event's details : `delete_event`
 
 Deletes the event details currently present in the application
 Format: `delete_event`
 
 ****
-* Deletes the event details(previously specified by you using the add_event command).
 * Ensure that you have specified some details before using this command. Otherwise, the system will inform you about the lack of event details.
+* You should not enter any characters after the command word, only extra spaces are allowed.
+For example, the following commands are incorrect: 'delete_event 182' or 'delete_event xyz' where 'x', 'y' and 'z' correspond to any characters except blank spaces.
 ****
 
 Examples:
@@ -540,6 +553,7 @@ Examples:
 You will delete the event details.
 
 // end::event[]
+// @@author
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
@@ -548,11 +562,12 @@ Restores the guest list to the state before the previous _undoable_ command was 
 Format: `undo`
 
 [NOTE]
-You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `undo extra characters` or `undo 182$*` will be incorrect, but `undo {nbsp}` (i.e. with spaces) will be correct.
+You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `undo extra_characters` or `undo 182$*` will be incorrect, but `undo {nbsp}` (i.e. with spaces) will be correct.
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the guest list's content (`add_guest`, `delete_guest`, `edit_guest`, `removeTag`, `addTag`, and `clear`). The other commands we provide are therefore *not* undoable.
+Undoable commands: those commands that modify the guest list's content (`add_guest`, `delete_guest`, `edit_guest`, `removeTag`, `addTag`, and `clear`)
+and the event details display's content('add_event', 'edit_event' and 'delete_event'). The other commands we provide are therefore *not* undoable.
 ====
 
 Examples:
@@ -577,7 +592,7 @@ Reverses the most recent `undo` command. +
 Format: `redo`
 
 [NOTE]
-You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `redo extra characters` or `redo 182$*` will be incorrect, but `redo {nbsp}` (i.e. with spaces) will be correct.
+You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `redo extra_characters` or `redo 182$*` will be incorrect, but `redo {nbsp}` (i.e. with spaces) will be correct.
 
 Examples:
 
@@ -604,12 +619,12 @@ Exits the program. +
 Format: `exit`
 
 [NOTE]
-You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `exit extra characters` or `exit 182$*` will be incorrect, but `exit {nbsp}` (i.e. with spaces) will be correct.
+You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `exit extra_characters` or `exit 182$*` will be incorrect, but `exit {nbsp}` (i.e. with spaces) will be correct.
 
-=== Saving the data
+=== Saving your data
 
-As the guest list data are saved in the hard disk automatically after any command that changes the data. +
-There is no need for you to save manually.
+The guest list data are saved in the hard disk automatically after any command that changes the data. +
+There is no need for you to save your data manually.
 
 == FAQ
 
@@ -645,7 +660,7 @@ If your operating system is *macOS Mojave*, please make an *important* note of t
 1. If you use any of the email-related commands (i.e. _email_, _emailAll_ or _emailSpecific_), you will be presented with an EmailWindow similar to
 the one in *Figure 4*.
 
-2. If you use the *command-tab* keys *when the EmailWindow is open* to switch windows, the program will crash. This is due to
+2. If you use the *command-tab* keys *when the EmailWindow is open* to switch windows, the application will crash. This is due to
 Apple's latest macOS release, in which some of the bindings are not compatible with key JavaFX functions.
 
 3. This issue does not occur on Windows, Linux, and older macOS systems, however it _may still exist_ in other operating systems we have not tested on.
@@ -663,9 +678,9 @@ Apple's latest macOS release, in which some of the bindings are not compatible w
 // tag::csvformat[]
 == CSV Guest List Format
 
-The `import` and `export` command will only work with CSV files according to a predefined format. To create valid CSV files, guests fields must in the following format below and each guest must be entered on a new line.
+The `import` and `export` command will only work with CSV files satisfying a predefined format. To create valid CSV files, guests fields must be in the following format below and each guest's details must be entered on a new line.
 
-Format: `NAME,PHONE_NUMBER,EMAIL,PAYMENT,ATTENDANCE,UID,[TAG]`
+Format: `NAME,PHONE_NUMBER,EMAIL,PAYMENT_STATUS,ATTENDANCE,UID,[TAG]`
 
 [WARNING]
 ====
@@ -684,24 +699,24 @@ Roy Balakrishnan,92624417,\royb@gmail.com,PENDING,ABSENT,00003,gold,Veg,VIP +
 == Command Summary
 
 * `help` : ​Displays a help sheet containing useful commands.
-* `add_guest` : ​Creates an entry for a guest to attend the event.
-* `edit_guest` :​ Modifies the entry of a specified guest based on name.
-* `delete_guest` : ​Removes an entry of a specified guest based on name.
+* `add_guest` : ​Creates an entry containing the details of a guest attending the event.
+* `edit_guest` :​ Modifies the entry of a specified guest based on index.
+* `delete_guest` : ​Removes an entry of a specified guest based on index.
 * `removeTag` : Removes a set of tags from all the guests in the current list.
-* `addtag` : Adds a set of tags to all the guests in the current list.
+* `addTag` : Adds a set of tags to all the guests in the current list.
 * `find` : Finds guests whose names, phone numbers or email addresses contain any of the given keywords.
 * `list` : Lists the current guest list.
-* `import` : ​Automatically generates guest list from a given CSV file.
-* `export` : Exports guest list to a CSV file.
+* `import` : ​Automatically generates and displays the guest list from a given CSV file.
+* `export` : Exports the current guest list to a CSV file.
 * `mark` : ​Tags a guest to note that they are currently at the event.
-* `unmark` : ​Removes the tag of a guest attending the event based on name.
+* `unmark` : Tags a guest to note that they are currently absent at the event​.
 * `filter` : ​Filters the guest list based on keywords given.
-* `email` : ​Sends individual emails to an entry of a specified guest based on index.
+* `email` : ​Sends individual emails to a guest based on the index specified.
 * `emailAll` : Sends an email to all of the guests in the current list.
-* `emailSpecific` : Sends an email to the guests with the specified tags.
+* `emailSpecific` : Sends an email to all guests with the specified tags.
 * `add_event` :​ Adds the details of your event.
-* `edit_event` : Edits the details of the event.
-* `delete_event` : ​Removes the specified event details.
-* `undo` : Restores the guest list to the state before the previous undoable command was executed.
+* `edit_event` : Edits the details of your event.
+* `delete_event` : ​Removes your event details.
+* `undo` : Restores the application to the state before the previous undoable command was executed.
 * `redo` : Reverses the most recent undo command.
 * `exit` : ​Exits the application.

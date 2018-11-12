@@ -578,7 +578,7 @@ Given below is an example of the execution of the added functionality of the `ad
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state and the currentStatePointer pointing to that single address book state.
 
-Step 2. The user executes the `add_guest` command with the following non-null fields: `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT u/00001 t/NORMAL`.
+Step 2. The user executes the `add_guest` command with the following non-null fields: `add_guest n/John Doe p/98765432 e/johnd@gmail.com pa/PAID a/ABSENT u/00000 t/NORMAL`.
 
 Step 3. The `addCommandParser` extracts the relevant information from the command and returns a `Person` model that was built with the given arguments.
 
@@ -587,14 +587,14 @@ Step 4. The `add_guest.execute` function receives the generated `Person` model a
 [NOTE]
 If the checks fail, `COMMANDEXCEPTION` will be thrown to indicate the existence of more than one of the same `UID` or `Person`
 
-Step 5. The function will test the equality between the `UID` given in the generated `Person` and the `DEFAULT_TO_GENERATE_UID` which is `00000`. From here the program will do one of 2 different things.
+Step 5. The function will test the equality between the `UID` given in the generated `Person` and the `DEFAULT_TO_GENERATE_UID` which is `u/00000`. From here the program will do one of 2 different things.
 
 Step 6a. If the `UID` given is not the same as `DEFAULT_TO_GENERATE_UID`: +
-         The program will treat this as a user defined UID and add the `Person` into the `Model` without changing anything.
+         The program will treat this as a user defined UID and add the `Person` into the `Model` without generating a new UID.
 
-Step 6b. If the `UID` given is the same as `DEFAULT_TO_GENERATE_UID`: +
-         The program will create a new `Person` model with the same arguments with the exception of `UID`. The `UID` is then generated randomly in the `generateUid()` function. +
-         Another check is done to ensure that the `UID` does not already exist in the `VersionedAddressBook`. +
+Step 6b. Alternatively, If the `UID` input in step 2 is the same as `DEFAULT_TO_GENERATE_UID`: +
+         The program will create a new `Person` model with the same arguments with the exception of `UID`. The `UID` is then generated randomly in the `generateUid()` function.
+         Another check is done to ensure that the `UID` does not already exist in the `VersionedAddressBook`.
          This is done in a loop to ensure the `UID` is unique before adding the `Person` into the `Model` by executing `addPerson()`.
 
 Step 7. After adding the `Person` into the `Model`, the program commits the changes by executing `commitAddressBook` to save the state of the `AddressBook`..

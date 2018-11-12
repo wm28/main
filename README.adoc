@@ -16,9 +16,9 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 
-Invités is a web application that caters to organisers of different events (such as weddings, orientation camps, networking sessions, product launches, etc). It helps event planners reduce their workload during the planning phase by providing them
+Invités is desktop application that caters to organisers of different events (such as weddings, orientation camps, networking sessions, product launches, etc). It helps event planners reduce their workload during the planning phase by providing them
 a convenient platform to manage guest lists, organise catering services, as well as keep track of payments. Our main target audience are event managers and planners, who wish to utilise a streamlined and efficient approach towards organising their
-events. The application also caters to nearly every type of event specialising by providing customised themes for different events.
+events.
 
 ## Our Purpose
 To streamline, digitise, and revamp the process of managing events, and benefit both the guests and the planners by doing so.
