@@ -328,7 +328,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 Step 2. The user executes `add_event n/Wedding d/18/10/2019 v/Mandarin Hotel st/10:00 AM t/ClassicTheme` command to add in details about the event they are currently organising.
 The `add_event` command calls `Model#addEvent()` to add in the event details.
-It calls'Model#commitAddressBook()' as well, causing the modified state of the address book after the `add_event n/Wedding d/18/10/2019 v/Mandarin Hotel st/10:00 AM t/ClassicTheme` command executes to be saved in the `addressBookStateList`.
+It calls 'Model#commitAddressBook()' which saves the modified state of the address book after the command executes in the `addressBookStateList`.
 The `currentStatePointer` is shifted to the newly inserted address book state.
 
 [NOTE]
@@ -339,7 +339,7 @@ If the user has added in the details of the event they are organising, then anot
 The `add_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
 
 Step 3. After the event has taken place, the user decides to organise another event with the same guest list and deletes the event details using the 'delete_event' command.
-The `delete_event` command calls `Model#deleteEvent to delete the event's details.
+The `delete_event` command calls `Model#deleteEvent` to delete the event's details.
 The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 [NOTE]
@@ -351,8 +351,13 @@ The `delete_event` command uses `Model#hasEvent()` to check if this is the case.
 
 The following sequence diagram shows how the add_event operation works:
 
-.Sequence diagram for add_event and delete_event commands that add or delete event details respectively.
-image::AddDeleteEventSequenceDiagram.png[width="800" ]
+.Sequence diagram for add_event command that adds event details.
+image::AddEventSequenceDiagram.png[width="800" ]
+
+The following sequence diagram shows how the delete_event operation works:
+
+.Sequence diagram for delete_event command that deletes event details.
+image::DeleteEventSequenceDiagram.png[width="800" ]
 
 ==== Design considerations
 ===== Aspect: Creation of the Event component
@@ -362,7 +367,7 @@ image::AddDeleteEventSequenceDiagram.png[width="800" ]
 
 *** Alternative 2: Create an 'Event' having an aggregation association with 'VersionableAddressBook'. Create an 'InvitesBook' having an aggregation association with 'Event'.
 ** Pros: It allows the user to organise multiple events and manage multiple event-specific guest lists.
-** Cons: It is difficult to create functions and test the component. The 'undo' and 'redo' commands are also affected.
+** Cons: The 'undo' and 'redo' commands are affected.
 
 === Edit Event feature
 ==== Current Implementation
@@ -376,13 +381,13 @@ Step 2. The user executes `add_event n/Wedding d/8/12/2019 v/Hilton st/10:00 AM`
 
 Step 3. Due to a sudden change of plans, the user wishes to change the event's date and venue.
 The user executes 'edit_event d/10/12/2019 v/Novotel' command. The 'edit_event' command calls `Model#updateEvent' to update the event's details.
-The command also calls Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The command also calls Model#commitAddressBook()` which saves the modified address book state into the `addressBookStateList`.
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 [NOTE]
-If the user has not added in the details of an event, then there are no specific event details to delete.
+If the user has not added in the details of an event, then there are no specific event details to edit.
 The `edit_event` command uses `Model#hasEvent()` to check if this is the case. If so, it will return an error to the user.
 
 The following sequence diagram shows how the edit_event operation works:
@@ -910,6 +915,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |event planner |be able to mark attendance of guests easily |minimise holdup as much as possible
 
+|`* * *` |event planner |be able to view event details and countdown to event date|take note of important details closer to the event date.
+
+|`* * *` |event planner |be able to delete event details easily |organise another event with the same guest list but different event details.
+
 |`* * *` |event planner |be able to send mass emails to guests |remind them about the event
 
 |`* * *` |event planner |be able to tag guests with specific labels |take note of any extra details if necessary
@@ -944,7 +953,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is `Invités` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
 === Use case: Import guest data and update payment status
 Actor: Application User - Event Planner
 
@@ -954,6 +962,20 @@ Actor: Application User - Event Planner
 2. System asks user to enter a command.
 3. User enters a command to mark those who have paid.
 4. System updates the file accordingly.
+
+Use case ends.
+
+=== Use case: Input event details and edit venue details
+Actor: Application User - Event Planner
+
+*MSS*
+
+1. User opens application.
+2. System asks user to enter a command.
+3. User enters a command to enter event details.
+4. System shows the specified event name, date, venue, start time and tags.
+5. User enters a command to edit venue field.
+6. System shows the event name, date , start time, tags and updated venue.
 
 Use case ends.
 
@@ -990,7 +1012,7 @@ Actor: Application User - Event Planner
 
 Use case ends.
 
-=== Use case: Review details while organising the event
+=== Use case: Review guest details while organising the event
 Actor: Application User - Event Planner
 
 *MSS*
@@ -1214,11 +1236,11 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Event details will be displayed in the event details panel. The number of days left to the event will be displayed in the status bar footer.
 
 .. Test case: 'add_event n/CFG Career Talk d/31/02/2019 v/LT 5 st/10:00 AM'+
-   Expected: No event details are added. Error details shown in the status message. Event details display remains intact.
+   Expected: No event details are added. Error details are shown in the status message. Event details display remains intact.
 
 .. Other incorrect commands to try: `add_event`, `add_event x`,
    `add_event n/CFG Career Talk d/10/11/2019 v/LT 9 st/10' , etc. +
-   Expected: No event details are added. Error details shown in the status message. Event details display remains intact.
+   Expected: No event details are added. Error details are shown in the status message. Event details display remains intact.
 
 === Deleting event details
 
@@ -1227,13 +1249,13 @@ These instructions only provide a starting point for testers to work on; testers
 .. Prerequisites: Event details initialised by the user must exist.
 
 .. Test case: `delete_event` +
-   Expected: Details of the event are deleted and are not displayed in the event details panel. Timestamp in the status bar is updated.
+   Expected: Details of the event are deleted and details are not displayed in the event details panel. Status bar is updated.
 
 .. Test case: `delete_event 0` +
-   Expected: Event details are not deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: Event details are not deleted. Error details are shown in the status message. Status bar remains the same.
 
 .. Other incorrect delete_event commands to try: `delete_event n`(where n is some parameter), etc. +
-   Expected: Event details are not deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: Event details are not deleted. Error details are shown in the status message. Status bar remains the same.
 
 === Editing event details
 
@@ -1244,12 +1266,12 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: 'edit_event d/10/02/2019' +
    Expected: Event details will be updated in the event details panel. The number of days left to the event will be updated in the status bar footer.
 
-.. Test case: 'edit_event e/Novotel Tour Eiffel' +
-   Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
+.. Test case: 'edit_event e/Novotel Tour Eiffel'+
+   Expected: No event details are edited. Error details are shown in the status message. Event details display remains intact.
 
 .. Other incorrect commands to try: `edit_event`, `edit_event x`,
    `edit_event d/31/02/2019' , etc. +
-   Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
+   Expected: No event details are edited. Error details are shown in the status message. Event details display remains intact.
 // end::eventappendix[]
 
 // tag::importexportappendix[]
