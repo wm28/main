@@ -41,7 +41,7 @@ public class MailCommandTest {
     }
 
     @Test
-    public void execute_outOfBoundsIndex_throwsCommandException() throws Exception{
+    public void execute_outOfBoundsIndex_throwsCommandException() throws Exception {
         MailCommand mailCommand = new MailCommand(INDEX_OUT_OF_BOUNDS);
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
@@ -52,7 +52,7 @@ public class MailCommandTest {
     }
 
     @Test
-    public void execute_emptyAddressBook_throwsCommandException() throws Exception{
+    public void execute_emptyAddressBook_throwsCommandException() throws Exception {
         MailCommand mailCommand = new MailCommand(INDEX_FIRST_PERSON);
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
@@ -63,7 +63,7 @@ public class MailCommandTest {
     }
 
     @Test
-    public void equals(){
+    public void equals() {
         MailCommand mailFirstCommand = new MailCommand(INDEX_FIRST_PERSON);
         MailCommand mailSecondCommand = new MailCommand(INDEX_SECOND_PERSON);
 
