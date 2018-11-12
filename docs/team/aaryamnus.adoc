@@ -78,7 +78,7 @@ include::../UserGuide.adoc[tag=settingupemail]
 == Contributions to the Developer Guide
 
 |===
-|*_Preface:_* This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation to explain the technical depth of my contributions, as well as methods to allow manual user-testing.
+|*_Preface:_* This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation to explain the *implementation of my contributions*, as well as *methods to allow manual user-testing*.
 |===
 
 include::../DeveloperGuide.adoc[tag=emailimplementation]
