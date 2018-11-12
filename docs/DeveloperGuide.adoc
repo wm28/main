@@ -1355,3 +1355,33 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other test cases: similar to `mark` command as shown above
 
 // end::attendanceappendix[]
+
+=== Add tags to all guests in the list
+
+. Adds a set of tags to all the guests in the list
+
+.. *Test case:* `addTag t/Veg t/Platinum`
+...   Expected: Adds the tags `Veg` and `Platinum` to all guests in the current filtered list
+
+.. *Test case:* `addTag t/(*@#(*`
+...   Expected: No tags are added as the tags specified are not alphanumeric
+
+.. *Incorrect commands to try:* `addTag t/t/`, `addTag`, etc.
+...   Expected: No tags added due to incorrect parameters.
+
+=== Remove tags from all guests in the list
+
+. Removes a set of tags from all the guests in the list
+
+.. *Test case:* `removeTag t/Veg t/Platinum`
+...   Expected: Removes the tags `Veg` and `Platinum` from all guests who have these tags
+
+.. *Test case:* `removeTag t/Veg t/Platinum`
+...   Expected: If no guests in the current filtered list have tags `Veg` or `Platinum`, system throws an error
+
+.. *Test case:* `removeTag t/(*@#(*`
+...   Expected: No tags are removed as the tags specified are not alphanumeric
+
+.. *Incorrect commands to try:* `removeTag t/t/`, `removeTag`, etc.
+...   Expected: No tags removed due to incorrect parameters.
+
