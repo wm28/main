@@ -1249,10 +1249,10 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Prerequisites: Delete all guests before each test case. Execute `list` followed by `clear`.
 
-.. Test case: Download link:{repoURL}/guestbook.csv[sample.csv] into directory where application Jar file is located and execute `import sample.csv` +
+.. Test case: Download link:{repoURL}/sample.csv[sample.csv] into directory where application Jar file is located and execute `import sample.csv` +
    Expected: All guests are imported from `test.csv`. No errors are found.
 
-.. Test case: Download link:{repoURL}/errorguestbook.csv[errorsample.csv] into directory where application Jar file is located and execute `import errorsample.csv` +
+.. Test case: Download link:{repoURL}/errorsample.csv[errorsample.csv] into directory where application Jar file is located and execute `import errorsample.csv` +
     Expected: No guests are imported from `test.csv`. Popup window shows all import errors.
 
 .. Other incorrect commands to try: `import`, `import test`, etc +
