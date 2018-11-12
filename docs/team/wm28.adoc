@@ -37,7 +37,7 @@ Invités is developed as part of a team project for a software development modul
 ** Project management:
 *** Managed releases `v1.2.9`, `v1.3.1` (2 releases) on GitHub
 *** Setup about us page (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/26[#26])
-*** Designed initial user interface mock up in Adobe XD (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/27[#27])
+*** Designed initial user interface mock up in Adobe XD (Pull request https://github.com/CS2113-AY1819S1-F09-3/main/pull/27[#27])
 ** Enhancements to existing features:
 *** Remodelled the guest list and added a guest preview panel in the user interface (Pull requests https://github.com/CS2113-AY1819S1-F09-3/main/pull/88[#88], https://github.com/CS2113-AY1819S1-F09-3/main/pull/100[#100], https://github.com/CS2113-AY1819S1-F09-3/main/pull/152[#152])
 ** Community:
