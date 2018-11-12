@@ -340,9 +340,8 @@ Examples:
 * `mark A345654M` You will set the guest with UID `A345654M` as `ABSENT`.
 * `mark ALPHA` You will set the guest with UID `ALPHA` as `ABSENT`.
 
-
 image::unmarkCommandSuccess.png[width="790"]
-Figure 4 - User interface after Mark Command : Successful execution of `MarkCommand`
+Figure 4 - User interface after Unmark Command : Successful execution of `UnmarkCommand`
 // end::unmark[]
 // @@author
 
