@@ -404,9 +404,9 @@ easily allows for more domains to be supported.
 Additionally, the main design of the email functionality resides within the *Logic* component, coupled with a *UI* component to allow the user to input their details.
 
 .EmailAll Class Diagram
-image::EmailAllClassDiagram.png[width="800"]
+image::EmailAllClassDiagram.png[width="600"]
 
-As you can see above, *Figure 14* captures the main interactions between all classes when the user executes an `emailAll` command.
+The figure above captures the main interactions between all classes when the user executes an `emailAll` command.
 
     * The command depends on the class `EmailPasswordAuthenticator` for verification of the user's email credentials and the abstract class `Email` which creates the email object to be sent as well as establishes a connection with Gmail's SMTP server via `Properties`
     * Moreover, the creation of the UI window is facilitated by the class `EmailWindow`, which also returns the email data once you input your details.
@@ -416,11 +416,10 @@ As you can see above, *Figure 14* captures the main interactions between all cla
     * Finally, the email, with all its contents, is sent via the abstract class `Transport`
 
 ==== Command Mechanism
-
 .MailCommand Activity Diagram
-image::MailCommandActivityDiagram.png[width = "800"]
+image::MailCommandActivityDiagram.png[width="700"]
 
-*Figure 15* represents an activity diagram when the _email_ command is executed. As you can see, the command involves *error checking*, followed by *creating an email object*, and finally *sending* this email to an individual guest.
+The figure above represents an activity diagram when the _email_ command is executed. As you can see, the command involves *error checking*, followed by *creating an email object*, and finally *sending* this email to an individual guest.
 
 ==== Design Considerations
 ===== Aspect: Creating an EmailWindow for user input

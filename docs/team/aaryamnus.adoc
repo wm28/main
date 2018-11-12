@@ -6,22 +6,20 @@
 == PROJECT: Invités
 == Introduction
 |===
-|*_Preface:_*
-|The purpose of this portfolio is to document my contributions, both technical and documentation-wise, to my software engineering project Invités.
+|*_Preface:_* The purpose of this portfolio is to document my contributions, both technical and documentation-wise, to my software engineering project Invités.
 |===
 
 Invités is a desktop application to help event managers and planners better organise and manage large events.
 Moreover, the application can mainly be controlled by a 3rd party using the Command Line Interface,
 as well as a Graphical User Interface (GUI).
 
-Invités was developed as part of team my team's Software Engineering Project, and some of its main features the ability to
-send mass emails, keep track of payments, as well as the tab keeping of attendance of the guests. To add to this, by
-using a standardised format, the application is able to take in Comma Separated Values (CSV) files and import
-data for a particular event.
-
-[cols="2*"]
+[cols="40%,60%"]
 |====
-    ^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Thanks to the complementary features our group implemented, we are able to
+    ^.^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Invités is a desktop application to help *event managers and planners* better *organise and manage large events*.
+                                                                    Moreover, the application can mainly be controlled by a 3rd party using the Command Line Interface,
+                                                                    as well as a Graphical User Interface (GUI).
+
+    Thanks to the complementary features our group implemented, we are able to
                                                    create a streamlined workflow for event planners and managers
                                                    in all facets, as depicted in *Diagram 1* on the left.
 |====
@@ -33,7 +31,6 @@ quickly inform all of their guests in a swift and efficient manner, and eliminat
 can become tedious and ineffective. Moreover, the ticket generation will not only ease the process of attending taking, but also provide an
 environmentally-friendly alternative to printing tickets, posters, flyers, and banners for an event.
 
-
 Finally, the team that worked with me on this project, as well as the features they implemented,
 are listed below:
 
@@ -44,57 +41,47 @@ are listed below:
 
 == Summary of contributions
 |===
-|*_Preface:_*
-|The purpose of this section is to list the contributions I have made to project Invités
+| *_Preface:_* The purpose of this section is to list the contributions I have made to project Invités
 |===
 
 * *Main Feature*: added the ability to *send mass emails* to guests
 ** What it does: allows you to either send emails to individual guests using the command `email`, or
-send mass emails to all your guests or certain groups of guests using the `emailAll` and `emailSpecific` commands respectively
-** Justification: This feature will allow event managers to streamline their event notification process, as they can easily and quickly
-inform all of their guests at once, regarding details of the event or otherwise. To add to this, ticket generation will provide users a
+send mass emails using the `emailAll` and `emailSpecific` commands.
+** Justification: This feature will allow event managers to streamline their event notification process and
+inform all of their guests at once, regarding details of the event or otherwise. Furthermore, ticket generation provides users a
 digitised and economical solution for attendance taking once the event goes live.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=aaryamnus[Contributed code]]
+* *Minor enhancement*: added an `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
 * *Other contributions*:
-** Added an `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
 ** Project management:
 *** Managed releases v1.1, v1.2, v1.2.1, v1.3, v1.3.9 (5 releases) on GitHub
-*** Setup Travis and AppVeyor
-*** Setup auto-publishing of documentation
-*** Setup issue and milestone tracker
+*** Setup Travis, AppVeyor, auto-publishing of documentation, and issue and milestone tracker
 ** Enhancements to existing features
 *** Changed UI response for incorrect commands
 *** Added a UI component to display number of guests in the current list in the footer of the application
 ** Community
 *** Reviewed Pull Requests (PRs) for all milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]]
-*** Issues created to better structure the project workflow and ensure an iterative design process - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/6[#6]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]]
+*** Issues created to better structure the project workflow and ensure an iterative design process - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]]
 ** Tools
 *** Integrated a third party library to enable email communication https://javaee.github.io/javamail/docs/api/[JavaMail API]
 
 == Contributions to the User Guide
 
 |===
-|*_Preface:_*
-|This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users
+|*_Preface:_* This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users
 |===
 
-=== *_Sections 3.7, 3.8, 3.16, 3.17, and 3.18 of the User Guide_*
 include::../UserGuide.adoc[tag=addremovetag]
 
 include::../UserGuide.adoc[tag=email]
 
-=== *_Section 5 of the User Guide_*
 include::../UserGuide.adoc[tag=settingupemail]
 
 == Contributions to the Developer Guide
 
 |===
-|*_Preface:_*
-|This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project
+|*_Preface:_* This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project
 |===
 
-=== *_Section 4.5 of the Developer Guide_*
 include::../DeveloperGuide.adoc[tag=emailimplementation]
-
-=== *_Appendix F.7 of the Developer Guide_*

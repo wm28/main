@@ -419,24 +419,19 @@ Format: `email INDEX`
 the command `email 5` will give you an error as there does not exist a guest at `INDEX` 5.
 ****
 
-[NOTE]
-====
-The `undo/redo` feature will *not work* with the `email` command as once you have sent an email, you cannot reverse this action.
-====
-
 *Examples*:
 
 * `email 2` +
-1. First, you will be presented with an EmailWindow similar to *Figure 3* below.
+1. First, you will be presented with an EmailWindow similar to *Figure 4* below.
 2. This window is for you to input your email address, password, email subject and message.
-3. You will then need to fill in all the required fields. If you miss any of the fields and try to click the `Send` button, an error message will pop up as the one in *Figure 4*.
+3. You will then need to fill in all the required fields. If you miss any of the fields and try to click the `Send` button, an error message will pop up as the one in *Figure 5*.
 4. Once all fields are filled, you can click the `Send` button to send your email to the *2nd guest* in the list. You can also click the `Quit` button if you don't want to send your email.
 5. If you are successful, you will see a message that says `Successfully sent email!`.
 
 [cols="2*"]
 |====
-| image:EmailWindow.png[] Figure 5 - EmailWindow
-| image:EmailWindowMissingMessage.png[] Figure 6 - Missing email message
+| image:EmailWindow.png[] Figure 4 - EmailWindow
+| image:EmailWindowMissingMessage.png[] Figure 5 - Missing email message
 |====
 
 === Sending an email to all guests : `emailAll`
@@ -450,26 +445,21 @@ Format: `emailAll`
 [NOTE]
 You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `emailAll extra characters` or `emailAll 182$*` will be incorrect, but `emailAll {nbsp}` (i.e. with spaces) will be correct.
 
-[NOTE]
-====
-The `undo/redo` feature will *not work* with the `emailAll` command as once you have sent an email, you cannot reverse this action.
-====
-
 Examples:
 
 * `list` +
 * `emailAll` +
 1. The command `list` will list all your guests to ensure you send an email to all of them.
-2. First, you will be presented with an EmailWindow similar to Figure 5 below.
+2. First, you will be presented with an EmailWindow similar to *Figure 6* below.
 3. This window is for you to input your email address, password, email subject and message.
-4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in Figure 6.
+4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 7*.
 5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
 
 [cols="2*"]
 |====
-|image:EmailWindow.png[] Figure 7 - EmailWindow
-|image:EmailWindowMissingSubject.png[] Figure 8 - Missing email subject
+|image:EmailWindow.png[] Figure 6 - EmailWindow
+|image:EmailWindowMissingSubject.png[] Figure 7 - Missing email subject
 |====
 
 === Sending emails to specific groups of guests : `emailSpecific`
@@ -486,11 +476,6 @@ Format: `emailSpecific [t/TAG]...`
 * You must provide tags that are alphanumeric, otherwise the system will throw an error
 ****
 
-[NOTE]
-====
-The `undo/redo` feature will *not work* with the `emailSpecific` command as once you have sent an email, you cannot reverse this action.
-====
-
 Examples:
 
 * `emailSpecific` +
@@ -499,16 +484,16 @@ This will present you with an error, as you have not provided any tags to delete
 This will present you with an error, as all your tags must be alphanumeric
 * `emailSpecific t/VIP` +
 1. This command will send an email to all the guests with a `VIP` tag
-2. First, you will be presented with an EmailWindow similar to Figure 7 below.
+2. First, you will be presented with an EmailWindow similar to *Figure 8* below.
 3. This window is for you to input your email address, password, email subject and message.
-4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in Figure 8.
+4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 9*.
 5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
 
 [cols="2*"]
 |====
-| image:EmailWindow.png[align="center"] Figure 9 - EmailWindow
-| image:EmailWindowMissingAddress.png[] Figure 10 - Missing email address
+| image:EmailWindow.png[align="center"] Figure 8 - EmailWindow
+| image:EmailWindowMissingAddress.png[] Figure 9 - Missing email address
 |====
 
 // end::email[]
@@ -668,17 +653,16 @@ susceptible to an increased number of spam emails from untrusted applications. H
 
 [IMPORTANT]
 If your operating system is *macOS Mojave*, please make an *important* note of the following:
-|====
-^.^| image:EmailWindow.png[] Figure 11 - EmailWindow | 1. If you use any of the email-related commands (i.e. _email_, _emailAll_ or _emailSpecific_), you will be presented with an EmailWindow similar to
-the one in *Figure 9*.
 
-2. If you use the *command-tab* keys *when the EmailWindow is open* to switch windows, the program to crash. This is due to
+1. If you use any of the email-related commands (i.e. _email_, _emailAll_ or _emailSpecific_), you will be presented with an EmailWindow similar to
+the one in *Figure 8*.
+
+2. If you use the *command-tab* keys *when the EmailWindow is open* to switch windows, the program will crash. This is due to
 Apple's latest macOS release, in which some of the bindings are not compatible with key JavaFX functions.
 
 3. This issue does not occur on Windows, Linux, and older macOS systems, however it _may still exist_ in other operating systems we have not tested on.
 
 4. We sincerely apologise for the inconvenience caused, and our team is quickly trying to fix this issue.
-|====
 
 |===
 |_For *testing* purposes, you may use a default Gmail account we have created to save you some time:_
