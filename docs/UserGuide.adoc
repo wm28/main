@@ -89,7 +89,9 @@ Format: `list`
 
 [NOTE]
 You should not enter any characters after the command word, only extra spaces are allowed! For example, the input `list extra_characters` or `list 182$*` will be incorrect, but `list {nbsp}` (i.e. with spaces) will be correct.
+
 // @@author Sarah
+
 // tag::find[]
 === Locating guests by name, phone number or email address: `find`
 
