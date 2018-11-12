@@ -76,7 +76,7 @@ include::../UserGuide.adoc[tag=event]
 == Contributions to the Developer Guide
 //TODO:
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections that I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 === *_1. Sections 4.4 and 4.5 of the Developer Guide_*
