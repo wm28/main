@@ -1251,3 +1251,70 @@ These instructions only provide a starting point for testers to work on; testers
    `edit_event d/31/02/2019' , etc. +
    Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
 // end::eventappendix[]
+
+// tag::importexportappendix[]
+=== Importing and exporting guests
+
+. Importing guests from CSV file
+
+.. Prerequisites: Delete all guests before each test case. Execute `list` followed by `clear`.
+
+.. Test case: Download link:{repoURL}/guestbook.csv[sample.csv] into directory where application Jar file is located and execute `import sample.csv` +
+   Expected: All guests are imported from `test.csv`. No errors are found.
+
+.. Test case: Download link:{repoURL}/errorguestbook.csv[errorsample.csv] into directory where application Jar file is located and execute `import errorsample.csv` +
+    Expected: No guests are imported from `test.csv`. Popup window shows all import errors.
+
+.. Other incorrect commands to try: `import`, `import test`, etc +
+   Expected: No guests are imported. Error details shown in the status message.
+
+. Exporting all guests
+
+   .. Prerequisites: List all guests using `list`. The list must not be empty. No `test.csv` file should be found in same directory of application Jar file.
+
+   .. Test case: 'export test.csv' +
+      Expected: All guests are exported into `test.csv`. `test.csv` can be found in the same directory of the application Jar file.
+
+   .. Other incorrect commands to try: `export`, `export test`, etc
+      Expected: No guests are exported. Error details shown in the status message.
+
+
+. Exporting filtered guest to CSV file
+
+.. Prerequisites: There must be guests that are absent. Filter all absent guests using `filter a/ABSENT`.
+
+
+.. Test case: 'export test.csv' +
+   Expected: Only guests that are absent are exported into `test.csv`. `test.csv`  can be found in the same directory of the application Jar file.
+
+
+. Exporting to file that already exists
+
+.. Prerequisites: There must be guests in the guest list panel. Export guests using `export test.csv`.
+
+.. Test case: `export test.csv` +
+   Expected: No guests are exported. Error details shown in the status message.
+
+
+. Exporting empty guest list
+
+   .. Prerequisites: guest list panel in user interface must be empty.
+
+   .. Test case: `export test.csv` +
+      Expected: No guests are exported. Error details shown in the status message.
+
+// end::importexportappendix[]
+
+
+// tag::personpreviewappendix[]
+=== Guest preview
+
+. Displaying guest in guest preview
+
+.. Prerequisites: Have guests in guest list.
+
+.. Test case: Click on any guest in guest list panel. +
+   Expected: Guest details should show up in guest preview. Any command that successfully modifies the underlying guest list will clear the person preview.
+   Note: `filter` and `find` is not considered to be modifying the guest list.
+
+// end::personpreviewappendix[]
