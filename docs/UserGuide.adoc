@@ -450,17 +450,11 @@ Examples:
 * `list` +
 * `emailAll` +
 1. The command `list` will list all your guests to ensure you send an email to all of them.
-2. First, you will be presented with an EmailWindow similar to *Figure 6* below.
+2. First, you will be presented with an EmailWindow similar to *Figure 4* above.
 3. This window is for you to input your email address, password, email subject and message.
-4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 7*.
+4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 5* above.
 5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
-
-[cols="2*"]
-|====
-|image:EmailWindow.png[] Figure 6 - EmailWindow
-|image:EmailWindowMissingSubject.png[] Figure 7 - Missing email subject
-|====
 
 === Sending emails to specific groups of guests : `emailSpecific`
 |===
@@ -484,17 +478,11 @@ This will present you with an error, as you have not provided any tags to delete
 This will present you with an error, as all your tags must be alphanumeric
 * `emailSpecific t/VIP` +
 1. This command will send an email to all the guests with a `VIP` tag
-2. First, you will be presented with an EmailWindow similar to *Figure 8* below.
+2. First, you will be presented with an EmailWindow similar to *Figure 4* above.
 3. This window is for you to input your email address, password, email subject and message.
-4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 9*.
+4. You will then need to fill in all the required fields. If you miss any of the fields and try click the `Send` button, an error message will pop up as the one in *Figure 5* above.
 5. Once all fields are filled, you can click the `Send` button to send your email to all guests in the list. You can also click the `Quit` button if you don't want to send your email.
 6. If you are successful, you will see a message that says `Successfully sent email!`.
-
-[cols="2*"]
-|====
-| image:EmailWindow.png[align="center"] Figure 8 - EmailWindow
-| image:EmailWindowMissingAddress.png[] Figure 9 - Missing email address
-|====
 
 // end::email[]
 
@@ -564,7 +552,7 @@ You should not enter any characters after the command word, only extra spaces ar
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the guest list's content (`add_guest`, `delete_guest`, `edit_guest`, `removeTag`, `addTag`, and `clear`).
+Undoable commands: those commands that modify the guest list's content (`add_guest`, `delete_guest`, `edit_guest`, `removeTag`, `addTag`, and `clear`). The other commands we provide are therefore *not* undoable.
 ====
 
 Examples:
@@ -655,7 +643,7 @@ susceptible to an increased number of spam emails from untrusted applications. H
 If your operating system is *macOS Mojave*, please make an *important* note of the following:
 
 1. If you use any of the email-related commands (i.e. _email_, _emailAll_ or _emailSpecific_), you will be presented with an EmailWindow similar to
-the one in *Figure 8*.
+the one in *Figure 4*.
 
 2. If you use the *command-tab* keys *when the EmailWindow is open* to switch windows, the program will crash. This is due to
 Apple's latest macOS release, in which some of the bindings are not compatible with key JavaFX functions.

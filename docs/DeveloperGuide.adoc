@@ -423,7 +423,7 @@ The figure above represents an activity diagram when the _email_ command is exec
 
 ==== Design Considerations
 ===== Aspect: Creating an EmailWindow for user input
-*** Current choice: Instantiating the UI component directly from the abstract class Email
+*** Current choice: Creating the UI component directly from the abstract class Email
 ** Pros: Reduces dependencies and coupling because other UI components and increases cohesion
 ** Cons: Does not fit within the Façade Class of `EventsCentre`
 
@@ -909,7 +909,7 @@ Actor: Application User - Event Planner
 
 Use case ends.
 
-=== Use case: Filter guest list based on status of payment and mass message those who have not paid
+=== Use case: Filter guest list based on status of payment and mass email those who have not paid
 Actor: Application User - Event Planner
 
 *MSS*
@@ -924,7 +924,7 @@ Actor: Application User - Event Planner
 
 Use case ends.
 
-=== Use case: Filter based on specific requirements and mass message all guests
+=== Use case: Filter based on specific requirements and mass email all guests
 Actor: Application User - Event Planner
 
 *MSS*
@@ -958,33 +958,15 @@ Actor: Application User - Event Planner
 
 Use case ends.
 
-=== Use case: Sending tickets to guests via email
+=== Use case: Sending tickets to individual guests
 Actor: Application User - Event Planner
 
 *MSS*
 
 1. User opens application and either imports csv file or adds each guest in the application.
-2. System asks user to enter a command.
-3. User keys in command to create tickets for each guest on the list.
-4. System copies and pastes the details of events, such as name, date, time and venue of event, dress code, etc
-   onto the ticket.
-5. System will print the guest’s index number, that is unique to each guest, onto each ticket,
-   obtained from either the csv file or data manually keyed in.
-6. System will inform user that the tickets have been created.
-7. User will then key in the command to email all guests their tickets.
-8. System will email all guests on the list their tickets, according to their unique index number.
-
-Use case ends.
-
-*Extensions*
-
-* 3a. User can specify which guest to create tickets for, for example if the guest was late in signing up for the event.
-* 3b. System will create the ticket for that particular guest.
-
-Use case resumes from step 4.
-
-* 8a. User can choose to key in command to email a particular guest his/her ticket.
-* 8b. System will email the ticket to a particular guest instead of all guests on the list.
+2. User keys in email command to send an email to an individual guest
+3. System will generate a QR code, which has the guest's unique ID encoded within it
+4. System will email the guest their ticket, as well as details of the event.
 
 Use case ends.
 
@@ -1118,7 +1100,6 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Filtering a guest
 
-
 .. Test case: `filter a/absent` +
    Expected: Details of guests who are absent (i.e. are labelled as "absent" in the
    Attendance field) will be listed.
@@ -1141,7 +1122,6 @@ These instructions only provide a starting point for testers to work on; testers
 === Finding a guest
 
 . Finding a guest
-
 
 .. Test case: `find n/john` +
    Expected: Details of guests who have 'john' in their names.
@@ -1203,3 +1183,44 @@ These instructions only provide a starting point for testers to work on; testers
    `edit_event d/31/02/2019' , etc. +
    Expected: No event details are edited. Error details shown in the status message. Event details display remains intact.
 // end::eventappendix[]
+
+// tag::emailappendix[]
+=== Sending individual emails
+
+. Send individual guests an email
+
+.. Test case: `email 1`+
+   Expected: Assuming there is at least one guest, UI Window opens to allow user input. If all inputs are valid, email is sent to guest at `INDEX` 1.
+
+.. Test case: `email -1`+
+   Expected: No email sent as `INDEX` is out of bounds, error shown in command box.
+
+.. Other incorrect commands to try: `email letters`, `emailLL`, `email 12.3`, etc. +
+   Expected: No email sent due to incorrect parameters.
+
+=== Sending all guests an email
+
+. Send all guests an email
+
+.. Test case: `emailAll`+
+   Expected: Assuming there is at least one guest, UI Window opens to allow user input. If all inputs are valid, email is sent to all guests.
+
+.. Test case: `emailAll`+
+   Expected: If current filtered list is empty, no email will be sent and an error message displayed.
+
+.. Other incorrect commands to try: `emailAll extracharacters`, `emailAllLL`, etc. +
+   Expected: No email sent due to incorrect parameters.
+
+=== Sending a group of guests an email
+
+. Send an email to a group of guests
+
+.. Test case: `emailSpecific t/Veg`+
+   Expected: Assuming there is at least one guest with tag `Veg` in the filtered list, UI Window opens to allow user input. If all inputs are valid, email is sent all guests with tag `Veg`
+
+.. Test case: `emailSpecific t/Veg`+
+   Expected: If current filtered list is empty *or* there are no guests with tag `Veg`, no email will be sent and an error message displayed.
+
+.. Other incorrect commands to try: `emailSpecific t/t/`, `emailSpecific t/@&@` etc. +
+   Expected: No email sent due to incorrect parameters.
+// end::emailappendix[]

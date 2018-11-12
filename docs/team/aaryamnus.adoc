@@ -13,13 +13,11 @@ Invités is a desktop application to help event managers and planners better org
 Moreover, the application can mainly be controlled by a 3rd party using the Command Line Interface,
 as well as a Graphical User Interface (GUI).
 
-[cols="40%,60%"]
+[cols="30%,70%"]
 |====
-    ^.^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Invités is a desktop application to help *event managers and planners* better *organise and manage large events*.
-                                                                    Moreover, the application can mainly be controlled by a 3rd party using the Command Line Interface,
-                                                                    as well as a Graphical User Interface (GUI).
+    ^.^| image:ProductWorkflow.png[] Diagram 1 - Product Workflow .^| Invités was developed as part of my team’s Software Engineering Project, and some of its *main features* include the ability to *send mass emails*, *keep track of payments*, as well as *attendance tracking*. To add to this, by using a standardised format, the application is able to take in Comma Separated Values (CSV) files and import data for a particular event.
 
-    Thanks to the complementary features our group implemented, we are able to
+    Thanks to the complementary features my group implemented, we are able to
                                                    create a streamlined workflow for event planners and managers
                                                    in all facets, as depicted in *Diagram 1* on the left.
 |====
@@ -41,7 +39,7 @@ are listed below:
 
 == Summary of contributions
 |===
-| *_Preface:_* The purpose of this section is to list the contributions I have made to project Invités
+| *_Preface:_* The purpose of this section is to list the contributions I have made to project Invités.
 |===
 
 * *Main Feature*: added the ability to *send mass emails* to guests
@@ -69,7 +67,7 @@ digitised and economical solution for attendance taking once the event goes live
 == Contributions to the User Guide
 
 |===
-|*_Preface:_* This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users
+|*_Preface:_* This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users.
 |===
 
 include::../UserGuide.adoc[tag=addremovetag]
@@ -81,7 +79,9 @@ include::../UserGuide.adoc[tag=settingupemail]
 == Contributions to the Developer Guide
 
 |===
-|*_Preface:_* This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project
+|*_Preface:_* This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation to explain the technical depth of my contributions, as well as methods to allow manual user-testing.
 |===
 
 include::../DeveloperGuide.adoc[tag=emailimplementation]
+
+include::../DeveloperGuide.adoc[tag=emailappendix]

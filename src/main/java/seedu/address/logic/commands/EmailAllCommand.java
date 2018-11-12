@@ -12,6 +12,7 @@ import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -49,6 +50,8 @@ public class EmailAllCommand extends Email {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        guestListSizeCheck(lastShownList);
 
         // Array of strings to store all the necessary information
         String[] information;
@@ -117,6 +120,16 @@ public class EmailAllCommand extends Email {
         logger.log(Level.INFO, "All emails sent successfully!");
         return new CommandResult(String.format(MESSAGE_MAIL_ALL_PERSON_SUCCESS, successfulEmails,
                 failedEmails, invalidEmails));
+    }
+
+    /**
+     * Makes sure that there is at least one guest in the current filtered list
+     * @param lastShownList the last known filtered list
+     */
+    private void guestListSizeCheck(List<Person> lastShownList) throws CommandException {
+        if (lastShownList.size() == 0) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_LIST);
+        }
     }
 
     /**

@@ -62,6 +62,8 @@ public class EmailSpecificCommand extends Email {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        guestListSizeCheck(lastShownList);
+
         // Check for duplicate emails to ensure each guest only receives one email, even if
         // multiple guests have registered under the same email
         HashSet<String> personsToSendEmail = createMailingList(lastShownList, tagsToSend);
@@ -95,6 +97,16 @@ public class EmailSpecificCommand extends Email {
         logger.log(Level.INFO, "Emails sent successfully to all guests with the specified tags!");
         return new CommandResult(String.format(MESSAGE_MAIL_PERSON_SUCCESS, personsToSendEmail.size(),
                 lastShownList.size() - personsToSendEmail.size()));
+    }
+
+    /**
+     * Makes sure that there is at least one guest in the current filtered list
+     * @param lastShownList the last known filtered list
+     */
+    private void guestListSizeCheck(List<Person> lastShownList) throws CommandException {
+        if (lastShownList.size() == 0) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_LIST);
+        }
     }
 
     /**
