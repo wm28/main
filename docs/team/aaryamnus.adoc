@@ -79,10 +79,12 @@ digitised and economical solution for attendance taking once the event goes live
 |This section details the contributions I have made to the User Guide, and shows my ability to write documentation targeting end-users
 |===
 
+=== *_Sections 3.7, 3.8, 3.16, 3.17, and 3.18 of the User Guide_*
 include::../UserGuide.adoc[tag=addremovetag]
 
 include::../UserGuide.adoc[tag=email]
 
+=== *_Section 5 of the User Guide_*
 include::../UserGuide.adoc[tag=settingupemail]
 
 == Contributions to the Developer Guide
@@ -92,6 +94,7 @@ include::../UserGuide.adoc[tag=settingupemail]
 |This section details the contributions I have made to the Developer Guide, and shows my ability to write technical documentation and explain the technical depth of my contributions to the project
 |===
 
+=== *_Section 4.5 of the Developer Guide_*
 include::../DeveloperGuide.adoc[tag=emailimplementation]
 
-include::../DeveloperGuide.adoc[tag=tags]
+=== *_Appendix F.7 of the Developer Guide_*

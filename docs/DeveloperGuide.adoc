@@ -403,11 +403,10 @@ easily allows for more domains to be supported.
 
 Additionally, the main design of the email functionality resides within the *Logic* component, coupled with a *UI* component to allow the user to input their details.
 
-|====
-    ^.^| image:EmailAllClassDiagram.png[] Figure 12 - EmailAll Class Diagram
-|====
+.EmailAll Class Diagram
+image::EmailAllClassDiagram.png[width="800"]
 
-As you can see above, *Figure 12* captures the main interactions between all classes when the user executes an `emailAll` command.
+As you can see above, *Figure 14* captures the main interactions between all classes when the user executes an `emailAll` command.
 
     * The command depends on the class `EmailPasswordAuthenticator` for verification of the user's email credentials and the abstract class `Email` which creates the email object to be sent as well as establishes a connection with Gmail's SMTP server via `Properties`
     * Moreover, the creation of the UI window is facilitated by the class `EmailWindow`, which also returns the email data once you input your details.
@@ -418,12 +417,10 @@ As you can see above, *Figure 12* captures the main interactions between all cla
 
 ==== Command Mechanism
 
-[cols="70%,30%"]
-|====
-    ^.^| image:MailCommandActivityDiagram.png[] Figure 13 - MailCommand Activity Diagram .^| *Figure 13* represents an activity diagram when the _email_ command is executed.
+.MailCommand Activity Diagram
+image::MailCommandActivityDiagram.png[width = "800"]
 
-    As you can see, the command involves *error checking*, followed by *creating an email object*, and finally *sending* this email to an individual guest.
-|====
+*Figure 15* represents an activity diagram when the _email_ command is executed. As you can see, the command involves *error checking*, followed by *creating an email object*, and finally *sending* this email to an individual guest.
 
 ==== Design Considerations
 ===== Aspect: Creating an EmailWindow for user input
@@ -445,50 +442,6 @@ As you can see above, *Figure 12* captures the main interactions between all cla
 ** Cons: Would make the codebase bulkier and require multiple email domain configurations
 
 // end::emailimplementation[]
-
-// tag::tags[]
-=== Add/Remove Tag generation feature
-==== Current Implementation
-
-The addTag/removeTag mechanism is facilitated by `AddressBook` as it provides a `ReadOnlyAddressBook` using the `Model` interface.
-Additionally, it implements `Model#commitAddressBook()`, `Model#getFilteredPersonList()`, and `Model#resetData()`.
-
-Given below is an example usage scenario and how the addTag/removeTag mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time and executes the command `import guestlist.csv` to import a list of guests and add them to the current state of `AddressBook`.
-
-Step 2. The user now decides to add a set of tags to all guests in the list and executes the command `addTag t/VIP t/Platinum` to add the tags `VIP` and `Platinum`.
-
-Step 3. A `ReadOnlyAddressBook` is created and an editable address book is created using `AddressBook`. To add to this, the current filtered list is accessed using `Model#getFilteredPersonList()`
-
-Step 4. The set of tags are added to all guests in the editable address book via `AddressBook#addTag()` and `AddressBook#addTagFromPerson()`
-
-Step 5. Finally, `Model#resetData()` and `Model#commitAddressBook()` are called to reset the current state of the list with the updated tags.
-
-The `removeTag` command does the opposite, and removes a set of tags from all guests in the guest list. However, the workflow is similar to `addTag`; a new `AddressBook` is created and edited accordingly as per the command.
-
-[NOTE]
-If there are no guests in the current list, or if the removeTag command tries to remove non-existent tags, the function will not execute and the current state of the list will be preserved.
-
-*Figures 14 and 15* below are sequence diagrams that summarize the flow of actions when the system performs the addTag() or removeTag() command respectively:
-
-[col="2*"]
-|====
-    ^| image:AddTagSequenceDiagram.png[] Figure 14 - AddTag Sequence Diagram ^| image:RemoveTagSequenceDiagram.png[] Figure 15 - RemoveTag Sequence Diagram
-|====
-
-==== Design Considerations
-
-===== Aspect: Creating an EditableAddressBook for AddTag and RemoveTag
-
-*** Current choice: edit the `AddressBook` model to allow an addTag and removeTag command to execute
-** Pros: Easier to use by the functions and also to test
-** Cons: Variability is difficult, as new editions to the model must be made
-
-*** Alternative: Make the AddressBook editable by default
-** Pros: Current AddressBook can easily be changed by any functions
-** Cons: Makes the content of the AddressBook accessible by all functions, which is undesirable
-// end::tags[]
 
 // tag::importexport[]
 
@@ -1151,7 +1104,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
+   Expected: Shows the GUI with a set of sample guest information. The window size may not be optimal.
 
 . Saving window preferences
 
