@@ -17,9 +17,9 @@
 *Responsibility* - My task was to handle data filtration. I split this task into two. First, I created a Filter command
 to handle data filtration for the payment status, attendance status and the tags, as these fields
 are not unique to any person. Next, I modified the existing Find command to handle names,
-phone numbers and email addresses, as these are unique fields, and the user may want to find a few
+phone numbers and email addresses, as these are fields used for identification, and the user may want to find a few
 guests at one go. Rather than use the Filter command, which would yield results one-by-one,
-the Find command allows the user to find a few guests at the same time.
+the Find command allows you to find a few guests at the same time.
 
 *Project Scope* - Invités is an application targeted at event managers and planners,
 that allows you to better organise, cater, and manage the reception for large events
@@ -27,12 +27,12 @@ such as weddings, school gatherings, orientation camps, etc. Some of the main fe
 include the ability to send mass emails, keep track of payments, as well as the tab
 keeping of attendance of the guests. To add to this, by employing a standardised format,
 the application is able to take in Comma Separated Values (CSV) files and import data for
-a particular event. This removes your need having to input all the information manually,
+a particular event. This removes your need to input all the information manually,
 as well as subsequently, gives you an alternative if you decide to organise another event
 using the same guest list.
 
 This will give you an easier time to manage the reception as you will be equipped with
-tools that will minimise errors in catering, organisation, and orders. Moreover, this
+tools that will minimise errors in catering, organising, and ordering. Moreover, this
 application aims to reduce the frustrations for you when planning events and address your
 needs in a platform that is more user-friendly, personalised, and efficient.
 
@@ -52,10 +52,10 @@ needs in a platform that is more user-friendly, personalised, and efficient.
 
 * *Major enhancement*: Added *the ability to filter data according to payment status, attendance
 status and tags*
-** What it does: allows the user to filter data based on keywords provided by user,
+** What it does: allows the user to filter data based on keywords provided by you,
                  such as payment status, attendance status and/or tags, depending on the prefix used.
-** Justification: This feature improves the product significantly because a user can find people who have yet to pay or are absent on the day of the event.
-                  This will help users to be able to find people that fit the conditions they are looking for, without having to traverse the list manually.
+** Justification: This feature improves the product significantly because you can find guests who have yet to pay or are absent on the day of the event.
+                  This will help you to be able to find people that fit the conditions you are looking for, without having to traverse the list manually.
 
 * *Code contributed*: [https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&search=sarahtaaherbonna[Sarah Taaher Bonna]]
 
@@ -65,9 +65,9 @@ Ensured that these attributes can only accept certain values.
 
 2. Modified find command which allows the user to find guests with the name(s),
 phone number(s) and/or email address(es), depending on the prefix used.
-This modified feature improves the product because a user can find a group of people, using their
+This modified feature improves the product because you can find a group of people, using their
 name(s), phone number(s) and/or email address(es) at one go, instead of doing it one-by-one. As such,
-the user is able to find the necessary guests using any available contact details, not just the name.
+you are able to find the necessary guests using any available contact details, not just the name.
 
 ** Enhancements to existing features:
 *** Wrote additional tests for existing and new features to increase coverage (Pull requests [https://github.com/CS2113-AY1819S1-F09-3/main/pull/273[273]], [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[266]])

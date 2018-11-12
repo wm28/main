@@ -7,8 +7,8 @@
 
 == Overview
 
-The purpose of this portfolio is to document my role and contributions to team F09-3's project,Invités,
-for the module: Software Engineering and Object Oriented Programming(CS2113T).
+The purpose of this portfolio is to document my role and contributions to team F09-3's project, Invités,
+for the module: Software Engineering and Object-Oriented Programming(CS2113T).
 
 ==== _Project Scope_
 
@@ -17,7 +17,7 @@ as weddings, school gatherings, orientation camps, etc. The application works on
 Some of the main distinguishing features of the application include the ability to send mass emails to guests, keep track of payments, and take note of guest attendance.
 The application also allows the user to input the proposed or confirmed details of their event and provides a countdown to the event date.
 To add to these features, by employing a standardised format, the application is able to take in Comma Separated Values (CSV) files and import the guest list for a particular event.
-This eliminates the need to key in the guest details manually and subsequently, gives users an alternative if they decide to organise another event using the same guest list.
+This eliminates the need to key in the guest details manually and gives users an alternative if they decide to organise another event using the same guest list.
 
 ==== _My responsibility_
 
