@@ -103,7 +103,7 @@ include::../UserGuide.adoc[tag=find]
 |_Given below are the sections that I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-=== *_Sections 4.2 and 4.3 of the Developer Guide_*
+=== *_Sections 4.1 and 4.2 of the Developer Guide_*
 
 include::../DeveloperGuide.adoc[tag=filter]
 
