@@ -244,86 +244,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-image::UndoRedoStartingStateListDiagram.png[width="800"]
-
-Step 2. The user executes `delete_guest 5` command to delete the 5th guest in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add_guest n/David ...` to add a new guest. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-Step 4. The user now decides that adding the guest was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
-
-==== Design Considerations
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the guest being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
-
 // tag::filter[]
 === Filter feature
 ==== Current Implementation
@@ -469,11 +389,17 @@ image::EditEventSequenceDiagram.png[width="800"]
 
 // end::event[]
 
+// tag::emailimplementation[]
+=== Email Functionality
+
+==== High Level Algorithm Design
+// end::emailimplementation[]
+
 // tag::tags[]
 === Add/Remove Tag generation feature
 ==== Current Implementation
 
-The addTag/removeTag mechanism is facilitated by `AddressBook` as it provides an editable form of a `ReadOnlyAddressBook` provided by the `Model` interface.
+The addTag/removeTag mechanism is facilitated by `AddressBook` as it provides an editable form of a `ReadOnlyAddressBook` using the `Model` interface.
 Additionally, it implements the following operations:
 
 `Model#commitAddressBook()`, `Model#getFilteredPersonList()`, and `Model#resetData()` respectively.
@@ -500,18 +426,16 @@ The `removeTag` command does the opposite, and removes a set of tags from all gu
 [NOTE]
 If there are no guests in the current list, or if the removeTag command tries to remove non-existent tags, the function will not execute and the current state of the list will be preserved.
 
-The following sequence diagram summarizes how the addTag() and removeTag() function work:
-The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
+Figure 12 and figure 13 below are sequence diagrams that summarize the flow of actions when the system performs the addTag() or removeTag() command respectively:
 
+[col="2*"]
 |====
-| image:AddTagRemoveTagSequenceDiagram.png[] Figure 1 - AddTag and RemoveTag Sequence Diagram | *Figure 1* on the left shows how the addTag() and removeTag() function work.
-
-                                                                                                The sequence diagram uses the case of addTag() to highlight how the application responds to this command. However, the same logic and sequence flow is applied to the removeTag() command.
+    ^| image:AddTagSequenceDiagram.png[] Figure 12 - AddTag Sequence Diagram ^| image:RemoveTagSequenceDiagram.png[] Figure 13 - RemoveTag Sequence Diagram
 |====
 
 ==== Design Considerations
 
-===== Aspect: How to create an EditableAddressBook for AddTag and RemoveTag?
+===== Aspect: Creating an EditableAddressBook for AddTag and RemoveTag?
 
 *** Alternative 1 (current choice): edit the `AddressBook` model to allow an addTag and removeTag command to execute
 ** Pros: Easier to use by the functions and also to test
@@ -519,7 +443,7 @@ The sequence diagram uses the case of addTag() to highlight how the application 
 
 *** Alternative 2: Make the AddressBook editable by default
 ** Pros: Current AddressBook can easily be changed by any functions
-** Cons: Makes the content of the AddressBook less secure by giving all functions access to edit
+** Cons: Makes the content of the AddressBook accessible by all functions, which is undesirable
 // end::tags[]
 
 // tag::importexport[]
@@ -626,9 +550,6 @@ The following sequence diagram shows how the add_event operation works:
 image::MarkUnmarkEventSequenceDiagram.png[width="800"]
 
 // end::markunmark[]
-
-// tag::emailimplementation[]
-=== Email Functionality - _Coming in v2.0_
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

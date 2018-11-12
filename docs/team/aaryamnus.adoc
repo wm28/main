@@ -33,8 +33,9 @@ quickly inform all of their guests in a swift and efficient manner, and eliminat
 can become tedious and ineffective. Moreover, the ticket generation will not only ease the process of attending taking, but also provide an
 environmentally-friendly alternative to printing tickets, posters, flyers, and banners for an event.
 
+
 Finally, the team that worked with me on this project, as well as the features they implemented,
-as listed below:
+are listed below:
 
 1. Sandhya Gopakumar - Events management
 2. Sarah Taaher Bonna - Guest list management
@@ -58,7 +59,7 @@ digitised and economical solution for attendance taking once the event goes live
 * *Other contributions*:
 ** Added an `addTag` and `removeTag` command that adds or removes a set of tags to all guests in the list
 ** Project management:
-*** Managed releases v1.1, v1.2, v1.2.1, v1.2.9, v1.3, v1.3.9 (6 releases) on GitHub
+*** Managed releases v1.1, v1.2, v1.2.1, v1.3, v1.3.9 (5 releases) on GitHub
 *** Setup Travis and AppVeyor
 *** Setup auto-publishing of documentation
 *** Setup issue and milestone tracker
@@ -66,9 +67,8 @@ digitised and economical solution for attendance taking once the event goes live
 *** Changed UI response for incorrect commands
 *** Added a UI component to display number of guests in the current list in the footer of the application
 ** Community
-*** Reviewed Pull Requests (PRs) for all milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/131[#131]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/153[#153]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/157[#157]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/190[#190]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/203[#203]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/215[#215]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/217[#217]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/266[#266]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/273[#273]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]]
-*** Issues created to better structure the project workflow and ensure an iterative design process - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/6[#6]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/11[#11]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/15[#15]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/80[#89]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/114[#114]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/117[#117]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/237[#237]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/238[#238]]
-*** Bug reports created during the first Practical Exam to provide feedback to other teams - [https://github.com/CS2113-AY1819S1-W12-2/main/issues/107[#107]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/113[#113]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/124[#124]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/127[#127]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/128[#128]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/131[#131]] [https://github.com/CS2113-AY1819S1-W12-2/main/issues/133[#133]]
+*** Reviewed Pull Requests (PRs) for all milestones to provide team members with ample and timely feedback - [https://github.com/CS2113-AY1819S1-F09-3/main/pull/112[#112]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/202[#202]] [https://github.com/CS2113-AY1819S1-F09-3/main/pull/274[#274]]
+*** Issues created to better structure the project workflow and ensure an iterative design process - [https://github.com/CS2113-AY1819S1-F09-3/main/issues/6[#6]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/121[#121]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/133[#133]] [https://github.com/CS2113-AY1819S1-F09-3/main/issues/178[#178]]
 ** Tools
 *** Integrated a third party library to enable email communication https://javaee.github.io/javamail/docs/api/[JavaMail API]
 
@@ -93,3 +93,5 @@ include::../UserGuide.adoc[tag=settingupemail]
 |===
 
 include::../DeveloperGuide.adoc[tag=tags]
+
+include::../DeveloperGuide.adoc[tag=emailimplementation]
